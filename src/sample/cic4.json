@@ -1,0 +1,127 @@
+{
+  "classes": [
+    {
+      "id": "CIC-4-A",
+      "branch": "CIC",
+      "year": 4,
+      "section": "A",
+      "homeRoomId": "CS-111",
+      "workingDays": ["Mon", "Tue", "Wed", "Thu", "Fri"],
+      "saturdayPeriods": 4,
+      "advisor": "Dr. M. V. Ramana Rao",
+      "wef": "01-08-2026",
+      "semesterFrom": "Aug 2026",
+      "semesterTo": "Dec 2026",
+      "semester": "VII",
+      "ay": "2026-27"
+    },
+    {
+      "id": "AIML-4-A",
+      "branch": "AIML",
+      "year": 4,
+      "section": "A",
+      "homeRoomId": "CS-112",
+      "workingDays": ["Mon", "Tue", "Wed", "Thu", "Fri"],
+      "saturdayPeriods": 4,
+      "advisor": "Dr. A. Vasanthi",
+      "wef": "01-08-2026",
+      "semesterFrom": "Aug 2026",
+      "semesterTo": "Dec 2026",
+      "semester": "VII",
+      "ay": "2026-27"
+    }
+  ],
+  "rooms": [
+    { "id": "CS-111", "name": "CS-111", "roomNo": "CS-111", "type": "Classroom", "labName": "", "capacity": 60 },
+    { "id": "CS-112", "name": "CS-112", "roomNo": "CS-112", "type": "Classroom", "labName": "", "capacity": 60 },
+    { "id": "CS-104", "name": "CS-104", "roomNo": "CS-104", "type": "Lab", "labName": "LAB-5", "capacity": 30 },
+    { "id": "CS-109", "name": "CS-109", "roomNo": "CS-109", "type": "Lab", "labName": "LAB-6", "capacity": 30 },
+    { "id": "CS-207", "name": "CS-207", "roomNo": "CS-207", "type": "Lab", "labName": "LAB-8", "capacity": 30 }
+  ],
+  "faculty": [
+    { "id": "f_mb", "name": "M. Bhanu", "short": "MB", "desg": "Asst Professor", "dept": "CSE(CIC)", "max": 30, "subjects": ["OE-I:RSE"] },
+    { "id": "f_mvrj", "name": "Dr. M. V. Ramana Rao", "short": "Dr.MVRJ", "desg": "Professor", "dept": "CSE(CIC)", "max": 30, "subjects": ["PE-V:SQT", "IoTCPS Lab"] },
+    { "id": "f_ppp", "name": "P. Premchand", "short": "PPP", "desg": "Assoc Professor", "dept": "CSE(CIC)", "max": 30, "subjects": ["BCT", "DevOps Lab", "BCT Lab", "DL", "DL Lab"] },
+    { "id": "f_av", "name": "Dr. A. Vasanthi", "short": "AV", "desg": "Assoc Professor", "dept": "CSE(CIC)", "max": 30, "subjects": ["PE-IV:SPSM", "DevOps Lab", "BCT Lab", "NLP", "NLP Lab"] },
+    { "id": "f_rt", "name": "R. Tejaswi", "short": "RT", "desg": "Asst Professor", "dept": "CSE(CIC)", "max": 30, "subjects": ["DMF", "BCT Lab"] },
+    { "id": "f_ps", "name": "P. Swetha", "short": "PS", "desg": "Asst Professor", "dept": "CSE(CIC)", "max": 30, "subjects": ["ES"] },
+    { "id": "f_tl", "name": "T. Lavanya", "short": "TL", "desg": "Asst Professor", "dept": "CSE(CIC)", "max": 30, "subjects": ["IoTCPS", "IoTCPS Lab", "CPW-1"] },
+    { "id": "f_fa", "name": "Faculty Assistant", "short": "FA", "desg": "Teaching Assistant", "dept": "CSE(CIC)", "max": 30, "subjects": ["IoTCPS Lab"] },
+    { "id": "f_sk", "name": "S. Kiran", "short": "SK", "desg": "Asst Professor", "dept": "CSE(AIML)", "max": 30, "subjects": ["RL", "AIML-EL", "DL Lab", "RL Lab", "Project Work-1"] },
+    { "id": "f_nk", "name": "N. Kavitha", "short": "NK", "desg": "Asst Professor", "dept": "CSE(AIML)", "max": 30, "subjects": ["CC", "PE-ETH", "OE-AIML", "NLP Lab", "RL Lab"] }
+  ],
+  "subjects": {
+    "CIC-4": [
+      { "id": "s_rse", "name": "Remote Sensing & Estimation", "code": "OE-I:RSE", "type": "Theory", "periods": 3, "block": 1, "facultyReq": 1, "labRoomId": "", "commonGroup": "OE-1" },
+      { "id": "s_sqt", "name": "Software Quality Testing", "code": "PE-V:SQT", "type": "Theory", "periods": 3, "block": 1, "facultyReq": 1, "labRoomId": "", "commonGroup": "" },
+      { "id": "s_spsm", "name": "Software Project & Security Mgmt", "code": "PE-IV:SPSM", "type": "Theory", "periods": 3, "block": 1, "facultyReq": 1, "labRoomId": "", "commonGroup": "" },
+      { "id": "s_dmf", "name": "Digital Marketing & Forensics", "code": "DMF", "type": "Theory", "periods": 3, "block": 1, "facultyReq": 1, "labRoomId": "", "commonGroup": "" },
+      { "id": "s_bct", "name": "Blockchain Technologies", "code": "BCT", "type": "Theory", "periods": 3, "block": 1, "facultyReq": 1, "labRoomId": "", "commonGroup": "" },
+      { "id": "s_iotcps", "name": "IoT & Cyber Physical Systems", "code": "IoTCPS", "type": "Theory", "periods": 3, "block": 1, "facultyReq": 1, "labRoomId": "", "commonGroup": "" },
+      { "id": "s_es", "name": "Embedded Systems", "code": "ES", "type": "Theory", "periods": 2, "block": 1, "facultyReq": 1, "labRoomId": "", "commonGroup": "" },
+      { "id": "s_devops_lab", "name": "DevOps Lab", "code": "DevOps Lab", "type": "Lab", "periods": 4, "block": 2, "facultyReq": 2, "labRoomId": "CS-104", "commonGroup": "" },
+      { "id": "s_bct_lab", "name": "Blockchain Technologies Lab", "code": "BCT Lab", "type": "Lab", "periods": 2, "block": 2, "facultyReq": 3, "labRoomId": "CS-109", "commonGroup": "" },
+      { "id": "s_iotcps_lab", "name": "IoT & Cyber Physical Systems Lab", "code": "IoTCPS Lab", "type": "Lab", "periods": 2, "block": 2, "facultyReq": 3, "labRoomId": "CS-109", "commonGroup": "" },
+      { "id": "s_cpw", "name": "Comprehensive Project Work 1", "code": "CPW-1", "type": "Project", "periods": 2, "block": 2, "facultyReq": 1, "labRoomId": "CS-207", "commonGroup": "" }
+    ],
+    "AIML-4": [
+      { "id": "s_dl", "name": "Deep Learning", "code": "DL", "type": "Theory", "periods": 3, "block": 1, "facultyReq": 1, "labRoomId": "", "commonGroup": "" },
+      { "id": "s_nlp", "name": "Natural Language Processing", "code": "NLP", "type": "Theory", "periods": 3, "block": 1, "facultyReq": 1, "labRoomId": "", "commonGroup": "" },
+      { "id": "s_rl", "name": "Reinforcement Learning", "code": "RL", "type": "Theory", "periods": 3, "block": 1, "facultyReq": 1, "labRoomId": "", "commonGroup": "" },
+      { "id": "s_cc", "name": "Cloud Computing", "code": "CC", "type": "Theory", "periods": 3, "block": 1, "facultyReq": 1, "labRoomId": "", "commonGroup": "" },
+      { "id": "s_aimlel", "name": "AIML Elective", "code": "AIML-EL", "type": "Theory", "periods": 3, "block": 1, "facultyReq": 1, "labRoomId": "", "commonGroup": "" },
+      { "id": "s_peeth", "name": "Professional Ethics", "code": "PE-ETH", "type": "Theory", "periods": 2, "block": 1, "facultyReq": 1, "labRoomId": "", "commonGroup": "" },
+      { "id": "s_oeaiml", "name": "Open Elective", "code": "OE-AIML", "type": "Theory", "periods": 3, "block": 1, "facultyReq": 1, "labRoomId": "", "commonGroup": "OE-1" },
+      { "id": "s_dl_lab", "name": "Deep Learning Lab", "code": "DL Lab", "type": "Lab", "periods": 4, "block": 2, "facultyReq": 2, "labRoomId": "CS-104", "commonGroup": "" },
+      { "id": "s_nlp_lab", "name": "Natural Language Processing Lab", "code": "NLP Lab", "type": "Lab", "periods": 2, "block": 2, "facultyReq": 2, "labRoomId": "CS-109", "commonGroup": "" },
+      { "id": "s_rl_lab", "name": "Reinforcement Learning Lab", "code": "RL Lab", "type": "Lab", "periods": 2, "block": 2, "facultyReq": 2, "labRoomId": "CS-207", "commonGroup": "" },
+      { "id": "s_pw1", "name": "Project Work 1", "code": "Project Work-1", "type": "Project", "periods": 2, "block": 2, "facultyReq": 1, "labRoomId": "CS-207", "commonGroup": "" }
+    ]
+  },
+  "assignments": {
+    "CIC-4-A": {
+      "s_rse": ["f_mb"],
+      "s_sqt": ["f_mvrj"],
+      "s_spsm": ["f_av"],
+      "s_dmf": ["f_rt"],
+      "s_bct": ["f_ppp"],
+      "s_iotcps": ["f_tl"],
+      "s_es": ["f_ps"],
+      "s_devops_lab": ["f_ppp", "f_av"],
+      "s_bct_lab": ["f_ppp", "f_rt", "f_av"],
+      "s_iotcps_lab": ["f_tl", "f_mvrj", "f_fa"],
+      "s_cpw": ["f_tl"]
+    },
+    "AIML-4-A": {
+      "s_dl": ["f_ppp"],
+      "s_nlp": ["f_av"],
+      "s_rl": ["f_sk"],
+      "s_cc": ["f_nk"],
+      "s_aimlel": ["f_sk"],
+      "s_peeth": ["f_nk"],
+      "s_oeaiml": ["f_nk"],
+      "s_dl_lab": ["f_ppp", "f_sk"],
+      "s_nlp_lab": ["f_av", "f_nk"],
+      "s_rl_lab": ["f_sk", "f_nk"],
+      "s_pw1": ["f_sk"]
+    }
+  },
+  "settings": {
+    "periods": [
+      { "id": "p1", "label": "P1", "start": "09:30", "end": "10:30", "brk": false },
+      { "id": "p2", "label": "P2", "start": "10:30", "end": "11:30", "brk": false },
+      { "id": "b1", "label": "Break", "start": "11:30", "end": "11:40", "brk": true },
+      { "id": "p3", "label": "P3", "start": "11:40", "end": "12:40", "brk": false },
+      { "id": "p4", "label": "P4", "start": "12:40", "end": "13:40", "brk": false },
+      { "id": "lunch", "label": "Lunch", "start": "13:40", "end": "14:15", "brk": true },
+      { "id": "p5", "label": "P5", "start": "14:15", "end": "15:15", "brk": false },
+      { "id": "p6", "label": "P6", "start": "15:15", "end": "16:15", "brk": false }
+    ],
+    "labWindows": [
+      ["p1", "p2"],
+      ["p3", "p4"],
+      ["p5", "p6"]
+    ],
+    "defaultSaturdayPeriods": 4
+  }
+}

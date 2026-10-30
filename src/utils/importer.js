@@ -1,92 +1,129 @@
 import * as XLSX from 'xlsx'
-import { uid, makeShort } from './helpers'
+import { uid, makeShort, getBranchYearKey, normalizeKey } from './helpers'
 import { BRANCHES, YEARS } from './constants'
 
-// ─── Raw sheet reader (auto-detects header row) ───────────────────────────────
-export function readSheetRaw(file) {
+/**
+ * Reads an Excel or CSV file as an ArrayBuffer and parses it with XLSX.read(..., {type: 'array'}).
+ * Automatically detects the header row by searching for the row with non-empty cells.
+ * Trims and lowercases headers for matching.
+ */
+export function readSheetArrayBuffer(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader()
     reader.onload = (e) => {
       try {
-        const wb = XLSX.read(e.target.result, { type: 'binary' })
-        const preferred = ['Teaching-Staff', 'teaching-staff', 'Faculty', 'faculty', 'Staff', 'staff']
-        const sheetName = preferred.find(n => wb.SheetNames.includes(n)) || wb.SheetNames[0]
+        const data = new Uint8Array(e.target.result)
+        const wb = XLSX.read(data, { type: 'array' })
+        const sheetName = wb.SheetNames[0]
         const ws = wb.Sheets[sheetName]
         const raw = XLSX.utils.sheet_to_json(ws, { header: 1, defval: '' })
 
-        let hdrIdx = -1
+        if (!raw.length) {
+          resolve({ headers: [], dataRows: [] })
+          return
+        }
+
+        // Auto-detect header row
+        let hdrIdx = 0
         for (let i = 0; i < Math.min(raw.length, 15); i++) {
-          const row = raw[i].map(x => String(x || '').trim().toLowerCase())
-          if (row.filter(x => x).length >= 2 && row.some(x => x === 'name' || x === 'name ')) {
-            hdrIdx = i; break
+          const row = raw[i].map((x) => String(x || '').trim())
+          const valid = row.filter(Boolean)
+          if (valid.length >= 2) {
+            hdrIdx = i
+            break
           }
         }
-        if (hdrIdx < 0) {
-          for (let i = 0; i < Math.min(raw.length, 10); i++) {
-            if (raw[i].filter(x => String(x || '').trim()).length >= 2) { hdrIdx = i; break }
-          }
-        }
-        if (hdrIdx < 0) { reject(new Error('Could not find header row in file')); return }
 
-        const headers = raw[hdrIdx].map(x => String(x || '').trim())
-        const dataRows = raw.slice(hdrIdx + 1).filter(r => r.some(x => String(x || '').trim()))
+        const headers = raw[hdrIdx].map((x) => String(x || '').trim())
+        const dataRows = raw.slice(hdrIdx + 1).filter((r) => r.some((x) => String(x || '').trim()))
+
         resolve({ headers, dataRows })
-      } catch (err) { reject(err) }
+      } catch (err) {
+        reject(err)
+      }
     }
-    reader.readAsBinaryString(file)
+    reader.onerror = (err) => reject(err)
+    reader.readAsArrayBuffer(file)
   })
 }
 
-// ─── Simple reader (uses row 1 as headers) ───────────────────────────────────
-export function readSheetSimple(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader()
-    reader.onload = (e) => {
-      try {
-        const wb = XLSX.read(e.target.result, { type: 'binary' })
-        const ws = wb.Sheets[wb.SheetNames[0]]
-        resolve(XLSX.utils.sheet_to_json(ws, { defval: '' }))
-      } catch (err) { reject(err) }
-    }
-    reader.readAsBinaryString(file)
-  })
-}
-
-// ─── Faculty importer ─────────────────────────────────────────────────────────
-export async function importFacultyFromFile(file, existingFaculty) {
-  const { headers, dataRows } = await readSheetRaw(file)
-  const h = headers.map(x => String(x || '').trim().toLowerCase())
-  const col = (variants) => {
-    for (const v of variants) { const i = h.findIndex(x => x === v || x.startsWith(v)); if (i >= 0) return i }
-    return -1
+function findColIdx(headers, variants) {
+  const normHeaders = headers.map((h) => String(h || '').trim().toLowerCase())
+  for (const v of variants) {
+    const target = v.toLowerCase()
+    const idx = normHeaders.findIndex(
+      (h) => h === target || h.replace(/\s+/g, '') === target.replace(/\s+/g, '')
+    )
+    if (idx >= 0) return idx
   }
+  for (const v of variants) {
+    const target = v.toLowerCase()
+    const idx = normHeaders.findIndex((h) => h.startsWith(target))
+    if (idx >= 0) return idx
+  }
+  return -1
+}
 
-  const iName = col(['name'])
-  const iShort = col(['short', 'code', 'initials', 'abbr'])
-  const iDept  = col(['department', 'dept', 'course', 'branch', 'section'])
-  const iDesg  = col(['designation', 'desg', 'post', 'title'])
-  const iMax   = col(['max periods/week', 'max periods', 'max', 'periods/week'])
+// ─── Faculty Importer ─────────────────────────────────────────────────────────
+// Columns: Faculty Name | Short Name | Designation | Department | Max Periods/Week | Subjects
+export async function importFacultyFromFile(file, existingFaculty = []) {
+  const { headers, dataRows } = await readSheetArrayBuffer(file)
+
+  const iName = findColIdx(headers, ['faculty name', 'name', 'faculty'])
+  const iShort = findColIdx(headers, ['short name', 'short', 'code', 'initials', 'abbr'])
+  const iDesg = findColIdx(headers, ['designation', 'desg', 'post', 'title'])
+  const iDept = findColIdx(headers, ['department', 'dept', 'branch', 'course'])
+  const iMax = findColIdx(headers, ['max periods/week', 'max periods', 'max', 'periods/week'])
+  const iSubs = findColIdx(headers, ['subjects', 'subject codes', 'courses', 'subject'])
 
   const result = []
   let skipped = 0
   const pool = [...existingFaculty]
 
-  dataRows.forEach(r => {
+  dataRows.forEach((r) => {
     const name = iName >= 0 ? String(r[iName] || '').trim() : ''
-    if (!name || typeof r[iName] === 'number') return
-    if (['name', 's.no.', ''].includes(name.toLowerCase())) return
+    if (!name || ['name', 's.no.', 'sno', 'sl.no'].includes(name.toLowerCase())) {
+      return
+    }
 
     let short = iShort >= 0 ? String(r[iShort] || '').trim().toUpperCase() : ''
     if (!short) short = makeShort(name)
-    if (!short) { skipped++; return }
+    if (!short) {
+      skipped++
+      return
+    }
 
-    let finalShort = short, attempt = 1
-    while (pool.some(x => x.short === finalShort)) finalShort = short + (++attempt)
+    // Check duplicate short in existing pool or current batch
+    if (pool.some((x) => x.short === short)) {
+      // Keep duplicate short to trigger validation report or append number if unassigned
+      let disambiguated = short
+      let counter = 2
+      while (pool.some((x) => x.short === disambiguated)) {
+        disambiguated = `${short}${counter++}`
+      }
+      short = disambiguated
+    }
 
-    const dept = iDept >= 0 ? String(r[iDept] || '').trim() : ''
     const desg = iDesg >= 0 ? String(r[iDesg] || '').trim() : ''
-    const max  = iMax  >= 0 ? String(r[iMax]  || '').trim() : ''
-    const entry = { id: uid('f'), name, short: finalShort, dept: dept || desg, max }
+    const dept = iDept >= 0 ? String(r[iDept] || '').trim() : ''
+    const maxVal = iMax >= 0 ? parseInt(r[iMax], 10) : 30
+    const rawSubs = iSubs >= 0 ? String(r[iSubs] || '').trim() : ''
+
+    const subjects = rawSubs
+      .split(',')
+      .map((s) => s.trim())
+      .filter(Boolean)
+
+    const entry = {
+      id: uid('f'),
+      name,
+      short,
+      desg,
+      dept,
+      max: Number.isFinite(maxVal) && maxVal > 0 ? maxVal : 30,
+      subjects,
+    }
+
     pool.push(entry)
     result.push(entry)
   })
@@ -94,45 +131,109 @@ export async function importFacultyFromFile(file, existingFaculty) {
   return { imported: result, skipped }
 }
 
-// ─── Rooms importer ───────────────────────────────────────────────────────────
-export async function importRoomsFromFile(file, existingRooms) {
-  const rows = await readSheetSimple(file)
+// ─── Rooms Importer ───────────────────────────────────────────────────────────
+// Columns: Room No | Type (Classroom/Lab) | Lab Name (e.g. LAB-5, blank for classrooms) | Capacity
+export async function importRoomsFromFile(file, existingRooms = []) {
+  const { headers, dataRows } = await readSheetArrayBuffer(file)
+
+  const iRoom = findColIdx(headers, ['room no', 'room', 'name', 'roomno'])
+  const iType = findColIdx(headers, ['type', 'room type'])
+  const iLab = findColIdx(headers, ['lab name', 'lab', 'labname'])
+  const iCap = findColIdx(headers, ['capacity', 'seats', 'cap'])
+
   const result = []
-  rows.forEach(r => {
-    const name = (r.Name || r.name || r[0] || '').toString().trim()
-    if (!name || existingRooms.some(x => x.name === name)) return
+
+  dataRows.forEach((r) => {
+    const roomNo = iRoom >= 0 ? String(r[iRoom] || '').trim() : ''
+    if (!roomNo || ['room no', 's.no.', 'room'].includes(roomNo.toLowerCase())) return
+
+    // Don't add duplicate room numbers
+    if (existingRooms.some((x) => (x.roomNo || x.name) === roomNo) || result.some((x) => x.roomNo === roomNo)) {
+      return
+    }
+
+    let rawType = iType >= 0 ? String(r[iType] || '').trim() : 'Classroom'
+    const isLab = /lab/i.test(rawType) || (iLab >= 0 && Boolean(String(r[iLab] || '').trim()))
+    const type = isLab ? 'Lab' : 'Classroom'
+    const labName = iLab >= 0 ? String(r[iLab] || '').trim() : ''
+    const cap = iCap >= 0 ? String(r[iCap] || '').trim() : ''
+
     result.push({
       id: uid('r'),
-      name,
-      type: (r.Type || r.type || r[1] || 'Classroom').toString().trim(),
-      capacity: (r.Capacity || r.capacity || r[2] || '').toString().trim(),
+      name: roomNo,
+      roomNo,
+      type,
+      labName,
+      capacity: cap,
     })
   })
+
   return result
 }
 
-// ─── Subjects importer ────────────────────────────────────────────────────────
-export async function importSubjectsFromFile(file, existingSubjects, faculty) {
-  const rows = await readSheetSimple(file)
+// ─── Subjects Importer ────────────────────────────────────────────────────────
+// Columns: Branch | Year | Subject Code | Subject Name | Type (Theory/Lab/Project) |
+// Periods/Week | Block Size | Faculty Required | Lab Room | Common Slot Group
+export async function importSubjectsFromFile(file, existingSubjects = {}, rooms = []) {
+  const { headers, dataRows } = await readSheetArrayBuffer(file)
+
+  const iBranch = findColIdx(headers, ['branch', 'dept'])
+  const iYear = findColIdx(headers, ['year'])
+  const iCode = findColIdx(headers, ['subject code', 'code', 'sub code', 'short'])
+  const iName = findColIdx(headers, ['subject name', 'name', 'subject'])
+  const iType = findColIdx(headers, ['type', 'sub type'])
+  const iPeriods = findColIdx(headers, ['periods/week', 'periods', 'period'])
+  const iBlock = findColIdx(headers, ['block size', 'block', 'blocksize'])
+  const iFacReq = findColIdx(headers, ['faculty required', 'faculty req', 'teachers', 'fac req'])
+  const iLabRoom = findColIdx(headers, ['lab room', 'lab room no', 'lab', 'room'])
+  const iGroup = findColIdx(headers, ['common slot group', 'common slot', 'common group', 'group', 'slot group'])
+
   const result = {}
-  rows.forEach(r => {
-    const branch = (r.Branch || r.branch || r[0] || '').toString().trim()
-    const year   = parseInt((r.Year   || r.year   || r[1] || 0).toString())
-    const name   = (r['Subject Name'] || r.name   || r[2] || '').toString().trim()
-    if (!branch || !year || !name || !BRANCHES.includes(branch) || !YEARS.includes(year)) return
-    const key = `${branch}_${year}`
-    if (!result[key]) result[key] = []
-    if ((existingSubjects[key] || []).some(x => x.name === name) || result[key].some(x => x.name === name)) return
-    const fShort = (r['Faculty Short'] || r.faculty || r[7] || '').toString().trim()
-    const fac = faculty.find(f => f.short === fShort) || null
-    result[key].push({
-      id: uid('s'), name,
-      code:      (r.Code            || r.code      || r[3] || '').toString().trim(),
-      type:      (r.Type            || r.type      || r[4] || 'Theory').toString().trim(),
-      periods:   parseInt((r['Periods/Week'] || r.periods || r[5] || 3).toString()) || 3,
-      block:     parseInt((r.Block  || r.block     || r[6] || 1).toString()) || 1,
-      facultyId: fac ? fac.id : '',
+
+  dataRows.forEach((r) => {
+    const branch = iBranch >= 0 ? String(r[iBranch] || '').trim().toUpperCase() : ''
+    const year = iYear >= 0 ? parseInt(String(r[iYear] || '').trim(), 10) : 0
+    const name = iName >= 0 ? String(r[iName] || '').trim() : ''
+    let code = iCode >= 0 ? String(r[iCode] || '').trim() : ''
+    if (!code && name) code = name
+
+    if (!branch || !year || !name) return
+
+    const byKey = getBranchYearKey(branch, year)
+    if (!result[byKey]) result[byKey] = []
+
+    const currentClassSubjects = existingSubjects[byKey] || []
+    if (
+      currentClassSubjects.some((s) => s.code === code || s.name === name) ||
+      result[byKey].some((s) => s.code === code || s.name === name)
+    ) {
+      return
+    }
+
+    let type = iType >= 0 ? String(r[iType] || '').trim() : 'Theory'
+    if (/lab/i.test(type)) type = 'Lab'
+    else if (/proj/i.test(type)) type = 'Project'
+    else type = 'Theory'
+
+    const periods = iPeriods >= 0 ? parseInt(r[iPeriods], 10) || 3 : 3
+    const block = iBlock >= 0 ? parseInt(r[iBlock], 10) || 1 : 1
+    const defaultFacReq = type === 'Lab' ? 2 : 1
+    const facultyReq = iFacReq >= 0 ? parseInt(r[iFacReq], 10) || defaultFacReq : defaultFacReq
+    const labRoom = iLabRoom >= 0 ? String(r[iLabRoom] || '').trim() : ''
+    const commonGroup = iGroup >= 0 ? String(r[iGroup] || '').trim() : ''
+
+    result[byKey].push({
+      id: uid('s'),
+      name,
+      code,
+      type,
+      periods,
+      block,
+      facultyReq,
+      labRoomId: labRoom,
+      commonGroup,
     })
   })
-  return result
+
+  return { map: result }
 }

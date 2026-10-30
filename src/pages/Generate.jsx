@@ -1,145 +1,573 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useMemo } from 'react'
 import { useStore } from '../store/useStore'
-import { BRANCHES, YEARS } from '../utils/constants'
-import { generateClass } from '../utils/generator'
+import { autoAssignFaculty, generateScheduleAsync } from '../utils/generator'
+import { validateState, isFacultyQualified } from '../utils/validator'
+import { getBranchYearKey } from '../utils/helpers'
 
 export default function Generate({ onNavigate }) {
   const state = useStore()
-  const { faculty, rooms, subjects, settings, setTimetable, toast } = state
-  const [running, setRunning]   = useState(false)
+  const {
+    classes,
+    faculty,
+    rooms,
+    subjects,
+    settings,
+    assignments,
+    lockedAssignments,
+    timetable,
+    setAssignment,
+    setAllAssignments,
+    toggleLockAssignment,
+    setAllTimetables,
+    toast,
+  } = state
+
+  const [step, setStep] = useState('review') // 'review' | 'generate'
+  const [selectedClassIds, setSelectedClassIds] = useState(() =>
+    classes.map((c) => c.id)
+  )
+  const [attempts, setAttempts] = useState(200)
+  const [running, setRunning] = useState(false)
   const [progress, setProgress] = useState(0)
-  const [status, setStatus]     = useState('')
-  const [log, setLog]           = useState([])
+  const [status, setStatus] = useState('')
+  const [genReport, setGenReport] = useState(null)
   const logRef = useRef(null)
 
-  const addLog = (text, kind = '') => setLog(l => [...l, { text, kind }])
+  // Validation report
+  const validation = useMemo(() => {
+    return validateState({ classes, faculty, rooms, subjects, settings })
+  }, [classes, faculty, rooms, subjects, settings])
 
-  const run = async () => {
-    const keys = BRANCHES.flatMap(b => YEARS.map(y => `${b}_${y}`))
-      .filter(k => document.getElementById('chk_' + k)?.checked)
-    if (!keys.length) { toast('Select at least one class', 'err'); return }
+  const selectedClasses = classes.filter((c) => selectedClassIds.includes(c.id))
 
-    const overwrite = document.getElementById('optOverwrite')?.checked ?? true
-    const autoFac   = document.getElementById('optAutoFac')?.checked   ?? true
-    const autoRoom  = document.getElementById('optAutoRoom')?.checked  ?? true
+  const toggleSelectAll = () => {
+    if (selectedClassIds.length === classes.length) {
+      setSelectedClassIds([])
+    } else {
+      setSelectedClassIds(classes.map((c) => c.id))
+    }
+  }
 
-    setRunning(true); setLog([]); setProgress(0)
-    addLog('Starting generator…', 'info')
+  const toggleSelectClass = (id) => {
+    setSelectedClassIds((prev) =>
+      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
+    )
+  }
 
-    const gFacOcc  = {}
-    const gRoomOcc = {}
+  // Step A: Auto-assign
+  const handleAutoAssign = () => {
+    const updated = autoAssignFaculty({
+      classes: selectedClasses,
+      subjects,
+      faculty,
+      existingAssignments: assignments,
+      lockedAssignments,
+    })
+    setAllAssignments(updated)
+    toast('Teaching teams auto-assigned from qualified faculty!', 'ok')
+  }
 
-    // Pre-fill occupancy from existing (non-overwrite) timetables
-    if (!overwrite) {
-      for (const [key, dayMap] of Object.entries(state.timetable)) {
-        if (keys.includes(key)) continue
-        for (const [day, ps] of Object.entries(dayMap))
-          for (const [pid, slot] of Object.entries(ps)) {
-            const tag = `${day}|${pid}`
-            if (slot.facId)  { gFacOcc[slot.facId]  ||= new Set(); gFacOcc[slot.facId].add(tag)  }
-            if (slot.roomId) { gRoomOcc[slot.roomId] ||= new Set(); gRoomOcc[slot.roomId].add(tag) }
-          }
-      }
+  const handleFacultyChange = (classId, subjectId, facId, checked) => {
+    const cur = assignments[classId]?.[subjectId] || []
+    const next = checked ? [...cur, facId] : cur.filter((id) => id !== facId)
+    setAssignment(classId, subjectId, next)
+  }
+
+  // Step B: Run Generator
+  const handleRunGenerator = async () => {
+    if (!validation.isValid) {
+      toast('Please fix validation errors before generating', 'err')
+      return
+    }
+    if (selectedClasses.length === 0) {
+      toast('Please select at least one class to generate', 'err')
+      return
     }
 
-    for (let ki = 0; ki < keys.length; ki++) {
-      const key  = keys[ki]
-      const [branch, yearStr] = key.split('_')
-      const year = parseInt(yearStr)
-      setProgress(Math.round((ki / keys.length) * 100))
-      setStatus(`Processing ${branch} Year ${year}…`)
-      addLog(`\n→ ${branch} Year ${year}`, 'info')
+    setRunning(true)
+    setProgress(0)
+    setStatus('Preparing multi-class scheduler…')
+    setGenReport(null)
 
-      if (!overwrite && state.timetable[key] && Object.keys(state.timetable[key]).length) {
-        addLog('  Skipped (exists)', 'ok'); continue
-      }
-      if (!(subjects[key] || []).length) { addLog('  No subjects — skipped', 'err'); continue }
-
-      const { tt, log: clog, summary } = generateClass({
-        key, state: { faculty, rooms, subjects, settings }, gFacOcc, gRoomOcc, autoFac, autoRoom
+    try {
+      const result = await generateScheduleAsync({
+        classes: selectedClasses,
+        subjects,
+        faculty,
+        rooms,
+        assignments,
+        settings,
+        existingTimetables: timetable,
+        options: { attempts: Number(attempts) || 200 },
+        onProgress: (pct) => {
+          setProgress(pct)
+          setStatus(`Running optimization attempts… ${pct}%`)
+        },
       })
 
-      clog.forEach(l => addLog('  ' + l.text, l.kind))
-      addLog('  ' + summary.text, summary.kind)
-      setTimetable(key, tt)
+      setAllTimetables(result.timetables)
+      setGenReport(result)
+      setStatus('Complete!')
 
-      await new Promise(r => setTimeout(r, 20))
-      if (logRef.current) logRef.current.scrollTop = logRef.current.scrollHeight
+      if (result.unplaced.length === 0) {
+        toast(`Generated timetables with 0 hard violations! (Score: ${result.score})`, 'ok')
+      } else {
+        toast(`Generated with ${result.unplaced.length} unplaced blocks`, 'err')
+      }
+    } catch (err) {
+      toast('Generator error: ' + err.message, 'err')
+    } finally {
+      setRunning(false)
     }
-
-    setProgress(100); setStatus('Done!')
-    addLog('\n✅ Generation complete! Go to View/Edit to review.', 'ok')
-    toast('Timetables generated!', 'ok')
-    setRunning(false)
   }
 
   return (
     <div>
       <div className="page-header">
-        <div className="row"><div><h2>Generate Timetable</h2><p>Auto-generate clash-free timetables for all classes.</p></div></div>
+        <div className="row">
+          <div>
+            <h2>Generate Timetable</h2>
+            <p>Generate all classes together with shared faculty and room constraints.</p>
+          </div>
+          <div className="actions">
+            <button
+              className={`btn ${step === 'review' ? 'btn-primary' : 'btn-secondary'}`}
+              onClick={() => setStep('review')}
+            >
+              Step A: Review Assignments
+            </button>
+            <button
+              className={`btn ${step === 'generate' ? 'btn-primary' : 'btn-secondary'}`}
+              onClick={() => setStep('generate')}
+            >
+              Step B: Schedule &amp; Generate
+            </button>
+          </div>
+        </div>
       </div>
 
-      {(!faculty.length || !rooms.length) && (
-        <div className="card" style={{ borderColor: 'var(--yellow)', background: 'var(--yellowbg)', marginBottom: '1rem' }}>
-          ⚠️ Please add Faculty and Rooms before generating.
+      {/* Validation Report Banner */}
+      {!validation.isValid && (
+        <div
+          className="card"
+          style={{
+            borderColor: 'var(--red)',
+            background: 'var(--redbg)',
+            marginBottom: '1rem',
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', gap: '.5rem', marginBottom: '.5rem' }}>
+            <span style={{ fontSize: '1.2rem' }}>⚠️</span>
+            <b style={{ color: 'var(--red)' }}>Validation Errors (Generation Blocked):</b>
+          </div>
+          <ul style={{ paddingLeft: '1.5rem', fontSize: '.84rem', color: 'var(--ink)' }}>
+            {validation.errors.map((err, i) => (
+              <li key={i} style={{ marginBottom: '.2rem' }}>
+                {err}
+              </li>
+            ))}
+          </ul>
         </div>
       )}
 
-      <div className="card">
-        <div className="card-header"><h3>Select Classes to Generate</h3></div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(150px,1fr))', gap: '.5rem' }}>
-          {BRANCHES.flatMap(b => YEARS.map(y => {
-            const key  = `${b}_${y}`
-            const subs = subjects[key] || []
-            return (
-              <label key={key} style={{ display: 'flex', alignItems: 'center', gap: '.45rem', background: 'var(--surface2)', border: '1px solid var(--border)', borderRadius: 'var(--radius-sm)', padding: '.55rem .75rem', cursor: subs.length ? 'pointer' : 'default', fontSize: '.84rem', opacity: subs.length ? 1 : 0.4 }}>
-                <input type="checkbox" id={`chk_${key}`} defaultChecked={subs.length > 0} disabled={!subs.length} />
-                <span><b>{b} Y{y}</b><br /><span style={{ fontSize: '.7rem', color: 'var(--muted)' }}>{subs.length} subj</span></span>
-              </label>
-            )
-          }))}
-        </div>
-      </div>
-
-      <div className="card">
-        <div className="card-header"><h3>Options</h3></div>
-        <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
-          {[
-            ['optOverwrite', 'Overwrite existing'],
-            ['optAutoFac',   'Auto-assign unset faculty'],
-            ['optAutoRoom',  'Auto-assign rooms'],
-          ].map(([id, label]) => (
-            <label key={id} style={{ display: 'flex', alignItems: 'center', gap: '.4rem', cursor: 'pointer', fontSize: '.84rem' }}>
-              <input type="checkbox" id={id} defaultChecked /> {label}
-            </label>
-          ))}
-        </div>
-      </div>
-
-      <div className="card">
-        <div className="card-header">
-          <h3>Generator</h3>
-          <button className="btn btn-success" onClick={run} disabled={running} style={{ marginLeft: 'auto' }}>
-            {running ? '⏳ Running…' : '⚡ Generate Now'}
-          </button>
-        </div>
-        {running && (
-          <div>
-            <div className="progress-bar"><i style={{ width: progress + '%' }} /></div>
-            <p style={{ fontSize: '.82rem', color: 'var(--muted)', margin: '.4rem 0' }}>{status}</p>
+      {validation.warnings.length > 0 && (
+        <div
+          className="card"
+          style={{
+            borderColor: 'var(--yellow)',
+            background: 'var(--yellowbg)',
+            marginBottom: '1rem',
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', gap: '.5rem', marginBottom: '.3rem' }}>
+            <span style={{ fontSize: '1rem' }}>ℹ️</span>
+            <b style={{ color: 'var(--yellow)' }}>Faculty Workload Warnings:</b>
           </div>
-        )}
-        {log.length > 0 && (
-          <div ref={logRef} className="gen-log" style={{ marginTop: '.75rem' }}>
-            {log.map((l, i) => <span key={i} className={l.kind}>{l.text}{'\n'}</span>)}
+          <ul style={{ paddingLeft: '1.5rem', fontSize: '.8rem', color: 'var(--muted)' }}>
+            {validation.warnings.slice(0, 5).map((w, i) => (
+              <li key={i}>{w}</li>
+            ))}
+            {validation.warnings.length > 5 && (
+              <li>...and {validation.warnings.length - 5} more warnings</li>
+            )}
+          </ul>
+        </div>
+      )}
+
+      {/* ─── STEP A: Review & Lock Assignments ─── */}
+      {step === 'review' && (
+        <div>
+          <div className="card">
+            <div className="card-header">
+              <h3>Step A: Faculty Teaching Assignments</h3>
+              <span style={{ fontSize: '.78rem', color: 'var(--muted)' }}>
+                Each class section can have different faculty teams for the same subject.
+              </span>
+              <div style={{ marginLeft: 'auto', display: 'flex', gap: '.5rem' }}>
+                <button className="btn btn-secondary btn-sm" onClick={handleAutoAssign}>
+                  ⚡ Auto-Assign All Qualified
+                </button>
+                <button className="btn btn-primary btn-sm" onClick={() => setStep('generate')}>
+                  Proceed to Schedule →
+                </button>
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', gap: '.5rem', flexWrap: 'wrap', marginBottom: '1rem' }}>
+              <button className="btn btn-ghost btn-sm" onClick={toggleSelectAll}>
+                {selectedClassIds.length === classes.length ? 'Deselect All' : 'Select All Classes'}
+              </button>
+              {classes.map((c) => (
+                <label
+                  key={c.id}
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '.35rem',
+                    background: selectedClassIds.includes(c.id)
+                      ? 'var(--accentbg)'
+                      : 'var(--surface2)',
+                    border: '1px solid var(--border)',
+                    borderRadius: 'var(--radius-sm)',
+                    padding: '.3rem .6rem',
+                    cursor: 'pointer',
+                    fontSize: '.82rem',
+                  }}
+                >
+                  <input
+                    type="checkbox"
+                    checked={selectedClassIds.includes(c.id)}
+                    onChange={() => toggleSelectClass(c.id)}
+                  />
+                  <span>
+                    <b>{c.id}</b>
+                  </span>
+                </label>
+              ))}
+            </div>
+
+            {selectedClasses.map((c) => {
+              const byKey = getBranchYearKey(c.branch, c.year)
+              const subList = subjects[byKey] || []
+              const classAss = assignments[c.id] || {}
+
+              return (
+                <div
+                  key={c.id}
+                  style={{
+                    background: 'var(--surface2)',
+                    border: '1px solid var(--border)',
+                    borderRadius: 'var(--radius)',
+                    padding: '1rem',
+                    marginBottom: '1rem',
+                  }}
+                >
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      marginBottom: '.75rem',
+                      borderBottom: '1px solid var(--border)',
+                      paddingBottom: '.4rem',
+                    }}
+                  >
+                    <div>
+                      <b style={{ fontSize: '1rem', color: 'var(--accent2)' }}>{c.id}</b>
+                      <span className="tag" style={{ marginLeft: '.5rem' }}>
+                        {subList.length} subjects
+                      </span>
+                      <span className="tag" style={{ marginLeft: '.3rem' }}>
+                        Home: {c.homeRoomId || 'Unset'}
+                      </span>
+                    </div>
+                  </div>
+
+                  {subList.length === 0 ? (
+                    <p style={{ fontSize: '.8rem', color: 'var(--muted)' }}>
+                      No subjects defined for {byKey}.
+                    </p>
+                  ) : (
+                    <div className="table-wrap">
+                      <table>
+                        <thead>
+                          <tr>
+                            <th>Subject</th>
+                            <th>Type</th>
+                            <th style={{ textAlign: 'right' }}>Req</th>
+                            <th>Assigned Faculty Team</th>
+                            <th>Lock Team</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {subList.map((s) => {
+                            const req = s.facultyReq ?? (s.type === 'Lab' ? 2 : 1)
+                            const currentTeam = classAss[s.id] || []
+                            const isLocked = !!lockedAssignments[c.id]?.[s.id]
+                            const qualified = faculty.filter((f) =>
+                              isFacultyQualified(f, s, byKey)
+                            )
+
+                            return (
+                              <tr key={s.id}>
+                                <td>
+                                  <b>{s.code || s.name}</b>
+                                  <span
+                                    style={{
+                                      display: 'block',
+                                      fontSize: '.72rem',
+                                      color: 'var(--muted)',
+                                    }}
+                                  >
+                                    {s.name} ({s.periods} p/wk)
+                                  </span>
+                                </td>
+                                <td>
+                                  <span
+                                    className={`tag ${
+                                      s.type === 'Lab'
+                                        ? 'green'
+                                        : s.type === 'Project'
+                                        ? 'purple'
+                                        : ''
+                                    }`}
+                                  >
+                                    {s.type}
+                                  </span>
+                                </td>
+                                <td style={{ textAlign: 'right' }}>{req}</td>
+                                <td>
+                                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.4rem' }}>
+                                    {qualified.map((f) => {
+                                      const isChosen = currentTeam.includes(f.id)
+                                      return (
+                                        <label
+                                          key={f.id}
+                                          style={{
+                                            display: 'inline-flex',
+                                            alignItems: 'center',
+                                            gap: '.25rem',
+                                            background: isChosen
+                                              ? 'var(--accent)'
+                                              : 'var(--surface3)',
+                                            color: isChosen ? '#fff' : 'var(--ink)',
+                                            padding: '.2rem .45rem',
+                                            borderRadius: '99px',
+                                            fontSize: '.74rem',
+                                            cursor: isLocked ? 'not-allowed' : 'pointer',
+                                            opacity: isLocked && !isChosen ? 0.4 : 1,
+                                          }}
+                                        >
+                                          <input
+                                            type="checkbox"
+                                            disabled={isLocked}
+                                            checked={isChosen}
+                                            onChange={(e) =>
+                                              handleFacultyChange(
+                                                c.id,
+                                                s.id,
+                                                f.id,
+                                                e.target.checked
+                                              )
+                                            }
+                                          />
+                                          {f.short}
+                                        </label>
+                                      )
+                                    })}
+                                    {qualified.length === 0 && (
+                                      <span style={{ color: 'var(--red)', fontSize: '.75rem' }}>
+                                        No qualified faculty!
+                                      </span>
+                                    )}
+                                  </div>
+                                </td>
+                                <td>
+                                  <button
+                                    className={`btn btn-sm ${
+                                      isLocked ? 'btn-primary' : 'btn-ghost'
+                                    }`}
+                                    onClick={() => toggleLockAssignment(c.id, s.id)}
+                                  >
+                                    {isLocked ? '🔒 Locked' : '🔓 Unlocked'}
+                                  </button>
+                                </td>
+                              </tr>
+                            )
+                          })}
+                        </tbody>
+                      </table>
+                    </div>
+                  )}
+                </div>
+              )
+            })}
           </div>
-        )}
-        {!running && log.length > 0 && (
-          <button className="btn btn-ghost btn-sm" style={{ marginTop: '.5rem' }} onClick={() => onNavigate('view-tt')}>
-            📋 View Timetable →
-          </button>
-        )}
-      </div>
+        </div>
+      )}
+
+      {/* ─── STEP B: Schedule & Generator Engine ─── */}
+      {step === 'generate' && (
+        <div>
+          <div className="card">
+            <div className="card-header">
+              <h3>Step B: Multi-Class Scheduler</h3>
+            </div>
+
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+                gap: '1rem',
+                marginBottom: '1rem',
+              }}
+            >
+              <div>
+                <label style={{ fontSize: '.78rem', color: 'var(--muted)', fontWeight: 600 }}>
+                  Selected Classes ({selectedClasses.length})
+                </label>
+                <div style={{ marginTop: '.3rem', fontSize: '.84rem' }}>
+                  {selectedClasses.map((c) => c.id).join(', ') || 'None'}
+                </div>
+              </div>
+
+              <div>
+                <label style={{ fontSize: '.78rem', color: 'var(--muted)', fontWeight: 600 }}>
+                  Optimization Attempts
+                </label>
+                <input
+                  type="number"
+                  min="50"
+                  max="1000"
+                  step="50"
+                  value={attempts}
+                  onChange={(e) => setAttempts(e.target.value)}
+                  style={{ width: 120, marginTop: '.3rem' }}
+                />
+              </div>
+
+              <div style={{ display: 'flex', alignItems: 'flex-end' }}>
+                <button
+                  className="btn btn-success"
+                  onClick={handleRunGenerator}
+                  disabled={running || !validation.isValid || selectedClasses.length === 0}
+                  style={{ height: 38 }}
+                >
+                  {running ? '⏳ Scheduling…' : '⚡ Generate Timetables'}
+                </button>
+              </div>
+            </div>
+
+            {running && (
+              <div style={{ marginTop: '1rem' }}>
+                <div className="progress-bar">
+                  <i style={{ width: `${progress}%` }} />
+                </div>
+                <p style={{ fontSize: '.82rem', color: 'var(--muted)', marginTop: '.4rem' }}>
+                  {status}
+                </p>
+              </div>
+            )}
+          </div>
+
+          {/* Generator Result Report */}
+          {genReport && (
+            <div className="card">
+              <div className="card-header">
+                <h3>📊 Scheduling Report</h3>
+                <span
+                  className={`tag ${genReport.unplaced.length === 0 ? 'green' : 'red'}`}
+                  style={{ fontSize: '.8rem' }}
+                >
+                  {genReport.unplaced.length === 0
+                    ? '✓ 0 Hard Violations (All Placed)'
+                    : `⚠️ ${genReport.unplaced.length} Unplaced Blocks`}
+                </span>
+                <span className="tag blue" style={{ marginLeft: '.3rem' }}>
+                  Soft Penalty Score: {genReport.score}
+                </span>
+                <button
+                  className="btn btn-primary btn-sm"
+                  style={{ marginLeft: 'auto' }}
+                  onClick={() => onNavigate('view-tt')}
+                >
+                  📋 View Timetable →
+                </button>
+              </div>
+
+              {genReport.unplaced.length > 0 && (
+                <div style={{ marginBottom: '1rem' }}>
+                  <h4 style={{ color: 'var(--red)', fontSize: '.9rem', marginBottom: '.4rem' }}>
+                    Unplaced Blocks:
+                  </h4>
+                  <div className="table-wrap">
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>Class</th>
+                          <th>Subject</th>
+                          <th>Reason</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {genReport.unplaced.map((u, i) => (
+                          <tr key={i}>
+                            <td>
+                              <b>{u.classId}</b>
+                            </td>
+                            <td>{u.sub?.code || u.sub?.name}</td>
+                            <td style={{ color: 'var(--red)' }}>{u.reason}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              )}
+
+              {genReport.violations.length > 0 ? (
+                <div>
+                  <h4 style={{ color: 'var(--yellow)', fontSize: '.9rem', marginBottom: '.4rem' }}>
+                    Soft Rule Deviations ({genReport.violations.length}):
+                  </h4>
+                  <div style={{ maxHeight: 220, overflowY: 'auto' }} className="table-wrap">
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>Class / Faculty</th>
+                          <th>Day &amp; Period</th>
+                          <th>Rule</th>
+                          <th>Details</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {genReport.violations.map((v, i) => (
+                          <tr key={i}>
+                            <td>
+                              <b>{v.classId || v.facId}</b>
+                            </td>
+                            <td>
+                              {v.day} {v.period ? `(${v.period})` : ''}
+                            </td>
+                            <td>
+                              <span className="tag yellow">{v.rule}</span>
+                            </td>
+                            <td>{v.text}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              ) : (
+                <p style={{ color: 'var(--green)', fontSize: '.84rem' }}>
+                  ✓ Outstanding! Zero soft-rule violations.
+                </p>
+              )}
+            </div>
+          )}
+        </div>
+      )}
     </div>
   )
 }

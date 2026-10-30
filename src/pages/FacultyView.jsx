@@ -4,74 +4,141 @@ import { DAYS_ORDER } from '../utils/constants'
 import { fmtTime } from '../utils/helpers'
 
 export default function FacultyView() {
-  const { faculty, rooms, subjects, timetable, settings } = useStore()
+  const { classes, faculty, rooms, subjects, timetable, settings } = useStore()
   const [facId, setFacId] = useState('')
 
-  const periods = settings.periods
+  const selectedFacId = facId || (faculty.length > 0 ? faculty[0].id : '')
+  const fac = faculty.find((f) => f.id === selectedFacId)
+
+  const periods = settings.periods || []
   const allDays = DAYS_ORDER
+  const allSubs = Object.values(subjects).flat()
 
   const schedule = {}
-  for (const [key, dayMap] of Object.entries(timetable)) {
-    const [b, y] = key.split('_')
-    for (const [day, ps] of Object.entries(dayMap))
-      for (const [pid, slot] of Object.entries(ps)) {
-        if (slot.facId !== facId) continue
-        schedule[day] = schedule[day] || {}
-        schedule[day][pid] = schedule[day][pid] || []
-        const sub  = Object.values(subjects).flat().find(s => s.id === slot.subId)
-        const room = rooms.find(r => r.id === slot.roomId)
-        schedule[day][pid].push({ branch: b, year: y, subName: sub?.name || '?', roomName: room?.name || '' })
-      }
+  let totalPeriods = 0
+
+  if (selectedFacId) {
+    classes.forEach((c) => {
+      const tt = timetable[c.id] || {}
+      Object.entries(tt).forEach(([day, ps]) => {
+        Object.entries(ps).forEach(([pid, slot]) => {
+          const team = slot.facIds || (slot.facId ? [slot.facId] : [])
+          if (!team.includes(selectedFacId)) return
+
+          schedule[day] = schedule[day] || {}
+          schedule[day][pid] = schedule[day][pid] || []
+
+          const sub = allSubs.find((s) => s.id === slot.subId)
+          const room = rooms.find(
+            (r) =>
+              r.id === slot.roomId ||
+              r.roomNo === slot.roomId ||
+              r.name === slot.roomId
+          )
+          schedule[day][pid].push({
+            classId: c.id,
+            subCode: slot.subCode || sub?.code || sub?.name || '?',
+            roomName: room?.roomNo || room?.name || slot.roomId || '',
+          })
+        })
+      })
+    })
   }
 
-  const activeDays = allDays.filter(d => Object.values(settings.days).some(arr => Array.isArray(arr) && arr.includes(d)))
-  const fac = faculty.find(f => f.id === facId)
-  let total = 0
+  const activeDays = allDays.filter((d) =>
+    classes.some((c) => (c.workingDays || []).includes(d))
+  )
 
   return (
     <div>
       <div className="page-header">
-        <div className="row"><div><h2>Faculty Schedule View</h2><p>Full week schedule for any faculty member across all branches.</p></div></div>
+        <div className="row">
+          <div>
+            <h2>Faculty Schedule View</h2>
+            <p>Full weekly schedule for any faculty member across all branches and classes.</p>
+          </div>
+        </div>
       </div>
 
-      <div style={{ maxWidth: 280, marginBottom: '1.25rem' }}>
+      <div style={{ maxWidth: 350, marginBottom: '1.25rem' }}>
         <div className="field">
-          <label>Select Faculty</label>
-          <select value={facId} onChange={e => setFacId(e.target.value)}>
-            <option value="">— Choose —</option>
-            {faculty.map(f => <option key={f.id} value={f.id}>{f.name} ({f.short})</option>)}
+          <label>Select Faculty Member</label>
+          <select value={selectedFacId} onChange={(e) => setFacId(e.target.value)}>
+            <option value="">— Choose Faculty —</option>
+            {faculty.map((f) => (
+              <option key={f.id} value={f.id}>
+                {f.name} ({f.short}) — Max: {f.max || 30}
+              </option>
+            ))}
           </select>
         </div>
       </div>
 
-      {facId && (
+      {fac && (
         <div className="card">
-          <div className="card-header"><h3>📅 {fac?.name || 'Faculty'} — Full Week</h3></div>
+          <div className="card-header">
+            <h3>
+              👤 {fac.name} ({fac.short}) — Weekly Schedule
+            </h3>
+            <span className="tag">{fac.dept || 'Faculty'}</span>
+            <span className="tag blue" style={{ marginLeft: '.3rem' }}>
+              Max: {fac.max || 30} periods/wk
+            </span>
+          </div>
+
           <div className="tt-grid-wrap">
             <table className="tt-grid">
               <thead>
                 <tr>
                   <th className="day-col">Day</th>
-                  {periods.map(p => p.brk
-                    ? <th key={p.id} className="brk">{p.label}</th>
-                    : <th key={p.id}>{p.label}<small>{fmtTime(p.start)}</small></th>
+                  {periods.map((p) =>
+                    p.brk ? (
+                      <th key={p.id} className="brk">
+                        {p.label}
+                      </th>
+                    ) : (
+                      <th key={p.id}>
+                        {p.label}
+                        <small>
+                          {fmtTime(p.start)}-{fmtTime(p.end)}
+                        </small>
+                      </th>
+                    )
                   )}
                 </tr>
               </thead>
               <tbody>
-                {activeDays.map(day => (
+                {activeDays.map((day) => (
                   <tr key={day}>
                     <th className="day-col">{day}</th>
-                    {periods.map(p => {
+                    {periods.map((p) => {
                       if (p.brk) return <td key={p.id} className="brk" />
-                      const slots = (schedule[day] || {})[p.id] || []
-                      if (slots.length) {
-                        total += slots.length
+
+                      const slots = schedule[day]?.[p.id] || []
+                      if (slots.length > 0) {
+                        totalPeriods++
                         const isClash = slots.length > 1
                         return (
-                          <td key={p.id} className={`tt-slot filled${isClash ? ' clash' : ''}`} style={{ '--h': isClash ? 0 : 220 }}>
+                          <td
+                            key={p.id}
+                            className={`tt-slot filled${isClash ? ' clash' : ''}`}
+                            style={{
+                              '--h': isClash ? 0 : 220,
+                              background: isClash ? 'var(--redbg)' : undefined,
+                            }}
+                          >
                             {slots.map((s, i) => (
-                              <span key={i}><b style={{ fontSize: '.7rem' }}>{s.branch} Y{s.year}</b><span>{s.subName}</span>{s.roomName ? <em>{s.roomName}</em> : null}</span>
+                              <div key={i} style={{ marginBottom: '.2rem' }}>
+                                <b style={{ fontSize: '.72rem' }}>{s.subCode}</b>
+                                <span style={{ fontSize: '.68rem', color: 'var(--accent2)' }}>
+                                  {s.classId}
+                                </span>
+                                {s.roomName && (
+                                  <em style={{ fontSize: '.65rem', color: 'var(--muted)' }}>
+                                    ({s.roomName})
+                                  </em>
+                                )}
+                              </div>
                             ))}
                           </td>
                         )
@@ -83,10 +150,22 @@ export default function FacultyView() {
               </tbody>
             </table>
           </div>
-          <p style={{ marginTop: '.75rem', fontSize: '.82rem', color: 'var(--muted)' }}>
-            Total: <b style={{ color: 'var(--ink)' }}>{total}</b> periods/week
-            {fac?.max ? ` (max: ${fac.max})` : ''}
-            {total > parseInt(fac?.max || 9999) ? <span className="tag red" style={{ marginLeft: '.4rem' }}>Over limit</span> : null}
+
+          <p style={{ marginTop: '.75rem', fontSize: '.84rem', color: 'var(--muted)' }}>
+            Total Allocated:{' '}
+            <b
+              style={{
+                color: totalPeriods > (fac.max || 30) ? 'var(--red)' : 'var(--ink)',
+              }}
+            >
+              {totalPeriods}
+            </b>{' '}
+            / {fac.max || 30} periods/week
+            {totalPeriods > (fac.max || 30) && (
+              <span className="tag red" style={{ marginLeft: '.5rem' }}>
+                Exceeds Max Limit!
+              </span>
+            )}
           </p>
         </div>
       )}

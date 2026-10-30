@@ -10,12 +10,13 @@ const NAV = [
   { view: 'subjects',     icon: '📚', label: 'Subjects',  badge: 'subjects' },
   { section: 'Timetable' },
   { view: 'generate',     icon: '⚡', label: 'Generate' },
-  { view: 'view-tt',      icon: '📋', label: 'View / Edit' },
+  { view: 'view-tt',      icon: '📋', label: 'Class Timetable' },
   { view: 'faculty-view', icon: '👤', label: 'Faculty View' },
+  { view: 'room-view',    icon: '🏛️', label: 'Room View' },
   { view: 'export',       icon: '📤', label: 'Export' },
 ]
 
-export default function Sidebar({ currentPage, onNavigate }) {
+export default function Sidebar({ currentPage, onNavigate, onOpenViewer }) {
   const { faculty, rooms, subjects, saveProject, loadProject, resetAll, toast } = useStore()
   const totalSubs = Object.values(subjects).reduce((a, b) => a + b.length, 0)
 
@@ -64,6 +65,13 @@ export default function Sidebar({ currentPage, onNavigate }) {
       </nav>
 
       <div className="sidebar-footer">
+        <button
+          className="btn btn-ghost btn-sm"
+          style={{ width: '100%', marginBottom: '.4rem', color: 'var(--accent2)' }}
+          onClick={onOpenViewer}
+        >
+          👁️ Public Viewer
+        </button>
         <button className="btn btn-ghost btn-sm" style={{ width: '100%', marginBottom: '.4rem' }} onClick={saveProject}>
           💾 Save Project
         </button>
