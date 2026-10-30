@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useStore } from './store/useStore'
 import Sidebar from './components/Sidebar'
 import Toast from './components/Toast'
@@ -30,7 +30,8 @@ const PAGES = {
 export default function App() {
   const [page, setPage] = useState('home')
   const [isEditor, setIsEditor] = useState(() => window.location.hash.startsWith('#edit'))
-  const { faculty, timetable, loadProject } = useStore()
+  const loadProject = useStore((s) => s.loadProject)
+  const seeded = useRef(false)
 
   // Listen to hash changes for #edit route
   useEffect(() => {
@@ -41,28 +42,25 @@ export default function App() {
     return () => window.removeEventListener('hashchange', handleHashChange)
   }, [])
 
-  // On load in editor route (#edit), if store is empty, fetch data.json from BASE_URL
+  // In the editor (#edit), seed from data.json ONCE, and only if this browser has no data yet
   useEffect(() => {
-    if (!isEditor) return // Never seed or touch persisted store in public viewer
-    const hasData = faculty.length > 0 || Object.keys(timetable).length > 0
-    if (!hasData) {
-      const baseUrl = import.meta.env.BASE_URL || '/'
-      const dataUrl = `${baseUrl.endsWith('/') ? baseUrl : baseUrl + '/'}data.json`
-      fetch(dataUrl, { cache: 'no-cache' })
-        .then((res) => {
-          if (!res.ok) return null
-          return res.json()
-        })
-        .then((data) => {
-          if (data && typeof data === 'object') {
-            loadProject(data)
-          }
-        })
-        .catch(() => {
-          // Silent 404 handling as required
-        })
-    }
-  }, [isEditor, faculty.length, timetable, loadProject])
+    if (!isEditor || seeded.current) return
+    seeded.current = true
+    const isEmpty = (st) =>
+      st.faculty.length === 0 &&
+      st.rooms.length === 0 &&
+      Object.keys(st.subjects || {}).length === 0 &&
+      Object.keys(st.timetable || {}).length === 0
+    if (!isEmpty(useStore.getState())) return
+    fetch(`${import.meta.env.BASE_URL}data.json`, { cache: 'no-cache' })
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        const hasContent = data && ((data.faculty || []).length > 0 || (data.classes || []).length > 0)
+        // Never overwrite anything imported while the fetch was in flight
+        if (hasContent && isEmpty(useStore.getState())) loadProject(data)
+      })
+      .catch(() => {})
+  }, [isEditor, loadProject])
 
   const openEditor = () => {
     window.location.hash = '#edit'
