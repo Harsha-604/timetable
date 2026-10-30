@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { useStore } from '../store/useStore'
 import Modal from '../components/Modal'
 import { uid } from '../utils/helpers'
@@ -9,6 +9,7 @@ export default function Rooms() {
   const { rooms, addRoom, updateRoom, deleteRoom, clearRooms, replaceRoomsList, toast } = useStore()
   const [modal, setModal] = useState(null)
   const [form, setForm] = useState({})
+  const fileInputRef = useRef(null)
 
   const openAdd = () => {
     setForm({ name: '', roomNo: '', type: 'Classroom', labName: '', capacity: '' })
@@ -49,8 +50,8 @@ export default function Rooms() {
     closeModal()
   }
 
-    const handleImport = async (e) => {
-    const file = e.target.files[0]
+  const handleImport = async (e) => {
+    const file = e.target.files?.[0]
     if (!file) return
     try {
       const { list, added, updated, duplicates } = await importRoomsFromFile(file, rooms)
@@ -60,8 +61,9 @@ export default function Rooms() {
       else toast(msg, 'ok')
     } catch (err) {
       toast('Import failed: ' + err.message, 'err')
+    } finally {
+      if (e.target) e.target.value = ''
     }
-    e.target.value = ''
   }
 
   const byType = (type) => rooms.filter((r) => r.type === type).length
@@ -75,10 +77,19 @@ export default function Rooms() {
             <p>Add all available classrooms and laboratory rooms.</p>
           </div>
           <div className="actions">
-            <label className="filebtn">
-              📊 Import Excel/CSV{' '}
-              <input type="file" accept=".xlsx,.xls,.csv" onChange={handleImport} hidden />
-            </label>
+            <button
+              className="btn btn-secondary filebtn"
+              onClick={() => fileInputRef.current?.click()}
+            >
+              📊 Import Excel/CSV
+            </button>
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept=".xlsx,.xls,.csv"
+              onChange={handleImport}
+              style={{ display: 'none' }}
+            />
             <button className="btn btn-secondary" onClick={() => dlTemplate('rooms')}>
               ⬇ Download Template
             </button>

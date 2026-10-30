@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { useStore } from '../store/useStore'
 import Modal from '../components/Modal'
 import { uid } from '../utils/helpers'
@@ -10,6 +10,7 @@ export default function Faculty() {
   const [search, setSearch] = useState('')
   const [modal, setModal] = useState(null)
   const [form, setForm] = useState({})
+  const fileInputRef = useRef(null)
 
   const filtered = search
     ? faculty.filter(
@@ -73,7 +74,7 @@ export default function Faculty() {
   }
 
   const handleImport = async (e) => {
-    const file = e.target.files[0]
+    const file = e.target.files?.[0]
     if (!file) return
     try {
       const { list, added, updated, skipped, duplicates } = await importFacultyFromFile(file, faculty)
@@ -83,8 +84,9 @@ export default function Faculty() {
       else toast(msg, 'ok')
     } catch (err) {
       toast('Import failed: ' + err.message, 'err')
+    } finally {
+      if (e.target) e.target.value = ''
     }
-    e.target.value = ''
   }
 
   return (
@@ -96,10 +98,19 @@ export default function Faculty() {
             <p>Add or upload faculty members, teaching limits, and subject qualifications.</p>
           </div>
           <div className="actions">
-            <label className="filebtn">
-              📊 Import Excel/CSV{' '}
-              <input type="file" accept=".xlsx,.xls,.csv" onChange={handleImport} hidden />
-            </label>
+            <button
+              className="btn btn-secondary filebtn"
+              onClick={() => fileInputRef.current?.click()}
+            >
+              📊 Import Excel/CSV
+            </button>
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept=".xlsx,.xls,.csv"
+              onChange={handleImport}
+              style={{ display: 'none' }}
+            />
             <button className="btn btn-secondary" onClick={() => dlTemplate('faculty')}>
               ⬇ Download Template
             </button>

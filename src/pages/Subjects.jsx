@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { useStore } from '../store/useStore'
 import Modal from '../components/Modal'
 import { BRANCHES, YEARS } from '../utils/constants'
@@ -24,6 +24,7 @@ export default function Subjects() {
   const [year, setYear] = useState(YEARS[0])
   const [modal, setModal] = useState(null)
   const [form, setForm] = useState({})
+  const fileInputRef = useRef(null)
 
   const key = getBranchYearKey(branch, year)
   const subs = subjects[key] || []
@@ -91,21 +92,39 @@ export default function Subjects() {
   }
 
   const handleImport = async (e) => {
-    const file = e.target.files[0]
+    const file = e.target.files?.[0]
     if (!file) return
     try {
-      const { map, added, updated, duplicates, unknown } = await importSubjectsFromFile(file, subjects)
+      const { map, added, updated, duplicates, unknown, affectedKeys } =
+        await importSubjectsFromFile(file, subjects, branch, year)
       replaceSubjects(map)
+
+      // Auto-switch view if imported subjects are for another branch/year
+      if (affectedKeys && affectedKeys.length === 1) {
+        const [targetBranch, targetYear] = affectedKeys[0].split('-')
+        if (
+          targetBranch &&
+          targetYear &&
+          (targetBranch !== branch || Number(targetYear) !== Number(year))
+        ) {
+          setBranch(targetBranch)
+          setYear(Number(targetYear))
+        }
+      }
+
       const problems = [
         duplicates.length ? `duplicate codes: ${duplicates.join(', ')}` : '',
-        unknown.length ? `rows skipped (bad branch/year): ${unknown.join('; ')}` : '',
-      ].filter(Boolean).join('. ')
+        unknown.length ? `rows skipped: ${unknown.join('; ')}` : '',
+      ]
+        .filter(Boolean)
+        .join('. ')
       const msg = `Subjects: ${added} added, ${updated} updated`
       toast(problems ? `${msg}. ${problems}` : msg, problems ? 'err' : 'ok')
     } catch (err) {
       toast('Import failed: ' + err.message, 'err')
+    } finally {
+      if (e.target) e.target.value = ''
     }
-    e.target.value = ''
   }
 
   return (
@@ -119,10 +138,19 @@ export default function Subjects() {
             </p>
           </div>
           <div className="actions">
-            <label className="filebtn">
-              📊 Import Excel/CSV{' '}
-              <input type="file" accept=".xlsx,.xls,.csv" onChange={handleImport} hidden />
-            </label>
+            <button
+              className="btn btn-secondary filebtn"
+              onClick={() => fileInputRef.current?.click()}
+            >
+              📊 Import Excel/CSV
+            </button>
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept=".xlsx,.xls,.csv"
+              onChange={handleImport}
+              style={{ display: 'none' }}
+            />
             <button className="btn btn-secondary" onClick={() => dlTemplate('subjects')}>
               ⬇ Download Template
             </button>
