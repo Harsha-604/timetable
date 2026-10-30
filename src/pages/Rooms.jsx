@@ -49,17 +49,15 @@ export default function Rooms() {
     closeModal()
   }
 
-  const handleImport = async (e) => {
+    const handleImport = async (e) => {
     const file = e.target.files[0]
     if (!file) return
     try {
-      const imported = await importRoomsFromFile(file, rooms)
-      if (imported.length > 0) {
-        replaceRoomsList([...rooms, ...imported])
-        toast(`Imported ${imported.length} rooms`, 'ok')
-      } else {
-        toast('No new rooms imported', 'info')
-      }
+      const { list, added, updated, duplicates } = await importRoomsFromFile(file, rooms)
+      replaceRoomsList(list)
+      const msg = `Rooms: ${added} added, ${updated} updated`
+      if (duplicates.length) toast(`${msg}. Duplicate Room No in sheet (first row kept): ${duplicates.join(', ')}`, 'err')
+      else toast(msg, 'ok')
     } catch (err) {
       toast('Import failed: ' + err.message, 'err')
     }

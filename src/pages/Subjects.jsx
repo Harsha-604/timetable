@@ -16,6 +16,7 @@ export default function Subjects() {
     clearClassSubjects,
     clearAllSubjects,
     mergeSubjects,
+    replaceSubjects,
     toast,
   } = useStore()
 
@@ -93,12 +94,14 @@ export default function Subjects() {
     const file = e.target.files[0]
     if (!file) return
     try {
-      const res = await importSubjectsFromFile(file, subjects, rooms)
-      if (res.map) {
-        mergeSubjects(res.map)
-        const total = Object.values(res.map).reduce((a, b) => a + b.length, 0)
-        toast(`Imported ${total} subjects!`, 'ok')
-      }
+      const { map, added, updated, duplicates, unknown } = await importSubjectsFromFile(file, subjects)
+      replaceSubjects(map)
+      const problems = [
+        duplicates.length ? `duplicate codes: ${duplicates.join(', ')}` : '',
+        unknown.length ? `rows skipped (bad branch/year): ${unknown.join('; ')}` : '',
+      ].filter(Boolean).join('. ')
+      const msg = `Subjects: ${added} added, ${updated} updated`
+      toast(problems ? `${msg}. ${problems}` : msg, problems ? 'err' : 'ok')
     } catch (err) {
       toast('Import failed: ' + err.message, 'err')
     }
@@ -249,13 +252,12 @@ export default function Subjects() {
                     </td>
                     <td>
                       <span
-                        className={`tag ${
-                          s.type === 'Lab'
+                        className={`tag ${s.type === 'Lab'
                             ? 'green'
                             : s.type === 'Project'
-                            ? 'purple'
-                            : ''
-                        }`}
+                              ? 'purple'
+                              : ''
+                          }`}
                       >
                         {s.type}
                       </span>

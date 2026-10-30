@@ -64,8 +64,14 @@ function findColIdx(headers, variants) {
   return -1
 }
 
+// ─── Shared helpers ───────────────────────────────────────────────────────────
+const norm = (v) => String(v ?? '').trim()
+const lc = (v) => norm(v).toLowerCase()
+
 // ─── Faculty Importer ─────────────────────────────────────────────────────────
 // Columns: Faculty Name | Short Name | Designation | Department | Max Periods/Week | Subjects
+// Upsert by Short Name (case-insensitive). Existing faculty keep their id, so
+// assignments and timetables stay linked. Faculty not in the sheet are kept.
 export async function importFacultyFromFile(file, existingFaculty = []) {
   const { headers, dataRows } = await readSheetArrayBuffer(file)
 
@@ -75,64 +81,46 @@ export async function importFacultyFromFile(file, existingFaculty = []) {
   const iDept = findColIdx(headers, ['department', 'dept', 'branch', 'course'])
   const iMax = findColIdx(headers, ['max periods/week', 'max periods', 'max', 'periods/week'])
   const iSubs = findColIdx(headers, ['subjects', 'subject codes', 'courses', 'subject'])
+  if (iName < 0) throw new Error('No "Faculty Name" column found')
 
-  const result = []
+  const list = existingFaculty.map((f) => ({ ...f }))
+  const seenInSheet = new Set()
+  const duplicates = []
+  let added = 0
+  let updated = 0
   let skipped = 0
-  const pool = [...existingFaculty]
 
   dataRows.forEach((r) => {
-    const name = iName >= 0 ? String(r[iName] || '').trim() : ''
-    if (!name || ['name', 's.no.', 'sno', 'sl.no'].includes(name.toLowerCase())) {
-      return
-    }
+    const name = norm(r[iName])
+    if (!name || ['name', 's.no.', 'sno', 'sl.no'].includes(name.toLowerCase())) return
 
-    let short = iShort >= 0 ? String(r[iShort] || '').trim().toUpperCase() : ''
-    if (!short) short = makeShort(name)
-    if (!short) {
-      skipped++
-      return
-    }
+    const short = (iShort >= 0 ? norm(r[iShort]) : '') || makeShort(name)
+    if (!short) { skipped++; return }
 
-    // Check duplicate short in existing pool or current batch
-    if (pool.some((x) => x.short === short)) {
-      // Keep duplicate short to trigger validation report or append number if unassigned
-      let disambiguated = short
-      let counter = 2
-      while (pool.some((x) => x.short === disambiguated)) {
-        disambiguated = `${short}${counter++}`
-      }
-      short = disambiguated
-    }
+    if (seenInSheet.has(short.toLowerCase())) { duplicates.push(short); return }
+    seenInSheet.add(short.toLowerCase())
 
-    const desg = iDesg >= 0 ? String(r[iDesg] || '').trim() : ''
-    const dept = iDept >= 0 ? String(r[iDept] || '').trim() : ''
-    const maxVal = iMax >= 0 ? parseInt(r[iMax], 10) : 30
-    const rawSubs = iSubs >= 0 ? String(r[iSubs] || '').trim() : ''
-
-    const subjects = rawSubs
-      .split(',')
-      .map((s) => s.trim())
-      .filter(Boolean)
-
-    const entry = {
-      id: uid('f'),
+    const maxVal = iMax >= 0 ? parseInt(r[iMax], 10) : NaN
+    const data = {
       name,
       short,
-      desg,
-      dept,
+      desg: iDesg >= 0 ? norm(r[iDesg]) : '',
+      dept: iDept >= 0 ? norm(r[iDept]) : '',
       max: Number.isFinite(maxVal) && maxVal > 0 ? maxVal : 30,
-      subjects,
+      subjects: (iSubs >= 0 ? norm(r[iSubs]) : '').split(',').map((s) => s.trim()).filter(Boolean),
     }
 
-    pool.push(entry)
-    result.push(entry)
+    const idx = list.findIndex((f) => lc(f.short) === short.toLowerCase())
+    if (idx >= 0) { list[idx] = { ...list[idx], ...data }; updated++ }
+    else { list.push({ id: uid('f'), ...data }); added++ }
   })
 
-  return { imported: result, skipped }
+  return { list, added, updated, skipped, duplicates }
 }
 
 // ─── Rooms Importer ───────────────────────────────────────────────────────────
-// Columns: Room No | Type (Classroom/Lab) | Lab Name (e.g. LAB-5, blank for classrooms) | Capacity
+// Columns: Room No | Type (Classroom/Lab) | Lab Name | Capacity
+// Upsert by Room No (case-insensitive).
 export async function importRoomsFromFile(file, existingRooms = []) {
   const { headers, dataRows } = await readSheetArrayBuffer(file)
 
@@ -140,41 +128,45 @@ export async function importRoomsFromFile(file, existingRooms = []) {
   const iType = findColIdx(headers, ['type', 'room type'])
   const iLab = findColIdx(headers, ['lab name', 'lab', 'labname'])
   const iCap = findColIdx(headers, ['capacity', 'seats', 'cap'])
+  if (iRoom < 0) throw new Error('No "Room No" column found')
 
-  const result = []
+  const list = existingRooms.map((r) => ({ ...r }))
+  const seenInSheet = new Set()
+  const duplicates = []
+  let added = 0
+  let updated = 0
 
   dataRows.forEach((r) => {
-    const roomNo = iRoom >= 0 ? String(r[iRoom] || '').trim() : ''
+    const roomNo = norm(r[iRoom])
     if (!roomNo || ['room no', 's.no.', 'room'].includes(roomNo.toLowerCase())) return
 
-    // Don't add duplicate room numbers
-    if (existingRooms.some((x) => (x.roomNo || x.name) === roomNo) || result.some((x) => x.roomNo === roomNo)) {
-      return
-    }
+    if (seenInSheet.has(roomNo.toLowerCase())) { duplicates.push(roomNo); return }
+    seenInSheet.add(roomNo.toLowerCase())
 
-    let rawType = iType >= 0 ? String(r[iType] || '').trim() : 'Classroom'
-    const isLab = /lab/i.test(rawType) || (iLab >= 0 && Boolean(String(r[iLab] || '').trim()))
-    const type = isLab ? 'Lab' : 'Classroom'
-    const labName = iLab >= 0 ? String(r[iLab] || '').trim() : ''
-    const cap = iCap >= 0 ? String(r[iCap] || '').trim() : ''
-
-    result.push({
-      id: uid('r'),
+    const labName = iLab >= 0 ? norm(r[iLab]) : ''
+    const rawType = iType >= 0 ? norm(r[iType]) : ''
+    const data = {
       name: roomNo,
       roomNo,
-      type,
+      type: /lab/i.test(rawType) || labName ? 'Lab' : 'Classroom',
       labName,
-      capacity: cap,
-    })
+      capacity: iCap >= 0 ? norm(r[iCap]) : '',
+    }
+
+    const idx = list.findIndex((x) => lc(x.roomNo || x.name) === roomNo.toLowerCase())
+    if (idx >= 0) { list[idx] = { ...list[idx], ...data }; updated++ }
+    else { list.push({ id: uid('r'), ...data }); added++ }
   })
 
-  return result
+  return { list, added, updated, duplicates }
 }
 
 // ─── Subjects Importer ────────────────────────────────────────────────────────
 // Columns: Branch | Year | Subject Code | Subject Name | Type (Theory/Lab/Project) |
 // Periods/Week | Block Size | Faculty Required | Lab Room | Common Slot Group
-export async function importSubjectsFromFile(file, existingSubjects = {}, rooms = []) {
+// Upsert by Branch-Year + Subject Code (case-insensitive). Existing subjects keep
+// their id. Returns the full merged map; use replaceSubjects with it.
+export async function importSubjectsFromFile(file, existingSubjects = {}) {
   const { headers, dataRows } = await readSheetArrayBuffer(file)
 
   const iBranch = findColIdx(headers, ['branch', 'dept'])
@@ -187,53 +179,55 @@ export async function importSubjectsFromFile(file, existingSubjects = {}, rooms 
   const iFacReq = findColIdx(headers, ['faculty required', 'faculty req', 'teachers', 'fac req'])
   const iLabRoom = findColIdx(headers, ['lab room', 'lab room no', 'lab', 'room'])
   const iGroup = findColIdx(headers, ['common slot group', 'common slot', 'common group', 'group', 'slot group'])
+  if (iBranch < 0 || iYear < 0) throw new Error('No "Branch" or "Year" column found')
 
-  const result = {}
+  const map = {}
+  Object.entries(existingSubjects).forEach(([k, arr]) => {
+    map[normalizeKey(k)] = (arr || []).map((s) => ({ ...s }))
+  })
 
-  dataRows.forEach((r) => {
-    const branch = iBranch >= 0 ? String(r[iBranch] || '').trim().toUpperCase() : ''
-    const year = iYear >= 0 ? parseInt(String(r[iYear] || '').trim(), 10) : 0
-    const name = iName >= 0 ? String(r[iName] || '').trim() : ''
-    let code = iCode >= 0 ? String(r[iCode] || '').trim() : ''
-    if (!code && name) code = name
+  const seenInSheet = new Set()
+  const duplicates = []
+  const unknown = []
+  let added = 0
+  let updated = 0
 
-    if (!branch || !year || !name) return
+  dataRows.forEach((r, i) => {
+    const branch = norm(r[iBranch]).toUpperCase()
+    const year = parseInt(norm(r[iYear]), 10)
+    const name = iName >= 0 ? norm(r[iName]) : ''
+    const code = (iCode >= 0 ? norm(r[iCode]) : '') || name
+    if (!branch && !year && !code) return
 
-    const byKey = getBranchYearKey(branch, year)
-    if (!result[byKey]) result[byKey] = []
-
-    const currentClassSubjects = existingSubjects[byKey] || []
-    if (
-      currentClassSubjects.some((s) => s.code === code || s.name === name) ||
-      result[byKey].some((s) => s.code === code || s.name === name)
-    ) {
+    if (!BRANCHES.includes(branch) || !YEARS.includes(year) || !code) {
+      unknown.push(`row ${i + 2}: ${branch || '?'} ${year || '?'} ${code || '?'}`)
       return
     }
 
-    let type = iType >= 0 ? String(r[iType] || '').trim() : 'Theory'
-    if (/lab/i.test(type)) type = 'Lab'
-    else if (/proj/i.test(type)) type = 'Project'
-    else type = 'Theory'
+    const byKey = getBranchYearKey(branch, year)
+    const sheetKey = `${byKey}|${code.toLowerCase()}`
+    if (seenInSheet.has(sheetKey)) { duplicates.push(`${byKey} ${code}`); return }
+    seenInSheet.add(sheetKey)
 
-    const periods = iPeriods >= 0 ? parseInt(r[iPeriods], 10) || 3 : 3
-    const block = iBlock >= 0 ? parseInt(r[iBlock], 10) || 1 : 1
+    const rawType = iType >= 0 ? norm(r[iType]) : ''
+    const type = /lab/i.test(rawType) ? 'Lab' : /proj/i.test(rawType) ? 'Project' : 'Theory'
     const defaultFacReq = type === 'Lab' ? 2 : 1
-    const facultyReq = iFacReq >= 0 ? parseInt(r[iFacReq], 10) || defaultFacReq : defaultFacReq
-    const labRoom = iLabRoom >= 0 ? String(r[iLabRoom] || '').trim() : ''
-    const commonGroup = iGroup >= 0 ? String(r[iGroup] || '').trim() : ''
-
-    result[byKey].push({
-      id: uid('s'),
-      name,
+    const data = {
+      name: name || code,
       code,
       type,
-      periods,
-      block,
-      facultyReq,
-      labRoomId: labRoom,
-      commonGroup,
-    })
+      periods: (iPeriods >= 0 && parseInt(r[iPeriods], 10)) || 3,
+      block: (iBlock >= 0 && parseInt(r[iBlock], 10)) || 1,
+      facultyReq: (iFacReq >= 0 && parseInt(r[iFacReq], 10)) || defaultFacReq,
+      labRoomId: iLabRoom >= 0 ? norm(r[iLabRoom]) : '',
+      commonGroup: iGroup >= 0 ? norm(r[iGroup]) : '',
+    }
+
+    const arr = (map[byKey] ||= [])
+    const idx = arr.findIndex((s) => lc(s.code) === code.toLowerCase())
+    if (idx >= 0) { arr[idx] = { ...arr[idx], ...data }; updated++ }
+    else { arr.push({ id: uid('s'), ...data }); added++ }
   })
 
-  return { map: result }
+  return { map, added, updated, duplicates, unknown }
 }

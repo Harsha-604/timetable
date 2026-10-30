@@ -13,11 +13,11 @@ export default function Faculty() {
 
   const filtered = search
     ? faculty.filter(
-        (f) =>
-          f.name.toLowerCase().includes(search.toLowerCase()) ||
-          f.short.toLowerCase().includes(search.toLowerCase()) ||
-          (f.subjects && f.subjects.join(', ').toLowerCase().includes(search.toLowerCase()))
-      )
+      (f) =>
+        f.name.toLowerCase().includes(search.toLowerCase()) ||
+        f.short.toLowerCase().includes(search.toLowerCase()) ||
+        (f.subjects && f.subjects.join(', ').toLowerCase().includes(search.toLowerCase()))
+    )
     : faculty
 
   const openAdd = () => {
@@ -76,13 +76,11 @@ export default function Faculty() {
     const file = e.target.files[0]
     if (!file) return
     try {
-      const { imported, skipped } = await importFacultyFromFile(file, faculty)
-      if (imported.length > 0) {
-        replaceFacultyList([...faculty, ...imported])
-        toast(`Imported ${imported.length} faculty${skipped ? ` (${skipped} skipped)` : ''}`, 'ok')
-      } else {
-        toast('No new faculty imported', 'info')
-      }
+      const { list, added, updated, skipped, duplicates } = await importFacultyFromFile(file, faculty)
+      replaceFacultyList(list)
+      const msg = `Faculty: ${added} added, ${updated} updated${skipped ? `, ${skipped} skipped` : ''}`
+      if (duplicates.length) toast(`${msg}. Duplicate Short Name in sheet (first row kept): ${duplicates.join(', ')}`, 'err')
+      else toast(msg, 'ok')
     } catch (err) {
       toast('Import failed: ' + err.message, 'err')
     }
