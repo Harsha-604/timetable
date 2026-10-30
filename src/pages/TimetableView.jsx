@@ -12,6 +12,7 @@ export default function TimetableView({ onNavigate }) {
     subjects,
     timetable,
     settings,
+    assignments,
     setSlot,
     toggleCellLock,
     swapSlots,
@@ -220,7 +221,7 @@ export default function TimetableView({ onNavigate }) {
         subjects,
         faculty,
         rooms,
-        assignments: state.assignments,
+        assignments,
         settings,
         existingTimetables: timetable,
         options: { attempts: 150 },
@@ -604,7 +605,7 @@ export default function TimetableView({ onNavigate }) {
                 </thead>
                 <tbody>
                   {classSubs.map((s) => {
-                    const assignedIds = state.assignments[currentClass.id]?.[s.id] || []
+                    const assignedIds = assignments[currentClass.id]?.[s.id] || []
                     const facList = faculty.filter((f) => assignedIds.includes(f.id))
                     const facString = facList.length
                       ? facList.map((f) => `${f.name} (${f.short})`).join(', ')

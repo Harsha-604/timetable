@@ -84,6 +84,64 @@ export default function Generate({ onNavigate }) {
       return
     }
 
+    // 1) Every selected class needs its own home classroom. Fill blanks with free classrooms.
+    const roomKey = (h) => {
+      const r = rooms.find((x) => x.id === h || x.name === h || x.roomNo === h)
+      return r ? r.roomNo || r.name : h
+    }
+    const classroomNos = rooms.filter((r) => r.type !== 'Lab').map((r) => r.roomNo || r.name)
+    const usedRooms = new Set(classes.map((c) => c.homeRoomId).filter(Boolean).map(roomKey))
+    const homeRooms = {}
+    for (const c of selectedClasses) {
+      let hr = c.homeRoomId ? roomKey(c.homeRoomId) : ''
+      if (!hr) {
+        hr = classroomNos.find((no) => !usedRooms.has(no)) || ''
+        if (!hr) {
+          toast(`Not enough classrooms: ${c.id} has no home room. Add classrooms or set it in Settings.`, 'err')
+          return
+        }
+        usedRooms.add(hr)
+        state.updateClass(c.id, { homeRoomId: hr })
+      }
+      homeRooms[c.id] = hr
+    }
+    const seenRooms = {}
+    for (const [cid, hr] of Object.entries(homeRooms)) {
+      if (seenRooms[hr]) {
+        toast(`${cid} and ${seenRooms[hr]} share home room ${hr}. Give each class its own room in Settings.`, 'err')
+        return
+      }
+      seenRooms[hr] = cid
+    }
+    const classesForGen = selectedClasses.map((c) => ({ ...c, homeRoomId: homeRooms[c.id] }))
+
+    // 2) Fill in teaching teams for any subject without one (keeps every existing team).
+    const keepExisting = {}
+    Object.entries(assignments || {}).forEach(([cid, m]) => {
+      keepExisting[cid] = {}
+      Object.entries(m || {}).forEach(([sid, team]) => {
+        if (team && team.length) keepExisting[cid][sid] = true
+      })
+    })
+    const filledAssignments = autoAssignFaculty({
+      classes: classesForGen,
+      subjects,
+      faculty,
+      existingAssignments: assignments,
+      lockedAssignments: keepExisting,
+    })
+    setAllAssignments(filledAssignments)
+    const noTeam = []
+    classesForGen.forEach((c) => {
+      ;(subjects[getBranchYearKey(c.branch, c.year)] || []).forEach((s) => {
+        if (!(filledAssignments[c.id]?.[s.id] || []).length) noTeam.push(`${c.id} ${s.code || s.name}`)
+      })
+    })
+    if (noTeam.length) {
+      toast(`No qualified faculty for: ${noTeam.slice(0, 5).join(', ')}${noTeam.length > 5 ? ` and ${noTeam.length - 5} more` : ''}`, 'err')
+      return
+    }
+
     setRunning(true)
     setProgress(0)
     setStatus('Preparing multi-class scheduler…')
@@ -91,11 +149,11 @@ export default function Generate({ onNavigate }) {
 
     try {
       const result = await generateScheduleAsync({
-        classes: selectedClasses,
+        classes: classesForGen,
         subjects,
         faculty,
         rooms,
-        assignments,
+        assignments: filledAssignments,
         settings,
         existingTimetables: timetable,
         options: { attempts: Number(attempts) || 200 },
