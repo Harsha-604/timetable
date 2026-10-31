@@ -2,18 +2,18 @@ import { useStore } from '../store/useStore'
 import { BRANCHES, YEARS } from '../utils/constants'
 
 const NAV = [
-  { view: 'home',         icon: '🏠', label: 'Dashboard' },
-  { view: 'settings',     icon: '⚙️',  label: 'Settings' },
+  { view: 'home',         label: 'Dashboard' },
+  { view: 'settings',     label: 'Settings' },
   { section: 'Data' },
-  { view: 'faculty',      icon: '👥', label: 'Faculty',   badge: 'faculty' },
-  { view: 'rooms',        icon: '🏛️', label: 'Rooms',     badge: 'rooms' },
-  { view: 'subjects',     icon: '📚', label: 'Subjects',  badge: 'subjects' },
+  { view: 'faculty',      label: 'Faculty',   badge: 'faculty' },
+  { view: 'rooms',        label: 'Rooms',     badge: 'rooms' },
+  { view: 'subjects',     label: 'Subjects',  badge: 'subjects' },
   { section: 'Timetable' },
-  { view: 'generate',     icon: '⚡', label: 'Generate' },
-  { view: 'view-tt',      icon: '📋', label: 'Class Timetable' },
-  { view: 'faculty-view', icon: '👤', label: 'Faculty View' },
-  { view: 'room-view',    icon: '🏛️', label: 'Room View' },
-  { view: 'export',       icon: '📤', label: 'Export' },
+  { view: 'generate',     label: 'Generate' },
+  { view: 'view-tt',      label: 'Class Timetable' },
+  { view: 'faculty-view', label: 'Faculty View' },
+  { view: 'room-view',    label: 'Room View' },
+  { view: 'export',       label: 'Export' },
 ]
 
 export default function Sidebar({ currentPage, onNavigate, onOpenViewer }) {
@@ -31,7 +31,7 @@ export default function Sidebar({ currentPage, onNavigate, onOpenViewer }) {
     const f = e.target.files[0]; if (!f) return
     const r = new FileReader()
     r.onload = (ev) => {
-      try { loadProject(JSON.parse(ev.target.result)); toast('Project loaded!', 'ok') }
+      try { loadProject(JSON.parse(ev.target.result)); toast('Project loaded', 'ok') }
       catch { toast('Invalid project file', 'err') }
     }
     r.readAsText(f); e.target.value = ''
@@ -54,7 +54,6 @@ export default function Sidebar({ currentPage, onNavigate, onOpenViewer }) {
               className={`nav-btn${currentPage === item.view ? ' active' : ''}`}
               onClick={() => onNavigate(item.view)}
             >
-              <span className="nav-icon">{item.icon}</span>
               {item.label}
               {item.badge && badge(item.badge) > 0 && (
                 <span className="nav-badge">{badge(item.badge)}</span>
@@ -67,24 +66,24 @@ export default function Sidebar({ currentPage, onNavigate, onOpenViewer }) {
       <div className="sidebar-footer">
         <button
           className="btn btn-ghost btn-sm"
-          style={{ width: '100%', marginBottom: '.4rem', color: 'var(--accent2)' }}
+          style={{ width: '100%', marginBottom: '.4rem', color: 'var(--accent)' }}
           onClick={onOpenViewer}
         >
-          👁️ Public Viewer
+          Public Viewer
         </button>
         <button className="btn btn-ghost btn-sm" style={{ width: '100%', marginBottom: '.4rem' }} onClick={saveProject}>
-          💾 Save Project
+          Save Project
         </button>
         <label className="btn btn-ghost btn-sm" style={{ width: '100%', marginBottom: '.4rem', textAlign: 'center', cursor: 'pointer' }}>
-          📂 Load Project
+          Load Project
           <input type="file" accept=".json" onChange={handleLoadProject} hidden />
         </label>
         <button
           className="btn btn-ghost btn-sm"
-          style={{ width: '100%', color: 'var(--red)' }}
+          style={{ width: '100%', color: 'var(--danger)' }}
           onClick={() => { if (confirm('Reset ALL data? This cannot be undone.')) { resetAll(); toast('All data reset', 'ok') } }}
         >
-          🗑 Reset All
+          Reset All
         </button>
       </div>
     </aside>

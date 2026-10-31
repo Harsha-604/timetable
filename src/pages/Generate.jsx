@@ -233,14 +233,13 @@ export default function Generate({ onNavigate }) {
         <div
           className="card"
           style={{
-            borderColor: 'var(--red)',
-            background: 'var(--redbg)',
+            border: "1px solid var(--danger)", borderLeft: "4px solid var(--danger)", background: "var(--dangerbg)",
             marginBottom: '1rem',
           }}
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: '.5rem', marginBottom: '.5rem' }}>
-            <span style={{ fontSize: '1.2rem' }}>⚠️</span>
-            <b style={{ color: 'var(--red)' }}>Validation Errors (Generation Blocked):</b>
+            
+            <b style={{ color: 'var(--danger)' }}>Validation Errors (Generation Blocked):</b>
           </div>
           <ul style={{ paddingLeft: '1.5rem', fontSize: '.84rem', color: 'var(--ink)' }}>
             {validation.errors.map((err, i) => (
@@ -256,14 +255,13 @@ export default function Generate({ onNavigate }) {
         <div
           className="card"
           style={{
-            borderColor: 'var(--yellow)',
-            background: 'var(--yellowbg)',
+            border: "1px solid var(--border)", borderLeft: "4px solid var(--border2)", background: "var(--surface2)",
             marginBottom: '1rem',
           }}
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: '.5rem', marginBottom: '.3rem' }}>
-            <span style={{ fontSize: '1rem' }}>ℹ️</span>
-            <b style={{ color: 'var(--yellow)' }}>Faculty Workload Warnings:</b>
+            
+            <b style={{ color: "var(--ink)" }}>Faculty Workload Warnings:</b>
           </div>
           <ul style={{ paddingLeft: '1.5rem', fontSize: '.8rem', color: 'var(--muted)' }}>
             {validation.warnings.slice(0, 5).map((w, i) => (
@@ -287,7 +285,7 @@ export default function Generate({ onNavigate }) {
               </span>
               <div style={{ marginLeft: 'auto', display: 'flex', gap: '.5rem' }}>
                 <button className="btn btn-secondary btn-sm" onClick={handleAutoAssign}>
-                  ⚡ Auto-Assign All Qualified
+                  Auto-Assign All Qualified
                 </button>
                 <button className="btn btn-primary btn-sm" onClick={() => setStep('generate')}>
                   Proceed to Schedule →
@@ -355,7 +353,7 @@ export default function Generate({ onNavigate }) {
                     }}
                   >
                     <div>
-                      <b style={{ fontSize: '1rem', color: 'var(--accent2)' }}>{c.id}</b>
+                      <b style={{ fontSize: '1rem', color: "var(--ink)" }}>{c.id}</b>
                       <span className="tag" style={{ marginLeft: '.5rem' }}>
                         {subList.length} subjects
                       </span>
@@ -470,7 +468,7 @@ export default function Generate({ onNavigate }) {
                                       )
                                     })}
                                     {availableFaculty.length === 0 && (
-                                      <span style={{ color: 'var(--red)', fontSize: '.75rem' }}>
+                                      <span style={{ color: 'var(--danger)', fontSize: '.75rem' }}>
                                         No qualified faculty!
                                       </span>
                                     )}
@@ -483,7 +481,7 @@ export default function Generate({ onNavigate }) {
                                     }`}
                                     onClick={() => toggleLockAssignment(c.id, s.id)}
                                   >
-                                    {isLocked ? '🔒 Locked' : '🔓 Unlocked'}
+                                    {isLocked ? 'Locked' : 'Unlocked'}
                                   </button>
                                 </td>
                               </tr>
@@ -542,12 +540,12 @@ export default function Generate({ onNavigate }) {
 
               <div style={{ display: 'flex', alignItems: 'flex-end' }}>
                 <button
-                  className="btn btn-success"
+                  className="btn btn-primary"
                   onClick={handleRunGenerator}
                   disabled={running || !validation.isValid || selectedClasses.length === 0}
                   style={{ height: 38 }}
                 >
-                  {running ? '⏳ Scheduling…' : '⚡ Generate Timetables'}
+                  {running ? 'Scheduling…' : 'Generate Timetables'}
                 </button>
               </div>
             </div>
@@ -568,16 +566,16 @@ export default function Generate({ onNavigate }) {
           {genReport && (
             <div className="card">
               <div className="card-header">
-                <h3>📊 Scheduling Report</h3>
+                <h3>Scheduling Report</h3>
                 <span
-                  className={`tag ${(genReport.hardViolations || []).length === 0 ? 'green' : 'red'}`}
+                  className={`tag ${(genReport.hardViolations || []).length === 0 ? '' : 'danger'}`}
                   style={{ fontSize: '.8rem' }}
                 >
                   {(genReport.hardViolations || []).length === 0
-                    ? '✓ 0 Hard Violations'
-                    : `⚠️ ${(genReport.hardViolations || []).length} Hard Violations`}
+                    ? '0 Hard Violations'
+                    : `${(genReport.hardViolations || []).length} Hard Violations`}
                 </span>
-                <span className="tag blue" style={{ marginLeft: '.3rem' }}>
+                <span className="tag" style={{ marginLeft: '.3rem' }}>
                   Soft Penalty Score: {genReport.score}
                 </span>
                 <button
@@ -585,13 +583,13 @@ export default function Generate({ onNavigate }) {
                   style={{ marginLeft: 'auto' }}
                   onClick={() => onNavigate('view-tt')}
                 >
-                  📋 View Timetable →
+                  View Timetable →
                 </button>
               </div>
 
               {(genReport.hardViolations || []).length > 0 && (
                 <div style={{ marginBottom: '1rem' }}>
-                  <h4 style={{ color: 'var(--red)', fontSize: '.9rem', marginBottom: '.4rem' }}>
+                  <h4 style={{ color: 'var(--danger)', fontSize: '.9rem', marginBottom: '.4rem' }}>
                     Hard Violations ({(genReport.hardViolations || []).length}):
                   </h4>
                   <div className="table-wrap">
@@ -612,9 +610,9 @@ export default function Generate({ onNavigate }) {
                             </td>
                             <td>{v.day ? `${v.day} ${v.period || ''}` : '—'}</td>
                             <td>
-                              <span className="tag red">{v.rule}</span>
+                              <span className="tag danger">{v.rule}</span>
                             </td>
-                            <td style={{ color: 'var(--red)' }}>{v.message}</td>
+                            <td style={{ color: 'var(--danger)' }}>{v.message}</td>
                           </tr>
                         ))}
                       </tbody>
@@ -625,7 +623,7 @@ export default function Generate({ onNavigate }) {
 
               {genReport.violations.length > 0 ? (
                 <div>
-                  <h4 style={{ color: 'var(--yellow)', fontSize: '.9rem', marginBottom: '.4rem' }}>
+                  <h4 style={{ color: "var(--ink)", fontSize: '.9rem', marginBottom: '.4rem' }}>
                     Soft Rule Deviations ({genReport.violations.length}):
                   </h4>
                   <div style={{ maxHeight: 220, overflowY: 'auto' }} className="table-wrap">
@@ -648,7 +646,7 @@ export default function Generate({ onNavigate }) {
                               {v.day} {v.period ? `(${v.period})` : ''}
                             </td>
                             <td>
-                              <span className="tag yellow">{v.rule}</span>
+                              <span className="tag">{v.rule}</span>
                             </td>
                             <td>{v.text}</td>
                           </tr>
@@ -658,8 +656,8 @@ export default function Generate({ onNavigate }) {
                   </div>
                 </div>
               ) : (
-                <p style={{ color: 'var(--green)', fontSize: '.84rem' }}>
-                  ✓ Outstanding! Zero soft-rule violations.
+                <p style={{ color: "var(--ink)", fontSize: '.84rem' }}>
+                  Zero soft-rule violations.
                 </p>
               )}
             </div>

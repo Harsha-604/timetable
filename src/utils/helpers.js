@@ -9,8 +9,6 @@ export const fmtTime = (t) => {
   return `${h}:${String(m).padStart(2, '0')}${ap}`
 }
 
-export const hue = (idx) => Math.round((idx * 137.508 + 20) % 360)
-
 export const makeShort = (name) => {
   const clean = name.replace(/^(Dr\.|Prof\.?|Mr\.|Mrs\.|Ms\.)/i, '').trim()
   const words = clean.split(/\s+/).filter(Boolean)

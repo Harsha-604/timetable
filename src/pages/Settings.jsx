@@ -142,7 +142,7 @@ export default function Settings() {
           </div>
           <div className="actions">
             <button className="btn btn-secondary" onClick={handleLoadSample}>
-              ⭐ Load Reference Sample (CIC-4-A)
+              Load Reference Sample (CIC-4-A)
             </button>
           </div>
         </div>
@@ -151,7 +151,7 @@ export default function Settings() {
       {/* ── Section Counts per Branch & Year ── */}
       <div className="card">
         <div className="card-header">
-          <h3>👥 Sections per Branch &amp; Year</h3>
+          <h3>Sections per Branch &amp; Year</h3>
           <span style={{ fontSize: '.78rem', color: 'var(--muted)' }}>
             Set 0 to N sections per branch+year. Adding a section creates the class entity.
           </span>
@@ -261,7 +261,7 @@ export default function Settings() {
       {/* ── Per-Class Settings: Home room, Working Days, Saturday Periods, Metadata ── */}
       <div className="card">
         <div className="card-header">
-          <h3>🏛️ Class Entities Configuration</h3>
+          <h3>Class Entities Configuration</h3>
           <span style={{ fontSize: '.78rem', color: 'var(--muted)' }}>
             Configure home classroom, working days, advisor, and dates for each active class.
           </span>
@@ -328,7 +328,7 @@ export default function Settings() {
                         style={{
                           fontSize: '1rem',
                           fontWeight: 700,
-                          color: 'var(--accent2)',
+                          color: "var(--ink)",
                           marginRight: '.75rem',
                         }}
                       >
@@ -344,7 +344,7 @@ export default function Settings() {
                     </div>
                     <button
                       className="btn btn-ghost btn-sm"
-                      style={{ color: 'var(--red)' }}
+                      style={{ color: 'var(--danger)' }}
                       onClick={() => {
                         if (confirm(`Delete section ${cls.id} and its timetable?`)) {
                           removeClass(cls.id)
@@ -352,7 +352,7 @@ export default function Settings() {
                         }
                       }}
                     >
-                      🗑 Remove Section
+                      Remove Section
                     </button>
                   </div>
 
@@ -501,7 +501,7 @@ export default function Settings() {
       {/* ── Lab Windows Configuration ── */}
       <div className="card">
         <div className="card-header">
-          <h3>🔬 Lab Windows (Multi-Period Blocks)</h3>
+          <h3>Lab Windows (Multi-Period Blocks)</h3>
           <span style={{ fontSize: '.78rem', color: 'var(--muted)' }}>
             Allowed contiguous periods for 2+ period blocks. Default: [P1,P2], [P3,P4], [P5,P6].
             Blocks never span breaks or lunch.
@@ -529,7 +529,7 @@ export default function Settings() {
                 padding: '.4rem .6rem',
               }}
             >
-              <span style={{ fontWeight: 600, fontSize: '.78rem', color: 'var(--green)' }}>
+              <span style={{ fontWeight: 600, fontSize: '.78rem', color: "var(--ink)" }}>
                 Window {idx + 1}:
               </span>
               <select
@@ -557,7 +557,7 @@ export default function Settings() {
               </select>
               <button
                 className="btn btn-ghost btn-sm"
-                style={{ color: 'var(--red)', padding: '0 .3rem' }}
+                style={{ color: 'var(--danger)', padding: '0 .3rem' }}
                 onClick={() => removeLabWindow(idx)}
               >
                 ✕
@@ -570,7 +570,7 @@ export default function Settings() {
       {/* ── Daily Period Schedule ── */}
       <div className="card">
         <div className="card-header">
-          <h3>⏰ Daily Period Schedule</h3>
+          <h3>Daily Period Schedule</h3>
           <span style={{ fontSize: '.78rem', color: 'var(--muted)' }}>
             Configurable period timings, morning break, and lunch break.
           </span>
@@ -594,7 +594,7 @@ export default function Settings() {
                 background: p.brk ? 'var(--surface3)' : 'var(--surface2)',
                 borderRadius: 'var(--radius-sm)',
                 padding: '.5rem .75rem',
-                borderLeft: p.brk ? '3px solid var(--yellow)' : '3px solid var(--accent)',
+                borderLeft: p.brk ? "3px solid var(--border2)" : "3px solid var(--accent)",
               }}
             >
               <input
@@ -635,7 +635,7 @@ export default function Settings() {
               </label>
               <button
                 className="btn btn-ghost btn-sm"
-                style={{ marginLeft: 'auto', color: 'var(--red)' }}
+                style={{ marginLeft: 'auto', color: 'var(--danger)' }}
                 onClick={() => removePeriod(i)}
               >
                 ✕

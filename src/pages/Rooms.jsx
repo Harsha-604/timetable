@@ -81,7 +81,7 @@ export default function Rooms() {
               className="btn btn-secondary filebtn"
               onClick={() => fileInputRef.current?.click()}
             >
-              📊 Import Excel/CSV
+              Import Excel/CSV
             </button>
             <input
               ref={fileInputRef}
@@ -91,7 +91,7 @@ export default function Rooms() {
               style={{ display: 'none' }}
             />
             <button className="btn btn-secondary" onClick={() => dlTemplate('rooms')}>
-              ⬇ Download Template
+              Download Template
             </button>
             {rooms.length > 0 && (
               <button
@@ -103,7 +103,7 @@ export default function Rooms() {
                   }
                 }}
               >
-                🗑 Clear All
+                Clear All
               </button>
             )}
             <button className="btn btn-primary" onClick={openAdd}>
@@ -132,7 +132,7 @@ export default function Rooms() {
             ['Classroom', 'blue'],
             ['Lab', 'green'],
           ].map(([t, c]) => (
-            <div key={t} className={`stat-card ${c}`} style={{ padding: '.75rem 1rem' }}>
+            <div key={t} className="stat-card" style={{ padding: '.75rem 1rem' }}>
               <div className="num">{byType(t)}</div>
               <div className="label">{t}s</div>
             </div>
@@ -143,7 +143,7 @@ export default function Rooms() {
       <div className="card">
         {!rooms.length ? (
           <div className="empty-state">
-            <div className="icon">🏛️</div>
+            
             <p>No rooms added yet.</p>
             <button className="btn btn-primary" onClick={openAdd}>
               + Add Room
@@ -170,19 +170,19 @@ export default function Rooms() {
                       <b>{r.roomNo || r.name}</b>
                     </td>
                     <td>
-                      <span className={`tag ${r.type === 'Lab' ? 'green' : ''}`}>
+                      <span className="tag">
                         {r.type}
                       </span>
                     </td>
-                    <td>{r.labName ? <span className="tag green">{r.labName}</span> : '—'}</td>
+                    <td>{r.labName ? <span className="tag">{r.labName}</span> : '—'}</td>
                     <td style={{ textAlign: 'right' }}>{r.capacity || '—'}</td>
                     <td style={{ textAlign: 'right', whiteSpace: 'nowrap' }}>
                       <button className="btn btn-ghost btn-sm" onClick={() => openEdit(r)}>
-                        ✏️
+                        Edit
                       </button>{' '}
                       <button
                         className="btn btn-ghost btn-sm"
-                        style={{ color: 'var(--red)' }}
+                        style={{ color: 'var(--danger)' }}
                         onClick={() => {
                           if (confirm(`Delete room ${r.roomNo || r.name}?`)) {
                             deleteRoom(r.id)
@@ -190,7 +190,7 @@ export default function Rooms() {
                           }
                         }}
                       >
-                        🗑
+                        Delete
                       </button>
                     </td>
                   </tr>

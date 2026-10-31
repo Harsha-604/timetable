@@ -78,7 +78,7 @@ export default function FacultyView() {
         <div className="card">
           <div className="card-header">
             <h3>
-              👤 {fac.name} ({fac.short}) — Weekly Schedule
+              {fac.name} ({fac.short}) — Weekly Schedule
             </h3>
             <span className="tag">{fac.dept || 'Faculty'}</span>
             <span className="tag blue" style={{ marginLeft: '.3rem' }}>
@@ -123,14 +123,14 @@ export default function FacultyView() {
                             key={p.id}
                             className={`tt-slot filled${isClash ? ' clash' : ''}`}
                             style={{
-                              '--h': isClash ? 0 : 220,
-                              background: isClash ? 'var(--redbg)' : undefined,
+                              background: isClash ? 'var(--dangerbg)' : '#ffffff',
+                              border: isClash ? '2px solid var(--danger)' : undefined,
                             }}
                           >
                             {slots.map((s, i) => (
                               <div key={i} style={{ marginBottom: '.2rem' }}>
                                 <b style={{ fontSize: '.72rem' }}>{s.subCode}</b>
-                                <span style={{ fontSize: '.68rem', color: 'var(--accent2)' }}>
+                                <span style={{ fontSize: '.68rem', color: 'var(--accent)' }}>
                                   {s.classId}
                                 </span>
                                 {s.roomName && (

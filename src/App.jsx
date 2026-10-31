@@ -98,7 +98,7 @@ export default function App() {
           }}
         >
           <button className="btn btn-ghost btn-sm" onClick={openViewer}>
-            👁️ Switch to Read-Only Public Viewer
+            Switch to Read-Only Public Viewer
           </button>
         </div>
         <Page key={page + (navClassId || '')} onNavigate={navigate} initialClassId={navClassId} />

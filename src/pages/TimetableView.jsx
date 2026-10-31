@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react'
 import { useStore } from '../store/useStore'
 import { BRANCHES, YEARS, DAYS_ORDER } from '../utils/constants'
-import { fmtTime, hue, getBranchYearKey } from '../utils/helpers'
+import { fmtTime, getBranchYearKey } from '../utils/helpers'
 import { generateScheduleAsync } from '../utils/generator'
 
 export default function TimetableView({ onNavigate, initialClassId }) {
@@ -252,10 +252,10 @@ export default function TimetableView({ onNavigate, initialClassId }) {
               onClick={handleRegenerateUnlocked}
               disabled={isRegenerating}
             >
-              ⚡ Regenerate Unlocked Cells
+              Regenerate Unlocked Cells
             </button>
             <button className="btn btn-primary" onClick={() => onNavigate('generate')}>
-              🚀 Full Multi-Class Generator
+              Full Multi-Class Generator
             </button>
           </div>
         </div>
@@ -356,8 +356,8 @@ export default function TimetableView({ onNavigate, initialClassId }) {
                         key={p.id}
                         className="brk"
                         style={{
-                          background: 'var(--surface3)',
-                          color: 'var(--yellow)',
+                          background: 'var(--surface2)',
+                          color: 'var(--muted)',
                           fontWeight: 700,
                           width: 44,
                         }}
@@ -395,10 +395,10 @@ export default function TimetableView({ onNavigate, initialClassId }) {
                               key={p.id}
                               className="brk"
                               style={{
-                                background: 'var(--surface3)',
+                                background: 'var(--surface2)',
                                 textAlign: 'center',
                                 verticalAlign: 'middle',
-                                fontSize: '.68rem',
+                                fontSize: '11px',
                                 color: 'var(--muted)',
                               }}
                             >
@@ -441,8 +441,6 @@ export default function TimetableView({ onNavigate, initialClassId }) {
                               ? `(${slot.roomId})`
                               : ''
 
-                          const h = hue(allSubs.findIndex((s) => s.id === slot.subId))
-
                           return (
                             <td
                               key={p.id}
@@ -452,13 +450,14 @@ export default function TimetableView({ onNavigate, initialClassId }) {
                               onDragOver={(e) => e.preventDefault()}
                               onDrop={(e) => handleDrop(e, day, p.id)}
                               onClick={() => openSlot(day, p.id)}
-                              className={`tt-slot filled${hasClash ? ' clash' : ''}`}
+                              className={`tt-slot filled${isLab ? ' lab' : ''}${hasClash ? ' clash' : ''}`}
                               style={{
-                                '--h': h,
-                                border: hasClash ? '2px solid var(--red)' : undefined,
+                                border: hasClash ? '2px solid var(--danger)' : undefined,
                                 background: hasClash
-                                  ? 'var(--redbg)'
-                                  : `hsl(${h} 45% 15%)`,
+                                  ? 'var(--dangerbg)'
+                                  : isLab
+                                  ? 'var(--surface2)'
+                                  : '#ffffff',
                                 position: 'relative',
                                 cursor: 'grab',
                               }}
@@ -473,8 +472,9 @@ export default function TimetableView({ onNavigate, initialClassId }) {
                               >
                                 <b
                                   style={{
-                                    fontSize: '.82rem',
-                                    color: `hsl(${h} 80% 75%)`,
+                                    fontSize: '13px',
+                                    fontWeight: 700,
+                                    color: 'var(--ink)',
                                     lineHeight: 1.2,
                                   }}
                                 >
@@ -488,35 +488,34 @@ export default function TimetableView({ onNavigate, initialClassId }) {
                                   style={{
                                     background: 'none',
                                     border: 'none',
-                                    fontSize: '.75rem',
                                     cursor: 'pointer',
-                                    padding: '0 2px',
+                                    padding: 0,
                                   }}
-                                  title={slot.locked ? 'Locked (Click to unlock)' : 'Unlocked'}
+                                  title={slot.locked ? 'Locked (Click to unlock)' : 'Click to lock'}
                                 >
-                                  {slot.locked ? '🔒' : '🔓'}
+                                  {slot.locked ? (
+                                    <span className="lock-badge">L</span>
+                                  ) : null}
                                 </button>
                               </div>
 
-                              {/* Line 2: Faculty short names in brackets */}
                               <span
                                 style={{
-                                  fontSize: '.74rem',
-                                  color: 'var(--ink)',
-                                  fontWeight: 600,
+                                  fontSize: '12px',
+                                  color: 'var(--muted)',
                                   marginTop: '2px',
+                                  display: 'block',
                                 }}
                               >
                                 {facShorts ? `(${facShorts})` : ''}
                               </span>
 
-                              {/* Line 3: for labs (Lab Name, Room No) in distinct emerald color */}
                               {isLab && labDisplay && (
                                 <span
                                   style={{
-                                    fontSize: '.7rem',
-                                    color: 'var(--green)',
-                                    fontWeight: 700,
+                                    fontSize: '11px',
+                                    color: 'var(--accent)',
+                                    fontWeight: 600,
                                     marginTop: '2px',
                                     display: 'block',
                                   }}
@@ -528,14 +527,14 @@ export default function TimetableView({ onNavigate, initialClassId }) {
                               {hasClash && (
                                 <span
                                   style={{
-                                    fontSize: '.65rem',
-                                    color: 'var(--red)',
+                                    fontSize: '11px',
+                                    color: 'var(--danger)',
                                     fontWeight: 700,
                                     display: 'block',
                                     marginTop: '2px',
                                   }}
                                 >
-                                  ⚠️ Clash!
+                                  Clash!
                                 </span>
                               )}
                             </td>
@@ -572,7 +571,7 @@ export default function TimetableView({ onNavigate, initialClassId }) {
             >
               <div>
                 <b style={{ fontSize: '.9rem' }}>Class Advisor: </b>
-                <span style={{ color: 'var(--accent2)', fontWeight: 600 }}>
+                <span style={{ color: 'var(--accent)', fontWeight: 600 }}>
                   {currentClass.advisor || '—'}
                 </span>
               </div>
@@ -619,13 +618,7 @@ export default function TimetableView({ onNavigate, initialClassId }) {
                         <td>{s.name}</td>
                         <td>
                           <span
-                            className={`tag ${
-                              s.type === 'Lab'
-                                ? 'green'
-                                : s.type === 'Project'
-                                ? 'purple'
-                                : ''
-                            }`}
+                            className="tag"
                           >
                             {s.type}
                           </span>
@@ -656,15 +649,15 @@ export default function TimetableView({ onNavigate, initialClassId }) {
             {liveClashReasons.length > 0 && (
               <div
                 style={{
-                  background: 'var(--redbg)',
-                  border: '1px solid var(--red)',
+                  background: 'var(--dangerbg)',
+                  border: '1px solid var(--danger)',
                   borderRadius: 'var(--radius-sm)',
                   padding: '.6rem .75rem',
                   marginBottom: '1rem',
                   fontSize: '.82rem',
                 }}
               >
-                <b style={{ color: 'var(--red)' }}>⚠️ Clash Detected:</b>
+                <b style={{ color: 'var(--danger)' }}>Clash Detected:</b>
                 <ul style={{ paddingLeft: '1.25rem', marginTop: '.25rem' }}>
                   {liveClashReasons.map((r, i) => (
                     <li key={i}>{r}</li>
@@ -796,7 +789,7 @@ export default function TimetableView({ onNavigate, initialClassId }) {
                     checked={!!slotForm.locked}
                     onChange={(e) => setSlotForm((f) => ({ ...f, locked: e.target.checked }))}
                   />
-                  <span>🔒 Lock this cell (keep fixed during auto-regeneration)</span>
+                  <span>Lock this cell (keep fixed during auto-regeneration)</span>
                 </label>
               </div>
             </div>

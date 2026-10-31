@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react'
-import { fmtTime, hue, getBranchYearKey } from '../utils/helpers'
+import { fmtTime, getBranchYearKey } from '../utils/helpers'
 import { DAYS_ORDER } from '../utils/constants'
 import { exportExcel, exportPDF } from '../utils/exporter'
 
@@ -162,9 +162,7 @@ export default function PublicViewer({ onOpenEditor }) {
             style={{
               fontSize: '1.6rem',
               fontWeight: 800,
-              background: 'linear-gradient(135deg, var(--accent2), var(--purple))',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
+              color: 'var(--ink)',
             }}
           >
             CSE Allied Timetables
@@ -172,7 +170,7 @@ export default function PublicViewer({ onOpenEditor }) {
           <div style={{ fontSize: '.84rem', color: 'var(--muted)', marginTop: '.2rem' }}>
             Official Published Schedule · A.Y. 2026-27
             {savedAt && (
-              <span style={{ marginLeft: '.75rem', color: 'var(--green)' }}>
+              <span style={{ marginLeft: '.75rem', color: 'var(--muted)' }}>
                 ● Last published: {new Date(savedAt).toLocaleString()}
               </span>
             )}
@@ -193,19 +191,19 @@ export default function PublicViewer({ onOpenEditor }) {
                 className={`btn btn-sm ${activeTab === 'class' ? 'btn-primary' : 'btn-ghost'}`}
                 onClick={() => setActiveTab('class')}
               >
-                📋 Classes
+                Classes
               </button>
               <button
                 className={`btn btn-sm ${activeTab === 'faculty' ? 'btn-primary' : 'btn-ghost'}`}
                 onClick={() => setActiveTab('faculty')}
               >
-                👤 Faculty
+                Faculty
               </button>
               <button
                 className={`btn btn-sm ${activeTab === 'room' ? 'btn-primary' : 'btn-ghost'}`}
                 onClick={() => setActiveTab('room')}
               >
-                🏛️ Rooms &amp; Labs
+                Rooms & Labs
               </button>
             </div>
           )}
@@ -215,7 +213,7 @@ export default function PublicViewer({ onOpenEditor }) {
             onClick={onOpenEditor}
             title="Open coordinator editor (#edit)"
           >
-            ⚙️ Coordinator Login / Edit
+            Coordinator Login / Edit
           </button>
         </div>
       </header>
@@ -230,7 +228,7 @@ export default function PublicViewer({ onOpenEditor }) {
       {/* Empty / Not Published state */}
       {!loading && (!data || classes.length === 0) && (
         <div className="card" style={{ textAlign: 'center', padding: '4rem 1.5rem' }}>
-          <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>📋</div>
+          
           <h2 style={{ fontSize: '1.4rem', fontWeight: 700, marginBottom: '.5rem' }}>
             Timetable not published yet
           </h2>
@@ -239,7 +237,7 @@ export default function PublicViewer({ onOpenEditor }) {
             go to the editor to generate and publish data.json.
           </p>
           <button className="btn btn-primary" onClick={onOpenEditor}>
-            ⚙️ Go to Coordinator Editor (#edit)
+            Go to Coordinator Editor (#edit)
           </button>
         </div>
       )}
@@ -277,13 +275,13 @@ export default function PublicViewer({ onOpenEditor }) {
                   className="btn btn-secondary btn-sm"
                   onClick={() => exportExcel(currentClass.id, data)}
                 >
-                  📊 Export Excel
+                  Export Excel
                 </button>
                 <button
                   className="btn btn-secondary btn-sm"
                   onClick={() => exportPDF(currentClass.id, data)}
                 >
-                  📄 Export PDF
+                  Export PDF
                 </button>
               </div>
             )}
@@ -340,8 +338,8 @@ export default function PublicViewer({ onOpenEditor }) {
                             key={p.id}
                             className="brk"
                             style={{
-                              background: 'var(--surface3)',
-                              color: 'var(--yellow)',
+                              background: 'var(--surface2)',
+                              color: 'var(--muted)',
                               fontWeight: 700,
                               width: 44,
                             }}
@@ -378,10 +376,10 @@ export default function PublicViewer({ onOpenEditor }) {
                                   key={p.id}
                                   className="brk"
                                   style={{
-                                    background: 'var(--surface3)',
+                                    background: 'var(--surface2)',
                                     textAlign: 'center',
                                     verticalAlign: 'middle',
-                                    fontSize: '.68rem',
+                                    fontSize: '11px',
                                     color: 'var(--muted)',
                                   }}
                                 >
@@ -424,22 +422,21 @@ export default function PublicViewer({ onOpenEditor }) {
                                   ? `(${slot.roomId})`
                                   : ''
 
-                              const h = hue(allSubs.findIndex((s) => s.id === slot.subId))
-
                               return (
                                 <td
                                   key={p.id}
                                   colSpan={slot.blockSize || 1}
-                                  className="tt-slot filled"
+                                  className={`tt-slot filled${isLab ? ' lab' : ''}`}
                                   style={{
-                                    '--h': h,
-                                    background: `hsl(${h} 45% 15%)`,
+                                    background: isLab ? 'var(--surface2)' : '#ffffff',
                                   }}
                                 >
                                   <b
                                     style={{
-                                      fontSize: '.82rem',
-                                      color: `hsl(${h} 80% 75%)`,
+                                      fontSize: '13px',
+                                      fontWeight: 700,
+                                      color: 'var(--ink)',
+                                      lineHeight: 1.2,
                                     }}
                                   >
                                     {slot.subCode || sub?.code || sub?.name || 'Class'}
@@ -447,10 +444,10 @@ export default function PublicViewer({ onOpenEditor }) {
                                   {facShorts && (
                                     <span
                                       style={{
-                                        fontSize: '.74rem',
-                                        color: 'var(--ink)',
-                                        fontWeight: 600,
+                                        fontSize: '12px',
+                                        color: 'var(--muted)',
                                         marginTop: '2px',
+                                        display: 'block',
                                       }}
                                     >
                                       ({facShorts})
@@ -459,9 +456,9 @@ export default function PublicViewer({ onOpenEditor }) {
                                   {isLab && labDisplay && (
                                     <span
                                       style={{
-                                        fontSize: '.7rem',
-                                        color: 'var(--green)',
-                                        fontWeight: 700,
+                                        fontSize: '11px',
+                                        color: 'var(--accent)',
+                                        fontWeight: 600,
                                         marginTop: '2px',
                                         display: 'block',
                                       }}
@@ -492,7 +489,7 @@ export default function PublicViewer({ onOpenEditor }) {
               >
                 <div style={{ marginBottom: '.75rem' }}>
                   <b style={{ fontSize: '.9rem' }}>Class Advisor: </b>
-                  <span style={{ color: 'var(--accent2)', fontWeight: 600 }}>
+                  <span style={{ color: 'var(--accent)', fontWeight: 600 }}>
                     {currentClass.advisor || '—'}
                   </span>
                 </div>
@@ -521,13 +518,7 @@ export default function PublicViewer({ onOpenEditor }) {
                             <td>{s.name}</td>
                             <td>
                               <span
-                                className={`tag ${
-                                  s.type === 'Lab'
-                                    ? 'green'
-                                    : s.type === 'Project'
-                                    ? 'purple'
-                                    : ''
-                                }`}
+                                className="tag"
                               >
                                 {s.type}
                               </span>
@@ -563,7 +554,7 @@ export default function PublicViewer({ onOpenEditor }) {
           >
             <input
               type="search"
-              placeholder="🔍 Search faculty by name or short code…"
+              placeholder="Search faculty by name or short code…"
               value={facultySearch}
               onChange={(e) => setFacultySearch(e.target.value)}
               style={{
@@ -593,10 +584,10 @@ export default function PublicViewer({ onOpenEditor }) {
             <div className="card">
               <div className="card-header">
                 <h3>
-                  👤 {activeFaculty.name} ({activeFaculty.short}) — Schedule
+                  {activeFaculty.name} ({activeFaculty.short}) — Schedule
                 </h3>
                 <span className="tag">{activeFaculty.dept || 'Faculty'}</span>
-                <span className="tag blue" style={{ marginLeft: '.3rem' }}>
+                <span className="tag" style={{ marginLeft: '.3rem' }}>
                   Max: {activeFaculty.max || 30} periods/wk
                 </span>
               </div>
@@ -631,11 +622,11 @@ export default function PublicViewer({ onOpenEditor }) {
                           const bookings = facSchedule[day]?.[p.id] || []
                           if (bookings.length > 0) {
                             return (
-                              <td key={p.id} className="tt-slot filled" style={{ '--h': 210 }}>
+                              <td key={p.id} className="tt-slot filled" >
                                 {bookings.map((b, i) => (
                                   <div key={i} style={{ marginBottom: '.2rem' }}>
                                     <b style={{ fontSize: '.72rem' }}>{b.subCode}</b>
-                                    <span style={{ fontSize: '.68rem', color: 'var(--accent2)' }}>
+                                    <span style={{ fontSize: '.68rem', color: 'var(--accent)' }}>
                                       {b.classId}
                                     </span>
                                     {b.roomName && (
@@ -688,10 +679,10 @@ export default function PublicViewer({ onOpenEditor }) {
             <div className="card">
               <div className="card-header">
                 <h3>
-                  🏛️ {activeRoom.roomNo || activeRoom.name}{' '}
+                  {activeRoom.roomNo || activeRoom.name}{' '}
                   {activeRoom.labName ? `(${activeRoom.labName})` : ''} — Weekly Usage
                 </h3>
-                <span className="tag green">{activeRoom.type || 'Room'}</span>
+                <span className="tag">{activeRoom.type || 'Room'}</span>
               </div>
 
               <div className="tt-grid-wrap">
@@ -724,10 +715,10 @@ export default function PublicViewer({ onOpenEditor }) {
                           const bookings = roomSchedule[day]?.[p.id] || []
                           if (bookings.length > 0) {
                             return (
-                              <td key={p.id} className="tt-slot filled" style={{ '--h': 150 }}>
+                              <td key={p.id} className="tt-slot filled" >
                                 {bookings.map((b, i) => (
                                   <div key={i}>
-                                    <b style={{ fontSize: '.72rem', color: 'var(--accent2)' }}>
+                                    <b style={{ fontSize: '.72rem', color: 'var(--accent)' }}>
                                       {b.classId}
                                     </b>
                                     <span style={{ fontSize: '.68rem' }}>{b.subCode}</span>

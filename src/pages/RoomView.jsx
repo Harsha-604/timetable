@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useStore } from '../store/useStore'
 import { DAYS_ORDER } from '../utils/constants'
-import { fmtTime, hue } from '../utils/helpers'
+import { fmtTime } from '../utils/helpers'
 
 export default function RoomView() {
   const { classes, rooms, subjects, timetable, settings } = useStore()
@@ -72,10 +72,10 @@ export default function RoomView() {
         <div className="card">
           <div className="card-header">
             <h3>
-              🏛️ {selectedRoom.roomNo || selectedRoom.name}{' '}
+              {selectedRoom.roomNo || selectedRoom.name}{' '}
               {selectedRoom.labName ? `(${selectedRoom.labName})` : ''} — Weekly Usage
             </h3>
-            <span className="tag blue">{selectedRoom.type || 'Classroom'}</span>
+            <span className="tag">{selectedRoom.type || 'Classroom'}</span>
             {selectedRoom.capacity && (
               <span className="tag" style={{ marginLeft: '.3rem' }}>
                 Cap: {selectedRoom.capacity}
@@ -120,13 +120,13 @@ export default function RoomView() {
                             key={p.id}
                             className={`tt-slot filled${isClash ? ' clash' : ''}`}
                             style={{
-                              '--h': isClash ? 0 : 200,
-                              background: isClash ? 'var(--redbg)' : undefined,
+                              background: isClash ? 'var(--dangerbg)' : '#ffffff',
+                              border: isClash ? '2px solid var(--danger)' : undefined,
                             }}
                           >
                             {bookings.map((b, idx) => (
                               <div key={idx} style={{ marginBottom: '.2rem' }}>
-                                <b style={{ fontSize: '.72rem', color: 'var(--accent2)' }}>
+                                <b style={{ fontSize: '.72rem', color: 'var(--accent)' }}>
                                   {b.classId}
                                 </b>
                                 <span style={{ fontSize: '.68rem' }}>

@@ -102,7 +102,7 @@ export default function Faculty() {
               className="btn btn-secondary filebtn"
               onClick={() => fileInputRef.current?.click()}
             >
-              📊 Import Excel/CSV
+              Import Excel/CSV
             </button>
             <input
               ref={fileInputRef}
@@ -112,7 +112,7 @@ export default function Faculty() {
               style={{ display: 'none' }}
             />
             <button className="btn btn-secondary" onClick={() => dlTemplate('faculty')}>
-              ⬇ Download Template
+              Download Template
             </button>
             {faculty.length > 0 && (
               <button
@@ -124,7 +124,7 @@ export default function Faculty() {
                   }
                 }}
               >
-                🗑 Clear All
+                Clear All
               </button>
             )}
             <button className="btn btn-primary" onClick={openAdd}>
@@ -171,7 +171,7 @@ export default function Faculty() {
 
         {!filtered.length ? (
           <div className="empty-state">
-            <div className="icon">👥</div>
+            
             <p>{search ? 'No matching faculty found' : 'No faculty added yet.'}</p>
             {!search && (
               <button className="btn btn-primary" onClick={openAdd}>
@@ -211,7 +211,7 @@ export default function Faculty() {
                       {Array.isArray(f.subjects) && f.subjects.length > 0 ? (
                         <div style={{ display: 'flex', gap: '.25rem', flexWrap: 'wrap' }}>
                           {f.subjects.map((sub, sIdx) => (
-                            <span key={sIdx} className="tag green" style={{ fontSize: '.68rem' }}>
+                            <span key={sIdx} className="tag" style={{ fontSize: '.68rem' }}>
                               {sub}
                             </span>
                           ))}
@@ -222,11 +222,11 @@ export default function Faculty() {
                     </td>
                     <td style={{ textAlign: 'right', whiteSpace: 'nowrap' }}>
                       <button className="btn btn-ghost btn-sm" onClick={() => openEdit(f)}>
-                        ✏️
+                        Edit
                       </button>{' '}
                       <button
                         className="btn btn-ghost btn-sm"
-                        style={{ color: 'var(--red)' }}
+                        style={{ color: 'var(--danger)' }}
                         onClick={() => {
                           if (confirm(`Delete ${f.name}?`)) {
                             deleteFaculty(f.id)
@@ -234,7 +234,7 @@ export default function Faculty() {
                           }
                         }}
                       >
-                        🗑
+                        Delete
                       </button>
                     </td>
                   </tr>

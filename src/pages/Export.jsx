@@ -56,7 +56,7 @@ export default function Export() {
                     toast(`Exported ${cls.id} to Excel`, 'ok')
                   }}
                 >
-                  📊 Excel
+                  Excel
                 </button>
                 <button
                   className="btn btn-secondary btn-sm"
@@ -66,7 +66,7 @@ export default function Export() {
                     toast(`Exported ${cls.id} to PDF`, 'ok')
                   }}
                 >
-                  📄 PDF
+                  PDF
                 </button>
               </div>
             </div>
@@ -76,7 +76,7 @@ export default function Export() {
 
       <div className="card">
         <div className="card-header">
-          <h3>📦 Batch Export (All Classes)</h3>
+          <h3>Batch Export (All Classes)</h3>
         </div>
         <div style={{ display: 'flex', gap: '.75rem', flexWrap: 'wrap' }}>
           <button
@@ -89,7 +89,7 @@ export default function Export() {
               }
             }}
           >
-            📊 All Classes → Single Excel Workbook
+            All Classes → Single Excel Workbook
           </button>
           <button
             className="btn btn-primary"
@@ -101,7 +101,7 @@ export default function Export() {
               }
             }}
           >
-            📄 All Classes → Multi-Page PDF
+            All Classes → Multi-Page PDF
           </button>
         </div>
       </div>

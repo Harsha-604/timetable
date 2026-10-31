@@ -173,7 +173,7 @@ export default function Subjects() {
               className="btn btn-secondary filebtn"
               onClick={() => fileInputRef.current?.click()}
             >
-              📊 Import Excel/CSV
+              Import Excel/CSV
             </button>
             <input
               ref={fileInputRef}
@@ -183,7 +183,7 @@ export default function Subjects() {
               style={{ display: 'none' }}
             />
             <button className="btn btn-secondary" onClick={() => dlTemplate('subjects')}>
-              ⬇ Download Template
+              Download Template
             </button>
             {subs.length > 0 && (
               <button
@@ -199,7 +199,7 @@ export default function Subjects() {
                   }
                 }}
               >
-                🗑 Clear This Class
+                Clear This Class
               </button>
             )}
             {Object.values(subjects).some((a) => a.length) && (
@@ -212,7 +212,7 @@ export default function Subjects() {
                   }
                 }}
               >
-                🗑 Clear All
+                Clear All
               </button>
             )}
             <button className="btn btn-primary" onClick={openAdd}>
@@ -268,14 +268,13 @@ export default function Subjects() {
         <div
           className="card"
           style={{
-            borderColor: 'var(--red)',
-            background: 'var(--redbg)',
+            border: "1px solid var(--danger)", borderLeft: "4px solid var(--danger)", background: "var(--dangerbg)",
             marginBottom: '1rem',
           }}
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: '.5rem', marginBottom: '.4rem' }}>
-            <span style={{ fontSize: '1.2rem' }}>⚠️</span>
-            <b style={{ color: 'var(--red)' }}>Subject Import Errors (Generation Blocked):</b>
+            
+            <b style={{ color: 'var(--danger)' }}>Subject Import Errors (Generation Blocked):</b>
           </div>
           <ul style={{ paddingLeft: '1.5rem', fontSize: '.84rem', color: 'var(--ink)' }}>
             {importErrors.map((err, i) => (
@@ -298,7 +297,7 @@ export default function Subjects() {
         </div>
         {!subs.length ? (
           <div className="empty-state">
-            <div className="icon">📚</div>
+            
             <p>
               No subjects for {branch} Year {year}.
             </p>
@@ -371,7 +370,7 @@ export default function Subjects() {
                                 </span>
                                 {names ? (
                                   <span>
-                                    <b>{names}</b> {isLocked && '🔒'}
+                                    <b>{names}</b> {isLocked && <span className="lock-badge">L</span>}
                                   </span>
                                 ) : (
                                   <span style={{ color: 'var(--muted)' }}>— (auto)</span>
@@ -381,15 +380,15 @@ export default function Subjects() {
                           })
                         )}
                       </td>
-                      <td>{s.labRoomId ? <span className="tag green">{s.labRoomId}</span> : '—'}</td>
-                      <td>{s.commonGroup ? <span className="tag yellow">{s.commonGroup}</span> : '—'}</td>
+                      <td>{s.labRoomId ? <span className="tag">{s.labRoomId}</span> : '—'}</td>
+                      <td>{s.commonGroup ? <span className="tag">{s.commonGroup}</span> : '—'}</td>
                       <td style={{ textAlign: 'right', whiteSpace: 'nowrap' }}>
                         <button className="btn btn-ghost btn-sm" onClick={() => openEdit(s)}>
-                          ✏️
+                          Edit
                         </button>{' '}
                         <button
                           className="btn btn-ghost btn-sm"
-                          style={{ color: 'var(--red)' }}
+                          style={{ color: 'var(--danger)' }}
                           onClick={() => {
                             if (confirm(`Delete subject ${s.name}?`)) {
                               deleteSubject(key, s.id)
@@ -397,7 +396,7 @@ export default function Subjects() {
                             }
                           }}
                         >
-                          🗑
+                          Delete
                         </button>
                       </td>
                     </tr>

@@ -149,24 +149,54 @@ export function exportPDF(classId, state) {
 
   doc.setFontSize(14)
   doc.setFont('helvetica', 'bold')
+  doc.setTextColor(17, 17, 17)
   doc.text(title, 14, 14)
 
   doc.setFontSize(8.5)
   doc.setFont('helvetica', 'normal')
+  doc.setTextColor(102, 102, 102)
   doc.text(subtitle, 14, 20)
 
   doc.autoTable({
     head: [rows[0]],
     body: rows.slice(1),
     startY: 24,
-    styles: { fontSize: 7.5, cellPadding: 2.5, overflow: 'linebreak' },
-    headStyles: { fillColor: [30, 37, 56], textColor: [228, 233, 245], fontStyle: 'bold' },
+    styles: {
+      fontSize: 7.5,
+      cellPadding: 2.5,
+      overflow: 'linebreak',
+      textColor: [17, 17, 17],
+      lineColor: [189, 189, 189],
+      lineWidth: 0.2,
+    },
+    headStyles: {
+      fillColor: [242, 242, 242],
+      textColor: [17, 17, 17],
+      fontStyle: 'bold',
+      lineColor: [189, 189, 189],
+      lineWidth: 0.2,
+    },
+    didParseCell: function (data) {
+      if (data.section === 'body') {
+        const text = String(data.cell.raw || '')
+        if (data.column.index === 0) {
+          data.cell.styles.fillColor = [242, 242, 242]
+          data.cell.styles.fontStyle = 'bold'
+        } else if (text === 'BREAK' || text === 'LUNCH') {
+          data.cell.styles.fillColor = [242, 242, 242]
+          data.cell.styles.textColor = [102, 102, 102]
+        } else if (text.includes('(LAB-') || text.includes('Lab') || text.includes('Project')) {
+          data.cell.styles.fillColor = [242, 242, 242]
+        }
+      }
+    },
     margin: { left: 10, right: 10 },
   })
 
   let finalY = doc.lastAutoTable.finalY + 6
   doc.setFontSize(9)
   doc.setFont('helvetica', 'bold')
+  doc.setTextColor(17, 17, 17)
   doc.text(advisor, 14, finalY)
 
   if (legend.length > 0 && finalY < 170) {
@@ -174,8 +204,20 @@ export function exportPDF(classId, state) {
       head: [['Subject Code', 'Subject Name', 'Type', 'Faculty In-Charge']],
       body: legend,
       startY: finalY + 4,
-      styles: { fontSize: 7, cellPadding: 2 },
-      headStyles: { fillColor: [45, 53, 83], textColor: [228, 233, 245], fontStyle: 'bold' },
+      styles: {
+        fontSize: 7,
+        cellPadding: 2,
+        textColor: [17, 17, 17],
+        lineColor: [189, 189, 189],
+        lineWidth: 0.2,
+      },
+      headStyles: {
+        fillColor: [242, 242, 242],
+        textColor: [17, 17, 17],
+        fontStyle: 'bold',
+        lineColor: [189, 189, 189],
+        lineWidth: 0.2,
+      },
       margin: { left: 10, right: 10 },
     })
   }
@@ -198,24 +240,54 @@ export function exportAllPDF(state) {
 
     doc.setFontSize(14)
     doc.setFont('helvetica', 'bold')
+    doc.setTextColor(17, 17, 17)
     doc.text(title, 14, 14)
 
     doc.setFontSize(8.5)
     doc.setFont('helvetica', 'normal')
+    doc.setTextColor(102, 102, 102)
     doc.text(subtitle, 14, 20)
 
     doc.autoTable({
       head: [rows[0]],
       body: rows.slice(1),
       startY: 24,
-      styles: { fontSize: 7.5, cellPadding: 2.5, overflow: 'linebreak' },
-      headStyles: { fillColor: [30, 37, 56], textColor: [228, 233, 245], fontStyle: 'bold' },
+      styles: {
+        fontSize: 7.5,
+        cellPadding: 2.5,
+        overflow: 'linebreak',
+        textColor: [17, 17, 17],
+        lineColor: [189, 189, 189],
+        lineWidth: 0.2,
+      },
+      headStyles: {
+        fillColor: [242, 242, 242],
+        textColor: [17, 17, 17],
+        fontStyle: 'bold',
+        lineColor: [189, 189, 189],
+        lineWidth: 0.2,
+      },
+      didParseCell: function (data) {
+        if (data.section === 'body') {
+          const text = String(data.cell.raw || '')
+          if (data.column.index === 0) {
+            data.cell.styles.fillColor = [242, 242, 242]
+            data.cell.styles.fontStyle = 'bold'
+          } else if (text === 'BREAK' || text === 'LUNCH') {
+            data.cell.styles.fillColor = [242, 242, 242]
+            data.cell.styles.textColor = [102, 102, 102]
+          } else if (text.includes('(LAB-') || text.includes('Lab') || text.includes('Project')) {
+            data.cell.styles.fillColor = [242, 242, 242]
+          }
+        }
+      },
       margin: { left: 10, right: 10 },
     })
 
     let finalY = doc.lastAutoTable.finalY + 6
     doc.setFontSize(9)
     doc.setFont('helvetica', 'bold')
+    doc.setTextColor(17, 17, 17)
     doc.text(advisor, 14, finalY)
 
     if (legend.length > 0 && finalY < 170) {
@@ -223,8 +295,20 @@ export function exportAllPDF(state) {
         head: [['Subject Code', 'Subject Name', 'Type', 'Faculty In-Charge']],
         body: legend,
         startY: finalY + 4,
-        styles: { fontSize: 7, cellPadding: 2 },
-        headStyles: { fillColor: [45, 53, 83], textColor: [228, 233, 245], fontStyle: 'bold' },
+        styles: {
+          fontSize: 7,
+          cellPadding: 2,
+          textColor: [17, 17, 17],
+          lineColor: [189, 189, 189],
+          lineWidth: 0.2,
+        },
+        headStyles: {
+          fillColor: [242, 242, 242],
+          textColor: [17, 17, 17],
+          fontStyle: 'bold',
+          lineColor: [189, 189, 189],
+          lineWidth: 0.2,
+        },
         margin: { left: 10, right: 10 },
       })
     }
