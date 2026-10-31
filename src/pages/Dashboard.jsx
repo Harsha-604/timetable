@@ -115,7 +115,7 @@ export default function Dashboard({ onNavigate }) {
                 key={cls.id}
                 className="card"
                 style={{ margin: 0, cursor: 'pointer' }}
-                onClick={() => onNavigate('view-tt')}
+                onClick={() => onNavigate('view-tt', cls.id)}
               >
                 <div
                   style={{

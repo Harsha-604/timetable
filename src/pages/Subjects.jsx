@@ -8,8 +8,14 @@ import { dlTemplate } from '../utils/exporter'
 
 export default function Subjects() {
   const {
+    classes,
+    faculty,
     rooms,
     subjects,
+    assignments,
+    lockedAssignments,
+    subjectFacultyPresets,
+    importErrors,
     addSubject,
     updateSubject,
     deleteSubject,
@@ -17,6 +23,10 @@ export default function Subjects() {
     clearAllSubjects,
     mergeSubjects,
     replaceSubjects,
+    setAllAssignments,
+    setLockedAssignments,
+    setSubjectFacultyPresets,
+    setImportErrors,
     toast,
   } = useStore()
 
@@ -95,13 +105,31 @@ export default function Subjects() {
     const file = e.target.files?.[0]
     if (!file) return
     try {
-      const { map, added, updated, duplicates, unknown, affectedKeys } =
-        await importSubjectsFromFile(file, subjects, branch, year)
-      replaceSubjects(map)
+      const res = await importSubjectsFromFile(file, {
+        existingSubjects: subjects,
+        classes,
+        faculty,
+        assignments,
+        lockedAssignments,
+        presets: subjectFacultyPresets,
+        defaultBranch: branch,
+        defaultYear: year,
+      })
+
+      replaceSubjects(res.map)
+      if (res.assignments) setAllAssignments(res.assignments)
+      if (res.lockedAssignments) setLockedAssignments(res.lockedAssignments)
+      if (res.presets) setSubjectFacultyPresets(res.presets)
+
+      if (res.errors && res.errors.length) {
+        setImportErrors(res.errors)
+      } else {
+        setImportErrors([])
+      }
 
       // Auto-switch view if imported subjects are for another branch/year
-      if (affectedKeys && affectedKeys.length === 1) {
-        const [targetBranch, targetYear] = affectedKeys[0].split('-')
+      if (res.affectedKeys && res.affectedKeys.length === 1) {
+        const [targetBranch, targetYear] = res.affectedKeys[0].split('-')
         if (
           targetBranch &&
           targetYear &&
@@ -113,13 +141,16 @@ export default function Subjects() {
       }
 
       const problems = [
-        duplicates.length ? `duplicate codes: ${duplicates.join(', ')}` : '',
-        unknown.length ? `rows skipped: ${unknown.join('; ')}` : '',
+        res.errors.length ? `ERRORS (${res.errors.length}): ${res.errors.join('; ')}` : '',
+        res.warnings.length ? `Warnings: ${res.warnings.join('; ')}` : '',
+        res.duplicates.length ? `duplicate codes: ${res.duplicates.join(', ')}` : '',
+        res.unknown.length ? `rows skipped: ${res.unknown.join('; ')}` : '',
       ]
         .filter(Boolean)
         .join('. ')
-      const msg = `Subjects: ${added} added, ${updated} updated`
-      toast(problems ? `${msg}. ${problems}` : msg, problems ? 'err' : 'ok')
+
+      const msg = `Subjects: ${res.added} added, ${res.updated} updated`
+      toast(problems ? `${msg}. ${problems}` : msg, res.errors.length ? 'err' : 'ok')
     } catch (err) {
       toast('Import failed: ' + err.message, 'err')
     } finally {
@@ -232,6 +263,30 @@ export default function Subjects() {
         </div>
       </div>
 
+      {/* Import Error Banner */}
+      {importErrors.length > 0 && (
+        <div
+          className="card"
+          style={{
+            borderColor: 'var(--red)',
+            background: 'var(--redbg)',
+            marginBottom: '1rem',
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', gap: '.5rem', marginBottom: '.4rem' }}>
+            <span style={{ fontSize: '1.2rem' }}>⚠️</span>
+            <b style={{ color: 'var(--red)' }}>Subject Import Errors (Generation Blocked):</b>
+          </div>
+          <ul style={{ paddingLeft: '1.5rem', fontSize: '.84rem', color: 'var(--ink)' }}>
+            {importErrors.map((err, i) => (
+              <li key={i} style={{ marginBottom: '.2rem' }}>
+                {err}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
       <div className="card">
         <div className="card-header">
           <h3>
@@ -263,57 +318,91 @@ export default function Subjects() {
                   <th style={{ textAlign: 'right' }}>Periods</th>
                   <th style={{ textAlign: 'right' }}>Block</th>
                   <th style={{ textAlign: 'right' }}>Fac Req</th>
+                  <th>Preset Faculty</th>
                   <th>Lab Room</th>
                   <th>Common Group</th>
                   <th />
                 </tr>
               </thead>
               <tbody>
-                {subs.map((s, i) => (
-                  <tr key={s.id}>
-                    <td style={{ textAlign: 'right' }}>{i + 1}</td>
-                    <td>
-                      <b>{s.name}</b>
-                    </td>
-                    <td>
-                      <code>{s.code || '—'}</code>
-                    </td>
-                    <td>
-                      <span
-                        className={`tag ${s.type === 'Lab'
-                            ? 'green'
-                            : s.type === 'Project'
+                {subs.map((s, i) => {
+                  const classList = classes.filter(
+                    (c) => c.branch === branch && Number(c.year) === Number(year)
+                  )
+                  return (
+                    <tr key={s.id}>
+                      <td style={{ textAlign: 'right' }}>{i + 1}</td>
+                      <td>
+                        <b>{s.name}</b>
+                      </td>
+                      <td>
+                        <code>{s.code || '—'}</code>
+                      </td>
+                      <td>
+                        <span
+                          className={`tag ${
+                            s.type === 'Lab'
+                              ? 'green'
+                              : s.type === 'Project'
                               ? 'purple'
                               : ''
                           }`}
-                      >
-                        {s.type}
-                      </span>
-                    </td>
-                    <td style={{ textAlign: 'right' }}>{s.periods}</td>
-                    <td style={{ textAlign: 'right' }}>{s.block}</td>
-                    <td style={{ textAlign: 'right' }}>{s.facultyReq || 1}</td>
-                    <td>{s.labRoomId ? <span className="tag green">{s.labRoomId}</span> : '—'}</td>
-                    <td>{s.commonGroup ? <span className="tag yellow">{s.commonGroup}</span> : '—'}</td>
-                    <td style={{ textAlign: 'right', whiteSpace: 'nowrap' }}>
-                      <button className="btn btn-ghost btn-sm" onClick={() => openEdit(s)}>
-                        ✏️
-                      </button>{' '}
-                      <button
-                        className="btn btn-ghost btn-sm"
-                        style={{ color: 'var(--red)' }}
-                        onClick={() => {
-                          if (confirm(`Delete subject ${s.name}?`)) {
-                            deleteSubject(key, s.id)
-                            toast('Deleted', 'ok')
-                          }
-                        }}
-                      >
-                        🗑
-                      </button>
-                    </td>
-                  </tr>
-                ))}
+                        >
+                          {s.type}
+                        </span>
+                      </td>
+                      <td style={{ textAlign: 'right' }}>{s.periods}</td>
+                      <td style={{ textAlign: 'right' }}>{s.block}</td>
+                      <td style={{ textAlign: 'right' }}>{s.facultyReq || 1}</td>
+                      <td>
+                        {classList.length === 0 ? (
+                          <span style={{ color: 'var(--muted)', fontSize: '.75rem' }}>No sections</span>
+                        ) : (
+                          classList.map((c) => {
+                            const team = assignments[c.id]?.[s.id] || []
+                            const names = team
+                              .map((fid) => faculty.find((f) => f.id === fid)?.short || fid)
+                              .join(', ')
+                            const isLocked = !!lockedAssignments[c.id]?.[s.id]
+                            return (
+                              <div key={c.id} style={{ fontSize: '.76rem', whiteSpace: 'nowrap' }}>
+                                <span style={{ color: 'var(--muted)', marginRight: '.25rem' }}>
+                                  Sec {c.section}:
+                                </span>
+                                {names ? (
+                                  <span>
+                                    <b>{names}</b> {isLocked && '🔒'}
+                                  </span>
+                                ) : (
+                                  <span style={{ color: 'var(--muted)' }}>— (auto)</span>
+                                )}
+                              </div>
+                            )
+                          })
+                        )}
+                      </td>
+                      <td>{s.labRoomId ? <span className="tag green">{s.labRoomId}</span> : '—'}</td>
+                      <td>{s.commonGroup ? <span className="tag yellow">{s.commonGroup}</span> : '—'}</td>
+                      <td style={{ textAlign: 'right', whiteSpace: 'nowrap' }}>
+                        <button className="btn btn-ghost btn-sm" onClick={() => openEdit(s)}>
+                          ✏️
+                        </button>{' '}
+                        <button
+                          className="btn btn-ghost btn-sm"
+                          style={{ color: 'var(--red)' }}
+                          onClick={() => {
+                            if (confirm(`Delete subject ${s.name}?`)) {
+                              deleteSubject(key, s.id)
+                              toast('Deleted', 'ok')
+                            }
+                          }}
+                        >
+                          🗑
+                        </button>
+                      </td>
+                    </tr>
+                  )
+                })}
               </tbody>
             </table>
           </div>

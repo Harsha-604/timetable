@@ -260,18 +260,20 @@ export function dlTemplate(type) {
       [
         'Branch',
         'Year',
+        'Section',
         'Subject Code',
         'Subject Name',
         'Type',
         'Periods/Week',
         'Block Size',
+        'Faculty',
         'Faculty Required',
         'Lab Room',
         'Common Slot Group',
       ],
-      ['CIC', 4, 'BCT', 'Blockchain Technologies', 'Theory', 3, 1, 1, '', ''],
-      ['CIC', 4, 'DevOps Lab', 'DevOps Lab', 'Lab', 4, 2, 2, 'CS-104', ''],
-      ['CIC', 4, 'OE-I:RSE', 'Remote Sensing & Estimation', 'Theory', 3, 1, 1, '', 'OE-1'],
+      ['CIC', 4, '', 'BCT', 'Blockchain Technologies', 'Theory', 3, 1, 'PPP', 1, '', ''],
+      ['CIC', 4, '', 'DevOps Lab', 'DevOps Lab', 'Lab', 4, 2, 'PPP, AV', 2, 'CS-104', ''],
+      ['CIC', 4, '', 'OE-I:RSE', 'Remote Sensing & Estimation', 'Theory', 3, 1, 'MB', 1, '', 'OE-1'],
     ])
     name = 'subjects_template.xlsx'
   }

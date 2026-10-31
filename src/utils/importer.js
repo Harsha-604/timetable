@@ -155,15 +155,21 @@ function detectHeaderRow(raw) {
  */
 export async function readSheetArrayBuffer(file, entityType = '') {
   let buffer
-  if (file && typeof file.arrayBuffer === 'function') {
+  if (file instanceof ArrayBuffer) {
+    buffer = file
+  } else if (typeof Buffer !== 'undefined' && Buffer.isBuffer(file)) {
+    buffer = file.buffer.slice(file.byteOffset, file.byteOffset + file.byteLength)
+  } else if (file && typeof file.arrayBuffer === 'function') {
     buffer = await file.arrayBuffer()
-  } else {
+  } else if (typeof FileReader !== 'undefined') {
     buffer = await new Promise((resolve, reject) => {
       const reader = new FileReader()
       reader.onload = (e) => resolve(e.target.result)
       reader.onerror = (err) => reject(err)
       reader.readAsArrayBuffer(file)
     })
+  } else {
+    throw new Error('Unsupported file type for readSheetArrayBuffer')
   }
 
   const data = new Uint8Array(buffer)
@@ -419,20 +425,47 @@ export async function importRoomsFromFile(file, existingRooms = []) {
 }
 
 // ─── Subjects Importer ────────────────────────────────────────────────────────
-// Columns: Branch | Year | Subject Code | Subject Name | Type (Theory/Lab/Project) |
-// Periods/Week | Block Size | Faculty Required | Lab Room | Common Slot Group
-// Upsert by Branch-Year + Subject Code. Falls back to defaultBranch and defaultYear
-// if Branch/Year columns are missing in the sheet.
+// Columns: Branch | Year | Section | Subject Code | Subject Name | Type (Theory/Lab/Project) |
+// Periods/Week | Block Size | Faculty | Faculty Required | Lab Room | Common Slot Group
+// Upsert by Branch-Year + Subject Code. Writes preset faculty teams into
+// assignments and lockedAssignments.
 export async function importSubjectsFromFile(
   file,
-  existingSubjects = {},
+  optionsOrSubjects = {},
   defaultBranch = 'CIC',
   defaultYear = 4
 ) {
+  const isOptionsObj =
+    optionsOrSubjects &&
+    (optionsOrSubjects.classes ||
+      optionsOrSubjects.existingSubjects ||
+      optionsOrSubjects.faculty ||
+      optionsOrSubjects.assignments)
+
+  const existingSubjects = isOptionsObj
+    ? optionsOrSubjects.existingSubjects || {}
+    : optionsOrSubjects || {}
+  const classes = isOptionsObj ? optionsOrSubjects.classes || [] : []
+  const faculty = isOptionsObj ? optionsOrSubjects.faculty || [] : []
+  const assignments = isOptionsObj
+    ? JSON.parse(JSON.stringify(optionsOrSubjects.assignments || {}))
+    : {}
+  const lockedAssignments = isOptionsObj
+    ? JSON.parse(JSON.stringify(optionsOrSubjects.lockedAssignments || {}))
+    : {}
+  const presets = isOptionsObj
+    ? JSON.parse(JSON.stringify(optionsOrSubjects.presets || {}))
+    : {}
+  const defBranch = isOptionsObj
+    ? optionsOrSubjects.defaultBranch || 'CIC'
+    : defaultBranch || 'CIC'
+  const defYear = isOptionsObj ? optionsOrSubjects.defaultYear || 4 : defaultYear || 4
+
   const { headers, dataRows } = await readSheetArrayBuffer(file, 'subjects')
 
   const iBranch = findColIdx(headers, ['branch', 'dept', 'department', 'stream', 'program', 'course'])
   const iYear = findColIdx(headers, ['year', 'yr', 'academic year', 'class year', 'semester', 'sem'])
+  const iSection = findColIdx(headers, ['section', 'sec'])
   const iCode = findColIdx(headers, [
     'subject code',
     'sub code',
@@ -466,15 +499,34 @@ export async function importSubjectsFromFile(
     'lec',
   ])
   const iBlock = findColIdx(headers, ['block size', 'block', 'blocksize', 'duration', 'consecutive'])
+
+  // Distinguish 'Faculty' (teachers) from 'Faculty Required' (count)
   const iFacReq = findColIdx(headers, [
     'faculty required',
     'faculty req',
-    'teachers',
+    'teachers required',
     'fac req',
     'staff required',
     'no of faculty',
     'faculty count',
   ])
+  let iFaculty = -1
+  for (let hIdx = 0; hIdx < headers.length; hIdx++) {
+    if (hIdx === iFacReq) continue
+    const h = String(headers[hIdx] || '').trim().toLowerCase()
+    if (
+      ['faculty', 'faculty name', 'faculty names', 'faculty short names', 'teachers', 'teacher'].includes(h) ||
+      (h.startsWith('faculty') &&
+        !h.includes('req') &&
+        !h.includes('count') &&
+        !h.includes('need') &&
+        !h.includes('size'))
+    ) {
+      iFaculty = hIdx
+      break
+    }
+  }
+
   const iLabRoom = findColIdx(headers, ['lab room', 'lab room no', 'lab room #', 'lab', 'lab no', 'room'])
   const iGroup = findColIdx(headers, [
     'common slot group',
@@ -501,16 +553,23 @@ export async function importSubjectsFromFile(
   const seenInSheet = new Set()
   const duplicates = []
   const unknown = []
+  const errors = []
+  const warnings = []
   const affectedKeys = new Set()
   let added = 0
   let updated = 0
 
+  // First pass: Collect row entries and presets
+  // rowPresets: byKey -> code -> { blankRow: { facIds, ... }, sectionRows: { [sec]: { facIds, ... } } }
+  const rowPresets = {}
+
   dataRows.forEach((r, i) => {
     const rawBranch = iBranch >= 0 ? norm(r[iBranch]) : ''
     const rawYear = iYear >= 0 ? norm(r[iYear]) : ''
+    const sec = iSection >= 0 ? norm(r[iSection]).toUpperCase() : ''
 
-    const branch = normalizeBranch(rawBranch || defaultBranch)
-    const year = normalizeYear(rawYear || defaultYear)
+    const branch = normalizeBranch(rawBranch || defBranch)
+    const year = normalizeYear(rawYear || defYear)
 
     const name = iName >= 0 ? norm(r[iName]) : ''
     const code = (iCode >= 0 ? norm(r[iCode]) : '') || name
@@ -524,12 +583,38 @@ export async function importSubjectsFromFile(
     const byKey = getBranchYearKey(branch, year)
     affectedKeys.add(byKey)
 
-    const sheetKey = `${byKey}|${code.toLowerCase()}`
-    if (seenInSheet.has(sheetKey)) {
-      duplicates.push(`${byKey} ${code}`)
-      return
+    // Check if section exists in Settings
+    if (sec && classes.length > 0) {
+      const secExists = classes.some(
+        (c) => c.branch === branch && Number(c.year) === Number(year) && c.section === sec
+      )
+      if (!secExists) {
+        errors.push(
+          `Row ${i + 2} (${code}): Section "${sec}" does not exist for ${branch} Year ${year}. Create section ${sec} in Settings first.`
+        )
+      }
     }
-    seenInSheet.add(sheetKey)
+
+    // Process Faculty cell (comma-separated short names)
+    const rawFac = iFaculty >= 0 ? norm(r[iFaculty]) : ''
+    const shortNames = rawFac
+      .split(/[,;]+/)
+      .map((s) => s.trim())
+      .filter(Boolean)
+
+    const resolvedFacIds = []
+    shortNames.forEach((sName) => {
+      const match = faculty.find(
+        (f) => (f.short || '').trim().toLowerCase() === sName.toLowerCase()
+      )
+      if (!match) {
+        errors.push(
+          `Row ${i + 2} (${code}): Unknown faculty short name "${sName}" (not found in faculty list).`
+        )
+      } else {
+        resolvedFacIds.push(match.id)
+      }
+    })
 
     const rawType = iType >= 0 ? norm(r[iType]) : ''
     const isLab = /lab|pract|pr\b/i.test(rawType)
@@ -537,7 +622,6 @@ export async function importSubjectsFromFile(
     const type = isLab ? 'Lab' : isProject ? 'Project' : 'Theory'
 
     const defaultBlock = type === 'Lab' || type === 'Project' ? 2 : 1
-    const defaultFacReq = type === 'Lab' || type === 'Project' ? 2 : 1
     const parsedBlock = iBlock >= 0 ? parseInt(r[iBlock], 10) : NaN
     const parsedPeriods = iPeriods >= 0 ? parseInt(r[iPeriods], 10) : NaN
     const parsedFacReq = iFacReq >= 0 ? parseInt(r[iFacReq], 10) : NaN
@@ -550,34 +634,181 @@ export async function importSubjectsFromFile(
         ? Math.max(block, 2)
         : 3
 
+    // Team size N rule
+    const N = shortNames.length
+    let facReq = type === 'Lab' || type === 'Project' ? 2 : 1
+    if (N > 0) {
+      facReq = N
+      if (Number.isFinite(parsedFacReq) && parsedFacReq !== N) {
+        warnings.push(
+          `Row ${i + 2} (${code}): Faculty lists ${N} names (${shortNames.join(', ')}), but Faculty Required is ${parsedFacReq}. Using ${N}.`
+        )
+      }
+    } else if (Number.isFinite(parsedFacReq) && parsedFacReq > 0) {
+      facReq = parsedFacReq
+    }
+
+    if (type === 'Theory' && N > 1) {
+      warnings.push(
+        `Row ${i + 2} (${code}): Theory subject has ${N} faculty assigned (${shortNames.join(', ')}): theory normally has 1 teacher.`
+      )
+    }
+
     const data = {
       name: name || code,
       code,
       type,
       periods,
       block,
-      facultyReq: Number.isFinite(parsedFacReq) && parsedFacReq > 0 ? parsedFacReq : defaultFacReq,
+      facultyReq: facReq,
       labRoomId: iLabRoom >= 0 ? norm(r[iLabRoom]) : '',
       commonGroup: iGroup >= 0 ? norm(r[iGroup]) : '',
     }
 
+    // Upsert subject entity into map[byKey] (one entry per code in branch-year)
     const arr = (map[byKey] ||= [])
     const idx = arr.findIndex((s) => lc(s.code) === code.toLowerCase())
+    let subEntityId
     if (idx >= 0) {
       arr[idx] = { ...arr[idx], ...data }
+      subEntityId = arr[idx].id
       updated++
     } else {
-      arr.push({ id: uid('s'), ...data })
+      subEntityId = uid('s')
+      arr.push({ id: subEntityId, ...data })
       added++
     }
+
+    // Register presets for Section override logic
+    if (!rowPresets[byKey]) rowPresets[byKey] = {}
+    if (!rowPresets[byKey][code]) {
+      rowPresets[byKey][code] = {
+        subEntityId,
+        code,
+        blankRow: null,
+        sectionRows: {},
+      }
+    }
+
+    const rowInfo = {
+      rowNum: i + 2,
+      rawFac,
+      hasFacCell: iFaculty >= 0,
+      facIds: resolvedFacIds,
+      shortNames,
+    }
+
+    if (sec) {
+      rowPresets[byKey][code].sectionRows[sec] = rowInfo
+    } else {
+      rowPresets[byKey][code].blankRow = rowInfo
+    }
+  })
+
+  // Second pass: Apply section overrides and write to assignments, lockedAssignments, and presets
+  Object.entries(rowPresets).forEach(([byKey, codeMap]) => {
+    if (!presets[byKey]) presets[byKey] = {}
+
+    Object.entries(codeMap).forEach(([code, pInfo]) => {
+      const { subEntityId, blankRow, sectionRows } = pInfo
+
+      // Save to presets for future sections added in Settings
+      presets[byKey][code] = {
+        all: blankRow ? blankRow.facIds : [],
+        sections: Object.fromEntries(
+          Object.entries(sectionRows).map(([s, r]) => [s, r.facIds])
+        ),
+      }
+
+      // Apply to all existing classes matching branch-year
+      const [b, y] = byKey.split('-')
+      const targetClasses = classes.filter(
+        (c) => c.branch === b && Number(c.year) === Number(y)
+      )
+
+      targetClasses.forEach((c) => {
+        if (!assignments[c.id]) assignments[c.id] = {}
+        if (!lockedAssignments[c.id]) lockedAssignments[c.id] = {}
+
+        // Specific Section row overrides blank-Section row, regardless of row order
+        let assignedTeam = null
+        if (sectionRows[c.section]) {
+          assignedTeam = sectionRows[c.section].facIds
+        } else if (blankRow) {
+          assignedTeam = blankRow.facIds
+        }
+
+        if (assignedTeam !== null) {
+          if (assignedTeam.length > 0) {
+            assignments[c.id][subEntityId] = assignedTeam
+            lockedAssignments[c.id][subEntityId] = true
+          } else {
+            // Explicit blank Faculty: leave unassigned (no lock) so auto-assign can fill it
+            delete assignments[c.id][subEntityId]
+            delete lockedAssignments[c.id][subEntityId]
+          }
+        }
+      })
+    })
+  })
+
+  // Check preset overload error across all faculty
+  faculty.forEach((f) => {
+    const max = Number(f.max) || 30
+    let presetLoad = 0
+    const causingSubs = []
+
+    classes.forEach((c) => {
+      const byKey = getBranchYearKey(c.branch, c.year)
+      const subList = map[byKey] || []
+      subList.forEach((s) => {
+        const team = assignments[c.id]?.[s.id] || []
+        if (team.includes(f.id)) {
+          const p = Number(s.periods) || 0
+          presetLoad += p
+          causingSubs.push(`${c.id} ${s.code || s.name} (${p}p)`)
+        }
+      })
+    })
+
+    if (presetLoad > max) {
+      errors.push(
+        `Faculty ${f.short} (${f.name}) preset load (${presetLoad} periods/wk) exceeds Max Periods/Week (${max}). Subjects causing it: ${causingSubs.join(', ')}.`
+      )
+    }
+  })
+
+  // Check if two subjects in the SAME class preset to a faculty whose combined load in that class alone exceeds 30 (WARNING)
+  classes.forEach((c) => {
+    const byKey = getBranchYearKey(c.branch, c.year)
+    const subList = map[byKey] || []
+    faculty.forEach((f) => {
+      let loadInClass = 0
+      subList.forEach((s) => {
+        const team = assignments[c.id]?.[s.id] || []
+        if (team.includes(f.id)) {
+          loadInClass += Number(s.periods) || 0
+        }
+      })
+      if (loadInClass > 30) {
+        warnings.push(
+          `Faculty ${f.short} is preset to ${loadInClass} periods in class ${c.id} alone (exceeds 30 periods/week, unschedulable).`
+        )
+      }
+    })
   })
 
   return {
     map,
+    assignments,
+    lockedAssignments,
+    presets,
     added,
     updated,
     duplicates,
     unknown,
+    errors,
+    warnings,
     affectedKeys: Array.from(affectedKeys),
   }
 }

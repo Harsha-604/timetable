@@ -46,6 +46,8 @@ export function makeEmpty() {
     subjects: {}, // key: "CIC-4" -> array of subjects
     assignments: {}, // key: classId "CIC-4-A" -> { [subId]: [facId1, facId2] }
     lockedAssignments: {}, // key: classId -> { [subId]: boolean }
+    subjectFacultyPresets: {}, // key: branchYearKey -> { [subCode]: { all: [], sections: { A: [] } } }
+    importErrors: [],
     timetable: {}, // key: classId -> { [day]: { [pid]: slot } }
     settings: {
       periods: JSON.parse(JSON.stringify(DEFAULT_PERIODS)),
@@ -132,6 +134,8 @@ export function migrateState(state) {
     timetable: migratedTimetable,
     assignments: state.assignments || {},
     lockedAssignments: state.lockedAssignments || {},
+    subjectFacultyPresets: state.subjectFacultyPresets || {},
+    importErrors: state.importErrors || [],
     settings: {
       ...fresh.settings,
       ...state.settings,
@@ -187,6 +191,12 @@ export const useStore = create(
 
           if (targetCount > curCount) {
             const added = []
+            const newAssignments = { ...s.assignments }
+            const newLocked = { ...s.lockedAssignments }
+            const byKey = getBranchYearKey(branch, year)
+            const classSubs = s.subjects[byKey] || []
+            const branchPresets = s.subjectFacultyPresets?.[byKey] || {}
+
             for (let i = curCount; i < targetCount; i++) {
               const sec = sectionLetter(i)
               const id = makeClassId(branch, year, sec)
@@ -205,8 +215,30 @@ export const useStore = create(
                 semester: current[0]?.semester || SEMESTER_MAP[year] || 'III',
                 ay: current[0]?.ay || '2026-27',
               })
+
+              // Apply presets: specific section preset or blank-section preset
+              if (!newAssignments[id]) newAssignments[id] = {}
+              if (!newLocked[id]) newLocked[id] = {}
+
+              classSubs.forEach((sub) => {
+                const p = branchPresets[sub.code]
+                let team = null
+                if (p?.sections?.[sec]) {
+                  team = p.sections[sec]
+                } else if (p?.all && p.all.length > 0) {
+                  team = p.all
+                }
+                if (team && team.length > 0) {
+                  newAssignments[id][sub.id] = team
+                  newLocked[id][sub.id] = true
+                }
+              })
             }
-            return { classes: [...s.classes, ...added] }
+            return {
+              classes: [...s.classes, ...added],
+              assignments: newAssignments,
+              lockedAssignments: newLocked,
+            }
           } else {
             // targetCount < curCount: remove excess sections
             const toKeep = current.slice(0, targetCount)
@@ -329,6 +361,15 @@ export const useStore = create(
         set((s) => ({
           assignments: { ...s.assignments, ...allAssignments },
         })),
+      setLockedAssignments: (locked) =>
+        set((s) => ({
+          lockedAssignments: { ...s.lockedAssignments, ...locked },
+        })),
+      setSubjectFacultyPresets: (presets) =>
+        set((s) => ({
+          subjectFacultyPresets: { ...s.subjectFacultyPresets, ...presets },
+        })),
+      setImportErrors: (errs) => set({ importErrors: Array.isArray(errs) ? errs : [] }),
       toggleLockAssignment: (classId, subjectId) =>
         set((s) => {
           const cur = !!s.lockedAssignments?.[classId]?.[subjectId]

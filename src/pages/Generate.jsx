@@ -1,7 +1,7 @@
 import { useState, useRef, useMemo } from 'react'
 import { useStore } from '../store/useStore'
 import { autoAssignFaculty, generateScheduleAsync } from '../utils/generator'
-import { validateState, isFacultyQualified } from '../utils/validator'
+import { validateState, isFacultyQualified, auditTimetableHardViolations } from '../utils/validator'
 import { getBranchYearKey } from '../utils/helpers'
 
 export default function Generate({ onNavigate }) {
@@ -14,6 +14,8 @@ export default function Generate({ onNavigate }) {
     settings,
     assignments,
     lockedAssignments,
+    subjectFacultyPresets,
+    importErrors,
     timetable,
     setAssignment,
     setAllAssignments,
@@ -35,8 +37,16 @@ export default function Generate({ onNavigate }) {
 
   // Validation report
   const validation = useMemo(() => {
-    return validateState({ classes, faculty, rooms, subjects, settings })
-  }, [classes, faculty, rooms, subjects, settings])
+    return validateState({
+      classes,
+      faculty,
+      rooms,
+      subjects,
+      settings,
+      assignments,
+      importErrors: importErrors || [],
+    })
+  }, [classes, faculty, rooms, subjects, settings, assignments, importErrors])
 
   const selectedClasses = classes.filter((c) => selectedClassIds.includes(c.id))
 
@@ -163,14 +173,28 @@ export default function Generate({ onNavigate }) {
         },
       })
 
+      // Run independent hard violations audit over final timetables
+      const audit = auditTimetableHardViolations({
+        timetables: result.timetables,
+        classes: classesForGen,
+        subjects,
+        faculty,
+        rooms,
+        assignments: filledAssignments,
+        settings,
+        unplaced: result.unplaced,
+      })
+      result.hardViolations = audit.hardViolations
+      result.hardValid = audit.isValid
+
       setAllTimetables(result.timetables)
       setGenReport(result)
       setStatus('Complete!')
 
-      if (result.unplaced.length === 0) {
+      if (audit.hardViolations.length === 0) {
         toast(`Generated timetables with 0 hard violations! (Score: ${result.score})`, 'ok')
       } else {
-        toast(`Generated with ${result.unplaced.length} unplaced blocks`, 'err')
+        toast(`Generated with ${audit.hardViolations.length} hard violations`, 'err')
       }
     } catch (err) {
       toast('Generator error: ' + err.message, 'err')
@@ -362,14 +386,26 @@ export default function Generate({ onNavigate }) {
                             const req = s.facultyReq ?? (s.type === 'Lab' ? 2 : 1)
                             const currentTeam = classAss[s.id] || []
                             const isLocked = !!lockedAssignments[c.id]?.[s.id]
-                            const qualified = faculty.filter((f) =>
-                              isFacultyQualified(f, s, byKey)
+                            const hasExcelPreset = Boolean(
+                              subjectFacultyPresets?.[byKey]?.[s.code]?.sections?.[c.section] ||
+                                subjectFacultyPresets?.[byKey]?.[s.code]?.all
+                            )
+                            const isPresetTeam = hasExcelPreset && currentTeam.length > 0
+                            const availableFaculty = faculty.filter(
+                              (f) => currentTeam.includes(f.id) || isFacultyQualified(f, s, byKey)
                             )
 
                             return (
                               <tr key={s.id}>
                                 <td>
-                                  <b>{s.code || s.name}</b>
+                                  <div style={{ display: 'inline-flex', alignItems: 'center', gap: '.3rem' }}>
+                                    <b>{s.code || s.name}</b>
+                                    {isPresetTeam && (
+                                      <span className="tag green" style={{ fontSize: '.68rem' }}>
+                                        From Excel
+                                      </span>
+                                    )}
+                                  </div>
                                   <span
                                     style={{
                                       display: 'block',
@@ -396,7 +432,7 @@ export default function Generate({ onNavigate }) {
                                 <td style={{ textAlign: 'right' }}>{req}</td>
                                 <td>
                                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.4rem' }}>
-                                    {qualified.map((f) => {
+                                    {availableFaculty.map((f) => {
                                       const isChosen = currentTeam.includes(f.id)
                                       return (
                                         <label
@@ -433,7 +469,7 @@ export default function Generate({ onNavigate }) {
                                         </label>
                                       )
                                     })}
-                                    {qualified.length === 0 && (
+                                    {availableFaculty.length === 0 && (
                                       <span style={{ color: 'var(--red)', fontSize: '.75rem' }}>
                                         No qualified faculty!
                                       </span>
@@ -534,12 +570,12 @@ export default function Generate({ onNavigate }) {
               <div className="card-header">
                 <h3>📊 Scheduling Report</h3>
                 <span
-                  className={`tag ${genReport.unplaced.length === 0 ? 'green' : 'red'}`}
+                  className={`tag ${(genReport.hardViolations || []).length === 0 ? 'green' : 'red'}`}
                   style={{ fontSize: '.8rem' }}
                 >
-                  {genReport.unplaced.length === 0
-                    ? '✓ 0 Hard Violations (All Placed)'
-                    : `⚠️ ${genReport.unplaced.length} Unplaced Blocks`}
+                  {(genReport.hardViolations || []).length === 0
+                    ? '✓ 0 Hard Violations'
+                    : `⚠️ ${(genReport.hardViolations || []).length} Hard Violations`}
                 </span>
                 <span className="tag blue" style={{ marginLeft: '.3rem' }}>
                   Soft Penalty Score: {genReport.score}
@@ -553,28 +589,32 @@ export default function Generate({ onNavigate }) {
                 </button>
               </div>
 
-              {genReport.unplaced.length > 0 && (
+              {(genReport.hardViolations || []).length > 0 && (
                 <div style={{ marginBottom: '1rem' }}>
                   <h4 style={{ color: 'var(--red)', fontSize: '.9rem', marginBottom: '.4rem' }}>
-                    Unplaced Blocks:
+                    Hard Violations ({(genReport.hardViolations || []).length}):
                   </h4>
                   <div className="table-wrap">
                     <table>
                       <thead>
                         <tr>
-                          <th>Class</th>
-                          <th>Subject</th>
-                          <th>Reason</th>
+                          <th>Class / Item</th>
+                          <th>Day &amp; Period</th>
+                          <th>Rule</th>
+                          <th>Details</th>
                         </tr>
                       </thead>
                       <tbody>
-                        {genReport.unplaced.map((u, i) => (
+                        {genReport.hardViolations.map((v, i) => (
                           <tr key={i}>
                             <td>
-                              <b>{u.classId}</b>
+                              <b>{v.classId || v.facId || v.roomId || 'General'}</b>
                             </td>
-                            <td>{u.sub?.code || u.sub?.name}</td>
-                            <td style={{ color: 'var(--red)' }}>{u.reason}</td>
+                            <td>{v.day ? `${v.day} ${v.period || ''}` : '—'}</td>
+                            <td>
+                              <span className="tag red">{v.rule}</span>
+                            </td>
+                            <td style={{ color: 'var(--red)' }}>{v.message}</td>
                           </tr>
                         ))}
                       </tbody>

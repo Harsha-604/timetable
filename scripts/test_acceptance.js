@@ -1,6 +1,8 @@
 import fs from 'fs'
-import { validateState } from '../src/utils/validator.js'
+import * as XLSX from 'xlsx'
+import { validateState, auditTimetableHardViolations } from '../src/utils/validator.js'
 import { autoAssignFaculty, generateScheduleAsync } from '../src/utils/generator.js'
+import { importSubjectsFromFile } from '../src/utils/importer.js'
 
 const cic4Sample = JSON.parse(fs.readFileSync('./src/sample/cic4.json', 'utf-8'))
 
@@ -322,8 +324,330 @@ async function runScaleIteration(seed) {
   return durationMs
 }
 
+// ── 3. TEST SUITES: PRESET FACULTY, OVERRIDES, VALIDATION & REPORT ──
+
+async function testSuite1_ReferenceFacultyMatch() {
+  console.log('\n=== Suite 1: CIC-4-A Reference Faculty Matching ===')
+  const state = {
+    classes: cic4Sample.classes,
+    rooms: cic4Sample.rooms,
+    faculty: cic4Sample.faculty,
+    subjects: cic4Sample.subjects,
+    settings: cic4Sample.settings,
+    timetable: {},
+    assignments: cic4Sample.assignments,
+  }
+
+  const lockedAssignments = {
+    'CIC-4-A': Object.fromEntries(
+      Object.keys(cic4Sample.assignments['CIC-4-A']).map((k) => [k, true])
+    ),
+  }
+
+  const assignments = autoAssignFaculty({
+    classes: state.classes,
+    subjects: state.subjects,
+    faculty: state.faculty,
+    existingAssignments: state.assignments,
+    lockedAssignments,
+  })
+
+  const genResult = await generateScheduleAsync({
+    classes: state.classes,
+    subjects: state.subjects,
+    faculty: state.faculty,
+    rooms: state.rooms,
+    assignments,
+    settings: state.settings,
+    existingTimetables: {},
+    options: { seed: 42, attempts: 200 },
+  })
+
+  if (genResult.unplaced.length > 0) {
+    throw new Error(`Suite 1 has unplaced blocks: ${genResult.unplaced.length}`)
+  }
+
+  const expectedFaculty = {
+    'OE-I:RSE': ['MB'],
+    'PE-V:SQT': ['Dr.MVRJ'],
+    'PE-IV:SPSM': ['AV'],
+    'DMF': ['RT'],
+    'BCT': ['PPP'],
+    'IoTCPS': ['TL'],
+    'ES': ['PS'],
+    'DevOps Lab': ['AV', 'PPP'],
+    'BCT Lab': ['AV', 'PPP', 'RT'],
+    'IoTCPS Lab': ['Dr.MVRJ', 'FA', 'TL'],
+    'CPW-1': ['TL'],
+  }
+
+  const cicSlots = genResult.timetables['CIC-4-A']
+  const facultyMap = Object.fromEntries(state.faculty.map((f) => [f.id, f.short]))
+  let cellCount = 0
+
+  for (const day of ['Mon', 'Tue', 'Wed', 'Thu', 'Fri']) {
+    for (const pid of ['p1', 'p2', 'p3', 'p4', 'p5', 'p6']) {
+      const slot = cicSlots?.[day]?.[pid]
+      if (!slot) continue
+      cellCount++
+      const exp = expectedFaculty[slot.subCode]
+      if (!exp) {
+        throw new Error(`Unexpected subject ${slot.subCode} found in CIC-4-A`)
+      }
+      const actualShorts = (slot.facIds || (slot.facId ? [slot.facId] : []))
+        .map((fid) => facultyMap[fid] || fid)
+        .sort()
+      const expSorted = [...exp].sort()
+      if (actualShorts.join(',') !== expSorted.join(',')) {
+        throw new Error(
+          `Cell ${day} ${pid} (${slot.subCode}): expected faculty ${expSorted.join(', ')}, got ${actualShorts.join(', ')}`
+        )
+      }
+    }
+  }
+
+  if (cellCount !== 30) {
+    throw new Error(`Expected 30 cells in CIC-4-A, got ${cellCount}`)
+  }
+  console.log('Suite 1: PASS (all 30 periods matched preset reference faculty exactly)')
+}
+
+async function testSuite2_AutoAssignBlankWithPresets() {
+  console.log('\n=== Suite 2: Auto-Assign Blank Cells while Preserving Presets ===')
+  const aimlSubs = cic4Sample.subjects['AIML-4']
+  const sDl = aimlSubs.find((s) => s.code === 'DL').id
+  const sNlp = aimlSubs.find((s) => s.code === 'NLP').id
+  const sDlLab = aimlSubs.find((s) => s.code === 'DL Lab').id
+
+  const existingAssignments = {
+    'AIML-4-A': {
+      [sDl]: ['f_ppp'],
+      [sNlp]: ['f_av'],
+      [sDlLab]: ['f_ppp', 'f_sk'],
+    },
+  }
+  const lockedAssignments = {
+    'AIML-4-A': {
+      [sDl]: true,
+      [sNlp]: true,
+      [sDlLab]: true,
+    },
+  }
+
+  const filled = autoAssignFaculty({
+    classes: [cic4Sample.classes.find((c) => c.id === 'AIML-4-A')],
+    subjects: { 'AIML-4': aimlSubs },
+    faculty: cic4Sample.faculty,
+    existingAssignments,
+    lockedAssignments,
+  })
+
+  const aimlAssignments = filled['AIML-4-A']
+
+  // Presets untouched
+  if (aimlAssignments[sDl][0] !== 'f_ppp') throw new Error('Preset DL was overridden')
+  if (aimlAssignments[sNlp][0] !== 'f_av') throw new Error('Preset NLP was overridden')
+  if (aimlAssignments[sDlLab].slice().sort().join(',') !== 'f_ppp,f_sk') {
+    throw new Error('Preset DL Lab was overridden')
+  }
+
+  // Blank subjects auto-assigned
+  for (const s of aimlSubs) {
+    const team = aimlAssignments[s.id]
+    if (!team || team.length === 0) {
+      throw new Error(`Subject ${s.code} was not auto-assigned`)
+    }
+    if (team.length !== s.facultyReq) {
+      throw new Error(
+        `Subject ${s.code} team size ${team.length} does not match facultyReq ${s.facultyReq}`
+      )
+    }
+  }
+
+  console.log('Suite 2: PASS (presets untouched, blank subjects successfully auto-assigned)')
+}
+
+async function testSuite3_SectionOverride() {
+  console.log('\n=== Suite 3: Section Override & Preset Propagation ===')
+  const ws = XLSX.utils.aoa_to_sheet([
+    [
+      'Branch', 'Year', 'Section', 'Subject Code', 'Subject Name',
+      'Type', 'Periods/Week', 'Block Size', 'Faculty', 'Faculty Required',
+      'Lab Room', 'Common Slot Group'
+    ],
+    ['CIC', 4, '', 'BCT', 'Blockchain Tech', 'Theory', 3, 1, 'PPP', 1, '', ''],
+    ['CIC', 4, 'B', 'BCT', 'Blockchain Tech', 'Theory', 3, 1, 'RT', 1, '', ''],
+    ['CIC', 4, '', 'OE-I', 'Open Elective', 'Theory', 3, 1, '', 1, '', '']
+  ])
+  const wb = XLSX.utils.book_new()
+  XLSX.utils.book_append_sheet(wb, ws, 'Subjects')
+  const buf = XLSX.write(wb, { type: 'buffer', bookType: 'xlsx' })
+
+  const faculty = [
+    { id: 'f_ppp', short: 'PPP', name: 'P. Premchand', max: 30 },
+    { id: 'f_rt', short: 'RT', name: 'R. Tejaswi', max: 30 },
+  ]
+  const classes = [
+    { id: 'CIC-4-A', branch: 'CIC', year: 4, section: 'A' },
+    { id: 'CIC-4-B', branch: 'CIC', year: 4, section: 'B' },
+  ]
+
+  const res = await importSubjectsFromFile(buf, { faculty, classes })
+  const bctSub = res.map['CIC-4'].find((s) => s.code === 'BCT')
+
+  // Section A gets PPP (blank row preset)
+  const teamA = res.assignments['CIC-4-A']?.[bctSub.id]
+  if (!teamA || teamA[0] !== 'f_ppp' || !res.lockedAssignments['CIC-4-A']?.[bctSub.id]) {
+    throw new Error(`Section A expected PPP locked, got: ${JSON.stringify(teamA)}`)
+  }
+
+  // Section B gets RT (overridden by Section B row)
+  const teamB = res.assignments['CIC-4-B']?.[bctSub.id]
+  if (!teamB || teamB[0] !== 'f_rt' || !res.lockedAssignments['CIC-4-B']?.[bctSub.id]) {
+    throw new Error(`Section B expected RT locked, got: ${JSON.stringify(teamB)}`)
+  }
+
+  // Preset structure preserved for new sections
+  const bctPreset = res.presets['CIC-4']?.['BCT']
+  if (!bctPreset || bctPreset.all[0] !== 'f_ppp' || bctPreset.sections?.['B']?.[0] !== 'f_rt') {
+    throw new Error(`Presets not correctly registered: ${JSON.stringify(bctPreset)}`)
+  }
+
+  console.log('Suite 3: PASS (Section B overrode blank row, Section A got blank row preset, presets preserved for new sections)')
+}
+
+async function testSuite4_ValidationErrors() {
+  console.log('\n=== Suite 4: Validation Errors Block Generation ===')
+  const faculty = [
+    { id: 'f_ppp', short: 'PPP', name: 'P. Premchand', max: 3 },
+  ]
+  const classes = [
+    { id: 'CIC-4-A', branch: 'CIC', year: 4, section: 'A' },
+    { id: 'CIC-4-B', branch: 'CIC', year: 4, section: 'B' },
+  ]
+
+  // 1. Unknown faculty short name
+  const wsUnknown = XLSX.utils.aoa_to_sheet([
+    ['Branch', 'Year', 'Section', 'Subject Code', 'Subject Name', 'Type', 'Periods/Week', 'Block Size', 'Faculty', 'Faculty Required', 'Lab Room', 'Common Slot Group'],
+    ['CIC', 4, '', 'BCT', 'Blockchain Tech', 'Theory', 3, 1, 'NONEXISTENT', 1, '', '']
+  ])
+  const wbUnknown = XLSX.utils.book_new()
+  XLSX.utils.book_append_sheet(wbUnknown, wsUnknown, 'Subjects')
+  const bufUnknown = XLSX.write(wbUnknown, { type: 'buffer', bookType: 'xlsx' })
+  const resUnknown = await importSubjectsFromFile(bufUnknown, { faculty, classes })
+  if (!resUnknown.errors.some((e) => e.includes('NONEXISTENT'))) {
+    throw new Error('Expected unknown faculty error for NONEXISTENT')
+  }
+
+  // 2. Specific Section named that doesn\'t exist in Settings
+  const wsSec = XLSX.utils.aoa_to_sheet([
+    ['Branch', 'Year', 'Section', 'Subject Code', 'Subject Name', 'Type', 'Periods/Week', 'Block Size', 'Faculty', 'Faculty Required', 'Lab Room', 'Common Slot Group'],
+    ['CIC', 4, 'Z', 'BCT', 'Blockchain Tech', 'Theory', 3, 1, 'PPP', 1, '', '']
+  ])
+  const wbSec = XLSX.utils.book_new()
+  XLSX.utils.book_append_sheet(wbSec, wsSec, 'Subjects')
+  const bufSec = XLSX.write(wbSec, { type: 'buffer', bookType: 'xlsx' })
+  const resSec = await importSubjectsFromFile(bufSec, { faculty, classes })
+  if (!resSec.errors.some((e) => e.includes('Section "Z" does not exist'))) {
+    throw new Error('Expected missing section error for Section Z')
+  }
+
+  // 3. Preset overload
+  const wsOver = XLSX.utils.aoa_to_sheet([
+    ['Branch', 'Year', 'Section', 'Subject Code', 'Subject Name', 'Type', 'Periods/Week', 'Block Size', 'Faculty', 'Faculty Required', 'Lab Room', 'Common Slot Group'],
+    ['CIC', 4, '', 'BCT', 'Blockchain Tech', 'Theory', 3, 1, 'PPP', 1, '', '']
+  ])
+  const wbOver = XLSX.utils.book_new()
+  XLSX.utils.book_append_sheet(wbOver, wsOver, 'Subjects')
+  const bufOver = XLSX.write(wbOver, { type: 'buffer', bookType: 'xlsx' })
+  const resOver = await importSubjectsFromFile(bufOver, { faculty, classes })
+  if (!resOver.errors.some((e) => e.includes('preset load (6 periods/wk) exceeds Max Periods/Week (3)'))) {
+    throw new Error('Expected preset overload error for PPP')
+  }
+
+  const valOver = validateState({
+    classes,
+    rooms: [{ id: 'CR-101', name: 'CR-101', type: 'Classroom' }],
+    faculty,
+    subjects: resOver.map,
+    assignments: resOver.assignments,
+    settings: cic4Sample.settings,
+  })
+  if (valOver.isValid) {
+    throw new Error('validateState should have failed on preset overload')
+  }
+
+  console.log('Suite 4: PASS (unknown short name, missing section, preset overload all caught and block generation)')
+}
+
+async function testSuite5_ReportCheck() {
+  console.log('\n=== Suite 5: Scheduling Report Invariant Audit ===')
+  const state = {
+    classes: cic4Sample.classes,
+    rooms: cic4Sample.rooms,
+    faculty: cic4Sample.faculty,
+    subjects: cic4Sample.subjects,
+    settings: cic4Sample.settings,
+    timetable: {},
+    assignments: cic4Sample.assignments,
+  }
+
+  const genResult = await generateScheduleAsync({
+    classes: state.classes,
+    subjects: state.subjects,
+    faculty: state.faculty,
+    rooms: state.rooms,
+    assignments: state.assignments,
+    settings: state.settings,
+    existingTimetables: {},
+    options: { seed: 10, attempts: 200 },
+  })
+
+  // Clean schedule: 0 hard violations
+  const cleanAudit = auditTimetableHardViolations(genResult.timetables, state)
+  if (!cleanAudit.isValid || cleanAudit.hardViolations.length !== 0) {
+    throw new Error(
+      `Clean schedule produced ${cleanAudit.hardViolations.length} hard violations: ` +
+        cleanAudit.hardViolations.map((v) => v.message).join('; ')
+    )
+  }
+
+  // Corrupt 1: Missing faculty
+  const corrupt1 = JSON.parse(JSON.stringify(genResult.timetables))
+  corrupt1['CIC-4-A']['Mon']['p1'].facIds = []
+  corrupt1['CIC-4-A']['Mon']['p1'].facId = ''
+  const audit1 = auditTimetableHardViolations(corrupt1, state)
+  if (audit1.isValid || !audit1.hardViolations.some((v) => v.type === 'FEWER_FACULTY' || v.type === 'NO_FACULTY')) {
+    throw new Error('Report check did not catch missing faculty corruption')
+  }
+
+  // Corrupt 2: Room clash
+  const corrupt2 = JSON.parse(JSON.stringify(genResult.timetables))
+  corrupt2['AIML-4-A']['Mon']['p1'].roomId = corrupt2['CIC-4-A']['Mon']['p1'].roomId
+  const audit2 = auditTimetableHardViolations(corrupt2, state)
+  if (audit2.isValid || !audit2.hardViolations.some((v) => v.type === 'ROOM_CLASH')) {
+    throw new Error('Report check did not catch room clash corruption')
+  }
+
+  // Corrupt 3: Faculty clash
+  const corrupt3 = JSON.parse(JSON.stringify(genResult.timetables))
+  corrupt3['AIML-4-A']['Tue']['p2'].facIds = corrupt3['CIC-4-A']['Tue']['p2'].facIds
+  const audit3 = auditTimetableHardViolations(corrupt3, state)
+  if (audit3.isValid || !audit3.hardViolations.some((v) => v.type === 'FACULTY_CLASH')) {
+    throw new Error('Report check did not catch faculty clash corruption')
+  }
+
+  console.log('Suite 5: PASS (clean schedule has 0 violations; all corruptions detected)')
+}
+
 async function main() {
-  console.log('=== RUNNING ACCEPTANCE TEST (20 runs, seeds 1..20) ===')
+  await testSuite1_ReferenceFacultyMatch()
+  await testSuite2_AutoAssignBlankWithPresets()
+  await testSuite3_SectionOverride()
+  await testSuite4_ValidationErrors()
+  await testSuite5_ReportCheck()
+
+  console.log('\n=== RUNNING ACCEPTANCE TEST (20 runs, seeds 1..20) ===')
   let acceptancePass = 0
   const totalAcceptance = 20
 

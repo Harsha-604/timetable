@@ -29,6 +29,11 @@ const PAGES = {
 
 export default function App() {
   const [page, setPage] = useState('home')
+  const [navClassId, setNavClassId] = useState(null)
+  const navigate = (p, classId = null) => {
+    setNavClassId(classId)
+    setPage(p)
+  }
   const [isEditor, setIsEditor] = useState(() => window.location.hash.startsWith('#edit'))
   const loadProject = useStore((s) => s.loadProject)
   const seeded = useRef(false)
@@ -83,7 +88,7 @@ export default function App() {
 
   return (
     <div className="app">
-      <Sidebar currentPage={page} onNavigate={setPage} onOpenViewer={openViewer} />
+      <Sidebar currentPage={page} onNavigate={navigate} onOpenViewer={openViewer} />
       <main className="main" id="mainContent">
         <div
           style={{
@@ -96,7 +101,7 @@ export default function App() {
             👁️ Switch to Read-Only Public Viewer
           </button>
         </div>
-        <Page onNavigate={setPage} />
+        <Page key={page + (navClassId || '')} onNavigate={navigate} initialClassId={navClassId} />
       </main>
       <Toast />
     </div>

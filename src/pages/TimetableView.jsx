@@ -4,7 +4,7 @@ import { BRANCHES, YEARS, DAYS_ORDER } from '../utils/constants'
 import { fmtTime, hue, getBranchYearKey } from '../utils/helpers'
 import { generateScheduleAsync } from '../utils/generator'
 
-export default function TimetableView({ onNavigate }) {
+export default function TimetableView({ onNavigate, initialClassId }) {
   const {
     classes,
     faculty,
@@ -21,7 +21,7 @@ export default function TimetableView({ onNavigate }) {
   } = useStore()
 
   const [selectedClassId, setSelectedClassId] = useState(
-    () => classes[0]?.id || 'CIC-4-A'
+    () => initialClassId || classes[0]?.id || 'CIC-4-A'
   )
   const [slotModal, setSlotModal] = useState(null) // { day, pid }
   const [slotForm, setSlotForm] = useState({})
