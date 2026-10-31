@@ -35,6 +35,8 @@ export default function App() {
     setPage(p)
   }
   const [isEditor, setIsEditor] = useState(() => window.location.hash.startsWith('#edit'))
+  const theme = useStore((s) => s.theme)
+  const toggleTheme = useStore((s) => s.toggleTheme)
   const loadProject = useStore((s) => s.loadProject)
   const seeded = useRef(false)
 
@@ -94,9 +96,20 @@ export default function App() {
           style={{
             display: 'flex',
             justifyContent: 'flex-end',
+            alignItems: 'center',
+            gap: '1.25rem',
             marginBottom: '.75rem',
           }}
         >
+          <label className="theme-switch" title="Toggle dark mode">
+            <span>Dark mode</span>
+            <input
+              type="checkbox"
+              checked={theme === 'dark'}
+              onChange={toggleTheme}
+            />
+            <span className="theme-switch-slider" />
+          </label>
           <button className="btn btn-ghost btn-sm" onClick={openViewer}>
             Switch to Read-Only Public Viewer
           </button>

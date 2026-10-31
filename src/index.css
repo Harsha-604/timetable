@@ -304,6 +304,54 @@ input:not([type=checkbox]):focus, select:focus, textarea:focus { border-color: v
 }
 .spacer { flex: 1; }
 
+/* ── Theme Switch ── */
+.theme-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--muted);
+  cursor: pointer;
+  user-select: none;
+}
+.theme-switch input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+.theme-switch-slider {
+  position: relative;
+  display: inline-block;
+  width: 32px;
+  height: 18px;
+  background: var(--surface2);
+  border: 1px solid var(--border2);
+  border-radius: 99px;
+  transition: all var(--transition);
+}
+.theme-switch-slider::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--muted);
+  transition: all var(--transition);
+}
+.theme-switch input:checked + .theme-switch-slider {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.theme-switch input:checked + .theme-switch-slider::after {
+  transform: translateX(14px);
+  background: #ffffff;
+}
+
 /* ── Progress ── */
 .progress-bar { height: 6px; background: var(--surface2); border: 1px solid var(--border); border-radius: 99px; overflow: hidden; }
 .progress-bar i { display: block; height: 100%; background: var(--accent); border-radius: 99px; transition: width .3s ease; }

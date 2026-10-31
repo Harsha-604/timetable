@@ -227,13 +227,15 @@ export default function PublicViewer({ onOpenEditor }) {
             </div>
           )}
 
-          <button
-            className="btn btn-secondary btn-sm"
-            onClick={toggleTheme}
-            title="Toggle dark / light mode"
-          >
-            Theme: {theme === 'dark' ? 'Dark' : 'Light'}
-          </button>
+          <label className="theme-switch" title="Toggle dark mode" style={{ marginRight: '.25rem' }}>
+            <span>Dark mode</span>
+            <input
+              type="checkbox"
+              checked={theme === 'dark'}
+              onChange={toggleTheme}
+            />
+            <span className="theme-switch-slider" />
+          </label>
 
           <button
             className="btn btn-secondary btn-sm"
