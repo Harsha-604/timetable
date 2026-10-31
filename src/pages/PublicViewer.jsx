@@ -14,6 +14,25 @@ export default function PublicViewer({ onOpenEditor }) {
   const [selectedFacId, setSelectedFacId] = useState('')
   const [selectedRoomId, setSelectedRoomId] = useState('')
 
+  const [theme, setTheme] = useState(() => {
+    if (typeof window === 'undefined') return 'light'
+    return (
+      localStorage.getItem('timetable_theme') ||
+      (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        ? 'dark'
+        : 'light')
+    )
+  })
+
+  const toggleTheme = () => {
+    const next = theme === 'dark' ? 'light' : 'dark'
+    setTheme(next)
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('timetable_theme', next)
+      document.documentElement.setAttribute('data-theme', next)
+    }
+  }
+
   // Fetch data.json from BASE_URL on mount - holds in component state only, never touches localStorage
   useEffect(() => {
     setLoading(true)
@@ -207,6 +226,14 @@ export default function PublicViewer({ onOpenEditor }) {
               </button>
             </div>
           )}
+
+          <button
+            className="btn btn-secondary btn-sm"
+            onClick={toggleTheme}
+            title="Toggle dark / light mode"
+          >
+            Theme: {theme === 'dark' ? 'Dark' : 'Light'}
+          </button>
 
           <button
             className="btn btn-secondary btn-sm"
@@ -428,7 +455,7 @@ export default function PublicViewer({ onOpenEditor }) {
                                   colSpan={slot.blockSize || 1}
                                   className={`tt-slot filled${isLab ? ' lab' : ''}`}
                                   style={{
-                                    background: isLab ? 'var(--surface2)' : '#ffffff',
+                                    background: isLab ? 'var(--surface2)' : 'var(--surface)',
                                   }}
                                 >
                                   <b

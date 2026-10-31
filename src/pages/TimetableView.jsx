@@ -457,7 +457,7 @@ export default function TimetableView({ onNavigate, initialClassId }) {
                                   ? 'var(--dangerbg)'
                                   : isLab
                                   ? 'var(--surface2)'
-                                  : '#ffffff',
+                                  : 'var(--surface)',
                                 position: 'relative',
                                 cursor: 'grab',
                               }}

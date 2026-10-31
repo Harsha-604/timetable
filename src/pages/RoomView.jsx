@@ -120,7 +120,7 @@ export default function RoomView() {
                             key={p.id}
                             className={`tt-slot filled${isClash ? ' clash' : ''}`}
                             style={{
-                              background: isClash ? 'var(--dangerbg)' : '#ffffff',
+                              background: isClash ? 'var(--dangerbg)' : 'var(--surface)',
                               border: isClash ? '2px solid var(--danger)' : undefined,
                             }}
                           >

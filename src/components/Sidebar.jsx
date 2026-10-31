@@ -17,7 +17,7 @@ const NAV = [
 ]
 
 export default function Sidebar({ currentPage, onNavigate, onOpenViewer }) {
-  const { faculty, rooms, subjects, saveProject, loadProject, resetAll, toast } = useStore()
+  const { faculty, rooms, subjects, saveProject, loadProject, resetAll, toast, theme, toggleTheme } = useStore()
   const totalSubs = Object.values(subjects).reduce((a, b) => a + b.length, 0)
 
   const badge = (key) => {
@@ -64,6 +64,13 @@ export default function Sidebar({ currentPage, onNavigate, onOpenViewer }) {
       </nav>
 
       <div className="sidebar-footer">
+        <button
+          className="btn btn-ghost btn-sm"
+          style={{ width: '100%', marginBottom: '.4rem' }}
+          onClick={toggleTheme}
+        >
+          Theme: {theme === 'dark' ? 'Dark' : 'Light'}
+        </button>
         <button
           className="btn btn-ghost btn-sm"
           style={{ width: '100%', marginBottom: '.4rem', color: 'var(--accent)' }}

@@ -153,6 +153,24 @@ export const useStore = create(
     (set, get) => ({
       ...makeEmpty(),
 
+      /* ── Theme ── */
+      theme:
+        typeof window !== 'undefined'
+          ? localStorage.getItem('timetable_theme') ||
+            (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+              ? 'dark'
+              : 'light')
+          : 'light',
+      toggleTheme: () => {
+        const cur = get().theme || 'light'
+        const next = cur === 'dark' ? 'light' : 'dark'
+        if (typeof window !== 'undefined') {
+          localStorage.setItem('timetable_theme', next)
+          document.documentElement.setAttribute('data-theme', next)
+        }
+        set({ theme: next })
+      },
+
       /* ── Classes ── */
       addClass: (cls) =>
         set((s) => ({
