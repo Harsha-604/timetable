@@ -86,16 +86,44 @@ Columns:
 
 ## 4. Publishing to GitHub Pages
 
-Timetable data edited in the browser is saved locally in `localStorage`. To make the generated schedule permanently visible to students and faculty on the public site:
+Timetable data edited in the browser is saved locally in `localStorage`. To make the generated schedule permanently visible to students and faculty on the public site, you can publish directly from the editor or use the manual fallback.
 
-1. In the sidebar footer, click **💾 Save Project** to download the project state as `data.json`.
-2. Place or commit `data.json` into the `public/` folder of the repository:
+### One-Click Direct Publishing (Recommended)
+
+1. **Create a Fine-Grained Personal Access Token (PAT):**
+   - Go to [github.com/settings/personal-access-tokens](https://github.com/settings/personal-access-tokens).
+   - Click **Generate new token**.
+   - **Repository access:** Choose *Only select repositories* → select `timetable`.
+   - **Permissions:** Under *Repository permissions*, set **Contents** to **Read and write**.
+   - **Expiration:** Choose 90 days.
+   - Click **Generate token** and copy the resulting string (`github_pat_...`).
+   *(Security note: Store the token only on the coordinator's personal computer. The app stores it strictly in `localStorage` under `tt_publish_token` and never includes it in state exports or payloads.)*
+
+2. **Configure in Settings:**
+   - In the Coordinator Editor, navigate to **Settings → Publishing**.
+   - Verify the Repository Owner (`Harsha-604`), Repository Name (`timetable`), and Branch (`master`).
+   - Paste the token into the **GitHub token** field.
+   - Click **Test connection**. It should display `Connected, can publish`.
+
+3. **Publish with One Click:**
+   - In the sidebar footer or on the **Generate** page, click the primary **Publish** button.
+   - The coordinator pre-check verifies that a token exists, all classes have generated schedules, and zero hard conflicts remain.
+   - Confirm the prompt (`Classes`, `Faculty`, `Last Generated`).
+   - The app commits `public/data.json` directly to the repository via the GitHub Contents API with UTF-8 safe encoding and automatic SHA conflict retry.
+   - Deployment status displays `Deploying…` and polls the GitHub Actions workflow run until it transitions to `Live` (or reports failure with a direct link to Actions logs).
+
+### Manual Publishing Fallback
+
+If you prefer not to use an access token:
+1. In the sidebar footer, click **Save Project** to download `data.json`.
+2. Commit `data.json` to the `public/` directory in the repository:
    ```bash
    git add public/data.json
    git commit -m "Publish updated timetables"
    git push origin master
    ```
-3. The GitHub Actions Deploy workflow (`.github/workflows/deploy.yml`) will automatically trigger, build the application, and publish the site to GitHub Pages.
-4. **Public vs. Editor Routes:**
-   - The default URL (`/` or `/timetable/`) opens the clean, read-only viewer for students and faculty with search by faculty name.
-   - The coordinator editor is accessible at `#edit` (e.g. `/timetable/#edit`) or by clicking **⚙️ Edit Mode** in the top navigation.
+3. GitHub Actions (`.github/workflows/deploy.yml`) will build and deploy the updated schedule to GitHub Pages.
+
+### Public vs. Editor Routes
+- The default URL (`/` or `/timetable/`) opens the clean, read-only viewer for students and faculty with search by faculty or room name.
+- The coordinator editor is accessible at `#edit` (e.g. `/timetable/#edit`) or by clicking **Coordinator Login / Edit** in the top navigation.

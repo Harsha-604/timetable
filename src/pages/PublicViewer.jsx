@@ -190,7 +190,7 @@ export default function PublicViewer({ onOpenEditor }) {
             Official Published Schedule · A.Y. 2026-27
             {savedAt && (
               <span style={{ marginLeft: '.75rem', color: 'var(--muted)' }}>
-                ● Last published: {new Date(savedAt).toLocaleString()}
+                ● Last updated: {new Date(savedAt).toLocaleString()}
               </span>
             )}
           </div>
@@ -257,17 +257,9 @@ export default function PublicViewer({ onOpenEditor }) {
       {/* Empty / Not Published state */}
       {!loading && (!data || classes.length === 0) && (
         <div className="card" style={{ textAlign: 'center', padding: '4rem 1.5rem' }}>
-          
           <h2 style={{ fontSize: '1.4rem', fontWeight: 700, marginBottom: '.5rem' }}>
-            Timetable not published yet
+            The timetable has not been published yet.
           </h2>
-          <p style={{ color: 'var(--muted)', maxWidth: 500, margin: '0 auto 1.5rem' }}>
-            The coordinator has not published a finalized schedule yet. If you are the coordinator,
-            go to the editor to generate and publish data.json.
-          </p>
-          <button className="btn btn-primary" onClick={onOpenEditor}>
-            Go to Coordinator Editor (#edit)
-          </button>
         </div>
       )}
 

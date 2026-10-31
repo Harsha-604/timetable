@@ -1,5 +1,6 @@
 import { useStore } from '../store/useStore'
 import { BRANCHES, YEARS } from '../utils/constants'
+import { usePublish } from '../utils/usePublish'
 
 const NAV = [
   { view: 'home',         label: 'Dashboard' },
@@ -18,6 +19,7 @@ const NAV = [
 
 export default function Sidebar({ currentPage, onNavigate, onOpenViewer }) {
   const { faculty, rooms, subjects, saveProject, loadProject, resetAll, toast } = useStore()
+  const { publishing, deployStatus, handlePublish } = usePublish({ onNavigate })
   const totalSubs = Object.values(subjects).reduce((a, b) => a + b.length, 0)
 
   const badge = (key) => {
@@ -64,6 +66,41 @@ export default function Sidebar({ currentPage, onNavigate, onOpenViewer }) {
       </nav>
 
       <div className="sidebar-footer">
+        <button
+          className="btn btn-primary btn-sm"
+          style={{ width: '100%', marginBottom: '.4rem' }}
+          disabled={publishing}
+          onClick={handlePublish}
+        >
+          {publishing ? 'Publishing…' : 'Publish'}
+        </button>
+
+        {deployStatus && (
+          <div
+            style={{
+              marginBottom: '.4rem',
+              fontSize: '.75rem',
+              textAlign: 'center',
+              lineHeight: 1.3,
+            }}
+          >
+            {deployStatus.state === 'failed' ? (
+              <a
+                href={deployStatus.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: 'var(--danger)', textDecoration: 'underline' }}
+              >
+                Deploy failed, see Actions
+              </a>
+            ) : deployStatus.state === 'live' ? (
+              <span style={{ color: 'var(--ink)', fontWeight: 600 }}>Live</span>
+            ) : (
+              <span style={{ color: 'var(--muted)' }}>Deploying…</span>
+            )}
+          </div>
+        )}
+
         <button
           className="btn btn-ghost btn-sm"
           style={{ width: '100%', marginBottom: '.4rem', color: 'var(--accent)' }}

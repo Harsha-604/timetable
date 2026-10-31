@@ -3,6 +3,14 @@ import * as XLSX from 'xlsx'
 import { validateState, auditTimetableHardViolations } from '../src/utils/validator.js'
 import { autoAssignFaculty, generateScheduleAsync } from '../src/utils/generator.js'
 import { importSubjectsFromFile } from '../src/utils/importer.js'
+import {
+  toBase64Utf8,
+  fromBase64Utf8,
+  publish,
+  buildProjectPayload,
+  setStoredToken,
+  clearStoredToken,
+} from '../src/utils/publisher.js'
 
 const cic4Sample = JSON.parse(fs.readFileSync('./src/sample/cic4.json', 'utf-8'))
 
@@ -640,12 +648,216 @@ async function testSuite5_ReportCheck() {
   console.log('Suite 5: PASS (clean schedule has 0 violations; all corruptions detected)')
 }
 
+async function testSuite6_PublisherTests() {
+  console.log('\n--- Running Suite 6: Publisher Tests ---')
+
+  // 1. Base64 helper round-trips a JSON string containing non-ASCII text ("Dr. Rāmā – తెలుగు")
+  const nonAsciiSample = {
+    faculty: 'Dr. Rāmā – తెలుగు',
+    unicodeCheck: 'Greek: Ω ≈ ∑; CJK: 日本語, 汉字; Accents: àéîöñç',
+  }
+  const serialized = JSON.stringify(nonAsciiSample)
+  const b64 = toBase64Utf8(serialized)
+  const decoded = fromBase64Utf8(b64)
+  if (decoded !== serialized) {
+    throw new Error('Base64 round-trip failed to match raw string')
+  }
+  if (JSON.parse(decoded).faculty !== 'Dr. Rāmā – తెలుగు') {
+    throw new Error('Base64 round-trip corrupted non-ASCII characters')
+  }
+
+  // 2. publish() sends GET then PUT to correct URLs with sha, branch, and Auth header; PUT body content decodes back to exact JSON
+  const calls = []
+  const originalFetch = global.fetch
+  global.fetch = async (url, options = {}) => {
+    calls.push({ url, options })
+    if (options.method === 'GET') {
+      return {
+        status: 200,
+        ok: true,
+        json: async () => ({ sha: 'sha-existing-12345' }),
+      }
+    }
+    if (options.method === 'PUT') {
+      return {
+        status: 200,
+        ok: true,
+        json: async () => ({ content: { sha: 'sha-new-67890' } }),
+      }
+    }
+    throw new Error('Unexpected method ' + options.method)
+  }
+
+  const mockProject = {
+    savedAt: '2026-11-01T00:00:00.000Z',
+    classes: [{ id: 'CIC-4-A' }],
+    faculty: [{ name: 'Dr. Rāmā – తెలుగు' }],
+  }
+
+  await publish({
+    owner: 'Harsha-604',
+    repo: 'timetable',
+    branch: 'master',
+    token: 'test-token-secret-123',
+    projectData: mockProject,
+    message: 'publish timetable 2026-11-01 12:00',
+  })
+
+  if (calls.length !== 2) throw new Error(`Expected 2 HTTP calls, got ${calls.length}`)
+  const [getCall, putCall] = calls
+  if (
+    getCall.url !==
+    'https://api.github.com/repos/Harsha-604/timetable/contents/public/data.json?ref=master'
+  ) {
+    throw new Error(`Incorrect GET URL: ${getCall.url}`)
+  }
+  if (getCall.options.headers?.Authorization !== 'Bearer test-token-secret-123') {
+    throw new Error('Missing or wrong Authorization on GET')
+  }
+
+  if (
+    putCall.url !== 'https://api.github.com/repos/Harsha-604/timetable/contents/public/data.json'
+  ) {
+    throw new Error(`Incorrect PUT URL: ${putCall.url}`)
+  }
+  if (putCall.options.headers?.Authorization !== 'Bearer test-token-secret-123') {
+    throw new Error('Missing or wrong Authorization on PUT')
+  }
+  const putBody = JSON.parse(putCall.options.body)
+  if (putBody.sha !== 'sha-existing-12345') {
+    throw new Error(`PUT body sha mismatch: expected sha-existing-12345, got ${putBody.sha}`)
+  }
+  if (putBody.branch !== 'master') {
+    throw new Error(`PUT body branch mismatch: expected master, got ${putBody.branch}`)
+  }
+  const decodedPutContent = fromBase64Utf8(putBody.content)
+  if (decodedPutContent !== JSON.stringify(mockProject, null, 2)) {
+    throw new Error('PUT body content does not decode back to exact JSON')
+  }
+
+  // 3. 404 on GET → PUT without sha
+  calls.length = 0
+  global.fetch = async (url, options = {}) => {
+    calls.push({ url, options })
+    if (options.method === 'GET') {
+      return {
+        status: 404,
+        ok: false,
+        json: async () => ({ message: 'Not Found' }),
+      }
+    }
+    if (options.method === 'PUT') {
+      return {
+        status: 201,
+        ok: true,
+        json: async () => ({ content: { sha: 'sha-created-abc' } }),
+      }
+    }
+  }
+
+  await publish({
+    owner: 'Harsha-604',
+    repo: 'timetable',
+    branch: 'master',
+    token: 'test-token-secret-123',
+    projectData: mockProject,
+  })
+
+  const putBody404 = JSON.parse(calls[1].options.body)
+  if ('sha' in putBody404 && putBody404.sha !== undefined) {
+    throw new Error('PUT after 404 should not include sha')
+  }
+
+  // 4. 409 on first PUT → re-GET and second PUT with new sha
+  calls.length = 0
+  let putCount = 0
+  let getCount = 0
+  global.fetch = async (url, options = {}) => {
+    calls.push({ url, options })
+    if (options.method === 'GET') {
+      getCount++
+      return {
+        status: 200,
+        ok: true,
+        json: async () => ({ sha: getCount === 1 ? 'sha-initial' : 'sha-refetched-after-409' }),
+      }
+    }
+    if (options.method === 'PUT') {
+      putCount++
+      if (putCount === 1) {
+        return {
+          status: 409,
+          ok: false,
+          json: async () => ({ message: 'Conflict: sha mismatch' }),
+        }
+      }
+      return {
+        status: 200,
+        ok: true,
+        json: async () => ({ content: { sha: 'sha-successful-put' } }),
+      }
+    }
+  }
+
+  await publish({
+    owner: 'Harsha-604',
+    repo: 'timetable',
+    branch: 'master',
+    token: 'test-token-secret-123',
+    projectData: mockProject,
+  })
+
+  if (calls.length !== 4) {
+    throw new Error(`Expected 4 calls on 409 retry, got ${calls.length}`)
+  }
+  const secondPutBody = JSON.parse(calls[3].options.body)
+  if (secondPutBody.sha !== 'sha-refetched-after-409') {
+    throw new Error(`Second PUT did not use re-fetched sha: got ${secondPutBody.sha}`)
+  }
+  global.fetch = originalFetch
+
+  // 5. The token never appears in the object returned by the Save Project builder
+  setStoredToken('super-secret-pat-token-999')
+  const mockState = {
+    classes: [{ id: 'CIC-4-A' }],
+    faculty: [{ id: 'f1', name: 'Dr. Test' }],
+    rooms: [],
+    subjects: {},
+    assignments: {},
+    lockedAssignments: {},
+    subjectFacultyPresets: {},
+    timetable: {},
+    settings: {
+      publishing: {
+        owner: 'Harsha-604',
+        repo: 'timetable',
+        branch: 'master',
+        token: 'super-secret-pat-token-999', // should be scrubbed
+      },
+      periods: [],
+    },
+  }
+
+  const payload = buildProjectPayload(mockState)
+  const payloadStr = JSON.stringify(payload)
+  if (payloadStr.includes('super-secret-pat-token-999')) {
+    throw new Error('Token leaked into object returned by buildProjectPayload')
+  }
+  if (payload.settings?.publishing?.token) {
+    throw new Error('Token property exists in settings.publishing of payload')
+  }
+  clearStoredToken()
+
+  console.log('Suite 6: PASS (Base64 non-ASCII roundtrip, GET/PUT flow, 404, 409 retry, token security)')
+}
+
 async function main() {
   await testSuite1_ReferenceFacultyMatch()
   await testSuite2_AutoAssignBlankWithPresets()
   await testSuite3_SectionOverride()
   await testSuite4_ValidationErrors()
   await testSuite5_ReportCheck()
+  await testSuite6_PublisherTests()
 
   console.log('\n=== RUNNING ACCEPTANCE TEST (20 runs, seeds 1..20) ===')
   let acceptancePass = 0

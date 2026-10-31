@@ -10,6 +10,21 @@ export default function Toast() {
       key={_toast.id}
     >
       {_toast.msg}
+      {_toast.url && (
+        <a
+          href={_toast.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            marginLeft: '.5rem',
+            color: 'inherit',
+            textDecoration: 'underline',
+            fontWeight: 600,
+          }}
+        >
+          View Actions
+        </a>
+      )}
     </div>
   )
 }

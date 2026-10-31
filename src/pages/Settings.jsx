@@ -2,6 +2,12 @@ import { useState } from 'react'
 import { useStore } from '../store/useStore'
 import { BRANCHES, YEARS, DAYS_ORDER, DEFAULT_PERIODS, DEFAULT_LAB_WINDOWS } from '../utils/constants'
 import { uid, sectionLetter } from '../utils/helpers'
+import {
+  getStoredToken,
+  setStoredToken,
+  clearStoredToken,
+  testGitHubConnection,
+} from '../utils/publisher'
 import cic4Sample from '../sample/cic4.json'
 
 export default function Settings() {
@@ -15,6 +21,7 @@ export default function Settings() {
     setPeriods,
     resetPeriods,
     setLabWindows,
+    updatePublishingSettings,
     loadProject,
     toast,
   } = useStore()
@@ -23,6 +30,20 @@ export default function Settings() {
   const [labWindows, setLabWindowsState] = useState(() => JSON.parse(JSON.stringify(settings.labWindows || DEFAULT_LAB_WINDOWS)))
   const [filterBranch, setFilterBranch] = useState('ALL')
   const [filterYear, setFilterYear] = useState('ALL')
+
+  const [pubOwner, setPubOwner] = useState(
+    () => settings.publishing?.owner || 'Harsha-604'
+  )
+  const [pubRepo, setPubRepo] = useState(
+    () => settings.publishing?.repo || 'timetable'
+  )
+  const [pubBranch, setPubBranch] = useState(
+    () => settings.publishing?.branch || 'master'
+  )
+  const [pubToken, setPubToken] = useState(() => getStoredToken())
+  const [showToken, setShowToken] = useState(false)
+  const [testing, setTesting] = useState(false)
+  const [testStatus, setTestStatus] = useState(null)
 
   // Classroom options for home classroom
   const classrooms = rooms.filter((r) => r.type === 'Classroom' || !r.type)
@@ -651,6 +672,160 @@ export default function Settings() {
           <button className="btn btn-ghost" onClick={doResetPeriods}>
             Reset to Default
           </button>
+        </div>
+      </div>
+
+      {/* ── Publishing Section ── */}
+      <div className="card" style={{ marginBottom: '1.5rem' }}>
+        <h3 style={{ marginBottom: '.25rem' }}>Publishing</h3>
+        <p style={{ color: 'var(--muted)', fontSize: '.84rem', marginBottom: '1rem' }}>
+          Configure repository settings and GitHub access token to publish timetables directly to the public viewer.
+        </p>
+
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+            gap: '1rem',
+            marginBottom: '1rem',
+          }}
+        >
+          <div>
+            <label style={{ display: 'block', fontSize: '.8rem', fontWeight: 600, marginBottom: '.3rem' }}>
+              Repository owner
+            </label>
+            <input
+              type="text"
+              value={pubOwner}
+              onChange={(e) => {
+                const val = e.target.value
+                setPubOwner(val)
+                updatePublishingSettings({ owner: val })
+              }}
+              placeholder="Harsha-604"
+              style={{ width: '100%' }}
+            />
+          </div>
+
+          <div>
+            <label style={{ display: 'block', fontSize: '.8rem', fontWeight: 600, marginBottom: '.3rem' }}>
+              Repository name
+            </label>
+            <input
+              type="text"
+              value={pubRepo}
+              onChange={(e) => {
+                const val = e.target.value
+                setPubRepo(val)
+                updatePublishingSettings({ repo: val })
+              }}
+              placeholder="timetable"
+              style={{ width: '100%' }}
+            />
+          </div>
+
+          <div>
+            <label style={{ display: 'block', fontSize: '.8rem', fontWeight: 600, marginBottom: '.3rem' }}>
+              Branch
+            </label>
+            <input
+              type="text"
+              value={pubBranch}
+              onChange={(e) => {
+                const val = e.target.value
+                setPubBranch(val)
+                updatePublishingSettings({ branch: val })
+              }}
+              placeholder="master"
+              style={{ width: '100%' }}
+            />
+          </div>
+        </div>
+
+        <div style={{ marginBottom: '1rem' }}>
+          <label style={{ display: 'block', fontSize: '.8rem', fontWeight: 600, marginBottom: '.3rem' }}>
+            GitHub token
+          </label>
+          <div style={{ display: 'flex', gap: '.5rem', alignItems: 'center' }}>
+            <input
+              type={showToken ? 'text' : 'password'}
+              value={pubToken}
+              onChange={(e) => {
+                const val = e.target.value
+                setPubToken(val)
+                setStoredToken(val)
+                setTestStatus(null)
+              }}
+              placeholder="github_pat_..."
+              style={{ flex: 1, fontFamily: 'monospace' }}
+            />
+            <button
+              type="button"
+              className="btn btn-secondary btn-sm"
+              onClick={() => setShowToken(!showToken)}
+            >
+              {showToken ? 'Hide' : 'Show'}
+            </button>
+            {pubToken && (
+              <button
+                type="button"
+                className="btn btn-ghost btn-sm"
+                style={{ color: 'var(--danger)' }}
+                onClick={() => {
+                  clearStoredToken()
+                  setPubToken('')
+                  setTestStatus(null)
+                  toast('Token removed', 'ok')
+                }}
+              >
+                Forget token
+              </button>
+            )}
+          </div>
+          <p style={{ fontSize: '.8rem', color: 'var(--muted)', marginTop: '.35rem', lineHeight: 1.45 }}>
+            Create a fine-grained token at github.com/settings/personal-access-tokens:
+            Repository access = Only select repositories → timetable; Permissions → Contents =
+            Read and write; Expiration = 90 days. Anyone using this browser can publish, so only
+            save the token on the coordinator's own computer.
+          </p>
+        </div>
+
+        <div style={{ display: 'flex', alignItems: 'center', gap: '.75rem', flexWrap: 'wrap' }}>
+          <button
+            type="button"
+            className="btn btn-secondary"
+            disabled={testing}
+            onClick={async () => {
+              setTesting(true)
+              setTestStatus(null)
+              const res = await testGitHubConnection({
+                owner: pubOwner,
+                repo: pubRepo,
+                token: pubToken,
+              })
+              setTesting(false)
+              if (res.ok) {
+                setTestStatus({ ok: true, text: res.message || 'Connected, can publish' })
+              } else {
+                setTestStatus({ ok: false, text: res.error || 'Connection failed' })
+              }
+            }}
+          >
+            {testing ? 'Testing…' : 'Test connection'}
+          </button>
+
+          {testStatus && (
+            <span
+              className={`tag ${testStatus.ok ? '' : 'danger'}`}
+              style={{
+                fontSize: '.84rem',
+                padding: '.35rem .6rem',
+                border: testStatus.ok ? '1px solid var(--border2)' : undefined,
+              }}
+            >
+              {testStatus.text}
+            </span>
+          )}
         </div>
       </div>
     </div>

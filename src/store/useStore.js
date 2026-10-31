@@ -13,6 +13,7 @@ import {
   sectionLetter,
   normalizeKey,
 } from '../utils/helpers'
+import { buildProjectPayload } from '../utils/publisher'
 
 export function defaultClasses() {
   const list = []
@@ -49,10 +50,16 @@ export function makeEmpty() {
     subjectFacultyPresets: {}, // key: branchYearKey -> { [subCode]: { all: [], sections: { A: [] } } }
     importErrors: [],
     timetable: {}, // key: classId -> { [day]: { [pid]: slot } }
+    lastGeneratedAt: null,
     settings: {
       periods: JSON.parse(JSON.stringify(DEFAULT_PERIODS)),
       labWindows: JSON.parse(JSON.stringify(DEFAULT_LAB_WINDOWS)),
       defaultSaturdayPeriods: 4,
+      publishing: {
+        owner: 'Harsha-604',
+        repo: 'timetable',
+        branch: 'master',
+      },
     },
     validationReport: null,
   }
@@ -136,12 +143,18 @@ export function migrateState(state) {
     lockedAssignments: state.lockedAssignments || {},
     subjectFacultyPresets: state.subjectFacultyPresets || {},
     importErrors: state.importErrors || [],
+    lastGeneratedAt: state.lastGeneratedAt || null,
     settings: {
       ...fresh.settings,
       ...state.settings,
       periods,
       labWindows,
       defaultSaturdayPeriods: state.settings?.defaultSaturdayPeriods || 4,
+      publishing: {
+        owner: state.settings?.publishing?.owner || 'Harsha-604',
+        repo: state.settings?.publishing?.repo || 'timetable',
+        branch: state.settings?.publishing?.branch || 'master',
+      },
     },
     faculty: Array.isArray(state.faculty) ? state.faculty : [],
     rooms: Array.isArray(state.rooms) ? state.rooms : [],
@@ -406,7 +419,10 @@ export const useStore = create(
       setTimetable: (classId, tt) =>
         set((s) => ({ timetable: { ...s.timetable, [classId]: tt } })),
       setAllTimetables: (map) =>
-        set((s) => ({ timetable: { ...s.timetable, ...map } })),
+        set((s) => ({
+          timetable: { ...s.timetable, ...map },
+          lastGeneratedAt: new Date().toISOString(),
+        })),
       setSlot: (classId, day, pid, slot) =>
         set((s) => {
           const tt = JSON.parse(JSON.stringify(s.timetable[classId] || {}))
@@ -450,39 +466,36 @@ export const useStore = create(
           },
         })),
 
+      updatePublishingSettings: (patch) =>
+        set((s) => {
+          const { token, ...safePatch } = patch || {}
+          return {
+            settings: {
+              ...s.settings,
+              publishing: {
+                owner: 'Harsha-604',
+                repo: 'timetable',
+                branch: 'master',
+                ...(s.settings?.publishing || {}),
+                ...safePatch,
+              },
+            },
+          }
+        }),
+
       /* ── Validation ── */
       setValidationReport: (report) => set({ validationReport: report }),
 
       /* ── Toast ── */
       _toast: null,
-      toast: (msg, kind = 'ok') => {
-        set({ _toast: { msg, kind, id: Date.now() } })
-        setTimeout(() => set((s) => (s._toast?.msg === msg ? { _toast: null } : {})), 3500)
+      toast: (msg, kind = 'ok', url = null) => {
+        set({ _toast: { msg, kind, url, id: Date.now() } })
+        setTimeout(() => set((s) => (s._toast?.id === Date.now() ? { _toast: null } : {})), 4500)
       },
 
       /* ── Project backup / restore ── */
       saveProject: () => {
-        const {
-          classes,
-          faculty,
-          rooms,
-          subjects,
-          assignments,
-          lockedAssignments,
-          timetable,
-          settings,
-        } = get()
-        const data = {
-          savedAt: new Date().toISOString(),
-          classes,
-          faculty,
-          rooms,
-          subjects,
-          assignments,
-          lockedAssignments,
-          timetable,
-          settings,
-        }
+        const data = buildProjectPayload(get())
         const a = document.createElement('a')
         a.href = URL.createObjectURL(
           new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' })
