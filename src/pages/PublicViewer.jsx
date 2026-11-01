@@ -236,6 +236,9 @@ export default function PublicViewer({ onOpenEditor }) {
             />
             <span className="theme-switch-slider" />
           </label>
+          <a href="#edit" className="btn btn-sm btn-secondary">
+            Coordinator Login
+          </a>
         </div>
       </header>
 
@@ -755,32 +758,6 @@ export default function PublicViewer({ onOpenEditor }) {
           )}
         </div>
       )}
-
-      {/* Page Footer */}
-      <footer
-        style={{
-          marginTop: '3.5rem',
-          paddingTop: '1.25rem',
-          borderTop: '1px solid var(--border)',
-          textAlign: 'center',
-          fontSize: '.75rem',
-          color: 'var(--muted)',
-        }}
-      >
-        <a
-          href="#edit"
-          style={{
-            color: 'var(--muted)',
-            textDecoration: 'none',
-            opacity: 0.65,
-            transition: 'opacity 0.15s ease',
-          }}
-          onMouseEnter={(e) => (e.currentTarget.style.opacity = '1')}
-          onMouseLeave={(e) => (e.currentTarget.style.opacity = '0.65')}
-        >
-          Coordinator
-        </a>
-      </footer>
     </div>
   )
 }
