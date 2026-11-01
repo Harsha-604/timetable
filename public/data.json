@@ -1,9 +1,7674 @@
 {
-  "classes": [],
-  "faculty": [],
-  "rooms": [],
-  "subjects": {},
-  "timetable": {},
-  "assignments": {},
-  "lockedAssignments": {}
+  "savedAt": "2026-11-01T07:12:51.714Z",
+  "classes": [
+    {
+      "id": "CIC-2-A",
+      "branch": "CIC",
+      "year": 2,
+      "section": "A",
+      "homeRoomId": "CS-101",
+      "workingDays": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+      ],
+      "saturdayPeriods": 4,
+      "advisor": "",
+      "wef": "01-08-2026",
+      "semesterFrom": "Aug 2026",
+      "semesterTo": "Dec 2026",
+      "semester": "III",
+      "ay": "2026-27"
+    },
+    {
+      "id": "CIC-3-A",
+      "branch": "CIC",
+      "year": 3,
+      "section": "A",
+      "homeRoomId": "CS-102",
+      "workingDays": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+      ],
+      "saturdayPeriods": 4,
+      "advisor": "",
+      "wef": "01-08-2026",
+      "semesterFrom": "Aug 2026",
+      "semesterTo": "Dec 2026",
+      "semester": "V",
+      "ay": "2026-27"
+    },
+    {
+      "id": "CIC-4-A",
+      "branch": "CIC",
+      "year": 4,
+      "section": "A",
+      "homeRoomId": "CS-103",
+      "workingDays": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+      ],
+      "saturdayPeriods": 4,
+      "advisor": "",
+      "wef": "01-08-2026",
+      "semesterFrom": "Aug 2026",
+      "semesterTo": "Dec 2026",
+      "semester": "VII",
+      "ay": "2026-27"
+    },
+    {
+      "id": "AIML-2-A",
+      "branch": "AIML",
+      "year": 2,
+      "section": "A",
+      "homeRoomId": "CS-105",
+      "workingDays": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+      ],
+      "saturdayPeriods": 4,
+      "advisor": "",
+      "wef": "01-08-2026",
+      "semesterFrom": "Aug 2026",
+      "semesterTo": "Dec 2026",
+      "semester": "III",
+      "ay": "2026-27"
+    },
+    {
+      "id": "AIML-3-A",
+      "branch": "AIML",
+      "year": 3,
+      "section": "A",
+      "homeRoomId": "CS-106",
+      "workingDays": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+      ],
+      "saturdayPeriods": 4,
+      "advisor": "",
+      "wef": "01-08-2026",
+      "semesterFrom": "Aug 2026",
+      "semesterTo": "Dec 2026",
+      "semester": "V",
+      "ay": "2026-27"
+    },
+    {
+      "id": "AIML-4-A",
+      "branch": "AIML",
+      "year": 4,
+      "section": "A",
+      "homeRoomId": "CS-107",
+      "workingDays": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+      ],
+      "saturdayPeriods": 4,
+      "advisor": "",
+      "wef": "01-08-2026",
+      "semesterFrom": "Aug 2026",
+      "semesterTo": "Dec 2026",
+      "semester": "VII",
+      "ay": "2026-27"
+    },
+    {
+      "id": "DS-2-A",
+      "branch": "DS",
+      "year": 2,
+      "section": "A",
+      "homeRoomId": "CS-108",
+      "workingDays": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+      ],
+      "saturdayPeriods": 4,
+      "advisor": "",
+      "wef": "01-08-2026",
+      "semesterFrom": "Aug 2026",
+      "semesterTo": "Dec 2026",
+      "semester": "III",
+      "ay": "2026-27"
+    },
+    {
+      "id": "DS-3-A",
+      "branch": "DS",
+      "year": 3,
+      "section": "A",
+      "homeRoomId": "CS-110",
+      "workingDays": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+      ],
+      "saturdayPeriods": 4,
+      "advisor": "",
+      "wef": "01-08-2026",
+      "semesterFrom": "Aug 2026",
+      "semesterTo": "Dec 2026",
+      "semester": "V",
+      "ay": "2026-27"
+    },
+    {
+      "id": "DS-4-A",
+      "branch": "DS",
+      "year": 4,
+      "section": "A",
+      "homeRoomId": "CS-111",
+      "workingDays": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+      ],
+      "saturdayPeriods": 4,
+      "advisor": "",
+      "wef": "01-08-2026",
+      "semesterFrom": "Aug 2026",
+      "semesterTo": "Dec 2026",
+      "semester": "VII",
+      "ay": "2026-27"
+    },
+    {
+      "id": "CSIT-2-A",
+      "branch": "CSIT",
+      "year": 2,
+      "section": "A",
+      "homeRoomId": "CS-112",
+      "workingDays": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+      ],
+      "saturdayPeriods": 4,
+      "advisor": "",
+      "wef": "01-08-2026",
+      "semesterFrom": "Aug 2026",
+      "semesterTo": "Dec 2026",
+      "semester": "III",
+      "ay": "2026-27"
+    },
+    {
+      "id": "CSIT-3-A",
+      "branch": "CSIT",
+      "year": 3,
+      "section": "A",
+      "homeRoomId": "CS-201",
+      "workingDays": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+      ],
+      "saturdayPeriods": 4,
+      "advisor": "",
+      "wef": "01-08-2026",
+      "semesterFrom": "Aug 2026",
+      "semesterTo": "Dec 2026",
+      "semester": "V",
+      "ay": "2026-27"
+    },
+    {
+      "id": "CSIT-4-A",
+      "branch": "CSIT",
+      "year": 4,
+      "section": "A",
+      "homeRoomId": "CS-202",
+      "workingDays": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+      ],
+      "saturdayPeriods": 4,
+      "advisor": "",
+      "wef": "01-08-2026",
+      "semesterFrom": "Aug 2026",
+      "semesterTo": "Dec 2026",
+      "semester": "VII",
+      "ay": "2026-27"
+    }
+  ],
+  "faculty": [
+    {
+      "id": "f1u2u18",
+      "name": "Dr. M. V. Ramana Jyothi",
+      "short": "DR.MVRJ",
+      "desg": "Professor",
+      "dept": "CIC",
+      "max": 14,
+      "subjects": [
+        "PE-V:SQT",
+        "IoTCPS Lab",
+        "SE"
+      ]
+    },
+    {
+      "id": "f2wxl5l",
+      "name": "Mr. M. Bhaskar",
+      "short": "MB",
+      "desg": "Assistant Professor",
+      "dept": "CIC",
+      "max": 18,
+      "subjects": [
+        "OE-I:RSE"
+      ]
+    },
+    {
+      "id": "fuxak8n",
+      "name": "Mrs. P. Padma Priya",
+      "short": "PPP",
+      "desg": "Associate Professor",
+      "dept": "CIC",
+      "max": 16,
+      "subjects": [
+        "BCT",
+        "DevOps Lab",
+        "BCT Lab"
+      ]
+    },
+    {
+      "id": "fmvua27",
+      "name": "Mr. A. Venkatesh",
+      "short": "AV",
+      "desg": "Assistant Professor",
+      "dept": "CIC",
+      "max": 18,
+      "subjects": [
+        "PE-IV:SPSM",
+        "DevOps Lab",
+        "BCT Lab",
+        "OS Lab"
+      ]
+    },
+    {
+      "id": "f7j8puf",
+      "name": "Ms. R. Teja",
+      "short": "RT",
+      "desg": "Assistant Professor",
+      "dept": "CIC",
+      "max": 18,
+      "subjects": [
+        "DMF",
+        "BCT Lab",
+        "CNS"
+      ]
+    },
+    {
+      "id": "fyte2g1",
+      "name": "Dr. P. Sridevi",
+      "short": "PS",
+      "desg": "Associate Professor",
+      "dept": "CIC",
+      "max": 16,
+      "subjects": [
+        "ES",
+        "DM"
+      ]
+    },
+    {
+      "id": "ftjlb2n",
+      "name": "Mrs. T. Lavanya",
+      "short": "TL",
+      "desg": "Associate Professor",
+      "dept": "CIC",
+      "max": 16,
+      "subjects": [
+        "CIC-4:IoTCPS",
+        "CIC-4:IoTCPS Lab",
+        "CPW-1"
+      ]
+    },
+    {
+      "id": "fjw0sm1",
+      "name": "Mr. F. Ahmed",
+      "short": "FA",
+      "desg": "Assistant Professor",
+      "dept": "CIC",
+      "max": 18,
+      "subjects": [
+        "IoTCPS Lab",
+        "IoT",
+        "CN Lab"
+      ]
+    },
+    {
+      "id": "fs3onw5",
+      "name": "Mr. K. Srikanth",
+      "short": "KS",
+      "desg": "Assistant Professor",
+      "dept": "CIC",
+      "max": 18,
+      "subjects": [
+        "CN",
+        "CN Lab",
+        "CNS"
+      ]
+    },
+    {
+      "id": "f93jwxk",
+      "name": "Mrs. S. Anitha",
+      "short": "SA",
+      "desg": "Assistant Professor",
+      "dept": "CIC",
+      "max": 18,
+      "subjects": [
+        "IoT",
+        "OS",
+        "OS Lab"
+      ]
+    },
+    {
+      "id": "f1k5jo0",
+      "name": "Mr. N. Raghu",
+      "short": "NR",
+      "desg": "Assistant Professor",
+      "dept": "CIC",
+      "max": 18,
+      "subjects": [
+        "PE-I:CC",
+        "CC",
+        "CC Lab",
+        "MP"
+      ]
+    },
+    {
+      "id": "f04i4jc",
+      "name": "Dr. G. Kalyani",
+      "short": "GK",
+      "desg": "Professor",
+      "dept": "CIC",
+      "max": 14,
+      "subjects": [
+        "DS",
+        "DS Lab",
+        "SE"
+      ]
+    },
+    {
+      "id": "f0ec6br",
+      "name": "Dr. V. Harika",
+      "short": "VH",
+      "desg": "Professor",
+      "dept": "AIML",
+      "max": 14,
+      "subjects": [
+        "ML",
+        "ML Lab",
+        "DL"
+      ]
+    },
+    {
+      "id": "f86u0ae",
+      "name": "Mr. B. Naveen",
+      "short": "BN",
+      "desg": "Assistant Professor",
+      "dept": "AIML",
+      "max": 18,
+      "subjects": [
+        "AI",
+        "AI Lab",
+        "ML Lab"
+      ]
+    },
+    {
+      "id": "ft2v2or",
+      "name": "Mrs. K. Swathi",
+      "short": "KSW",
+      "desg": "Assistant Professor",
+      "dept": "AIML",
+      "max": 18,
+      "subjects": [
+        "DL",
+        "DL Lab",
+        "CV Lab"
+      ]
+    },
+    {
+      "id": "f7fglzl",
+      "name": "Mr. P. Rohith",
+      "short": "PR",
+      "desg": "Assistant Professor",
+      "dept": "AIML",
+      "max": 18,
+      "subjects": [
+        "CV",
+        "CV Lab",
+        "NLP Lab",
+        "PE-I:NLP"
+      ]
+    },
+    {
+      "id": "fon3gzp",
+      "name": "Ms. D. Meghana",
+      "short": "DM",
+      "desg": "Assistant Professor",
+      "dept": "AIML",
+      "max": 18,
+      "subjects": [
+        "RL",
+        "GAI",
+        "AI Lab",
+        "MP"
+      ]
+    },
+    {
+      "id": "f29x3xf",
+      "name": "Mrs. L. Sowmya",
+      "short": "LS",
+      "desg": "Associate Professor",
+      "dept": "AIML",
+      "max": 16,
+      "subjects": [
+        "PE-I:NLP",
+        "NLP Lab",
+        "DL Lab",
+        "CPW-1"
+      ]
+    },
+    {
+      "id": "fvs724f",
+      "name": "Mr. J. Praveen",
+      "short": "JP",
+      "desg": "Assistant Professor",
+      "dept": "AIML",
+      "max": 18,
+      "subjects": [
+        "GAI",
+        "ML Lab",
+        "DS Lab",
+        "PE-IV:SPSM"
+      ]
+    },
+    {
+      "id": "fv8q6n3",
+      "name": "Dr. S. Ramesh",
+      "short": "SR",
+      "desg": "Professor",
+      "dept": "DS",
+      "max": 14,
+      "subjects": [
+        "BDA",
+        "BDA Lab",
+        "PA"
+      ]
+    },
+    {
+      "id": "fn0iwbt",
+      "name": "Mrs. Y. Divya",
+      "short": "YD",
+      "desg": "Assistant Professor",
+      "dept": "DS",
+      "max": 18,
+      "subjects": [
+        "DWDM",
+        "DWDM Lab",
+        "BDA Lab"
+      ]
+    },
+    {
+      "id": "fqgoh7i",
+      "name": "Mr. C. Kiran",
+      "short": "CK",
+      "desg": "Assistant Professor",
+      "dept": "DS",
+      "max": 18,
+      "subjects": [
+        "PA",
+        "PA Lab",
+        "TSA"
+      ]
+    },
+    {
+      "id": "fchbisd",
+      "name": "Ms. H. Nikitha",
+      "short": "HN",
+      "desg": "Assistant Professor",
+      "dept": "DS",
+      "max": 18,
+      "subjects": [
+        "SNA",
+        "SNA Lab",
+        "PE-I:DV"
+      ]
+    },
+    {
+      "id": "fuzyhjx",
+      "name": "Mr. V. Sandeep",
+      "short": "VS",
+      "desg": "Assistant Professor",
+      "dept": "DS",
+      "max": 18,
+      "subjects": [
+        "TSA",
+        "PA Lab",
+        "DBMS Lab",
+        "CPW-1"
+      ]
+    },
+    {
+      "id": "fiuyg71",
+      "name": "Mrs. A. Keerthi",
+      "short": "AK",
+      "desg": "Associate Professor",
+      "dept": "DS",
+      "max": 16,
+      "subjects": [
+        "DBMS",
+        "DBMS Lab",
+        "PE-I:DV",
+        "SNA Lab"
+      ]
+    },
+    {
+      "id": "f1qgqs3",
+      "name": "Dr. R. Prakash",
+      "short": "RP",
+      "desg": "Professor",
+      "dept": "CSIT",
+      "max": 14,
+      "subjects": [
+        "CD",
+        "WT",
+        "CPW-1"
+      ]
+    },
+    {
+      "id": "fsws4xh",
+      "name": "Mr. S. Vamshi",
+      "short": "SV",
+      "desg": "Assistant Professor",
+      "dept": "CSIT",
+      "max": 18,
+      "subjects": [
+        "WT",
+        "WT Lab",
+        "MAD Lab"
+      ]
+    },
+    {
+      "id": "furpuwu",
+      "name": "Mrs. B. Sravani",
+      "short": "BS",
+      "desg": "Assistant Professor",
+      "dept": "CSIT",
+      "max": 18,
+      "subjects": [
+        "MAD",
+        "MAD Lab",
+        "BCT Lab"
+      ]
+    },
+    {
+      "id": "f2n6nbs",
+      "name": "Mr. T. Ajay",
+      "short": "TA",
+      "desg": "Assistant Professor",
+      "dept": "CSIT",
+      "max": 18,
+      "subjects": [
+        "CSF",
+        "CC",
+        "CC Lab"
+      ]
+    },
+    {
+      "id": "fvfe2sm",
+      "name": "Ms. G. Pooja",
+      "short": "GP",
+      "desg": "Assistant Professor",
+      "dept": "CSIT",
+      "max": 18,
+      "subjects": [
+        "BCT",
+        "BCT Lab",
+        "WT Lab",
+        "MP"
+      ]
+    },
+    {
+      "id": "fkxzksu",
+      "name": "Mr. K. Manoj",
+      "short": "KM",
+      "desg": "Assistant Professor",
+      "dept": "CSIT",
+      "max": 18,
+      "subjects": [
+        "CN",
+        "CN Lab",
+        "OS"
+      ]
+    },
+    {
+      "id": "frab7ha",
+      "name": "Dr. N. Sudhakar",
+      "short": "NS",
+      "desg": "Professor",
+      "dept": "CIC",
+      "max": 14,
+      "subjects": [
+        "DS",
+        "OOP"
+      ]
+    },
+    {
+      "id": "fa6621v",
+      "name": "Mrs. U. Radhika",
+      "short": "UR",
+      "desg": "Assistant Professor",
+      "dept": "AIML",
+      "max": 18,
+      "subjects": [
+        "DS",
+        "DS Lab",
+        "ITW"
+      ]
+    },
+    {
+      "id": "fhi7jce",
+      "name": "Mr. I. Suresh",
+      "short": "IS",
+      "desg": "Assistant Professor",
+      "dept": "DS",
+      "max": 18,
+      "subjects": [
+        "OOP",
+        "OOP Lab",
+        "ITW"
+      ]
+    },
+    {
+      "id": "f9il99o",
+      "name": "Mrs. M. Kavitha",
+      "short": "MK",
+      "desg": "Assistant Professor",
+      "dept": "CSIT",
+      "max": 18,
+      "subjects": [
+        "OOP",
+        "OOP Lab",
+        "DS Lab"
+      ]
+    },
+    {
+      "id": "fklgsjw",
+      "name": "Mr. E. Ravi",
+      "short": "ER",
+      "desg": "Assistant Professor",
+      "dept": "CIC",
+      "max": 18,
+      "subjects": [
+        "DE",
+        "DE Lab",
+        "COA"
+      ]
+    },
+    {
+      "id": "fu381xi",
+      "name": "Mrs. Q. Fatima",
+      "short": "QF",
+      "desg": "Assistant Professor",
+      "dept": "AIML",
+      "max": 18,
+      "subjects": [
+        "DE",
+        "DE Lab",
+        "COA"
+      ]
+    },
+    {
+      "id": "fnohs2s",
+      "name": "Mr. O. Sai Kumar",
+      "short": "OSK",
+      "desg": "Assistant Professor",
+      "dept": "DS",
+      "max": 18,
+      "subjects": [
+        "COA",
+        "DE Lab",
+        "OS"
+      ]
+    },
+    {
+      "id": "fkxc6oh",
+      "name": "Dr. W. Lakshmi",
+      "short": "WL",
+      "desg": "Professor",
+      "dept": "CSIT",
+      "max": 14,
+      "subjects": [
+        "PSM",
+        "DM"
+      ]
+    },
+    {
+      "id": "fuwsk8z",
+      "name": "Mr. X. Anil",
+      "short": "XA",
+      "desg": "Assistant Professor",
+      "dept": "CSIT",
+      "max": 18,
+      "subjects": [
+        "PSM",
+        "DM",
+        "EVS"
+      ]
+    },
+    {
+      "id": "fevyfmd",
+      "name": "Mrs. Z. Shirisha",
+      "short": "ZS",
+      "desg": "Assistant Professor",
+      "dept": "CIC",
+      "max": 18,
+      "subjects": [
+        "EVS",
+        "ES",
+        "PSM"
+      ]
+    },
+    {
+      "id": "fasn7jg",
+      "name": "Mr. G. Harish",
+      "short": "GH",
+      "desg": "Assistant Professor",
+      "dept": "AIML",
+      "max": 18,
+      "subjects": [
+        "DBMS",
+        "DBMS Lab",
+        "SE"
+      ]
+    },
+    {
+      "id": "fw06wkc",
+      "name": "Mrs. V. Rekha",
+      "short": "VR",
+      "desg": "Assistant Professor",
+      "dept": "DS",
+      "max": 18,
+      "subjects": [
+        "OS",
+        "OS Lab",
+        "DBMS"
+      ]
+    },
+    {
+      "id": "ftvlte9",
+      "name": "Mr. L. Mahesh",
+      "short": "LM",
+      "desg": "Assistant Professor",
+      "dept": "CSIT",
+      "max": 18,
+      "subjects": [
+        "SE",
+        "PE-V:SQT",
+        "OOP Lab"
+      ]
+    },
+    {
+      "id": "fsj2dpg",
+      "name": "Mrs. S. Bhavani",
+      "short": "SB",
+      "desg": "Assistant Professor",
+      "dept": "CIC",
+      "max": 18,
+      "subjects": [
+        "PE-V:SQT",
+        "ES",
+        "CN"
+      ]
+    },
+    {
+      "id": "fph3ibb",
+      "name": "Mr. K. Arun",
+      "short": "KA",
+      "desg": "Assistant Professor",
+      "dept": "AIML",
+      "max": 18,
+      "subjects": [
+        "OE-I:HRM",
+        "ES"
+      ]
+    },
+    {
+      "id": "fuxjizo",
+      "name": "Mrs. P. Swapna",
+      "short": "PSW",
+      "desg": "Assistant Professor",
+      "dept": "DS",
+      "max": 18,
+      "subjects": [
+        "OE-I:IPR",
+        "ES"
+      ]
+    },
+    {
+      "id": "fh06l0h",
+      "name": "Mr. R. Vinod",
+      "short": "RV",
+      "desg": "Assistant Professor",
+      "dept": "CSIT",
+      "max": 18,
+      "subjects": [
+        "OE-I:EM",
+        "EVS"
+      ]
+    },
+    {
+      "id": "f2trwys",
+      "name": "Mr. D. Kishore",
+      "short": "DK",
+      "desg": "Assistant Professor",
+      "dept": "CSIT",
+      "max": 18,
+      "subjects": [
+        "CSF",
+        "BCT",
+        "MP",
+        "ITW"
+      ]
+    },
+    {
+      "id": "fg716wg",
+      "name": "Mrs. N. Hima Bindu",
+      "short": "NHB",
+      "desg": "Assistant Professor",
+      "dept": "DS",
+      "max": 18,
+      "subjects": [
+        "DS Lab",
+        "DS",
+        "BDA Lab",
+        "DWDM Lab"
+      ]
+    }
+  ],
+  "rooms": [
+    {
+      "id": "rdlbr7c",
+      "name": "CS-101",
+      "roomNo": "CS-101",
+      "type": "Classroom",
+      "labName": "",
+      "capacity": "66"
+    },
+    {
+      "id": "rlkgphg",
+      "name": "CS-102",
+      "roomNo": "CS-102",
+      "type": "Classroom",
+      "labName": "",
+      "capacity": "66"
+    },
+    {
+      "id": "rw7k3ie",
+      "name": "CS-103",
+      "roomNo": "CS-103",
+      "type": "Classroom",
+      "labName": "",
+      "capacity": "66"
+    },
+    {
+      "id": "ru6kn63",
+      "name": "CS-104",
+      "roomNo": "CS-104",
+      "type": "Lab",
+      "labName": "LAB-5",
+      "capacity": "66"
+    },
+    {
+      "id": "rpdvdz0",
+      "name": "CS-105",
+      "roomNo": "CS-105",
+      "type": "Classroom",
+      "labName": "",
+      "capacity": "66"
+    },
+    {
+      "id": "rc2k7b3",
+      "name": "CS-106",
+      "roomNo": "CS-106",
+      "type": "Classroom",
+      "labName": "",
+      "capacity": "66"
+    },
+    {
+      "id": "rjyr4ia",
+      "name": "CS-107",
+      "roomNo": "CS-107",
+      "type": "Classroom",
+      "labName": "",
+      "capacity": "66"
+    },
+    {
+      "id": "rpqf7kp",
+      "name": "CS-108",
+      "roomNo": "CS-108",
+      "type": "Classroom",
+      "labName": "",
+      "capacity": "66"
+    },
+    {
+      "id": "rpqhmsu",
+      "name": "CS-109",
+      "roomNo": "CS-109",
+      "type": "Lab",
+      "labName": "LAB-6",
+      "capacity": "66"
+    },
+    {
+      "id": "ryajqxd",
+      "name": "CS-110",
+      "roomNo": "CS-110",
+      "type": "Classroom",
+      "labName": "",
+      "capacity": "66"
+    },
+    {
+      "id": "rm5dck7",
+      "name": "CS-111",
+      "roomNo": "CS-111",
+      "type": "Classroom",
+      "labName": "",
+      "capacity": "66"
+    },
+    {
+      "id": "rczuav4",
+      "name": "CS-112",
+      "roomNo": "CS-112",
+      "type": "Classroom",
+      "labName": "",
+      "capacity": "66"
+    },
+    {
+      "id": "rcret74",
+      "name": "CS-113",
+      "roomNo": "CS-113",
+      "type": "Lab",
+      "labName": "LAB-1",
+      "capacity": "66"
+    },
+    {
+      "id": "rpsirqq",
+      "name": "CS-114",
+      "roomNo": "CS-114",
+      "type": "Lab",
+      "labName": "LAB-2",
+      "capacity": "66"
+    },
+    {
+      "id": "ro64gwd",
+      "name": "CS-115",
+      "roomNo": "CS-115",
+      "type": "Lab",
+      "labName": "LAB-3",
+      "capacity": "66"
+    },
+    {
+      "id": "rfv8c8c",
+      "name": "CS-201",
+      "roomNo": "CS-201",
+      "type": "Classroom",
+      "labName": "",
+      "capacity": "66"
+    },
+    {
+      "id": "rp6kf4r",
+      "name": "CS-202",
+      "roomNo": "CS-202",
+      "type": "Classroom",
+      "labName": "",
+      "capacity": "66"
+    },
+    {
+      "id": "rix535b",
+      "name": "CS-203",
+      "roomNo": "CS-203",
+      "type": "Classroom",
+      "labName": "",
+      "capacity": "66"
+    },
+    {
+      "id": "rwpgq4i",
+      "name": "CS-204",
+      "roomNo": "CS-204",
+      "type": "Classroom",
+      "labName": "",
+      "capacity": "66"
+    },
+    {
+      "id": "rxf9ty6",
+      "name": "CS-205",
+      "roomNo": "CS-205",
+      "type": "Lab",
+      "labName": "LAB-4",
+      "capacity": "66"
+    },
+    {
+      "id": "rxme16p",
+      "name": "CS-206",
+      "roomNo": "CS-206",
+      "type": "Lab",
+      "labName": "LAB-7",
+      "capacity": "66"
+    },
+    {
+      "id": "refu2e3",
+      "name": "CS-207",
+      "roomNo": "CS-207",
+      "type": "Lab",
+      "labName": "LAB-8",
+      "capacity": "66"
+    }
+  ],
+  "subjects": {
+    "CIC-2": [
+      {
+        "id": "s3btglv",
+        "name": "Data Structures",
+        "code": "DS",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "syecxov",
+        "name": "Object Oriented Programming",
+        "code": "OOP",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "sjbfaga",
+        "name": "Discrete Mathematics",
+        "code": "DM",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "sr21jvx",
+        "name": "Probability and Statistical Methods",
+        "code": "PSM",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "sk1qabe",
+        "name": "Digital Electronics",
+        "code": "DE",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "sb2v0qn",
+        "name": "Computer Organization and Architecture",
+        "code": "COA",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "syosb0c",
+        "name": "Environmental Science",
+        "code": "EVS",
+        "type": "Theory",
+        "periods": 2,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "syv1v29",
+        "name": "Data Structures Lab",
+        "code": "DS Lab",
+        "type": "Lab",
+        "periods": 4,
+        "block": 2,
+        "facultyReq": 2,
+        "labRoomId": "CS-113",
+        "commonGroup": ""
+      },
+      {
+        "id": "svz592x",
+        "name": "OOP Lab",
+        "code": "OOP Lab",
+        "type": "Lab",
+        "periods": 2,
+        "block": 2,
+        "facultyReq": 2,
+        "labRoomId": "CS-114",
+        "commonGroup": ""
+      },
+      {
+        "id": "seendbp",
+        "name": "Digital Electronics Lab",
+        "code": "DE Lab",
+        "type": "Lab",
+        "periods": 2,
+        "block": 2,
+        "facultyReq": 2,
+        "labRoomId": "CS-115",
+        "commonGroup": ""
+      },
+      {
+        "id": "shbla6m",
+        "name": "IT Workshop",
+        "code": "ITW",
+        "type": "Lab",
+        "periods": 2,
+        "block": 2,
+        "facultyReq": 1,
+        "labRoomId": "CS-114",
+        "commonGroup": ""
+      }
+    ],
+    "AIML-2": [
+      {
+        "id": "s321w5k",
+        "name": "Data Structures",
+        "code": "DS",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "sx2565r",
+        "name": "Object Oriented Programming",
+        "code": "OOP",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "s9xo2ak",
+        "name": "Discrete Mathematics",
+        "code": "DM",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "stqv97j",
+        "name": "Probability and Statistical Methods",
+        "code": "PSM",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "stl3rpl",
+        "name": "Digital Electronics",
+        "code": "DE",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "sg9wj5i",
+        "name": "Computer Organization and Architecture",
+        "code": "COA",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "sg80253",
+        "name": "Environmental Science",
+        "code": "EVS",
+        "type": "Theory",
+        "periods": 2,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "scs7o92",
+        "name": "Data Structures Lab",
+        "code": "DS Lab",
+        "type": "Lab",
+        "periods": 4,
+        "block": 2,
+        "facultyReq": 2,
+        "labRoomId": "CS-113",
+        "commonGroup": ""
+      },
+      {
+        "id": "sfgaswn",
+        "name": "OOP Lab",
+        "code": "OOP Lab",
+        "type": "Lab",
+        "periods": 2,
+        "block": 2,
+        "facultyReq": 2,
+        "labRoomId": "CS-114",
+        "commonGroup": ""
+      },
+      {
+        "id": "sarar8o",
+        "name": "Digital Electronics Lab",
+        "code": "DE Lab",
+        "type": "Lab",
+        "periods": 2,
+        "block": 2,
+        "facultyReq": 2,
+        "labRoomId": "CS-115",
+        "commonGroup": ""
+      },
+      {
+        "id": "smeiuf6",
+        "name": "IT Workshop",
+        "code": "ITW",
+        "type": "Lab",
+        "periods": 2,
+        "block": 2,
+        "facultyReq": 1,
+        "labRoomId": "CS-114",
+        "commonGroup": ""
+      }
+    ],
+    "DS-2": [
+      {
+        "id": "shsmvia",
+        "name": "Data Structures",
+        "code": "DS",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "scptmcv",
+        "name": "Object Oriented Programming",
+        "code": "OOP",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "sqivbe1",
+        "name": "Discrete Mathematics",
+        "code": "DM",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "s3s273k",
+        "name": "Probability and Statistical Methods",
+        "code": "PSM",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "sytq8lc",
+        "name": "Digital Electronics",
+        "code": "DE",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "sset14o",
+        "name": "Computer Organization and Architecture",
+        "code": "COA",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "sq3x84u",
+        "name": "Environmental Science",
+        "code": "EVS",
+        "type": "Theory",
+        "periods": 2,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "s4sql98",
+        "name": "Data Structures Lab",
+        "code": "DS Lab",
+        "type": "Lab",
+        "periods": 4,
+        "block": 2,
+        "facultyReq": 2,
+        "labRoomId": "CS-113",
+        "commonGroup": ""
+      },
+      {
+        "id": "sjnb2jj",
+        "name": "OOP Lab",
+        "code": "OOP Lab",
+        "type": "Lab",
+        "periods": 2,
+        "block": 2,
+        "facultyReq": 2,
+        "labRoomId": "CS-114",
+        "commonGroup": ""
+      },
+      {
+        "id": "sn82jm8",
+        "name": "Digital Electronics Lab",
+        "code": "DE Lab",
+        "type": "Lab",
+        "periods": 2,
+        "block": 2,
+        "facultyReq": 2,
+        "labRoomId": "CS-115",
+        "commonGroup": ""
+      },
+      {
+        "id": "suwy8j8",
+        "name": "IT Workshop",
+        "code": "ITW",
+        "type": "Lab",
+        "periods": 2,
+        "block": 2,
+        "facultyReq": 1,
+        "labRoomId": "CS-114",
+        "commonGroup": ""
+      }
+    ],
+    "CSIT-2": [
+      {
+        "id": "svuw421",
+        "name": "Data Structures",
+        "code": "DS",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "si705t8",
+        "name": "Object Oriented Programming",
+        "code": "OOP",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "sk8owqa",
+        "name": "Discrete Mathematics",
+        "code": "DM",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "sxs3yps",
+        "name": "Probability and Statistical Methods",
+        "code": "PSM",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "sgxgg6w",
+        "name": "Digital Electronics",
+        "code": "DE",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "s4kz8rm",
+        "name": "Computer Organization and Architecture",
+        "code": "COA",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "s8xsysy",
+        "name": "Environmental Science",
+        "code": "EVS",
+        "type": "Theory",
+        "periods": 2,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "s1wvtty",
+        "name": "Data Structures Lab",
+        "code": "DS Lab",
+        "type": "Lab",
+        "periods": 4,
+        "block": 2,
+        "facultyReq": 2,
+        "labRoomId": "CS-113",
+        "commonGroup": ""
+      },
+      {
+        "id": "smitx2h",
+        "name": "OOP Lab",
+        "code": "OOP Lab",
+        "type": "Lab",
+        "periods": 2,
+        "block": 2,
+        "facultyReq": 2,
+        "labRoomId": "CS-114",
+        "commonGroup": ""
+      },
+      {
+        "id": "scyk4cu",
+        "name": "Digital Electronics Lab",
+        "code": "DE Lab",
+        "type": "Lab",
+        "periods": 2,
+        "block": 2,
+        "facultyReq": 2,
+        "labRoomId": "CS-115",
+        "commonGroup": ""
+      },
+      {
+        "id": "shx8ho4",
+        "name": "IT Workshop",
+        "code": "ITW",
+        "type": "Lab",
+        "periods": 2,
+        "block": 2,
+        "facultyReq": 1,
+        "labRoomId": "CS-114",
+        "commonGroup": ""
+      }
+    ],
+    "CIC-3": [
+      {
+        "id": "s9xsaqf",
+        "name": "Operating Systems",
+        "code": "OS",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "s7f8ldk",
+        "name": "Database Management Systems",
+        "code": "DBMS",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "souqber",
+        "name": "Software Engineering",
+        "code": "SE",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "s91ikul",
+        "name": "Computer Networks",
+        "code": "CN",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "s9spcsq",
+        "name": "Cryptography and Network Security",
+        "code": "CNS",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "s5ygca0",
+        "name": "Internet of Things",
+        "code": "IoT",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "s3gsj2k",
+        "name": "Cloud Computing",
+        "code": "PE-I:CC",
+        "type": "Theory",
+        "periods": 2,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "swnkugi",
+        "name": "Operating Systems Lab",
+        "code": "OS Lab",
+        "type": "Lab",
+        "periods": 4,
+        "block": 2,
+        "facultyReq": 2,
+        "labRoomId": "CS-205",
+        "commonGroup": ""
+      },
+      {
+        "id": "skzruib",
+        "name": "DBMS Lab",
+        "code": "DBMS Lab",
+        "type": "Lab",
+        "periods": 2,
+        "block": 2,
+        "facultyReq": 2,
+        "labRoomId": "CS-205",
+        "commonGroup": ""
+      },
+      {
+        "id": "sbzr64n",
+        "name": "Computer Networks Lab",
+        "code": "CN Lab",
+        "type": "Lab",
+        "periods": 2,
+        "block": 2,
+        "facultyReq": 2,
+        "labRoomId": "CS-206",
+        "commonGroup": ""
+      },
+      {
+        "id": "sdbdraf",
+        "name": "Mini Project",
+        "code": "MP",
+        "type": "Project",
+        "periods": 2,
+        "block": 2,
+        "facultyReq": 1,
+        "labRoomId": "CS-207",
+        "commonGroup": ""
+      }
+    ],
+    "AIML-3": [
+      {
+        "id": "s603ttb",
+        "name": "Operating Systems",
+        "code": "OS",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "sm10o3a",
+        "name": "Database Management Systems",
+        "code": "DBMS",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "skls3e2",
+        "name": "Software Engineering",
+        "code": "SE",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "s9s2pn2",
+        "name": "Artificial Intelligence",
+        "code": "AI",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "smg3k3q",
+        "name": "Machine Learning",
+        "code": "ML",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "sbz4vy4",
+        "name": "Computer Networks",
+        "code": "CN",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "s4fv7f4",
+        "name": "Natural Language Processing",
+        "code": "PE-I:NLP",
+        "type": "Theory",
+        "periods": 2,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "s2hwq0e",
+        "name": "Machine Learning Lab",
+        "code": "ML Lab",
+        "type": "Lab",
+        "periods": 4,
+        "block": 2,
+        "facultyReq": 2,
+        "labRoomId": "CS-206",
+        "commonGroup": ""
+      },
+      {
+        "id": "s4se2js",
+        "name": "DBMS Lab",
+        "code": "DBMS Lab",
+        "type": "Lab",
+        "periods": 2,
+        "block": 2,
+        "facultyReq": 2,
+        "labRoomId": "CS-205",
+        "commonGroup": ""
+      },
+      {
+        "id": "s4t0ycj",
+        "name": "AI Lab",
+        "code": "AI Lab",
+        "type": "Lab",
+        "periods": 2,
+        "block": 2,
+        "facultyReq": 2,
+        "labRoomId": "CS-206",
+        "commonGroup": ""
+      },
+      {
+        "id": "spm96nl",
+        "name": "Mini Project",
+        "code": "MP",
+        "type": "Project",
+        "periods": 2,
+        "block": 2,
+        "facultyReq": 1,
+        "labRoomId": "CS-207",
+        "commonGroup": ""
+      }
+    ],
+    "DS-3": [
+      {
+        "id": "shlltp9",
+        "name": "Operating Systems",
+        "code": "OS",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "sxkxmn5",
+        "name": "Database Management Systems",
+        "code": "DBMS",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "smdevtz",
+        "name": "Software Engineering",
+        "code": "SE",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "se4610e",
+        "name": "Data Warehousing and Data Mining",
+        "code": "DWDM",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "s32szv8",
+        "name": "Big Data Analytics",
+        "code": "BDA",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "shgq4q9",
+        "name": "Computer Networks",
+        "code": "CN",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "swcco8v",
+        "name": "Data Visualization",
+        "code": "PE-I:DV",
+        "type": "Theory",
+        "periods": 2,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "swbnazg",
+        "name": "Big Data Analytics Lab",
+        "code": "BDA Lab",
+        "type": "Lab",
+        "periods": 4,
+        "block": 2,
+        "facultyReq": 2,
+        "labRoomId": "CS-113",
+        "commonGroup": ""
+      },
+      {
+        "id": "se9m4h8",
+        "name": "DBMS Lab",
+        "code": "DBMS Lab",
+        "type": "Lab",
+        "periods": 2,
+        "block": 2,
+        "facultyReq": 2,
+        "labRoomId": "CS-205",
+        "commonGroup": ""
+      },
+      {
+        "id": "s8te1lx",
+        "name": "DWDM Lab",
+        "code": "DWDM Lab",
+        "type": "Lab",
+        "periods": 2,
+        "block": 2,
+        "facultyReq": 2,
+        "labRoomId": "CS-205",
+        "commonGroup": ""
+      },
+      {
+        "id": "s9ewa72",
+        "name": "Mini Project",
+        "code": "MP",
+        "type": "Project",
+        "periods": 2,
+        "block": 2,
+        "facultyReq": 1,
+        "labRoomId": "CS-207",
+        "commonGroup": ""
+      }
+    ],
+    "CSIT-3": [
+      {
+        "id": "smds87s",
+        "name": "Operating Systems",
+        "code": "OS",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "s09rmva",
+        "name": "Database Management Systems",
+        "code": "DBMS",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "shqrd1b",
+        "name": "Software Engineering",
+        "code": "SE",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "sk52mip",
+        "name": "Computer Networks",
+        "code": "CN",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "scym71m",
+        "name": "Web Technologies",
+        "code": "WT",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "s3dsx41",
+        "name": "Compiler Design",
+        "code": "CD",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "swkcxym",
+        "name": "Cloud Computing",
+        "code": "PE-I:CC",
+        "type": "Theory",
+        "periods": 2,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "ss465jh",
+        "name": "Web Technologies Lab",
+        "code": "WT Lab",
+        "type": "Lab",
+        "periods": 4,
+        "block": 2,
+        "facultyReq": 2,
+        "labRoomId": "CS-114",
+        "commonGroup": ""
+      },
+      {
+        "id": "sfbwkx7",
+        "name": "DBMS Lab",
+        "code": "DBMS Lab",
+        "type": "Lab",
+        "periods": 2,
+        "block": 2,
+        "facultyReq": 2,
+        "labRoomId": "CS-205",
+        "commonGroup": ""
+      },
+      {
+        "id": "srvgh2q",
+        "name": "Computer Networks Lab",
+        "code": "CN Lab",
+        "type": "Lab",
+        "periods": 2,
+        "block": 2,
+        "facultyReq": 2,
+        "labRoomId": "CS-206",
+        "commonGroup": ""
+      },
+      {
+        "id": "sjbmxim",
+        "name": "Mini Project",
+        "code": "MP",
+        "type": "Project",
+        "periods": 2,
+        "block": 2,
+        "facultyReq": 1,
+        "labRoomId": "CS-207",
+        "commonGroup": ""
+      }
+    ],
+    "CIC-4": [
+      {
+        "id": "s8czwwd",
+        "name": "Renewable and Sustainable Energy",
+        "code": "OE-I:RSE",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": "OE-1"
+      },
+      {
+        "id": "s8mumgr",
+        "name": "Software Quality and Testing",
+        "code": "PE-V:SQT",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "swfn5bo",
+        "name": "Software Project and Service Management",
+        "code": "PE-IV:SPSM",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "syk8uo7",
+        "name": "Digital Media Forensics",
+        "code": "DMF",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "sidppjh",
+        "name": "Blockchain Technology",
+        "code": "BCT",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "s0xugfb",
+        "name": "IoT and Cyber Physical Systems",
+        "code": "IoTCPS",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "s3f41u7",
+        "name": "Engineering Sciences Elective",
+        "code": "ES",
+        "type": "Theory",
+        "periods": 2,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "stuek81",
+        "name": "DevOps Lab",
+        "code": "DevOps Lab",
+        "type": "Lab",
+        "periods": 4,
+        "block": 2,
+        "facultyReq": 2,
+        "labRoomId": "CS-104",
+        "commonGroup": ""
+      },
+      {
+        "id": "s75vg81",
+        "name": "Blockchain Lab",
+        "code": "BCT Lab",
+        "type": "Lab",
+        "periods": 2,
+        "block": 2,
+        "facultyReq": 3,
+        "labRoomId": "CS-109",
+        "commonGroup": ""
+      },
+      {
+        "id": "s1jh0dk",
+        "name": "IoTCPS Lab",
+        "code": "IoTCPS Lab",
+        "type": "Lab",
+        "periods": 2,
+        "block": 2,
+        "facultyReq": 3,
+        "labRoomId": "CS-109",
+        "commonGroup": ""
+      },
+      {
+        "id": "s7oba4y",
+        "name": "Capstone Project Work-1",
+        "code": "CPW-1",
+        "type": "Project",
+        "periods": 2,
+        "block": 2,
+        "facultyReq": 1,
+        "labRoomId": "CS-207",
+        "commonGroup": ""
+      }
+    ],
+    "AIML-4": [
+      {
+        "id": "srnir6u",
+        "name": "Human Resource Management",
+        "code": "OE-I:HRM",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": "OE-1"
+      },
+      {
+        "id": "stwteka",
+        "name": "Deep Learning",
+        "code": "DL",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "s1ndoor",
+        "name": "Computer Vision",
+        "code": "CV",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "sgm6a4o",
+        "name": "Reinforcement Learning",
+        "code": "RL",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "swbivq6",
+        "name": "Generative AI",
+        "code": "GAI",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "sqk6oyc",
+        "name": "Software Project and Service Management",
+        "code": "PE-IV:SPSM",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "sh0oeii",
+        "name": "Engineering Sciences Elective",
+        "code": "ES",
+        "type": "Theory",
+        "periods": 2,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "se700x3",
+        "name": "Deep Learning Lab",
+        "code": "DL Lab",
+        "type": "Lab",
+        "periods": 4,
+        "block": 2,
+        "facultyReq": 2,
+        "labRoomId": "CS-104",
+        "commonGroup": ""
+      },
+      {
+        "id": "s45j8o0",
+        "name": "NLP Lab",
+        "code": "NLP Lab",
+        "type": "Lab",
+        "periods": 2,
+        "block": 2,
+        "facultyReq": 2,
+        "labRoomId": "CS-206",
+        "commonGroup": ""
+      },
+      {
+        "id": "slku7bk",
+        "name": "Computer Vision Lab",
+        "code": "CV Lab",
+        "type": "Lab",
+        "periods": 2,
+        "block": 2,
+        "facultyReq": 2,
+        "labRoomId": "CS-104",
+        "commonGroup": ""
+      },
+      {
+        "id": "swqd6jp",
+        "name": "Capstone Project Work-1",
+        "code": "CPW-1",
+        "type": "Project",
+        "periods": 2,
+        "block": 2,
+        "facultyReq": 1,
+        "labRoomId": "CS-207",
+        "commonGroup": ""
+      }
+    ],
+    "DS-4": [
+      {
+        "id": "s5psxu8",
+        "name": "Intellectual Property Rights",
+        "code": "OE-I:IPR",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": "OE-1"
+      },
+      {
+        "id": "srr4c03",
+        "name": "Predictive Analytics",
+        "code": "PA",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "siw6rli",
+        "name": "Cloud Computing",
+        "code": "CC",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "sued245",
+        "name": "Social Network Analysis",
+        "code": "SNA",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "skw3guj",
+        "name": "Time Series Analysis",
+        "code": "TSA",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "sxddoc1",
+        "name": "Software Quality and Testing",
+        "code": "PE-V:SQT",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "ss9jx80",
+        "name": "Engineering Sciences Elective",
+        "code": "ES",
+        "type": "Theory",
+        "periods": 2,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "s4v8hal",
+        "name": "Predictive Analytics Lab",
+        "code": "PA Lab",
+        "type": "Lab",
+        "periods": 4,
+        "block": 2,
+        "facultyReq": 2,
+        "labRoomId": "CS-109",
+        "commonGroup": ""
+      },
+      {
+        "id": "sedfvy0",
+        "name": "Cloud Computing Lab",
+        "code": "CC Lab",
+        "type": "Lab",
+        "periods": 2,
+        "block": 2,
+        "facultyReq": 2,
+        "labRoomId": "CS-205",
+        "commonGroup": ""
+      },
+      {
+        "id": "su70xo5",
+        "name": "SNA Lab",
+        "code": "SNA Lab",
+        "type": "Lab",
+        "periods": 2,
+        "block": 2,
+        "facultyReq": 2,
+        "labRoomId": "CS-206",
+        "commonGroup": ""
+      },
+      {
+        "id": "sbmgvv6",
+        "name": "Capstone Project Work-1",
+        "code": "CPW-1",
+        "type": "Project",
+        "periods": 2,
+        "block": 2,
+        "facultyReq": 1,
+        "labRoomId": "CS-207",
+        "commonGroup": ""
+      }
+    ],
+    "CSIT-4": [
+      {
+        "id": "s5k0gph",
+        "name": "Entrepreneurship Management",
+        "code": "OE-I:EM",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": "OE-1"
+      },
+      {
+        "id": "s6uo21h",
+        "name": "Cloud Computing",
+        "code": "CC",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "sb7ugad",
+        "name": "Mobile Application Development",
+        "code": "MAD",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "suo9qbn",
+        "name": "Blockchain Technology",
+        "code": "BCT",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "snyje1n",
+        "name": "Cyber Security Fundamentals",
+        "code": "CSF",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "sqi3af8",
+        "name": "Software Quality and Testing",
+        "code": "PE-V:SQT",
+        "type": "Theory",
+        "periods": 3,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "sbd2a13",
+        "name": "Engineering Sciences Elective",
+        "code": "ES",
+        "type": "Theory",
+        "periods": 2,
+        "block": 1,
+        "facultyReq": 1,
+        "labRoomId": "",
+        "commonGroup": ""
+      },
+      {
+        "id": "sl1s4dl",
+        "name": "Mobile App Development Lab",
+        "code": "MAD Lab",
+        "type": "Lab",
+        "periods": 4,
+        "block": 2,
+        "facultyReq": 2,
+        "labRoomId": "CS-109",
+        "commonGroup": ""
+      },
+      {
+        "id": "slj4wox",
+        "name": "Cloud Computing Lab",
+        "code": "CC Lab",
+        "type": "Lab",
+        "periods": 2,
+        "block": 2,
+        "facultyReq": 2,
+        "labRoomId": "CS-205",
+        "commonGroup": ""
+      },
+      {
+        "id": "sfe7g59",
+        "name": "Blockchain Lab",
+        "code": "BCT Lab",
+        "type": "Lab",
+        "periods": 2,
+        "block": 2,
+        "facultyReq": 3,
+        "labRoomId": "CS-109",
+        "commonGroup": ""
+      },
+      {
+        "id": "slcje98",
+        "name": "Capstone Project Work-1",
+        "code": "CPW-1",
+        "type": "Project",
+        "periods": 2,
+        "block": 2,
+        "facultyReq": 1,
+        "labRoomId": "CS-207",
+        "commonGroup": ""
+      }
+    ]
+  },
+  "assignments": {
+    "CIC-2-A": {
+      "s3btglv": [
+        "f04i4jc"
+      ],
+      "syecxov": [
+        "frab7ha"
+      ],
+      "sjbfaga": [
+        "fyte2g1"
+      ],
+      "sr21jvx": [
+        "fkxc6oh"
+      ],
+      "sk1qabe": [
+        "fklgsjw"
+      ],
+      "sb2v0qn": [
+        "fu381xi"
+      ],
+      "syosb0c": [
+        "fuwsk8z"
+      ],
+      "syv1v29": [
+        "f04i4jc",
+        "fvs724f"
+      ],
+      "svz592x": [
+        "fhi7jce",
+        "f9il99o"
+      ],
+      "seendbp": [
+        "fklgsjw",
+        "fnohs2s"
+      ],
+      "shbla6m": [
+        "fa6621v"
+      ]
+    },
+    "CIC-3-A": {
+      "s9xsaqf": [
+        "f93jwxk"
+      ],
+      "s7f8ldk": [
+        "fiuyg71"
+      ],
+      "souqber": [
+        "f1u2u18"
+      ],
+      "s91ikul": [
+        "fs3onw5"
+      ],
+      "s9spcsq": [
+        "f7j8puf"
+      ],
+      "s5ygca0": [
+        "fjw0sm1"
+      ],
+      "s3gsj2k": [
+        "f1k5jo0"
+      ],
+      "swnkugi": [
+        "f93jwxk",
+        "fmvua27"
+      ],
+      "skzruib": [
+        "fiuyg71",
+        "fuzyhjx"
+      ],
+      "sbzr64n": [
+        "fs3onw5",
+        "fkxzksu"
+      ],
+      "sdbdraf": [
+        "fon3gzp"
+      ]
+    },
+    "CIC-4-A": {
+      "s8czwwd": [
+        "f2wxl5l"
+      ],
+      "s8mumgr": [
+        "ftvlte9"
+      ],
+      "swfn5bo": [
+        "fmvua27"
+      ],
+      "syk8uo7": [
+        "f7j8puf"
+      ],
+      "sidppjh": [
+        "fuxak8n"
+      ],
+      "s0xugfb": [
+        "ftjlb2n"
+      ],
+      "s3f41u7": [
+        "fevyfmd"
+      ],
+      "stuek81": [
+        "fuxak8n",
+        "fmvua27"
+      ],
+      "s75vg81": [
+        "fuxak8n",
+        "furpuwu",
+        "fvfe2sm"
+      ],
+      "s1jh0dk": [
+        "ftjlb2n",
+        "f1u2u18",
+        "fjw0sm1"
+      ],
+      "s7oba4y": [
+        "f29x3xf"
+      ]
+    },
+    "AIML-2-A": {
+      "s321w5k": [
+        "fg716wg"
+      ],
+      "sx2565r": [
+        "fhi7jce"
+      ],
+      "s9xo2ak": [
+        "fuwsk8z"
+      ],
+      "stqv97j": [
+        "fevyfmd"
+      ],
+      "stl3rpl": [
+        "fu381xi"
+      ],
+      "sg9wj5i": [
+        "fnohs2s"
+      ],
+      "sg80253": [
+        "fh06l0h"
+      ],
+      "scs7o92": [
+        "fg716wg",
+        "fa6621v"
+      ],
+      "sfgaswn": [
+        "fhi7jce",
+        "f9il99o"
+      ],
+      "sarar8o": [
+        "fu381xi",
+        "fklgsjw"
+      ],
+      "smeiuf6": [
+        "f2trwys"
+      ]
+    },
+    "AIML-3-A": {
+      "s603ttb": [
+        "fw06wkc"
+      ],
+      "sm10o3a": [
+        "fasn7jg"
+      ],
+      "skls3e2": [
+        "fasn7jg"
+      ],
+      "s9s2pn2": [
+        "f86u0ae"
+      ],
+      "smg3k3q": [
+        "f0ec6br"
+      ],
+      "sbz4vy4": [
+        "fsj2dpg"
+      ],
+      "s4fv7f4": [
+        "f7fglzl"
+      ],
+      "s2hwq0e": [
+        "f0ec6br",
+        "f86u0ae"
+      ],
+      "s4se2js": [
+        "fasn7jg",
+        "fuzyhjx"
+      ],
+      "s4t0ycj": [
+        "f86u0ae",
+        "fon3gzp"
+      ],
+      "spm96nl": [
+        "f1k5jo0"
+      ]
+    },
+    "AIML-4-A": {
+      "srnir6u": [
+        "fph3ibb"
+      ],
+      "stwteka": [
+        "ft2v2or"
+      ],
+      "s1ndoor": [
+        "f7fglzl"
+      ],
+      "sgm6a4o": [
+        "fon3gzp"
+      ],
+      "swbivq6": [
+        "fvs724f"
+      ],
+      "sqk6oyc": [
+        "fvs724f"
+      ],
+      "sh0oeii": [
+        "fuxjizo"
+      ],
+      "se700x3": [
+        "ft2v2or",
+        "f29x3xf"
+      ],
+      "s45j8o0": [
+        "f7fglzl",
+        "f29x3xf"
+      ],
+      "slku7bk": [
+        "f7fglzl",
+        "ft2v2or"
+      ],
+      "swqd6jp": [
+        "f1qgqs3"
+      ]
+    },
+    "DS-2-A": {
+      "shsmvia": [
+        "frab7ha"
+      ],
+      "scptmcv": [
+        "f9il99o"
+      ],
+      "sqivbe1": [
+        "fyte2g1"
+      ],
+      "s3s273k": [
+        "fkxc6oh"
+      ],
+      "sytq8lc": [
+        "fklgsjw"
+      ],
+      "sset14o": [
+        "fnohs2s"
+      ],
+      "sq3x84u": [
+        "fh06l0h"
+      ],
+      "s4sql98": [
+        "fa6621v",
+        "f04i4jc"
+      ],
+      "sjnb2jj": [
+        "f9il99o",
+        "ftvlte9"
+      ],
+      "sn82jm8": [
+        "fklgsjw",
+        "fu381xi"
+      ],
+      "suwy8j8": [
+        "f2trwys"
+      ]
+    },
+    "DS-3-A": {
+      "shlltp9": [
+        "fkxzksu"
+      ],
+      "sxkxmn5": [
+        "fw06wkc"
+      ],
+      "smdevtz": [
+        "f1u2u18"
+      ],
+      "se4610e": [
+        "fn0iwbt"
+      ],
+      "s32szv8": [
+        "fv8q6n3"
+      ],
+      "shgq4q9": [
+        "fsj2dpg"
+      ],
+      "swcco8v": [
+        "fchbisd"
+      ],
+      "swbnazg": [
+        "fv8q6n3",
+        "fn0iwbt"
+      ],
+      "se9m4h8": [
+        "fuzyhjx",
+        "fiuyg71"
+      ],
+      "s8te1lx": [
+        "fn0iwbt",
+        "fg716wg"
+      ],
+      "s9ewa72": [
+        "fvfe2sm"
+      ]
+    },
+    "DS-4-A": {
+      "s5psxu8": [
+        "fuxjizo"
+      ],
+      "srr4c03": [
+        "fqgoh7i"
+      ],
+      "siw6rli": [
+        "f2n6nbs"
+      ],
+      "sued245": [
+        "fchbisd"
+      ],
+      "skw3guj": [
+        "fqgoh7i"
+      ],
+      "sxddoc1": [
+        "ftvlte9"
+      ],
+      "ss9jx80": [
+        "fph3ibb"
+      ],
+      "s4v8hal": [
+        "fqgoh7i",
+        "fuzyhjx"
+      ],
+      "sedfvy0": [
+        "f2n6nbs",
+        "f1k5jo0"
+      ],
+      "su70xo5": [
+        "fchbisd",
+        "fiuyg71"
+      ],
+      "sbmgvv6": [
+        "f1qgqs3"
+      ]
+    },
+    "CSIT-2-A": {
+      "svuw421": [
+        "frab7ha"
+      ],
+      "si705t8": [
+        "fhi7jce"
+      ],
+      "sk8owqa": [
+        "fuwsk8z"
+      ],
+      "sxs3yps": [
+        "fevyfmd"
+      ],
+      "sgxgg6w": [
+        "fu381xi"
+      ],
+      "s4kz8rm": [
+        "fnohs2s"
+      ],
+      "s8xsysy": [
+        "fh06l0h"
+      ],
+      "s1wvtty": [
+        "f9il99o",
+        "fg716wg"
+      ],
+      "smitx2h": [
+        "fhi7jce",
+        "ftvlte9"
+      ],
+      "scyk4cu": [
+        "fu381xi",
+        "fnohs2s"
+      ],
+      "shx8ho4": [
+        "f2trwys"
+      ]
+    },
+    "CSIT-3-A": {
+      "smds87s": [
+        "fkxzksu"
+      ],
+      "s09rmva": [
+        "fw06wkc"
+      ],
+      "shqrd1b": [
+        "f1u2u18"
+      ],
+      "sk52mip": [
+        "fs3onw5"
+      ],
+      "scym71m": [
+        "fsws4xh"
+      ],
+      "s3dsx41": [
+        "f1qgqs3"
+      ],
+      "swkcxym": [
+        "f1k5jo0"
+      ],
+      "ss465jh": [
+        "fsws4xh",
+        "fvfe2sm"
+      ],
+      "sfbwkx7": [
+        "fasn7jg",
+        "fiuyg71"
+      ],
+      "srvgh2q": [
+        "fs3onw5",
+        "fjw0sm1"
+      ],
+      "sjbmxim": [
+        "f2trwys"
+      ]
+    },
+    "CSIT-4-A": {
+      "s5k0gph": [
+        "fh06l0h"
+      ],
+      "s6uo21h": [
+        "f2n6nbs"
+      ],
+      "sb7ugad": [
+        "furpuwu"
+      ],
+      "suo9qbn": [
+        "fvfe2sm"
+      ],
+      "snyje1n": [
+        "f2n6nbs"
+      ],
+      "sqi3af8": [
+        "fsj2dpg"
+      ],
+      "sbd2a13": [
+        "fph3ibb"
+      ],
+      "sl1s4dl": [
+        "furpuwu",
+        "fsws4xh"
+      ],
+      "slj4wox": [
+        "f2n6nbs",
+        "f1k5jo0"
+      ],
+      "sfe7g59": [
+        "fvfe2sm",
+        "f7j8puf",
+        "fuxak8n"
+      ],
+      "slcje98": [
+        "ftjlb2n"
+      ]
+    }
+  },
+  "lockedAssignments": {},
+  "subjectFacultyPresets": {},
+  "timetable": {
+    "CIC-2-A": {
+      "Mon": {
+        "p3": {
+          "subId": "shbla6m",
+          "subCode": "ITW",
+          "facIds": [
+            "fa6621v"
+          ],
+          "facId": "fa6621v",
+          "roomId": "CS-114",
+          "blockStart": "p3",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p4": {
+          "subId": "shbla6m",
+          "subCode": "ITW",
+          "facIds": [
+            "fa6621v"
+          ],
+          "facId": "fa6621v",
+          "roomId": "CS-114",
+          "blockStart": "p3",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p5": {
+          "subId": "syecxov",
+          "subCode": "OOP",
+          "facIds": [
+            "frab7ha"
+          ],
+          "facId": "frab7ha",
+          "roomId": "CS-101",
+          "blockStart": "p5",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p2": {
+          "subId": "syosb0c",
+          "subCode": "EVS",
+          "facIds": [
+            "fuwsk8z"
+          ],
+          "facId": "fuwsk8z",
+          "roomId": "CS-101",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p1": {
+          "subId": "s3btglv",
+          "subCode": "DS",
+          "facIds": [
+            "f04i4jc"
+          ],
+          "facId": "f04i4jc",
+          "roomId": "CS-101",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p6": {
+          "subId": "sb2v0qn",
+          "subCode": "COA",
+          "facIds": [
+            "fu381xi"
+          ],
+          "facId": "fu381xi",
+          "roomId": "CS-101",
+          "blockStart": "p6",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Tue": {
+        "p5": {
+          "subId": "syv1v29",
+          "subCode": "DS Lab",
+          "facIds": [
+            "f04i4jc",
+            "fvs724f"
+          ],
+          "facId": "f04i4jc",
+          "roomId": "CS-113",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p6": {
+          "subId": "syv1v29",
+          "subCode": "DS Lab",
+          "facIds": [
+            "f04i4jc",
+            "fvs724f"
+          ],
+          "facId": "f04i4jc",
+          "roomId": "CS-113",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p3": {
+          "subId": "sk1qabe",
+          "subCode": "DE",
+          "facIds": [
+            "fklgsjw"
+          ],
+          "facId": "fklgsjw",
+          "roomId": "CS-101",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p4": {
+          "subId": "s3btglv",
+          "subCode": "DS",
+          "facIds": [
+            "f04i4jc"
+          ],
+          "facId": "f04i4jc",
+          "roomId": "CS-101",
+          "blockStart": "p4",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p2": {
+          "subId": "sjbfaga",
+          "subCode": "DM",
+          "facIds": [
+            "fyte2g1"
+          ],
+          "facId": "fyte2g1",
+          "roomId": "CS-101",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p1": {
+          "subId": "syecxov",
+          "subCode": "OOP",
+          "facIds": [
+            "frab7ha"
+          ],
+          "facId": "frab7ha",
+          "roomId": "CS-101",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Wed": {
+        "p1": {
+          "subId": "seendbp",
+          "subCode": "DE Lab",
+          "facIds": [
+            "fklgsjw",
+            "fnohs2s"
+          ],
+          "facId": "fklgsjw",
+          "roomId": "CS-115",
+          "blockStart": "p1",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p2": {
+          "subId": "seendbp",
+          "subCode": "DE Lab",
+          "facIds": [
+            "fklgsjw",
+            "fnohs2s"
+          ],
+          "facId": "fklgsjw",
+          "roomId": "CS-115",
+          "blockStart": "p1",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p5": {
+          "subId": "syosb0c",
+          "subCode": "EVS",
+          "facIds": [
+            "fuwsk8z"
+          ],
+          "facId": "fuwsk8z",
+          "roomId": "CS-101",
+          "blockStart": "p5",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p3": {
+          "subId": "sr21jvx",
+          "subCode": "PSM",
+          "facIds": [
+            "fkxc6oh"
+          ],
+          "facId": "fkxc6oh",
+          "roomId": "CS-101",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p4": {
+          "subId": "s3btglv",
+          "subCode": "DS",
+          "facIds": [
+            "f04i4jc"
+          ],
+          "facId": "f04i4jc",
+          "roomId": "CS-101",
+          "blockStart": "p4",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p6": {
+          "subId": "syecxov",
+          "subCode": "OOP",
+          "facIds": [
+            "frab7ha"
+          ],
+          "facId": "frab7ha",
+          "roomId": "CS-101",
+          "blockStart": "p6",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Thu": {
+        "p1": {
+          "subId": "svz592x",
+          "subCode": "OOP Lab",
+          "facIds": [
+            "fhi7jce",
+            "f9il99o"
+          ],
+          "facId": "fhi7jce",
+          "roomId": "CS-114",
+          "blockStart": "p1",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p2": {
+          "subId": "svz592x",
+          "subCode": "OOP Lab",
+          "facIds": [
+            "fhi7jce",
+            "f9il99o"
+          ],
+          "facId": "fhi7jce",
+          "roomId": "CS-114",
+          "blockStart": "p1",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p4": {
+          "subId": "sjbfaga",
+          "subCode": "DM",
+          "facIds": [
+            "fyte2g1"
+          ],
+          "facId": "fyte2g1",
+          "roomId": "CS-101",
+          "blockStart": "p4",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p3": {
+          "subId": "sr21jvx",
+          "subCode": "PSM",
+          "facIds": [
+            "fkxc6oh"
+          ],
+          "facId": "fkxc6oh",
+          "roomId": "CS-101",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p5": {
+          "subId": "sk1qabe",
+          "subCode": "DE",
+          "facIds": [
+            "fklgsjw"
+          ],
+          "facId": "fklgsjw",
+          "roomId": "CS-101",
+          "blockStart": "p5",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p6": {
+          "subId": "sb2v0qn",
+          "subCode": "COA",
+          "facIds": [
+            "fu381xi"
+          ],
+          "facId": "fu381xi",
+          "roomId": "CS-101",
+          "blockStart": "p6",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Fri": {
+        "p3": {
+          "subId": "syv1v29",
+          "subCode": "DS Lab",
+          "facIds": [
+            "f04i4jc",
+            "fvs724f"
+          ],
+          "facId": "f04i4jc",
+          "roomId": "CS-113",
+          "blockStart": "p3",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p4": {
+          "subId": "syv1v29",
+          "subCode": "DS Lab",
+          "facIds": [
+            "f04i4jc",
+            "fvs724f"
+          ],
+          "facId": "f04i4jc",
+          "roomId": "CS-113",
+          "blockStart": "p3",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p1": {
+          "subId": "sb2v0qn",
+          "subCode": "COA",
+          "facIds": [
+            "fu381xi"
+          ],
+          "facId": "fu381xi",
+          "roomId": "CS-101",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p2": {
+          "subId": "sjbfaga",
+          "subCode": "DM",
+          "facIds": [
+            "fyte2g1"
+          ],
+          "facId": "fyte2g1",
+          "roomId": "CS-101",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p5": {
+          "subId": "sk1qabe",
+          "subCode": "DE",
+          "facIds": [
+            "fklgsjw"
+          ],
+          "facId": "fklgsjw",
+          "roomId": "CS-101",
+          "blockStart": "p5",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p6": {
+          "subId": "sr21jvx",
+          "subCode": "PSM",
+          "facIds": [
+            "fkxc6oh"
+          ],
+          "facId": "fkxc6oh",
+          "roomId": "CS-101",
+          "blockStart": "p6",
+          "blockSize": 1,
+          "locked": false
+        }
+      }
+    },
+    "CIC-3-A": {
+      "Mon": {
+        "p5": {
+          "subId": "swnkugi",
+          "subCode": "OS Lab",
+          "facIds": [
+            "f93jwxk",
+            "fmvua27"
+          ],
+          "facId": "f93jwxk",
+          "roomId": "CS-205",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p6": {
+          "subId": "swnkugi",
+          "subCode": "OS Lab",
+          "facIds": [
+            "f93jwxk",
+            "fmvua27"
+          ],
+          "facId": "f93jwxk",
+          "roomId": "CS-205",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p2": {
+          "subId": "s5ygca0",
+          "subCode": "IoT",
+          "facIds": [
+            "fjw0sm1"
+          ],
+          "facId": "fjw0sm1",
+          "roomId": "CS-102",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p1": {
+          "subId": "s9xsaqf",
+          "subCode": "OS",
+          "facIds": [
+            "f93jwxk"
+          ],
+          "facId": "f93jwxk",
+          "roomId": "CS-102",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p4": {
+          "subId": "s7f8ldk",
+          "subCode": "DBMS",
+          "facIds": [
+            "fiuyg71"
+          ],
+          "facId": "fiuyg71",
+          "roomId": "CS-102",
+          "blockStart": "p4",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p3": {
+          "subId": "s91ikul",
+          "subCode": "CN",
+          "facIds": [
+            "fs3onw5"
+          ],
+          "facId": "fs3onw5",
+          "roomId": "CS-102",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Tue": {
+        "p1": {
+          "subId": "swnkugi",
+          "subCode": "OS Lab",
+          "facIds": [
+            "f93jwxk",
+            "fmvua27"
+          ],
+          "facId": "f93jwxk",
+          "roomId": "CS-205",
+          "blockStart": "p1",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p2": {
+          "subId": "swnkugi",
+          "subCode": "OS Lab",
+          "facIds": [
+            "f93jwxk",
+            "fmvua27"
+          ],
+          "facId": "f93jwxk",
+          "roomId": "CS-205",
+          "blockStart": "p1",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p3": {
+          "subId": "s3gsj2k",
+          "subCode": "PE-I:CC",
+          "facIds": [
+            "f1k5jo0"
+          ],
+          "facId": "f1k5jo0",
+          "roomId": "CS-102",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p6": {
+          "subId": "s9spcsq",
+          "subCode": "CNS",
+          "facIds": [
+            "f7j8puf"
+          ],
+          "facId": "f7j8puf",
+          "roomId": "CS-102",
+          "blockStart": "p6",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p5": {
+          "subId": "s7f8ldk",
+          "subCode": "DBMS",
+          "facIds": [
+            "fiuyg71"
+          ],
+          "facId": "fiuyg71",
+          "roomId": "CS-102",
+          "blockStart": "p5",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p4": {
+          "subId": "souqber",
+          "subCode": "SE",
+          "facIds": [
+            "f1u2u18"
+          ],
+          "facId": "f1u2u18",
+          "roomId": "CS-102",
+          "blockStart": "p4",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Wed": {
+        "p5": {
+          "subId": "skzruib",
+          "subCode": "DBMS Lab",
+          "facIds": [
+            "fiuyg71",
+            "fuzyhjx"
+          ],
+          "facId": "fiuyg71",
+          "roomId": "CS-205",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p6": {
+          "subId": "skzruib",
+          "subCode": "DBMS Lab",
+          "facIds": [
+            "fiuyg71",
+            "fuzyhjx"
+          ],
+          "facId": "fiuyg71",
+          "roomId": "CS-205",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p3": {
+          "subId": "s91ikul",
+          "subCode": "CN",
+          "facIds": [
+            "fs3onw5"
+          ],
+          "facId": "fs3onw5",
+          "roomId": "CS-102",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p1": {
+          "subId": "s9xsaqf",
+          "subCode": "OS",
+          "facIds": [
+            "f93jwxk"
+          ],
+          "facId": "f93jwxk",
+          "roomId": "CS-102",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p2": {
+          "subId": "s9spcsq",
+          "subCode": "CNS",
+          "facIds": [
+            "f7j8puf"
+          ],
+          "facId": "f7j8puf",
+          "roomId": "CS-102",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p4": {
+          "subId": "souqber",
+          "subCode": "SE",
+          "facIds": [
+            "f1u2u18"
+          ],
+          "facId": "f1u2u18",
+          "roomId": "CS-102",
+          "blockStart": "p4",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Thu": {
+        "p5": {
+          "subId": "sdbdraf",
+          "subCode": "MP",
+          "facIds": [
+            "fon3gzp"
+          ],
+          "facId": "fon3gzp",
+          "roomId": "CS-207",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p6": {
+          "subId": "sdbdraf",
+          "subCode": "MP",
+          "facIds": [
+            "fon3gzp"
+          ],
+          "facId": "fon3gzp",
+          "roomId": "CS-207",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p4": {
+          "subId": "s9spcsq",
+          "subCode": "CNS",
+          "facIds": [
+            "f7j8puf"
+          ],
+          "facId": "f7j8puf",
+          "roomId": "CS-102",
+          "blockStart": "p4",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p1": {
+          "subId": "s91ikul",
+          "subCode": "CN",
+          "facIds": [
+            "fs3onw5"
+          ],
+          "facId": "fs3onw5",
+          "roomId": "CS-102",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p2": {
+          "subId": "s5ygca0",
+          "subCode": "IoT",
+          "facIds": [
+            "fjw0sm1"
+          ],
+          "facId": "fjw0sm1",
+          "roomId": "CS-102",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p3": {
+          "subId": "souqber",
+          "subCode": "SE",
+          "facIds": [
+            "f1u2u18"
+          ],
+          "facId": "f1u2u18",
+          "roomId": "CS-102",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Fri": {
+        "p1": {
+          "subId": "sbzr64n",
+          "subCode": "CN Lab",
+          "facIds": [
+            "fs3onw5",
+            "fkxzksu"
+          ],
+          "facId": "fs3onw5",
+          "roomId": "CS-206",
+          "blockStart": "p1",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p2": {
+          "subId": "sbzr64n",
+          "subCode": "CN Lab",
+          "facIds": [
+            "fs3onw5",
+            "fkxzksu"
+          ],
+          "facId": "fs3onw5",
+          "roomId": "CS-206",
+          "blockStart": "p1",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p3": {
+          "subId": "s9xsaqf",
+          "subCode": "OS",
+          "facIds": [
+            "f93jwxk"
+          ],
+          "facId": "f93jwxk",
+          "roomId": "CS-102",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p6": {
+          "subId": "s3gsj2k",
+          "subCode": "PE-I:CC",
+          "facIds": [
+            "f1k5jo0"
+          ],
+          "facId": "f1k5jo0",
+          "roomId": "CS-102",
+          "blockStart": "p6",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p4": {
+          "subId": "s7f8ldk",
+          "subCode": "DBMS",
+          "facIds": [
+            "fiuyg71"
+          ],
+          "facId": "fiuyg71",
+          "roomId": "CS-102",
+          "blockStart": "p4",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p5": {
+          "subId": "s5ygca0",
+          "subCode": "IoT",
+          "facIds": [
+            "fjw0sm1"
+          ],
+          "facId": "fjw0sm1",
+          "roomId": "CS-102",
+          "blockStart": "p5",
+          "blockSize": 1,
+          "locked": false
+        }
+      }
+    },
+    "CIC-4-A": {
+      "Mon": {
+        "p3": {
+          "subId": "s8czwwd",
+          "subCode": "OE-I:RSE",
+          "facIds": [
+            "f2wxl5l"
+          ],
+          "facId": "f2wxl5l",
+          "roomId": "CS-103",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p1": {
+          "subId": "stuek81",
+          "subCode": "DevOps Lab",
+          "facIds": [
+            "fuxak8n",
+            "fmvua27"
+          ],
+          "facId": "fuxak8n",
+          "roomId": "CS-104",
+          "blockStart": "p1",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p2": {
+          "subId": "stuek81",
+          "subCode": "DevOps Lab",
+          "facIds": [
+            "fuxak8n",
+            "fmvua27"
+          ],
+          "facId": "fuxak8n",
+          "roomId": "CS-104",
+          "blockStart": "p1",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p4": {
+          "subId": "sidppjh",
+          "subCode": "BCT",
+          "facIds": [
+            "fuxak8n"
+          ],
+          "facId": "fuxak8n",
+          "roomId": "CS-103",
+          "blockStart": "p4",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p5": {
+          "subId": "s3f41u7",
+          "subCode": "ES",
+          "facIds": [
+            "fevyfmd"
+          ],
+          "facId": "fevyfmd",
+          "roomId": "CS-103",
+          "blockStart": "p5",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p6": {
+          "subId": "s0xugfb",
+          "subCode": "IoTCPS",
+          "facIds": [
+            "ftjlb2n"
+          ],
+          "facId": "ftjlb2n",
+          "roomId": "CS-103",
+          "blockStart": "p6",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Tue": {
+        "p3": {
+          "subId": "stuek81",
+          "subCode": "DevOps Lab",
+          "facIds": [
+            "fuxak8n",
+            "fmvua27"
+          ],
+          "facId": "fuxak8n",
+          "roomId": "CS-104",
+          "blockStart": "p3",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p4": {
+          "subId": "stuek81",
+          "subCode": "DevOps Lab",
+          "facIds": [
+            "fuxak8n",
+            "fmvua27"
+          ],
+          "facId": "fuxak8n",
+          "roomId": "CS-104",
+          "blockStart": "p3",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p2": {
+          "subId": "sidppjh",
+          "subCode": "BCT",
+          "facIds": [
+            "fuxak8n"
+          ],
+          "facId": "fuxak8n",
+          "roomId": "CS-103",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p1": {
+          "subId": "s8mumgr",
+          "subCode": "PE-V:SQT",
+          "facIds": [
+            "ftvlte9"
+          ],
+          "facId": "ftvlte9",
+          "roomId": "CS-103",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p6": {
+          "subId": "s3f41u7",
+          "subCode": "ES",
+          "facIds": [
+            "fevyfmd"
+          ],
+          "facId": "fevyfmd",
+          "roomId": "CS-103",
+          "blockStart": "p6",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p5": {
+          "subId": "syk8uo7",
+          "subCode": "DMF",
+          "facIds": [
+            "f7j8puf"
+          ],
+          "facId": "f7j8puf",
+          "roomId": "CS-103",
+          "blockStart": "p5",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Wed": {
+        "p5": {
+          "subId": "s1jh0dk",
+          "subCode": "IoTCPS Lab",
+          "facIds": [
+            "ftjlb2n",
+            "f1u2u18",
+            "fjw0sm1"
+          ],
+          "facId": "ftjlb2n",
+          "roomId": "CS-109",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p6": {
+          "subId": "s1jh0dk",
+          "subCode": "IoTCPS Lab",
+          "facIds": [
+            "ftjlb2n",
+            "f1u2u18",
+            "fjw0sm1"
+          ],
+          "facId": "ftjlb2n",
+          "roomId": "CS-109",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p1": {
+          "subId": "s0xugfb",
+          "subCode": "IoTCPS",
+          "facIds": [
+            "ftjlb2n"
+          ],
+          "facId": "ftjlb2n",
+          "roomId": "CS-103",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p2": {
+          "subId": "s8mumgr",
+          "subCode": "PE-V:SQT",
+          "facIds": [
+            "ftvlte9"
+          ],
+          "facId": "ftvlte9",
+          "roomId": "CS-103",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p4": {
+          "subId": "syk8uo7",
+          "subCode": "DMF",
+          "facIds": [
+            "f7j8puf"
+          ],
+          "facId": "f7j8puf",
+          "roomId": "CS-103",
+          "blockStart": "p4",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p3": {
+          "subId": "swfn5bo",
+          "subCode": "PE-IV:SPSM",
+          "facIds": [
+            "fmvua27"
+          ],
+          "facId": "fmvua27",
+          "roomId": "CS-103",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Thu": {
+        "p3": {
+          "subId": "s8czwwd",
+          "subCode": "OE-I:RSE",
+          "facIds": [
+            "f2wxl5l"
+          ],
+          "facId": "f2wxl5l",
+          "roomId": "CS-103",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p1": {
+          "subId": "s7oba4y",
+          "subCode": "CPW-1",
+          "facIds": [
+            "f29x3xf"
+          ],
+          "facId": "f29x3xf",
+          "roomId": "CS-207",
+          "blockStart": "p1",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p2": {
+          "subId": "s7oba4y",
+          "subCode": "CPW-1",
+          "facIds": [
+            "f29x3xf"
+          ],
+          "facId": "f29x3xf",
+          "roomId": "CS-207",
+          "blockStart": "p1",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p6": {
+          "subId": "s0xugfb",
+          "subCode": "IoTCPS",
+          "facIds": [
+            "ftjlb2n"
+          ],
+          "facId": "ftjlb2n",
+          "roomId": "CS-103",
+          "blockStart": "p6",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p4": {
+          "subId": "swfn5bo",
+          "subCode": "PE-IV:SPSM",
+          "facIds": [
+            "fmvua27"
+          ],
+          "facId": "fmvua27",
+          "roomId": "CS-103",
+          "blockStart": "p4",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p5": {
+          "subId": "s8mumgr",
+          "subCode": "PE-V:SQT",
+          "facIds": [
+            "ftvlte9"
+          ],
+          "facId": "ftvlte9",
+          "roomId": "CS-103",
+          "blockStart": "p5",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Fri": {
+        "p4": {
+          "subId": "s8czwwd",
+          "subCode": "OE-I:RSE",
+          "facIds": [
+            "f2wxl5l"
+          ],
+          "facId": "f2wxl5l",
+          "roomId": "CS-103",
+          "blockStart": "p4",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p5": {
+          "subId": "s75vg81",
+          "subCode": "BCT Lab",
+          "facIds": [
+            "fuxak8n",
+            "furpuwu",
+            "fvfe2sm"
+          ],
+          "facId": "fuxak8n",
+          "roomId": "CS-109",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p6": {
+          "subId": "s75vg81",
+          "subCode": "BCT Lab",
+          "facIds": [
+            "fuxak8n",
+            "furpuwu",
+            "fvfe2sm"
+          ],
+          "facId": "fuxak8n",
+          "roomId": "CS-109",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p3": {
+          "subId": "sidppjh",
+          "subCode": "BCT",
+          "facIds": [
+            "fuxak8n"
+          ],
+          "facId": "fuxak8n",
+          "roomId": "CS-103",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p1": {
+          "subId": "swfn5bo",
+          "subCode": "PE-IV:SPSM",
+          "facIds": [
+            "fmvua27"
+          ],
+          "facId": "fmvua27",
+          "roomId": "CS-103",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p2": {
+          "subId": "syk8uo7",
+          "subCode": "DMF",
+          "facIds": [
+            "f7j8puf"
+          ],
+          "facId": "f7j8puf",
+          "roomId": "CS-103",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        }
+      }
+    },
+    "AIML-2-A": {
+      "Mon": {
+        "p5": {
+          "subId": "smeiuf6",
+          "subCode": "ITW",
+          "facIds": [
+            "f2trwys"
+          ],
+          "facId": "f2trwys",
+          "roomId": "CS-114",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p6": {
+          "subId": "smeiuf6",
+          "subCode": "ITW",
+          "facIds": [
+            "f2trwys"
+          ],
+          "facId": "f2trwys",
+          "roomId": "CS-114",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p2": {
+          "subId": "stl3rpl",
+          "subCode": "DE",
+          "facIds": [
+            "fu381xi"
+          ],
+          "facId": "fu381xi",
+          "roomId": "CS-105",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p3": {
+          "subId": "s321w5k",
+          "subCode": "DS",
+          "facIds": [
+            "fg716wg"
+          ],
+          "facId": "fg716wg",
+          "roomId": "CS-105",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p4": {
+          "subId": "sg9wj5i",
+          "subCode": "COA",
+          "facIds": [
+            "fnohs2s"
+          ],
+          "facId": "fnohs2s",
+          "roomId": "CS-105",
+          "blockStart": "p4",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p1": {
+          "subId": "sg80253",
+          "subCode": "EVS",
+          "facIds": [
+            "fh06l0h"
+          ],
+          "facId": "fh06l0h",
+          "roomId": "CS-105",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Tue": {
+        "p3": {
+          "subId": "scs7o92",
+          "subCode": "DS Lab",
+          "facIds": [
+            "fg716wg",
+            "fa6621v"
+          ],
+          "facId": "fg716wg",
+          "roomId": "CS-113",
+          "blockStart": "p3",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p4": {
+          "subId": "scs7o92",
+          "subCode": "DS Lab",
+          "facIds": [
+            "fg716wg",
+            "fa6621v"
+          ],
+          "facId": "fg716wg",
+          "roomId": "CS-113",
+          "blockStart": "p3",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p1": {
+          "subId": "sg9wj5i",
+          "subCode": "COA",
+          "facIds": [
+            "fnohs2s"
+          ],
+          "facId": "fnohs2s",
+          "roomId": "CS-105",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p5": {
+          "subId": "s321w5k",
+          "subCode": "DS",
+          "facIds": [
+            "fg716wg"
+          ],
+          "facId": "fg716wg",
+          "roomId": "CS-105",
+          "blockStart": "p5",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p6": {
+          "subId": "sx2565r",
+          "subCode": "OOP",
+          "facIds": [
+            "fhi7jce"
+          ],
+          "facId": "fhi7jce",
+          "roomId": "CS-105",
+          "blockStart": "p6",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p2": {
+          "subId": "s9xo2ak",
+          "subCode": "DM",
+          "facIds": [
+            "fuwsk8z"
+          ],
+          "facId": "fuwsk8z",
+          "roomId": "CS-105",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Wed": {
+        "p1": {
+          "subId": "scs7o92",
+          "subCode": "DS Lab",
+          "facIds": [
+            "fg716wg",
+            "fa6621v"
+          ],
+          "facId": "fg716wg",
+          "roomId": "CS-113",
+          "blockStart": "p1",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p2": {
+          "subId": "scs7o92",
+          "subCode": "DS Lab",
+          "facIds": [
+            "fg716wg",
+            "fa6621v"
+          ],
+          "facId": "fg716wg",
+          "roomId": "CS-113",
+          "blockStart": "p1",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p3": {
+          "subId": "sx2565r",
+          "subCode": "OOP",
+          "facIds": [
+            "fhi7jce"
+          ],
+          "facId": "fhi7jce",
+          "roomId": "CS-105",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p6": {
+          "subId": "s321w5k",
+          "subCode": "DS",
+          "facIds": [
+            "fg716wg"
+          ],
+          "facId": "fg716wg",
+          "roomId": "CS-105",
+          "blockStart": "p6",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p5": {
+          "subId": "stqv97j",
+          "subCode": "PSM",
+          "facIds": [
+            "fevyfmd"
+          ],
+          "facId": "fevyfmd",
+          "roomId": "CS-105",
+          "blockStart": "p5",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p4": {
+          "subId": "sg80253",
+          "subCode": "EVS",
+          "facIds": [
+            "fh06l0h"
+          ],
+          "facId": "fh06l0h",
+          "roomId": "CS-105",
+          "blockStart": "p4",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Thu": {
+        "p1": {
+          "subId": "sarar8o",
+          "subCode": "DE Lab",
+          "facIds": [
+            "fu381xi",
+            "fklgsjw"
+          ],
+          "facId": "fu381xi",
+          "roomId": "CS-115",
+          "blockStart": "p1",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p2": {
+          "subId": "sarar8o",
+          "subCode": "DE Lab",
+          "facIds": [
+            "fu381xi",
+            "fklgsjw"
+          ],
+          "facId": "fu381xi",
+          "roomId": "CS-115",
+          "blockStart": "p1",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p3": {
+          "subId": "stl3rpl",
+          "subCode": "DE",
+          "facIds": [
+            "fu381xi"
+          ],
+          "facId": "fu381xi",
+          "roomId": "CS-105",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p6": {
+          "subId": "sx2565r",
+          "subCode": "OOP",
+          "facIds": [
+            "fhi7jce"
+          ],
+          "facId": "fhi7jce",
+          "roomId": "CS-105",
+          "blockStart": "p6",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p5": {
+          "subId": "s9xo2ak",
+          "subCode": "DM",
+          "facIds": [
+            "fuwsk8z"
+          ],
+          "facId": "fuwsk8z",
+          "roomId": "CS-105",
+          "blockStart": "p5",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p4": {
+          "subId": "stqv97j",
+          "subCode": "PSM",
+          "facIds": [
+            "fevyfmd"
+          ],
+          "facId": "fevyfmd",
+          "roomId": "CS-105",
+          "blockStart": "p4",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Fri": {
+        "p3": {
+          "subId": "sfgaswn",
+          "subCode": "OOP Lab",
+          "facIds": [
+            "fhi7jce",
+            "f9il99o"
+          ],
+          "facId": "fhi7jce",
+          "roomId": "CS-114",
+          "blockStart": "p3",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p4": {
+          "subId": "sfgaswn",
+          "subCode": "OOP Lab",
+          "facIds": [
+            "fhi7jce",
+            "f9il99o"
+          ],
+          "facId": "fhi7jce",
+          "roomId": "CS-114",
+          "blockStart": "p3",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p2": {
+          "subId": "sg9wj5i",
+          "subCode": "COA",
+          "facIds": [
+            "fnohs2s"
+          ],
+          "facId": "fnohs2s",
+          "roomId": "CS-105",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p1": {
+          "subId": "s9xo2ak",
+          "subCode": "DM",
+          "facIds": [
+            "fuwsk8z"
+          ],
+          "facId": "fuwsk8z",
+          "roomId": "CS-105",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p5": {
+          "subId": "stqv97j",
+          "subCode": "PSM",
+          "facIds": [
+            "fevyfmd"
+          ],
+          "facId": "fevyfmd",
+          "roomId": "CS-105",
+          "blockStart": "p5",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p6": {
+          "subId": "stl3rpl",
+          "subCode": "DE",
+          "facIds": [
+            "fu381xi"
+          ],
+          "facId": "fu381xi",
+          "roomId": "CS-105",
+          "blockStart": "p6",
+          "blockSize": 1,
+          "locked": false
+        }
+      }
+    },
+    "AIML-3-A": {
+      "Mon": {
+        "p3": {
+          "subId": "s2hwq0e",
+          "subCode": "ML Lab",
+          "facIds": [
+            "f0ec6br",
+            "f86u0ae"
+          ],
+          "facId": "f0ec6br",
+          "roomId": "CS-206",
+          "blockStart": "p3",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p4": {
+          "subId": "s2hwq0e",
+          "subCode": "ML Lab",
+          "facIds": [
+            "f0ec6br",
+            "f86u0ae"
+          ],
+          "facId": "f0ec6br",
+          "roomId": "CS-206",
+          "blockStart": "p3",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p2": {
+          "subId": "s9s2pn2",
+          "subCode": "AI",
+          "facIds": [
+            "f86u0ae"
+          ],
+          "facId": "f86u0ae",
+          "roomId": "CS-106",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p1": {
+          "subId": "smg3k3q",
+          "subCode": "ML",
+          "facIds": [
+            "f0ec6br"
+          ],
+          "facId": "f0ec6br",
+          "roomId": "CS-106",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p6": {
+          "subId": "sm10o3a",
+          "subCode": "DBMS",
+          "facIds": [
+            "fasn7jg"
+          ],
+          "facId": "fasn7jg",
+          "roomId": "CS-106",
+          "blockStart": "p6",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p5": {
+          "subId": "s603ttb",
+          "subCode": "OS",
+          "facIds": [
+            "fw06wkc"
+          ],
+          "facId": "fw06wkc",
+          "roomId": "CS-106",
+          "blockStart": "p5",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Tue": {
+        "p1": {
+          "subId": "s2hwq0e",
+          "subCode": "ML Lab",
+          "facIds": [
+            "f0ec6br",
+            "f86u0ae"
+          ],
+          "facId": "f0ec6br",
+          "roomId": "CS-206",
+          "blockStart": "p1",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p2": {
+          "subId": "s2hwq0e",
+          "subCode": "ML Lab",
+          "facIds": [
+            "f0ec6br",
+            "f86u0ae"
+          ],
+          "facId": "f0ec6br",
+          "roomId": "CS-206",
+          "blockStart": "p1",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p3": {
+          "subId": "s603ttb",
+          "subCode": "OS",
+          "facIds": [
+            "fw06wkc"
+          ],
+          "facId": "fw06wkc",
+          "roomId": "CS-106",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p4": {
+          "subId": "s9s2pn2",
+          "subCode": "AI",
+          "facIds": [
+            "f86u0ae"
+          ],
+          "facId": "f86u0ae",
+          "roomId": "CS-106",
+          "blockStart": "p4",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p5": {
+          "subId": "sbz4vy4",
+          "subCode": "CN",
+          "facIds": [
+            "fsj2dpg"
+          ],
+          "facId": "fsj2dpg",
+          "roomId": "CS-106",
+          "blockStart": "p5",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p6": {
+          "subId": "smg3k3q",
+          "subCode": "ML",
+          "facIds": [
+            "f0ec6br"
+          ],
+          "facId": "f0ec6br",
+          "roomId": "CS-106",
+          "blockStart": "p6",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Wed": {
+        "p1": {
+          "subId": "s4t0ycj",
+          "subCode": "AI Lab",
+          "facIds": [
+            "f86u0ae",
+            "fon3gzp"
+          ],
+          "facId": "f86u0ae",
+          "roomId": "CS-206",
+          "blockStart": "p1",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p2": {
+          "subId": "s4t0ycj",
+          "subCode": "AI Lab",
+          "facIds": [
+            "f86u0ae",
+            "fon3gzp"
+          ],
+          "facId": "f86u0ae",
+          "roomId": "CS-206",
+          "blockStart": "p1",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p3": {
+          "subId": "sbz4vy4",
+          "subCode": "CN",
+          "facIds": [
+            "fsj2dpg"
+          ],
+          "facId": "fsj2dpg",
+          "roomId": "CS-106",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p5": {
+          "subId": "s603ttb",
+          "subCode": "OS",
+          "facIds": [
+            "fw06wkc"
+          ],
+          "facId": "fw06wkc",
+          "roomId": "CS-106",
+          "blockStart": "p5",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p4": {
+          "subId": "sm10o3a",
+          "subCode": "DBMS",
+          "facIds": [
+            "fasn7jg"
+          ],
+          "facId": "fasn7jg",
+          "roomId": "CS-106",
+          "blockStart": "p4",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p6": {
+          "subId": "skls3e2",
+          "subCode": "SE",
+          "facIds": [
+            "fasn7jg"
+          ],
+          "facId": "fasn7jg",
+          "roomId": "CS-106",
+          "blockStart": "p6",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Thu": {
+        "p3": {
+          "subId": "spm96nl",
+          "subCode": "MP",
+          "facIds": [
+            "f1k5jo0"
+          ],
+          "facId": "f1k5jo0",
+          "roomId": "CS-207",
+          "blockStart": "p3",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p4": {
+          "subId": "spm96nl",
+          "subCode": "MP",
+          "facIds": [
+            "f1k5jo0"
+          ],
+          "facId": "f1k5jo0",
+          "roomId": "CS-207",
+          "blockStart": "p3",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p2": {
+          "subId": "sm10o3a",
+          "subCode": "DBMS",
+          "facIds": [
+            "fasn7jg"
+          ],
+          "facId": "fasn7jg",
+          "roomId": "CS-106",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p1": {
+          "subId": "skls3e2",
+          "subCode": "SE",
+          "facIds": [
+            "fasn7jg"
+          ],
+          "facId": "fasn7jg",
+          "roomId": "CS-106",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p5": {
+          "subId": "s4fv7f4",
+          "subCode": "PE-I:NLP",
+          "facIds": [
+            "f7fglzl"
+          ],
+          "facId": "f7fglzl",
+          "roomId": "CS-106",
+          "blockStart": "p5",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p6": {
+          "subId": "s9s2pn2",
+          "subCode": "AI",
+          "facIds": [
+            "f86u0ae"
+          ],
+          "facId": "f86u0ae",
+          "roomId": "CS-106",
+          "blockStart": "p6",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Fri": {
+        "p3": {
+          "subId": "s4se2js",
+          "subCode": "DBMS Lab",
+          "facIds": [
+            "fasn7jg",
+            "fuzyhjx"
+          ],
+          "facId": "fasn7jg",
+          "roomId": "CS-205",
+          "blockStart": "p3",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p4": {
+          "subId": "s4se2js",
+          "subCode": "DBMS Lab",
+          "facIds": [
+            "fasn7jg",
+            "fuzyhjx"
+          ],
+          "facId": "fasn7jg",
+          "roomId": "CS-205",
+          "blockStart": "p3",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p1": {
+          "subId": "smg3k3q",
+          "subCode": "ML",
+          "facIds": [
+            "f0ec6br"
+          ],
+          "facId": "f0ec6br",
+          "roomId": "CS-106",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p2": {
+          "subId": "skls3e2",
+          "subCode": "SE",
+          "facIds": [
+            "fasn7jg"
+          ],
+          "facId": "fasn7jg",
+          "roomId": "CS-106",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p5": {
+          "subId": "s4fv7f4",
+          "subCode": "PE-I:NLP",
+          "facIds": [
+            "f7fglzl"
+          ],
+          "facId": "f7fglzl",
+          "roomId": "CS-106",
+          "blockStart": "p5",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p6": {
+          "subId": "sbz4vy4",
+          "subCode": "CN",
+          "facIds": [
+            "fsj2dpg"
+          ],
+          "facId": "fsj2dpg",
+          "roomId": "CS-106",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        }
+      }
+    },
+    "AIML-4-A": {
+      "Mon": {
+        "p3": {
+          "subId": "srnir6u",
+          "subCode": "OE-I:HRM",
+          "facIds": [
+            "fph3ibb"
+          ],
+          "facId": "fph3ibb",
+          "roomId": "CS-107",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p5": {
+          "subId": "slku7bk",
+          "subCode": "CV Lab",
+          "facIds": [
+            "f7fglzl",
+            "ft2v2or"
+          ],
+          "facId": "f7fglzl",
+          "roomId": "CS-104",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p6": {
+          "subId": "slku7bk",
+          "subCode": "CV Lab",
+          "facIds": [
+            "f7fglzl",
+            "ft2v2or"
+          ],
+          "facId": "f7fglzl",
+          "roomId": "CS-104",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p2": {
+          "subId": "s1ndoor",
+          "subCode": "CV",
+          "facIds": [
+            "f7fglzl"
+          ],
+          "facId": "f7fglzl",
+          "roomId": "CS-107",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p1": {
+          "subId": "stwteka",
+          "subCode": "DL",
+          "facIds": [
+            "ft2v2or"
+          ],
+          "facId": "ft2v2or",
+          "roomId": "CS-107",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p4": {
+          "subId": "sqk6oyc",
+          "subCode": "PE-IV:SPSM",
+          "facIds": [
+            "fvs724f"
+          ],
+          "facId": "fvs724f",
+          "roomId": "CS-107",
+          "blockStart": "p4",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Tue": {
+        "p3": {
+          "subId": "s45j8o0",
+          "subCode": "NLP Lab",
+          "facIds": [
+            "f7fglzl",
+            "f29x3xf"
+          ],
+          "facId": "f7fglzl",
+          "roomId": "CS-206",
+          "blockStart": "p3",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p4": {
+          "subId": "s45j8o0",
+          "subCode": "NLP Lab",
+          "facIds": [
+            "f7fglzl",
+            "f29x3xf"
+          ],
+          "facId": "f7fglzl",
+          "roomId": "CS-206",
+          "blockStart": "p3",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p5": {
+          "subId": "s1ndoor",
+          "subCode": "CV",
+          "facIds": [
+            "f7fglzl"
+          ],
+          "facId": "f7fglzl",
+          "roomId": "CS-107",
+          "blockStart": "p5",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p1": {
+          "subId": "sgm6a4o",
+          "subCode": "RL",
+          "facIds": [
+            "fon3gzp"
+          ],
+          "facId": "fon3gzp",
+          "roomId": "CS-107",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p2": {
+          "subId": "sqk6oyc",
+          "subCode": "PE-IV:SPSM",
+          "facIds": [
+            "fvs724f"
+          ],
+          "facId": "fvs724f",
+          "roomId": "CS-107",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p6": {
+          "subId": "stwteka",
+          "subCode": "DL",
+          "facIds": [
+            "ft2v2or"
+          ],
+          "facId": "ft2v2or",
+          "roomId": "CS-107",
+          "blockStart": "p6",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Wed": {
+        "p3": {
+          "subId": "se700x3",
+          "subCode": "DL Lab",
+          "facIds": [
+            "ft2v2or",
+            "f29x3xf"
+          ],
+          "facId": "ft2v2or",
+          "roomId": "CS-104",
+          "blockStart": "p3",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p4": {
+          "subId": "se700x3",
+          "subCode": "DL Lab",
+          "facIds": [
+            "ft2v2or",
+            "f29x3xf"
+          ],
+          "facId": "ft2v2or",
+          "roomId": "CS-104",
+          "blockStart": "p3",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p2": {
+          "subId": "swbivq6",
+          "subCode": "GAI",
+          "facIds": [
+            "fvs724f"
+          ],
+          "facId": "fvs724f",
+          "roomId": "CS-107",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p1": {
+          "subId": "s1ndoor",
+          "subCode": "CV",
+          "facIds": [
+            "f7fglzl"
+          ],
+          "facId": "f7fglzl",
+          "roomId": "CS-107",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p5": {
+          "subId": "stwteka",
+          "subCode": "DL",
+          "facIds": [
+            "ft2v2or"
+          ],
+          "facId": "ft2v2or",
+          "roomId": "CS-107",
+          "blockStart": "p5",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p6": {
+          "subId": "sh0oeii",
+          "subCode": "ES",
+          "facIds": [
+            "fuxjizo"
+          ],
+          "facId": "fuxjizo",
+          "roomId": "CS-107",
+          "blockStart": "p6",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Thu": {
+        "p3": {
+          "subId": "srnir6u",
+          "subCode": "OE-I:HRM",
+          "facIds": [
+            "fph3ibb"
+          ],
+          "facId": "fph3ibb",
+          "roomId": "CS-107",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p5": {
+          "subId": "se700x3",
+          "subCode": "DL Lab",
+          "facIds": [
+            "ft2v2or",
+            "f29x3xf"
+          ],
+          "facId": "ft2v2or",
+          "roomId": "CS-104",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p6": {
+          "subId": "se700x3",
+          "subCode": "DL Lab",
+          "facIds": [
+            "ft2v2or",
+            "f29x3xf"
+          ],
+          "facId": "ft2v2or",
+          "roomId": "CS-104",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p1": {
+          "subId": "sgm6a4o",
+          "subCode": "RL",
+          "facIds": [
+            "fon3gzp"
+          ],
+          "facId": "fon3gzp",
+          "roomId": "CS-107",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p2": {
+          "subId": "swbivq6",
+          "subCode": "GAI",
+          "facIds": [
+            "fvs724f"
+          ],
+          "facId": "fvs724f",
+          "roomId": "CS-107",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p4": {
+          "subId": "sqk6oyc",
+          "subCode": "PE-IV:SPSM",
+          "facIds": [
+            "fvs724f"
+          ],
+          "facId": "fvs724f",
+          "roomId": "CS-107",
+          "blockStart": "p4",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Fri": {
+        "p4": {
+          "subId": "srnir6u",
+          "subCode": "OE-I:HRM",
+          "facIds": [
+            "fph3ibb"
+          ],
+          "facId": "fph3ibb",
+          "roomId": "CS-107",
+          "blockStart": "p4",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p5": {
+          "subId": "swqd6jp",
+          "subCode": "CPW-1",
+          "facIds": [
+            "f1qgqs3"
+          ],
+          "facId": "f1qgqs3",
+          "roomId": "CS-207",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p6": {
+          "subId": "swqd6jp",
+          "subCode": "CPW-1",
+          "facIds": [
+            "f1qgqs3"
+          ],
+          "facId": "f1qgqs3",
+          "roomId": "CS-207",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p2": {
+          "subId": "sgm6a4o",
+          "subCode": "RL",
+          "facIds": [
+            "fon3gzp"
+          ],
+          "facId": "fon3gzp",
+          "roomId": "CS-107",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p1": {
+          "subId": "swbivq6",
+          "subCode": "GAI",
+          "facIds": [
+            "fvs724f"
+          ],
+          "facId": "fvs724f",
+          "roomId": "CS-107",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p3": {
+          "subId": "sh0oeii",
+          "subCode": "ES",
+          "facIds": [
+            "fuxjizo"
+          ],
+          "facId": "fuxjizo",
+          "roomId": "CS-107",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        }
+      }
+    },
+    "DS-2-A": {
+      "Mon": {
+        "p1": {
+          "subId": "suwy8j8",
+          "subCode": "ITW",
+          "facIds": [
+            "f2trwys"
+          ],
+          "facId": "f2trwys",
+          "roomId": "CS-114",
+          "blockStart": "p1",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p2": {
+          "subId": "suwy8j8",
+          "subCode": "ITW",
+          "facIds": [
+            "f2trwys"
+          ],
+          "facId": "f2trwys",
+          "roomId": "CS-114",
+          "blockStart": "p1",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p4": {
+          "subId": "sytq8lc",
+          "subCode": "DE",
+          "facIds": [
+            "fklgsjw"
+          ],
+          "facId": "fklgsjw",
+          "roomId": "CS-108",
+          "blockStart": "p5",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p3": {
+          "subId": "scptmcv",
+          "subCode": "OOP",
+          "facIds": [
+            "f9il99o"
+          ],
+          "facId": "f9il99o",
+          "roomId": "CS-108",
+          "blockStart": "p5",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p5": {
+          "subId": "sset14o",
+          "subCode": "COA",
+          "facIds": [
+            "fnohs2s"
+          ],
+          "facId": "fnohs2s",
+          "roomId": "CS-108",
+          "blockStart": "p5",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p6": {
+          "subId": "shsmvia",
+          "subCode": "DS",
+          "facIds": [
+            "frab7ha"
+          ],
+          "facId": "frab7ha",
+          "roomId": "CS-108",
+          "blockStart": "p6",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Tue": {
+        "p1": {
+          "subId": "s4sql98",
+          "subCode": "DS Lab",
+          "facIds": [
+            "fa6621v",
+            "f04i4jc"
+          ],
+          "facId": "fa6621v",
+          "roomId": "CS-113",
+          "blockStart": "p1",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p2": {
+          "subId": "s4sql98",
+          "subCode": "DS Lab",
+          "facIds": [
+            "fa6621v",
+            "f04i4jc"
+          ],
+          "facId": "fa6621v",
+          "roomId": "CS-113",
+          "blockStart": "p1",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p4": {
+          "subId": "s3s273k",
+          "subCode": "PSM",
+          "facIds": [
+            "fkxc6oh"
+          ],
+          "facId": "fkxc6oh",
+          "roomId": "CS-108",
+          "blockStart": "p4",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p5": {
+          "subId": "sytq8lc",
+          "subCode": "DE",
+          "facIds": [
+            "fklgsjw"
+          ],
+          "facId": "fklgsjw",
+          "roomId": "CS-108",
+          "blockStart": "p5",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p3": {
+          "subId": "scptmcv",
+          "subCode": "OOP",
+          "facIds": [
+            "f9il99o"
+          ],
+          "facId": "f9il99o",
+          "roomId": "CS-108",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p6": {
+          "subId": "shsmvia",
+          "subCode": "DS",
+          "facIds": [
+            "frab7ha"
+          ],
+          "facId": "frab7ha",
+          "roomId": "CS-108",
+          "blockStart": "p6",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Wed": {
+        "p3": {
+          "subId": "sn82jm8",
+          "subCode": "DE Lab",
+          "facIds": [
+            "fklgsjw",
+            "fu381xi"
+          ],
+          "facId": "fklgsjw",
+          "roomId": "CS-115",
+          "blockStart": "p3",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p4": {
+          "subId": "sn82jm8",
+          "subCode": "DE Lab",
+          "facIds": [
+            "fklgsjw",
+            "fu381xi"
+          ],
+          "facId": "fklgsjw",
+          "roomId": "CS-115",
+          "blockStart": "p3",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p2": {
+          "subId": "sqivbe1",
+          "subCode": "DM",
+          "facIds": [
+            "fyte2g1"
+          ],
+          "facId": "fyte2g1",
+          "roomId": "CS-108",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p5": {
+          "subId": "s3s273k",
+          "subCode": "PSM",
+          "facIds": [
+            "fkxc6oh"
+          ],
+          "facId": "fkxc6oh",
+          "roomId": "CS-108",
+          "blockStart": "p4",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p1": {
+          "subId": "scptmcv",
+          "subCode": "OOP",
+          "facIds": [
+            "f9il99o"
+          ],
+          "facId": "f9il99o",
+          "roomId": "CS-108",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p6": {
+          "subId": "sq3x84u",
+          "subCode": "EVS",
+          "facIds": [
+            "fh06l0h"
+          ],
+          "facId": "fh06l0h",
+          "roomId": "CS-108",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Thu": {
+        "p3": {
+          "subId": "s4sql98",
+          "subCode": "DS Lab",
+          "facIds": [
+            "fa6621v",
+            "f04i4jc"
+          ],
+          "facId": "fa6621v",
+          "roomId": "CS-113",
+          "blockStart": "p3",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p4": {
+          "subId": "s4sql98",
+          "subCode": "DS Lab",
+          "facIds": [
+            "fa6621v",
+            "f04i4jc"
+          ],
+          "facId": "fa6621v",
+          "roomId": "CS-113",
+          "blockStart": "p3",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p2": {
+          "subId": "shsmvia",
+          "subCode": "DS",
+          "facIds": [
+            "frab7ha"
+          ],
+          "facId": "frab7ha",
+          "roomId": "CS-108",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p5": {
+          "subId": "sq3x84u",
+          "subCode": "EVS",
+          "facIds": [
+            "fh06l0h"
+          ],
+          "facId": "fh06l0h",
+          "roomId": "CS-108",
+          "blockStart": "p5",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p1": {
+          "subId": "sset14o",
+          "subCode": "COA",
+          "facIds": [
+            "fnohs2s"
+          ],
+          "facId": "fnohs2s",
+          "roomId": "CS-108",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p6": {
+          "subId": "sqivbe1",
+          "subCode": "DM",
+          "facIds": [
+            "fyte2g1"
+          ],
+          "facId": "fyte2g1",
+          "roomId": "CS-108",
+          "blockStart": "p6",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Fri": {
+        "p1": {
+          "subId": "sjnb2jj",
+          "subCode": "OOP Lab",
+          "facIds": [
+            "f9il99o",
+            "ftvlte9"
+          ],
+          "facId": "f9il99o",
+          "roomId": "CS-114",
+          "blockStart": "p1",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p2": {
+          "subId": "sjnb2jj",
+          "subCode": "OOP Lab",
+          "facIds": [
+            "f9il99o",
+            "ftvlte9"
+          ],
+          "facId": "f9il99o",
+          "roomId": "CS-114",
+          "blockStart": "p1",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p5": {
+          "subId": "sqivbe1",
+          "subCode": "DM",
+          "facIds": [
+            "fyte2g1"
+          ],
+          "facId": "fyte2g1",
+          "roomId": "CS-108",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p3": {
+          "subId": "sset14o",
+          "subCode": "COA",
+          "facIds": [
+            "fnohs2s"
+          ],
+          "facId": "fnohs2s",
+          "roomId": "CS-108",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p4": {
+          "subId": "s3s273k",
+          "subCode": "PSM",
+          "facIds": [
+            "fkxc6oh"
+          ],
+          "facId": "fkxc6oh",
+          "roomId": "CS-108",
+          "blockStart": "p4",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p6": {
+          "subId": "sytq8lc",
+          "subCode": "DE",
+          "facIds": [
+            "fklgsjw"
+          ],
+          "facId": "fklgsjw",
+          "roomId": "CS-108",
+          "blockStart": "p6",
+          "blockSize": 1,
+          "locked": false
+        }
+      }
+    },
+    "DS-3-A": {
+      "Mon": {
+        "p1": {
+          "subId": "s8te1lx",
+          "subCode": "DWDM Lab",
+          "facIds": [
+            "fn0iwbt",
+            "fg716wg"
+          ],
+          "facId": "fn0iwbt",
+          "roomId": "CS-205",
+          "blockStart": "p1",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p2": {
+          "subId": "s8te1lx",
+          "subCode": "DWDM Lab",
+          "facIds": [
+            "fn0iwbt",
+            "fg716wg"
+          ],
+          "facId": "fn0iwbt",
+          "roomId": "CS-205",
+          "blockStart": "p1",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p3": {
+          "subId": "shlltp9",
+          "subCode": "OS",
+          "facIds": [
+            "fkxzksu"
+          ],
+          "facId": "fkxzksu",
+          "roomId": "CS-110",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p4": {
+          "subId": "shgq4q9",
+          "subCode": "CN",
+          "facIds": [
+            "fsj2dpg"
+          ],
+          "facId": "fsj2dpg",
+          "roomId": "CS-110",
+          "blockStart": "p4",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p5": {
+          "subId": "s32szv8",
+          "subCode": "BDA",
+          "facIds": [
+            "fv8q6n3"
+          ],
+          "facId": "fv8q6n3",
+          "roomId": "CS-110",
+          "blockStart": "p5",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p6": {
+          "subId": "se4610e",
+          "subCode": "DWDM",
+          "facIds": [
+            "fn0iwbt"
+          ],
+          "facId": "fn0iwbt",
+          "roomId": "CS-110",
+          "blockStart": "p6",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Tue": {
+        "p3": {
+          "subId": "s9ewa72",
+          "subCode": "MP",
+          "facIds": [
+            "fvfe2sm"
+          ],
+          "facId": "fvfe2sm",
+          "roomId": "CS-207",
+          "blockStart": "p3",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p4": {
+          "subId": "s9ewa72",
+          "subCode": "MP",
+          "facIds": [
+            "fvfe2sm"
+          ],
+          "facId": "fvfe2sm",
+          "roomId": "CS-207",
+          "blockStart": "p3",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p2": {
+          "subId": "shlltp9",
+          "subCode": "OS",
+          "facIds": [
+            "fkxzksu"
+          ],
+          "facId": "fkxzksu",
+          "roomId": "CS-110",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p1": {
+          "subId": "sxkxmn5",
+          "subCode": "DBMS",
+          "facIds": [
+            "fw06wkc"
+          ],
+          "facId": "fw06wkc",
+          "roomId": "CS-110",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p6": {
+          "subId": "smdevtz",
+          "subCode": "SE",
+          "facIds": [
+            "f1u2u18"
+          ],
+          "facId": "f1u2u18",
+          "roomId": "CS-110",
+          "blockStart": "p6",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p5": {
+          "subId": "swcco8v",
+          "subCode": "PE-I:DV",
+          "facIds": [
+            "fchbisd"
+          ],
+          "facId": "fchbisd",
+          "roomId": "CS-110",
+          "blockStart": "p5",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Wed": {
+        "p3": {
+          "subId": "swbnazg",
+          "subCode": "BDA Lab",
+          "facIds": [
+            "fv8q6n3",
+            "fn0iwbt"
+          ],
+          "facId": "fv8q6n3",
+          "roomId": "CS-113",
+          "blockStart": "p3",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p4": {
+          "subId": "swbnazg",
+          "subCode": "BDA Lab",
+          "facIds": [
+            "fv8q6n3",
+            "fn0iwbt"
+          ],
+          "facId": "fv8q6n3",
+          "roomId": "CS-113",
+          "blockStart": "p3",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p6": {
+          "subId": "s32szv8",
+          "subCode": "BDA",
+          "facIds": [
+            "fv8q6n3"
+          ],
+          "facId": "fv8q6n3",
+          "roomId": "CS-110",
+          "blockStart": "p6",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p2": {
+          "subId": "smdevtz",
+          "subCode": "SE",
+          "facIds": [
+            "f1u2u18"
+          ],
+          "facId": "f1u2u18",
+          "roomId": "CS-110",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p1": {
+          "subId": "sxkxmn5",
+          "subCode": "DBMS",
+          "facIds": [
+            "fw06wkc"
+          ],
+          "facId": "fw06wkc",
+          "roomId": "CS-110",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p5": {
+          "subId": "shlltp9",
+          "subCode": "OS",
+          "facIds": [
+            "fkxzksu"
+          ],
+          "facId": "fkxzksu",
+          "roomId": "CS-110",
+          "blockStart": "p5",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Thu": {
+        "p3": {
+          "subId": "se9m4h8",
+          "subCode": "DBMS Lab",
+          "facIds": [
+            "fuzyhjx",
+            "fiuyg71"
+          ],
+          "facId": "fuzyhjx",
+          "roomId": "CS-205",
+          "blockStart": "p3",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p4": {
+          "subId": "se9m4h8",
+          "subCode": "DBMS Lab",
+          "facIds": [
+            "fuzyhjx",
+            "fiuyg71"
+          ],
+          "facId": "fuzyhjx",
+          "roomId": "CS-205",
+          "blockStart": "p3",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p2": {
+          "subId": "smdevtz",
+          "subCode": "SE",
+          "facIds": [
+            "f1u2u18"
+          ],
+          "facId": "f1u2u18",
+          "roomId": "CS-110",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p5": {
+          "subId": "s32szv8",
+          "subCode": "BDA",
+          "facIds": [
+            "fv8q6n3"
+          ],
+          "facId": "fv8q6n3",
+          "roomId": "CS-110",
+          "blockStart": "p5",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p1": {
+          "subId": "se4610e",
+          "subCode": "DWDM",
+          "facIds": [
+            "fn0iwbt"
+          ],
+          "facId": "fn0iwbt",
+          "roomId": "CS-110",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p6": {
+          "subId": "shgq4q9",
+          "subCode": "CN",
+          "facIds": [
+            "fsj2dpg"
+          ],
+          "facId": "fsj2dpg",
+          "roomId": "CS-110",
+          "blockStart": "p6",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Fri": {
+        "p5": {
+          "subId": "swbnazg",
+          "subCode": "BDA Lab",
+          "facIds": [
+            "fv8q6n3",
+            "fn0iwbt"
+          ],
+          "facId": "fv8q6n3",
+          "roomId": "CS-113",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p6": {
+          "subId": "swbnazg",
+          "subCode": "BDA Lab",
+          "facIds": [
+            "fv8q6n3",
+            "fn0iwbt"
+          ],
+          "facId": "fv8q6n3",
+          "roomId": "CS-113",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p3": {
+          "subId": "sxkxmn5",
+          "subCode": "DBMS",
+          "facIds": [
+            "fw06wkc"
+          ],
+          "facId": "fw06wkc",
+          "roomId": "CS-110",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p2": {
+          "subId": "swcco8v",
+          "subCode": "PE-I:DV",
+          "facIds": [
+            "fchbisd"
+          ],
+          "facId": "fchbisd",
+          "roomId": "CS-110",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p4": {
+          "subId": "shgq4q9",
+          "subCode": "CN",
+          "facIds": [
+            "fsj2dpg"
+          ],
+          "facId": "fsj2dpg",
+          "roomId": "CS-110",
+          "blockStart": "p4",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p1": {
+          "subId": "se4610e",
+          "subCode": "DWDM",
+          "facIds": [
+            "fn0iwbt"
+          ],
+          "facId": "fn0iwbt",
+          "roomId": "CS-110",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        }
+      }
+    },
+    "DS-4-A": {
+      "Mon": {
+        "p3": {
+          "subId": "s5psxu8",
+          "subCode": "OE-I:IPR",
+          "facIds": [
+            "fuxjizo"
+          ],
+          "facId": "fuxjizo",
+          "roomId": "CS-111",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p1": {
+          "subId": "sbmgvv6",
+          "subCode": "CPW-1",
+          "facIds": [
+            "f1qgqs3"
+          ],
+          "facId": "f1qgqs3",
+          "roomId": "CS-207",
+          "blockStart": "p1",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p2": {
+          "subId": "sbmgvv6",
+          "subCode": "CPW-1",
+          "facIds": [
+            "f1qgqs3"
+          ],
+          "facId": "f1qgqs3",
+          "roomId": "CS-207",
+          "blockStart": "p1",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p6": {
+          "subId": "siw6rli",
+          "subCode": "CC",
+          "facIds": [
+            "f2n6nbs"
+          ],
+          "facId": "f2n6nbs",
+          "roomId": "CS-111",
+          "blockStart": "p6",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p4": {
+          "subId": "skw3guj",
+          "subCode": "TSA",
+          "facIds": [
+            "fqgoh7i"
+          ],
+          "facId": "fqgoh7i",
+          "roomId": "CS-111",
+          "blockStart": "p4",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p5": {
+          "subId": "srr4c03",
+          "subCode": "PA",
+          "facIds": [
+            "fqgoh7i"
+          ],
+          "facId": "fqgoh7i",
+          "roomId": "CS-111",
+          "blockStart": "p5",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Tue": {
+        "p3": {
+          "subId": "s4v8hal",
+          "subCode": "PA Lab",
+          "facIds": [
+            "fqgoh7i",
+            "fuzyhjx"
+          ],
+          "facId": "fqgoh7i",
+          "roomId": "CS-109",
+          "blockStart": "p3",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p4": {
+          "subId": "s4v8hal",
+          "subCode": "PA Lab",
+          "facIds": [
+            "fqgoh7i",
+            "fuzyhjx"
+          ],
+          "facId": "fqgoh7i",
+          "roomId": "CS-109",
+          "blockStart": "p3",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p2": {
+          "subId": "siw6rli",
+          "subCode": "CC",
+          "facIds": [
+            "f2n6nbs"
+          ],
+          "facId": "f2n6nbs",
+          "roomId": "CS-111",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p1": {
+          "subId": "sued245",
+          "subCode": "SNA",
+          "facIds": [
+            "fchbisd"
+          ],
+          "facId": "fchbisd",
+          "roomId": "CS-111",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p6": {
+          "subId": "sxddoc1",
+          "subCode": "PE-V:SQT",
+          "facIds": [
+            "ftvlte9"
+          ],
+          "facId": "ftvlte9",
+          "roomId": "CS-111",
+          "blockStart": "p6",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p5": {
+          "subId": "skw3guj",
+          "subCode": "TSA",
+          "facIds": [
+            "fqgoh7i"
+          ],
+          "facId": "fqgoh7i",
+          "roomId": "CS-111",
+          "blockStart": "p5",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Wed": {
+        "p1": {
+          "subId": "s4v8hal",
+          "subCode": "PA Lab",
+          "facIds": [
+            "fqgoh7i",
+            "fuzyhjx"
+          ],
+          "facId": "fqgoh7i",
+          "roomId": "CS-109",
+          "blockStart": "p1",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p2": {
+          "subId": "s4v8hal",
+          "subCode": "PA Lab",
+          "facIds": [
+            "fqgoh7i",
+            "fuzyhjx"
+          ],
+          "facId": "fqgoh7i",
+          "roomId": "CS-109",
+          "blockStart": "p1",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p4": {
+          "subId": "skw3guj",
+          "subCode": "TSA",
+          "facIds": [
+            "fqgoh7i"
+          ],
+          "facId": "fqgoh7i",
+          "roomId": "CS-111",
+          "blockStart": "p4",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p5": {
+          "subId": "siw6rli",
+          "subCode": "CC",
+          "facIds": [
+            "f2n6nbs"
+          ],
+          "facId": "f2n6nbs",
+          "roomId": "CS-111",
+          "blockStart": "p5",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p3": {
+          "subId": "ss9jx80",
+          "subCode": "ES",
+          "facIds": [
+            "fph3ibb"
+          ],
+          "facId": "fph3ibb",
+          "roomId": "CS-111",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p6": {
+          "subId": "sxddoc1",
+          "subCode": "PE-V:SQT",
+          "facIds": [
+            "ftvlte9"
+          ],
+          "facId": "ftvlte9",
+          "roomId": "CS-111",
+          "blockStart": "p6",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Thu": {
+        "p3": {
+          "subId": "s5psxu8",
+          "subCode": "OE-I:IPR",
+          "facIds": [
+            "fuxjizo"
+          ],
+          "facId": "fuxjizo",
+          "roomId": "CS-111",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p1": {
+          "subId": "su70xo5",
+          "subCode": "SNA Lab",
+          "facIds": [
+            "fchbisd",
+            "fiuyg71"
+          ],
+          "facId": "fchbisd",
+          "roomId": "CS-206",
+          "blockStart": "p1",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p2": {
+          "subId": "su70xo5",
+          "subCode": "SNA Lab",
+          "facIds": [
+            "fchbisd",
+            "fiuyg71"
+          ],
+          "facId": "fchbisd",
+          "roomId": "CS-206",
+          "blockStart": "p1",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p4": {
+          "subId": "sxddoc1",
+          "subCode": "PE-V:SQT",
+          "facIds": [
+            "ftvlte9"
+          ],
+          "facId": "ftvlte9",
+          "roomId": "CS-111",
+          "blockStart": "p4",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p6": {
+          "subId": "sued245",
+          "subCode": "SNA",
+          "facIds": [
+            "fchbisd"
+          ],
+          "facId": "fchbisd",
+          "roomId": "CS-111",
+          "blockStart": "p6",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p5": {
+          "subId": "srr4c03",
+          "subCode": "PA",
+          "facIds": [
+            "fqgoh7i"
+          ],
+          "facId": "fqgoh7i",
+          "roomId": "CS-111",
+          "blockStart": "p5",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Fri": {
+        "p4": {
+          "subId": "s5psxu8",
+          "subCode": "OE-I:IPR",
+          "facIds": [
+            "fuxjizo"
+          ],
+          "facId": "fuxjizo",
+          "roomId": "CS-111",
+          "blockStart": "p4",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p1": {
+          "subId": "sedfvy0",
+          "subCode": "CC Lab",
+          "facIds": [
+            "f2n6nbs",
+            "f1k5jo0"
+          ],
+          "facId": "f2n6nbs",
+          "roomId": "CS-205",
+          "blockStart": "p1",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p2": {
+          "subId": "sedfvy0",
+          "subCode": "CC Lab",
+          "facIds": [
+            "f2n6nbs",
+            "f1k5jo0"
+          ],
+          "facId": "f2n6nbs",
+          "roomId": "CS-205",
+          "blockStart": "p1",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p3": {
+          "subId": "srr4c03",
+          "subCode": "PA",
+          "facIds": [
+            "fqgoh7i"
+          ],
+          "facId": "fqgoh7i",
+          "roomId": "CS-111",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p5": {
+          "subId": "sued245",
+          "subCode": "SNA",
+          "facIds": [
+            "fchbisd"
+          ],
+          "facId": "fchbisd",
+          "roomId": "CS-111",
+          "blockStart": "p5",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p6": {
+          "subId": "ss9jx80",
+          "subCode": "ES",
+          "facIds": [
+            "fph3ibb"
+          ],
+          "facId": "fph3ibb",
+          "roomId": "CS-111",
+          "blockStart": "p5",
+          "blockSize": 1,
+          "locked": false
+        }
+      }
+    },
+    "CSIT-2-A": {
+      "Mon": {
+        "p5": {
+          "subId": "s1wvtty",
+          "subCode": "DS Lab",
+          "facIds": [
+            "f9il99o",
+            "fg716wg"
+          ],
+          "facId": "f9il99o",
+          "roomId": "CS-113",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p6": {
+          "subId": "s1wvtty",
+          "subCode": "DS Lab",
+          "facIds": [
+            "f9il99o",
+            "fg716wg"
+          ],
+          "facId": "f9il99o",
+          "roomId": "CS-113",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p3": {
+          "subId": "svuw421",
+          "subCode": "DS",
+          "facIds": [
+            "frab7ha"
+          ],
+          "facId": "frab7ha",
+          "roomId": "CS-112",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p1": {
+          "subId": "si705t8",
+          "subCode": "OOP",
+          "facIds": [
+            "fhi7jce"
+          ],
+          "facId": "fhi7jce",
+          "roomId": "CS-112",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p2": {
+          "subId": "s8xsysy",
+          "subCode": "EVS",
+          "facIds": [
+            "fh06l0h"
+          ],
+          "facId": "fh06l0h",
+          "roomId": "CS-112",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p4": {
+          "subId": "sgxgg6w",
+          "subCode": "DE",
+          "facIds": [
+            "fu381xi"
+          ],
+          "facId": "fu381xi",
+          "roomId": "CS-112",
+          "blockStart": "p4",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Tue": {
+        "p3": {
+          "subId": "smitx2h",
+          "subCode": "OOP Lab",
+          "facIds": [
+            "fhi7jce",
+            "ftvlte9"
+          ],
+          "facId": "fhi7jce",
+          "roomId": "CS-114",
+          "blockStart": "p3",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p4": {
+          "subId": "smitx2h",
+          "subCode": "OOP Lab",
+          "facIds": [
+            "fhi7jce",
+            "ftvlte9"
+          ],
+          "facId": "fhi7jce",
+          "roomId": "CS-114",
+          "blockStart": "p3",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p2": {
+          "subId": "sgxgg6w",
+          "subCode": "DE",
+          "facIds": [
+            "fu381xi"
+          ],
+          "facId": "fu381xi",
+          "roomId": "CS-112",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p5": {
+          "subId": "svuw421",
+          "subCode": "DS",
+          "facIds": [
+            "frab7ha"
+          ],
+          "facId": "frab7ha",
+          "roomId": "CS-112",
+          "blockStart": "p5",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p6": {
+          "subId": "s4kz8rm",
+          "subCode": "COA",
+          "facIds": [
+            "fnohs2s"
+          ],
+          "facId": "fnohs2s",
+          "roomId": "CS-112",
+          "blockStart": "p6",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p1": {
+          "subId": "sk8owqa",
+          "subCode": "DM",
+          "facIds": [
+            "fuwsk8z"
+          ],
+          "facId": "fuwsk8z",
+          "roomId": "CS-112",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Wed": {
+        "p5": {
+          "subId": "scyk4cu",
+          "subCode": "DE Lab",
+          "facIds": [
+            "fu381xi",
+            "fnohs2s"
+          ],
+          "facId": "fu381xi",
+          "roomId": "CS-115",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p6": {
+          "subId": "scyk4cu",
+          "subCode": "DE Lab",
+          "facIds": [
+            "fu381xi",
+            "fnohs2s"
+          ],
+          "facId": "fu381xi",
+          "roomId": "CS-115",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p3": {
+          "subId": "s4kz8rm",
+          "subCode": "COA",
+          "facIds": [
+            "fnohs2s"
+          ],
+          "facId": "fnohs2s",
+          "roomId": "CS-112",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p1": {
+          "subId": "svuw421",
+          "subCode": "DS",
+          "facIds": [
+            "frab7ha"
+          ],
+          "facId": "frab7ha",
+          "roomId": "CS-112",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p2": {
+          "subId": "sxs3yps",
+          "subCode": "PSM",
+          "facIds": [
+            "fevyfmd"
+          ],
+          "facId": "fevyfmd",
+          "roomId": "CS-112",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p4": {
+          "subId": "sk8owqa",
+          "subCode": "DM",
+          "facIds": [
+            "fuwsk8z"
+          ],
+          "facId": "fuwsk8z",
+          "roomId": "CS-112",
+          "blockStart": "p4",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Thu": {
+        "p5": {
+          "subId": "s1wvtty",
+          "subCode": "DS Lab",
+          "facIds": [
+            "f9il99o",
+            "fg716wg"
+          ],
+          "facId": "f9il99o",
+          "roomId": "CS-113",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p6": {
+          "subId": "s1wvtty",
+          "subCode": "DS Lab",
+          "facIds": [
+            "f9il99o",
+            "fg716wg"
+          ],
+          "facId": "f9il99o",
+          "roomId": "CS-113",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p2": {
+          "subId": "s4kz8rm",
+          "subCode": "COA",
+          "facIds": [
+            "fnohs2s"
+          ],
+          "facId": "fnohs2s",
+          "roomId": "CS-112",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p4": {
+          "subId": "si705t8",
+          "subCode": "OOP",
+          "facIds": [
+            "fhi7jce"
+          ],
+          "facId": "fhi7jce",
+          "roomId": "CS-112",
+          "blockStart": "p4",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p1": {
+          "subId": "sk8owqa",
+          "subCode": "DM",
+          "facIds": [
+            "fuwsk8z"
+          ],
+          "facId": "fuwsk8z",
+          "roomId": "CS-112",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p3": {
+          "subId": "sxs3yps",
+          "subCode": "PSM",
+          "facIds": [
+            "fevyfmd"
+          ],
+          "facId": "fevyfmd",
+          "roomId": "CS-112",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Fri": {
+        "p5": {
+          "subId": "shx8ho4",
+          "subCode": "ITW",
+          "facIds": [
+            "f2trwys"
+          ],
+          "facId": "f2trwys",
+          "roomId": "CS-114",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p6": {
+          "subId": "shx8ho4",
+          "subCode": "ITW",
+          "facIds": [
+            "f2trwys"
+          ],
+          "facId": "f2trwys",
+          "roomId": "CS-114",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p2": {
+          "subId": "s8xsysy",
+          "subCode": "EVS",
+          "facIds": [
+            "fh06l0h"
+          ],
+          "facId": "fh06l0h",
+          "roomId": "CS-112",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p3": {
+          "subId": "sgxgg6w",
+          "subCode": "DE",
+          "facIds": [
+            "fu381xi"
+          ],
+          "facId": "fu381xi",
+          "roomId": "CS-112",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p1": {
+          "subId": "si705t8",
+          "subCode": "OOP",
+          "facIds": [
+            "fhi7jce"
+          ],
+          "facId": "fhi7jce",
+          "roomId": "CS-112",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p4": {
+          "subId": "sxs3yps",
+          "subCode": "PSM",
+          "facIds": [
+            "fevyfmd"
+          ],
+          "facId": "fevyfmd",
+          "roomId": "CS-112",
+          "blockStart": "p4",
+          "blockSize": 1,
+          "locked": false
+        }
+      }
+    },
+    "CSIT-3-A": {
+      "Mon": {
+        "p5": {
+          "subId": "srvgh2q",
+          "subCode": "CN Lab",
+          "facIds": [
+            "fs3onw5",
+            "fjw0sm1"
+          ],
+          "facId": "fs3onw5",
+          "roomId": "CS-206",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p6": {
+          "subId": "srvgh2q",
+          "subCode": "CN Lab",
+          "facIds": [
+            "fs3onw5",
+            "fjw0sm1"
+          ],
+          "facId": "fs3onw5",
+          "roomId": "CS-206",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p3": {
+          "subId": "swkcxym",
+          "subCode": "PE-I:CC",
+          "facIds": [
+            "f1k5jo0"
+          ],
+          "facId": "f1k5jo0",
+          "roomId": "CS-201",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p2": {
+          "subId": "sk52mip",
+          "subCode": "CN",
+          "facIds": [
+            "fs3onw5"
+          ],
+          "facId": "fs3onw5",
+          "roomId": "CS-201",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p4": {
+          "subId": "s3dsx41",
+          "subCode": "CD",
+          "facIds": [
+            "f1qgqs3"
+          ],
+          "facId": "f1qgqs3",
+          "roomId": "CS-201",
+          "blockStart": "p4",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p1": {
+          "subId": "s09rmva",
+          "subCode": "DBMS",
+          "facIds": [
+            "fw06wkc"
+          ],
+          "facId": "fw06wkc",
+          "roomId": "CS-201",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Tue": {
+        "p3": {
+          "subId": "sfbwkx7",
+          "subCode": "DBMS Lab",
+          "facIds": [
+            "fasn7jg",
+            "fiuyg71"
+          ],
+          "facId": "fasn7jg",
+          "roomId": "CS-205",
+          "blockStart": "p3",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p4": {
+          "subId": "sfbwkx7",
+          "subCode": "DBMS Lab",
+          "facIds": [
+            "fasn7jg",
+            "fiuyg71"
+          ],
+          "facId": "fasn7jg",
+          "roomId": "CS-205",
+          "blockStart": "p3",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p2": {
+          "subId": "s3dsx41",
+          "subCode": "CD",
+          "facIds": [
+            "f1qgqs3"
+          ],
+          "facId": "f1qgqs3",
+          "roomId": "CS-201",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p5": {
+          "subId": "smds87s",
+          "subCode": "OS",
+          "facIds": [
+            "fkxzksu"
+          ],
+          "facId": "fkxzksu",
+          "roomId": "CS-201",
+          "blockStart": "p5",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p1": {
+          "subId": "shqrd1b",
+          "subCode": "SE",
+          "facIds": [
+            "f1u2u18"
+          ],
+          "facId": "f1u2u18",
+          "roomId": "CS-201",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p6": {
+          "subId": "scym71m",
+          "subCode": "WT",
+          "facIds": [
+            "fsws4xh"
+          ],
+          "facId": "fsws4xh",
+          "roomId": "CS-201",
+          "blockStart": "p6",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Wed": {
+        "p3": {
+          "subId": "ss465jh",
+          "subCode": "WT Lab",
+          "facIds": [
+            "fsws4xh",
+            "fvfe2sm"
+          ],
+          "facId": "fsws4xh",
+          "roomId": "CS-114",
+          "blockStart": "p3",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p4": {
+          "subId": "ss465jh",
+          "subCode": "WT Lab",
+          "facIds": [
+            "fsws4xh",
+            "fvfe2sm"
+          ],
+          "facId": "fsws4xh",
+          "roomId": "CS-114",
+          "blockStart": "p3",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p2": {
+          "subId": "smds87s",
+          "subCode": "OS",
+          "facIds": [
+            "fkxzksu"
+          ],
+          "facId": "fkxzksu",
+          "roomId": "CS-201",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p1": {
+          "subId": "scym71m",
+          "subCode": "WT",
+          "facIds": [
+            "fsws4xh"
+          ],
+          "facId": "fsws4xh",
+          "roomId": "CS-201",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p5": {
+          "subId": "s3dsx41",
+          "subCode": "CD",
+          "facIds": [
+            "f1qgqs3"
+          ],
+          "facId": "f1qgqs3",
+          "roomId": "CS-201",
+          "blockStart": "p5",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p6": {
+          "subId": "sk52mip",
+          "subCode": "CN",
+          "facIds": [
+            "fs3onw5"
+          ],
+          "facId": "fs3onw5",
+          "roomId": "CS-201",
+          "blockStart": "p6",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Thu": {
+        "p5": {
+          "subId": "ss465jh",
+          "subCode": "WT Lab",
+          "facIds": [
+            "fsws4xh",
+            "fvfe2sm"
+          ],
+          "facId": "fsws4xh",
+          "roomId": "CS-114",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p6": {
+          "subId": "ss465jh",
+          "subCode": "WT Lab",
+          "facIds": [
+            "fsws4xh",
+            "fvfe2sm"
+          ],
+          "facId": "fsws4xh",
+          "roomId": "CS-114",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p2": {
+          "subId": "sk52mip",
+          "subCode": "CN",
+          "facIds": [
+            "fs3onw5"
+          ],
+          "facId": "fs3onw5",
+          "roomId": "CS-201",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p3": {
+          "subId": "s09rmva",
+          "subCode": "DBMS",
+          "facIds": [
+            "fw06wkc"
+          ],
+          "facId": "fw06wkc",
+          "roomId": "CS-201",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p1": {
+          "subId": "swkcxym",
+          "subCode": "PE-I:CC",
+          "facIds": [
+            "f1k5jo0"
+          ],
+          "facId": "f1k5jo0",
+          "roomId": "CS-201",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p4": {
+          "subId": "shqrd1b",
+          "subCode": "SE",
+          "facIds": [
+            "f1u2u18"
+          ],
+          "facId": "f1u2u18",
+          "roomId": "CS-201",
+          "blockStart": "p4",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Fri": {
+        "p1": {
+          "subId": "sjbmxim",
+          "subCode": "MP",
+          "facIds": [
+            "f2trwys"
+          ],
+          "facId": "f2trwys",
+          "roomId": "CS-207",
+          "blockStart": "p1",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p2": {
+          "subId": "sjbmxim",
+          "subCode": "MP",
+          "facIds": [
+            "f2trwys"
+          ],
+          "facId": "f2trwys",
+          "roomId": "CS-207",
+          "blockStart": "p1",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p3": {
+          "subId": "shqrd1b",
+          "subCode": "SE",
+          "facIds": [
+            "f1u2u18"
+          ],
+          "facId": "f1u2u18",
+          "roomId": "CS-201",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p5": {
+          "subId": "scym71m",
+          "subCode": "WT",
+          "facIds": [
+            "fsws4xh"
+          ],
+          "facId": "fsws4xh",
+          "roomId": "CS-201",
+          "blockStart": "p5",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p4": {
+          "subId": "s09rmva",
+          "subCode": "DBMS",
+          "facIds": [
+            "fw06wkc"
+          ],
+          "facId": "fw06wkc",
+          "roomId": "CS-201",
+          "blockStart": "p4",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p6": {
+          "subId": "smds87s",
+          "subCode": "OS",
+          "facIds": [
+            "fkxzksu"
+          ],
+          "facId": "fkxzksu",
+          "roomId": "CS-201",
+          "blockStart": "p6",
+          "blockSize": 1,
+          "locked": false
+        }
+      }
+    },
+    "CSIT-4-A": {
+      "Mon": {
+        "p3": {
+          "subId": "s5k0gph",
+          "subCode": "OE-I:EM",
+          "facIds": [
+            "fh06l0h"
+          ],
+          "facId": "fh06l0h",
+          "roomId": "CS-202",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p5": {
+          "subId": "sfe7g59",
+          "subCode": "BCT Lab",
+          "facIds": [
+            "fvfe2sm",
+            "f7j8puf",
+            "fuxak8n"
+          ],
+          "facId": "fvfe2sm",
+          "roomId": "CS-109",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p6": {
+          "subId": "sfe7g59",
+          "subCode": "BCT Lab",
+          "facIds": [
+            "fvfe2sm",
+            "f7j8puf",
+            "fuxak8n"
+          ],
+          "facId": "fvfe2sm",
+          "roomId": "CS-109",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p2": {
+          "subId": "suo9qbn",
+          "subCode": "BCT",
+          "facIds": [
+            "fvfe2sm"
+          ],
+          "facId": "fvfe2sm",
+          "roomId": "CS-202",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p1": {
+          "subId": "s6uo21h",
+          "subCode": "CC",
+          "facIds": [
+            "f2n6nbs"
+          ],
+          "facId": "f2n6nbs",
+          "roomId": "CS-202",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p4": {
+          "subId": "sbd2a13",
+          "subCode": "ES",
+          "facIds": [
+            "fph3ibb"
+          ],
+          "facId": "fph3ibb",
+          "roomId": "CS-202",
+          "blockStart": "p4",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Tue": {
+        "p5": {
+          "subId": "slj4wox",
+          "subCode": "CC Lab",
+          "facIds": [
+            "f2n6nbs",
+            "f1k5jo0"
+          ],
+          "facId": "f2n6nbs",
+          "roomId": "CS-205",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p6": {
+          "subId": "slj4wox",
+          "subCode": "CC Lab",
+          "facIds": [
+            "f2n6nbs",
+            "f1k5jo0"
+          ],
+          "facId": "f2n6nbs",
+          "roomId": "CS-205",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p3": {
+          "subId": "sqi3af8",
+          "subCode": "PE-V:SQT",
+          "facIds": [
+            "fsj2dpg"
+          ],
+          "facId": "fsj2dpg",
+          "roomId": "CS-202",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p4": {
+          "subId": "sb7ugad",
+          "subCode": "MAD",
+          "facIds": [
+            "furpuwu"
+          ],
+          "facId": "furpuwu",
+          "roomId": "CS-202",
+          "blockStart": "p4",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p1": {
+          "subId": "snyje1n",
+          "subCode": "CSF",
+          "facIds": [
+            "f2n6nbs"
+          ],
+          "facId": "f2n6nbs",
+          "roomId": "CS-202",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p2": {
+          "subId": "suo9qbn",
+          "subCode": "BCT",
+          "facIds": [
+            "fvfe2sm"
+          ],
+          "facId": "fvfe2sm",
+          "roomId": "CS-202",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Wed": {
+        "p3": {
+          "subId": "slcje98",
+          "subCode": "CPW-1",
+          "facIds": [
+            "ftjlb2n"
+          ],
+          "facId": "ftjlb2n",
+          "roomId": "CS-207",
+          "blockStart": "p3",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p4": {
+          "subId": "slcje98",
+          "subCode": "CPW-1",
+          "facIds": [
+            "ftjlb2n"
+          ],
+          "facId": "ftjlb2n",
+          "roomId": "CS-207",
+          "blockStart": "p3",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p1": {
+          "subId": "s6uo21h",
+          "subCode": "CC",
+          "facIds": [
+            "f2n6nbs"
+          ],
+          "facId": "f2n6nbs",
+          "roomId": "CS-202",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p2": {
+          "subId": "sb7ugad",
+          "subCode": "MAD",
+          "facIds": [
+            "furpuwu"
+          ],
+          "facId": "furpuwu",
+          "roomId": "CS-202",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p6": {
+          "subId": "sqi3af8",
+          "subCode": "PE-V:SQT",
+          "facIds": [
+            "fsj2dpg"
+          ],
+          "facId": "fsj2dpg",
+          "roomId": "CS-202",
+          "blockStart": "p6",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p5": {
+          "subId": "suo9qbn",
+          "subCode": "BCT",
+          "facIds": [
+            "fvfe2sm"
+          ],
+          "facId": "fvfe2sm",
+          "roomId": "CS-202",
+          "blockStart": "p5",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Thu": {
+        "p3": {
+          "subId": "s5k0gph",
+          "subCode": "OE-I:EM",
+          "facIds": [
+            "fh06l0h"
+          ],
+          "facId": "fh06l0h",
+          "roomId": "CS-202",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p1": {
+          "subId": "sl1s4dl",
+          "subCode": "MAD Lab",
+          "facIds": [
+            "furpuwu",
+            "fsws4xh"
+          ],
+          "facId": "furpuwu",
+          "roomId": "CS-109",
+          "blockStart": "p1",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p2": {
+          "subId": "sl1s4dl",
+          "subCode": "MAD Lab",
+          "facIds": [
+            "furpuwu",
+            "fsws4xh"
+          ],
+          "facId": "furpuwu",
+          "roomId": "CS-109",
+          "blockStart": "p1",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p4": {
+          "subId": "snyje1n",
+          "subCode": "CSF",
+          "facIds": [
+            "f2n6nbs"
+          ],
+          "facId": "f2n6nbs",
+          "roomId": "CS-202",
+          "blockStart": "p4",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p5": {
+          "subId": "sbd2a13",
+          "subCode": "ES",
+          "facIds": [
+            "fph3ibb"
+          ],
+          "facId": "fph3ibb",
+          "roomId": "CS-202",
+          "blockStart": "p5",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p6": {
+          "subId": "sb7ugad",
+          "subCode": "MAD",
+          "facIds": [
+            "furpuwu"
+          ],
+          "facId": "furpuwu",
+          "roomId": "CS-202",
+          "blockStart": "p6",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Fri": {
+        "p4": {
+          "subId": "s5k0gph",
+          "subCode": "OE-I:EM",
+          "facIds": [
+            "fh06l0h"
+          ],
+          "facId": "fh06l0h",
+          "roomId": "CS-202",
+          "blockStart": "p4",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p1": {
+          "subId": "sl1s4dl",
+          "subCode": "MAD Lab",
+          "facIds": [
+            "furpuwu",
+            "fsws4xh"
+          ],
+          "facId": "furpuwu",
+          "roomId": "CS-109",
+          "blockStart": "p1",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p2": {
+          "subId": "sl1s4dl",
+          "subCode": "MAD Lab",
+          "facIds": [
+            "furpuwu",
+            "fsws4xh"
+          ],
+          "facId": "furpuwu",
+          "roomId": "CS-109",
+          "blockStart": "p1",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p3": {
+          "subId": "snyje1n",
+          "subCode": "CSF",
+          "facIds": [
+            "f2n6nbs"
+          ],
+          "facId": "f2n6nbs",
+          "roomId": "CS-202",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p5": {
+          "subId": "sqi3af8",
+          "subCode": "PE-V:SQT",
+          "facIds": [
+            "fsj2dpg"
+          ],
+          "facId": "fsj2dpg",
+          "roomId": "CS-202",
+          "blockStart": "p5",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p6": {
+          "subId": "s6uo21h",
+          "subCode": "CC",
+          "facIds": [
+            "f2n6nbs"
+          ],
+          "facId": "f2n6nbs",
+          "roomId": "CS-202",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        }
+      }
+    }
+  },
+  "settings": {
+    "periods": [
+      {
+        "id": "p1",
+        "label": "P1",
+        "start": "09:30",
+        "end": "10:30",
+        "brk": false
+      },
+      {
+        "id": "p2",
+        "label": "P2",
+        "start": "10:30",
+        "end": "11:30",
+        "brk": false
+      },
+      {
+        "id": "b1",
+        "label": "Break",
+        "start": "11:30",
+        "end": "11:40",
+        "brk": true
+      },
+      {
+        "id": "p3",
+        "label": "P3",
+        "start": "11:40",
+        "end": "12:40",
+        "brk": false
+      },
+      {
+        "id": "p4",
+        "label": "P4",
+        "start": "12:40",
+        "end": "13:40",
+        "brk": false
+      },
+      {
+        "id": "lunch",
+        "label": "Lunch",
+        "start": "13:40",
+        "end": "14:15",
+        "brk": true
+      },
+      {
+        "id": "p5",
+        "label": "P5",
+        "start": "14:15",
+        "end": "15:15",
+        "brk": false
+      },
+      {
+        "id": "p6",
+        "label": "P6",
+        "start": "15:15",
+        "end": "16:15",
+        "brk": false
+      }
+    ],
+    "labWindows": [
+      [
+        "p1",
+        "p2"
+      ],
+      [
+        "p3",
+        "p4"
+      ],
+      [
+        "p5",
+        "p6"
+      ]
+    ],
+    "defaultSaturdayPeriods": 4
+  }
 }
