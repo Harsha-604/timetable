@@ -1,6 +1,7 @@
 import { useStore } from '../store/useStore'
 import { BRANCHES, YEARS } from '../utils/constants'
 import { usePublish } from '../utils/usePublish'
+import { isPinSet } from '../utils/publisher'
 
 const NAV = [
   { view: 'home',         label: 'Dashboard' },
@@ -17,10 +18,11 @@ const NAV = [
   { view: 'export',       label: 'Export' },
 ]
 
-export default function Sidebar({ currentPage, onNavigate, onOpenViewer }) {
+export default function Sidebar({ currentPage, onNavigate, onOpenViewer, onLock, onLogout }) {
   const { faculty, rooms, subjects, saveProject, loadProject, resetAll, toast } = useStore()
-  const { publishing, deployStatus, handlePublish } = usePublish({ onNavigate })
+  const { publishing, deployStatus, isOffline, handlePublish } = usePublish({ onNavigate })
   const totalSubs = Object.values(subjects).reduce((a, b) => a + b.length, 0)
+  const hasPin = isPinSet()
 
   const badge = (key) => {
     if (key === 'faculty')  return faculty.length
@@ -69,7 +71,7 @@ export default function Sidebar({ currentPage, onNavigate, onOpenViewer }) {
         <button
           className="btn btn-primary btn-sm"
           style={{ width: '100%', marginBottom: '.4rem' }}
-          disabled={publishing}
+          disabled={publishing || isOffline}
           onClick={handlePublish}
         >
           {publishing ? 'Publishing…' : 'Publish'}
@@ -117,10 +119,26 @@ export default function Sidebar({ currentPage, onNavigate, onOpenViewer }) {
         </label>
         <button
           className="btn btn-ghost btn-sm"
-          style={{ width: '100%', color: 'var(--danger)' }}
+          style={{ width: '100%', color: 'var(--danger)', marginBottom: '.4rem' }}
           onClick={() => { if (confirm('Reset ALL data? This cannot be undone.')) { resetAll(); toast('All data reset', 'ok') } }}
         >
           Reset All
+        </button>
+        {hasPin && (
+          <button
+            className="btn btn-ghost btn-sm"
+            style={{ width: '100%', marginBottom: '.4rem' }}
+            onClick={onLock}
+          >
+            Lock
+          </button>
+        )}
+        <button
+          className="btn btn-ghost btn-sm"
+          style={{ width: '100%', color: 'var(--muted)' }}
+          onClick={onLogout}
+        >
+          Log out
         </button>
       </div>
     </aside>

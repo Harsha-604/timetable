@@ -5,6 +5,10 @@ import {
   publish as publishApi,
   getLatestWorkflowRun,
   buildProjectPayload,
+  testGitHubConnection,
+  getIsOffline,
+  setIsOffline,
+  setAuthCached,
 } from './publisher'
 import { auditTimetableHardViolations } from './validator'
 
@@ -78,6 +82,11 @@ export function usePublish({ onNavigate } = {}) {
   const handlePublish = async () => {
     if (publishing) return
 
+    if (getIsOffline()) {
+      toast('Publishing is disabled until you are back online.', 'err')
+      return
+    }
+
     // Pre-check 1: Token saved?
     const token = getStoredToken()
     if (!token) {
@@ -87,6 +96,27 @@ export function usePublish({ onNavigate } = {}) {
       }
       return
     }
+
+    // Pre-verify token push permissions immediately before publish
+    const owner = settings.publishing?.owner || 'Harsha-604'
+    const repo = settings.publishing?.repo || 'timetable'
+    const branch = settings.publishing?.branch || 'master'
+    const actionsUrl = `https://github.com/${owner}/${repo}/actions`
+
+    const connTest = await testGitHubConnection({ owner, repo, token })
+    if (!connTest.ok || !connTest.canPush) {
+      if (connTest.status === 401) {
+        toast('Token invalid or expired, update it in Settings', 'err')
+      } else if (connTest.isNetworkError) {
+        setIsOffline(true)
+        toast('Could not reach GitHub', 'err')
+      } else {
+        toast(connTest.error || 'Token cannot write to this repo', 'err')
+      }
+      return
+    }
+    setAuthCached()
+    setIsOffline(false)
 
     // Pre-check 2: Any class has no timetable?
     const missingClasses = classes.filter(
@@ -131,10 +161,6 @@ export function usePublish({ onNavigate } = {}) {
     }
 
     setPublishing(true)
-    const owner = settings.publishing?.owner || 'Harsha-604'
-    const repo = settings.publishing?.repo || 'timetable'
-    const branch = settings.publishing?.branch || 'master'
-    const actionsUrl = `https://github.com/${owner}/${repo}/actions`
 
     try {
       const now = new Date().toISOString()
@@ -168,6 +194,7 @@ export function usePublish({ onNavigate } = {}) {
   return {
     publishing,
     deployStatus,
+    isOffline: getIsOffline(),
     handlePublish,
   }
 }

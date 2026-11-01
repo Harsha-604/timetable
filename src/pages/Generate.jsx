@@ -7,7 +7,7 @@ import { usePublish } from '../utils/usePublish'
 
 export default function Generate({ onNavigate }) {
   const state = useStore()
-  const { publishing, deployStatus, handlePublish } = usePublish({ onNavigate })
+  const { publishing, deployStatus, isOffline, handlePublish } = usePublish({ onNavigate })
   const {
     classes,
     faculty,
@@ -601,7 +601,7 @@ export default function Generate({ onNavigate }) {
                   )}
                   <button
                     className="btn btn-primary btn-sm"
-                    disabled={publishing}
+                    disabled={publishing || isOffline}
                     onClick={handlePublish}
                   >
                     {publishing ? 'Publishing…' : 'Publish'}

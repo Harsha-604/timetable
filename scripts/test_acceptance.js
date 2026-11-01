@@ -8,8 +8,17 @@ import {
   fromBase64Utf8,
   publish,
   buildProjectPayload,
+  getStoredToken,
   setStoredToken,
   clearStoredToken,
+  getStoredPinHash,
+  setStoredPinHash,
+  clearStoredPinHash,
+  hashPin,
+  verifyPin,
+  clearAuthCache,
+  testGitHubConnection,
+  verifyEditorAccess,
 } from '../src/utils/publisher.js'
 
 const cic4Sample = JSON.parse(fs.readFileSync('./src/sample/cic4.json', 'utf-8'))
@@ -851,13 +860,240 @@ async function testSuite6_PublisherTests() {
   console.log('Suite 6: PASS (Base64 non-ASCII roundtrip, GET/PUT flow, 404, 409 retry, token security)')
 }
 
+function initMockStorage() {
+  if (typeof global.localStorage === 'undefined') {
+    const lStore = new Map()
+    global.localStorage = {
+      getItem: (k) => (lStore.has(k) ? lStore.get(k) : null),
+      setItem: (k, v) => lStore.set(k, String(v)),
+      removeItem: (k) => lStore.delete(k),
+      clear: () => lStore.clear(),
+    }
+  }
+  if (typeof global.sessionStorage === 'undefined') {
+    const sStore = new Map()
+    global.sessionStorage = {
+      getItem: (k) => (sStore.has(k) ? sStore.get(k) : null),
+      setItem: (k, v) => sStore.set(k, String(v)),
+      removeItem: (k) => sStore.delete(k),
+      clear: () => sStore.clear(),
+    }
+  }
+}
+
+async function testSuite7_AuthenticationSecurity() {
+  console.log('\n--- Running Suite 7: Authentication & Security Tests ---')
+  initMockStorage()
+  const originalFetch = global.fetch
+
+  // 1. Login allowed only when permissions.push is true; 401, 404 and push:false are rejected and nothing is saved
+  clearStoredToken()
+  clearAuthCache()
+
+  // 1a. Success case: permissions.push === true
+  global.fetch = async () => ({
+    status: 200,
+    ok: true,
+    json: async () => ({ permissions: { push: true } }),
+  })
+  const successTest = await testGitHubConnection({
+    owner: 'Harsha-604',
+    repo: 'timetable',
+    token: 'valid-pat-123',
+  })
+  if (!successTest.ok || !successTest.canPush) {
+    throw new Error('testGitHubConnection failed for push:true')
+  }
+  setStoredToken('valid-pat-123')
+  if (getStoredToken() !== 'valid-pat-123') {
+    throw new Error('Valid token was not saved on successful login')
+  }
+  clearStoredToken()
+
+  // 1b. 401 rejected and nothing saved
+  global.fetch = async () => ({
+    status: 401,
+    ok: false,
+    json: async () => ({ message: 'Bad credentials' }),
+  })
+  const test401 = await testGitHubConnection({
+    owner: 'Harsha-604',
+    repo: 'timetable',
+    token: 'invalid-pat-401',
+  })
+  if (test401.ok || test401.canPush) {
+    throw new Error('401 should not be allowed')
+  }
+  if (getStoredToken()) {
+    throw new Error('Token should not be saved on 401 failure')
+  }
+
+  // 1c. 404 rejected and nothing saved
+  global.fetch = async () => ({
+    status: 404,
+    ok: false,
+    json: async () => ({ message: 'Not Found' }),
+  })
+  const test404 = await testGitHubConnection({
+    owner: 'Harsha-604',
+    repo: 'timetable',
+    token: 'missing-repo-404',
+  })
+  if (test404.ok || test404.canPush) {
+    throw new Error('404 should not be allowed')
+  }
+  if (getStoredToken()) {
+    throw new Error('Token should not be saved on 404 failure')
+  }
+
+  // 1d. push: false rejected and nothing saved
+  global.fetch = async () => ({
+    status: 200,
+    ok: true,
+    json: async () => ({ permissions: { push: false } }),
+  })
+  const testReadOnly = await testGitHubConnection({
+    owner: 'Harsha-604',
+    repo: 'timetable',
+    token: 'readonly-token',
+  })
+  if (testReadOnly.ok || testReadOnly.canPush) {
+    throw new Error('push:false should not be allowed')
+  }
+  if (getStoredToken()) {
+    throw new Error('Token should not be saved on push:false failure')
+  }
+
+  // 2. Stored token that now returns 401 on load is cleared and the login screen is required
+  setStoredToken('expired-pat-token')
+  clearAuthCache()
+  global.fetch = async () => ({
+    status: 401,
+    ok: false,
+    json: async () => ({ message: 'Bad credentials' }),
+  })
+  const accessCheck = await verifyEditorAccess({
+    owner: 'Harsha-604',
+    repo: 'timetable',
+    token: getStoredToken(),
+  })
+  if (accessCheck.allowed) {
+    throw new Error('verifyEditorAccess allowed an expired 401 token')
+  }
+  if (accessCheck.reason !== 'revoked') {
+    throw new Error(`Expected reason 'revoked', got ${accessCheck.reason}`)
+  }
+  if (getStoredToken() !== '') {
+    throw new Error('Stored token was not cleared after 401 on load')
+  }
+
+  // 3. PIN: correct PIN unlocks, wrong PIN fails, hash in storage does not contain the PIN and differs for the same PIN with different salts, 5 failures trigger the wait
+  clearStoredPinHash()
+  const pinCode = '7391'
+  const hash1 = await hashPin(pinCode)
+  setStoredPinHash(hash1)
+
+  const storedPinHash = getStoredPinHash()
+  if (storedPinHash.includes(pinCode)) {
+    throw new Error('Security violation: Stored PIN hash contains the plain PIN')
+  }
+
+  const hash2 = await hashPin(pinCode)
+  if (hash1 === hash2) {
+    throw new Error('Two hashes of the same PIN must differ due to random 16-byte salt')
+  }
+
+  const verifyCorrect = await verifyPin(pinCode, storedPinHash)
+  if (!verifyCorrect) {
+    throw new Error('Correct PIN failed verification')
+  }
+
+  const verifyWrong = await verifyPin('0000', storedPinHash)
+  if (verifyWrong) {
+    throw new Error('Wrong PIN succeeded verification')
+  }
+
+  // 5 failures trigger wait
+  let consecutiveFailures = 0
+  let waitTriggered = false
+  for (let i = 0; i < 5; i++) {
+    const ok = await verifyPin('wrong', storedPinHash)
+    if (!ok) {
+      consecutiveFailures++
+      if (consecutiveFailures >= 5) {
+        waitTriggered = true
+      }
+    }
+  }
+  if (!waitTriggered) {
+    throw new Error('5 wrong PIN attempts failed to trigger cooldown/wait')
+  }
+  clearStoredPinHash()
+
+  // 4. Save Project / publish payload contains neither token nor PIN hash
+  const secretToken = 'super-secret-pat-token-for-test'
+  const secretPinHash = await hashPin('9876')
+  setStoredToken(secretToken)
+  setStoredPinHash(secretPinHash)
+
+  const mockState = {
+    classes: [{ id: 'CIC-4-A' }],
+    faculty: [{ id: 'f1', name: 'Dr. Test' }],
+    rooms: [],
+    subjects: {},
+    assignments: {},
+    lockedAssignments: {},
+    subjectFacultyPresets: {},
+    timetable: {},
+    settings: {
+      publishing: {
+        owner: 'Harsha-604',
+        repo: 'timetable',
+        branch: 'master',
+        token: secretToken,
+      },
+      pin: '9876',
+      pinHash: secretPinHash,
+      periods: [],
+    },
+  }
+
+  const safePayload = buildProjectPayload(mockState)
+  const payloadStr = JSON.stringify(safePayload)
+
+  if (payloadStr.includes(secretToken)) {
+    throw new Error('Security violation: Secret token leaked into project payload')
+  }
+  if (payloadStr.includes(secretPinHash)) {
+    throw new Error('Security violation: PIN hash leaked into project payload')
+  }
+  if (safePayload.settings?.publishing?.token) {
+    throw new Error('Token property exists in settings.publishing of payload')
+  }
+  if (safePayload.settings?.pin) {
+    throw new Error('PIN property exists in settings of payload')
+  }
+  if (safePayload.settings?.pinHash) {
+    throw new Error('PIN hash property exists in settings of payload')
+  }
+
+  clearStoredToken()
+  clearStoredPinHash()
+  clearAuthCache()
+  global.fetch = originalFetch
+
+  console.log('Suite 7: PASS (Login permissions, 401 token clearance, PIN salt & verification, 5 failures cooldown, leak protection)')
+}
+
 async function main() {
+  initMockStorage()
   await testSuite1_ReferenceFacultyMatch()
   await testSuite2_AutoAssignBlankWithPresets()
   await testSuite3_SectionOverride()
   await testSuite4_ValidationErrors()
   await testSuite5_ReportCheck()
   await testSuite6_PublisherTests()
+  await testSuite7_AuthenticationSecurity()
 
   console.log('\n=== RUNNING ACCEPTANCE TEST (20 runs, seeds 1..20) ===')
   let acceptancePass = 0

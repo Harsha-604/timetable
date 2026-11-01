@@ -1,10 +1,22 @@
 /**
- * Utilities for publishing timetables to GitHub via the GitHub Contents API.
- * Security Note: Tokens are stored exclusively in localStorage and must never
+ * Utilities for authentication and publishing timetables to GitHub via the GitHub Contents API.
+ * Security Note: Tokens and PIN hashes are stored exclusively in localStorage and must never
  * be leaked into project payloads, console logs, or error messages.
  */
 
 export const TOKEN_STORAGE_KEY = 'tt_publish_token'
+export const PIN_STORAGE_KEY = 'tt_editor_pin'
+export const AUTH_CACHE_KEY = 'tt_auth_verified_at'
+export const PIN_UNLOCKED_KEY = 'tt_pin_unlocked'
+export const AUTH_CACHE_TTL = 12 * 60 * 60 * 1000 // 12 hours
+
+let offlineState = false
+export function getIsOffline() {
+  return offlineState
+}
+export function setIsOffline(val) {
+  offlineState = !!val
+}
 
 export function toBase64Utf8(str) {
   if (typeof Buffer !== 'undefined') {
@@ -31,6 +43,8 @@ export function fromBase64Utf8(b64) {
   }
   return new TextDecoder().decode(bytes)
 }
+
+/* ─── Token Storage ─── */
 
 export function getStoredToken() {
   if (typeof localStorage === 'undefined') return ''
@@ -59,6 +73,122 @@ export function clearStoredToken() {
   } catch {}
 }
 
+/* ─── PIN Storage & Hashing ─── */
+
+export function getStoredPinHash() {
+  if (typeof localStorage === 'undefined') return ''
+  try {
+    return localStorage.getItem(PIN_STORAGE_KEY) || ''
+  } catch {
+    return ''
+  }
+}
+
+export function setStoredPinHash(hash) {
+  if (typeof localStorage === 'undefined') return
+  try {
+    if (hash && typeof hash === 'string' && hash.trim()) {
+      localStorage.setItem(PIN_STORAGE_KEY, hash.trim())
+    } else {
+      localStorage.removeItem(PIN_STORAGE_KEY)
+    }
+  } catch {}
+}
+
+export function clearStoredPinHash() {
+  if (typeof localStorage === 'undefined') return
+  try {
+    localStorage.removeItem(PIN_STORAGE_KEY)
+  } catch {}
+}
+
+export function isPinSet() {
+  return !!getStoredPinHash()
+}
+
+/**
+ * Computes a salted SHA-256 hash using Web Cryptography API.
+ * Format returned: "<saltHex>:<hashHex>"
+ */
+export async function hashPin(pin, saltHex = null) {
+  if (!saltHex) {
+    const saltBytes = new Uint8Array(16)
+    crypto.getRandomValues(saltBytes)
+    saltHex = Array.from(saltBytes)
+      .map((b) => b.toString(16).padStart(2, '0'))
+      .join('')
+  }
+  const enc = new TextEncoder()
+  const data = enc.encode(saltHex + ':' + pin)
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data)
+  const hashHex = Array.from(new Uint8Array(hashBuffer))
+    .map((b) => b.toString(16).padStart(2, '0'))
+    .join('')
+  return `${saltHex}:${hashHex}`
+}
+
+export async function verifyPin(pin, storedHash) {
+  if (!storedHash || !storedHash.includes(':')) return false
+  const [saltHex] = storedHash.split(':')
+  const check = await hashPin(pin, saltHex)
+  return check === storedHash
+}
+
+/* ─── Session Flags (Auth cache & PIN unlock) ─── */
+
+export function isPinUnlocked() {
+  if (!isPinSet()) return true
+  if (typeof sessionStorage === 'undefined') return false
+  try {
+    return sessionStorage.getItem(PIN_UNLOCKED_KEY) === 'true'
+  } catch {
+    return false
+  }
+}
+
+export function setPinUnlocked(unlocked) {
+  if (typeof sessionStorage === 'undefined') return
+  try {
+    if (unlocked) {
+      sessionStorage.setItem(PIN_UNLOCKED_KEY, 'true')
+    } else {
+      sessionStorage.removeItem(PIN_UNLOCKED_KEY)
+    }
+  } catch {}
+}
+
+export function isAuthCached() {
+  if (typeof sessionStorage === 'undefined') return false
+  try {
+    const val = sessionStorage.getItem(AUTH_CACHE_KEY)
+    if (!val) return false
+    const time = Number(val)
+    return Date.now() - time < AUTH_CACHE_TTL
+  } catch {
+    return false
+  }
+}
+
+export function setAuthCached() {
+  if (typeof sessionStorage === 'undefined') return
+  try {
+    sessionStorage.setItem(AUTH_CACHE_KEY, String(Date.now()))
+  } catch {}
+}
+
+export function clearAuthCache() {
+  if (typeof sessionStorage === 'undefined') return
+  try {
+    sessionStorage.removeItem(AUTH_CACHE_KEY)
+  } catch {}
+}
+
+export function logout() {
+  clearStoredToken()
+  clearAuthCache()
+  setPinUnlocked(false)
+}
+
 export function formatPublishCommitMessage(date = new Date()) {
   const pad = (n) => String(n).padStart(2, '0')
   const yyyy = date.getFullYear()
@@ -71,7 +201,7 @@ export function formatPublishCommitMessage(date = new Date()) {
 
 /**
  * Builds the project payload for Save Project and Publish, ensuring
- * that any token or credential is strictly omitted from the exported JSON.
+ * that neither token nor PIN hash leaks into the exported JSON.
  */
 export function buildProjectPayload(state, savedAt = new Date().toISOString()) {
   const {
@@ -86,11 +216,13 @@ export function buildProjectPayload(state, savedAt = new Date().toISOString()) {
     settings = {},
   } = state || {}
 
-  // Deep clone settings and strip any accidentally attached token
+  // Deep clone settings and strip any credentials
   const safeSettings = JSON.parse(JSON.stringify(settings || {}))
   if (safeSettings.publishing) {
     delete safeSettings.publishing.token
   }
+  delete safeSettings.pin
+  delete safeSettings.pinHash
 
   const payload = {
     savedAt,
@@ -105,12 +237,20 @@ export function buildProjectPayload(state, savedAt = new Date().toISOString()) {
     settings: safeSettings,
   }
 
-  // Security invariant: Ensure stored token never appears in payload string
+  // Security invariant: Ensure stored token and PIN hash never appear in payload string
   const stored = getStoredToken()
   if (stored && stored.length > 5) {
     const raw = JSON.stringify(payload)
     if (raw.includes(stored)) {
       throw new Error('Security violation: GitHub token leaked into project payload')
+    }
+  }
+
+  const storedPin = getStoredPinHash()
+  if (storedPin && storedPin.length > 5) {
+    const raw = JSON.stringify(payload)
+    if (raw.includes(storedPin)) {
+      throw new Error('Security violation: PIN hash leaked into project payload')
     }
   }
 
@@ -130,7 +270,7 @@ export async function testGitHubConnection({
   const cleanToken = (token || getStoredToken()).trim()
 
   if (!cleanToken) {
-    return { ok: false, error: 'No GitHub token entered' }
+    return { ok: false, canPush: false, error: 'No GitHub token entered' }
   }
 
   const url = `https://api.github.com/repos/${cleanOwner}/${cleanRepo}`
@@ -146,23 +286,63 @@ export async function testGitHubConnection({
     })
 
     if (res.status === 401) {
-      return { ok: false, error: '401 invalid/expired token' }
+      return { ok: false, canPush: false, status: 401, error: '401 invalid/expired token' }
     }
     if (res.status === 404) {
-      return { ok: false, error: '404 repo not found or token has no access' }
+      return { ok: false, canPush: false, status: 404, error: '404 repo not found or token has no access' }
     }
     if (!res.ok) {
-      return { ok: false, error: `GitHub API error (HTTP ${res.status})` }
+      return { ok: false, canPush: false, status: res.status, error: `GitHub API error (HTTP ${res.status})` }
     }
 
     const data = await res.json()
     if (data?.permissions?.push === true) {
-      return { ok: true, message: 'Connected, can publish' }
+      return { ok: true, canPush: true, status: 200, message: 'Connected, can publish' }
     } else {
-      return { ok: false, error: 'push false = token is read-only' }
+      return { ok: false, canPush: false, status: 200, error: 'push false = token is read-only' }
     }
   } catch (err) {
-    return { ok: false, error: 'Could not reach GitHub' }
+    return { ok: false, canPush: false, isNetworkError: true, error: 'Could not reach GitHub' }
+  }
+}
+
+/**
+ * Verifies access on editor load.
+ * 401 / push false / 404 -> clears token and cache, returns not allowed.
+ * Network error -> allows editor with isOffline: true.
+ * Success -> sets cache and allows editor.
+ */
+export async function verifyEditorAccess({
+  owner = 'Harsha-604',
+  repo = 'timetable',
+  token,
+} = {}) {
+  const currentToken = token || getStoredToken()
+  if (!currentToken) {
+    return { allowed: false, reason: 'no_token' }
+  }
+
+  if (isAuthCached()) {
+    return { allowed: true, cached: true }
+  }
+
+  const res = await testGitHubConnection({ owner, repo, token: currentToken })
+  if (res.ok && res.canPush) {
+    setAuthCached()
+    return { allowed: true, cached: false }
+  }
+
+  if (res.isNetworkError) {
+    return { allowed: true, isOffline: true }
+  }
+
+  // 401, 404, or push false
+  clearStoredToken()
+  clearAuthCache()
+  return {
+    allowed: false,
+    reason: 'revoked',
+    error: 'Your access was revoked or the token expired. Log in again.',
   }
 }
 
@@ -355,4 +535,3 @@ export async function getLatestWorkflowRun({
     return null
   }
 }
-
