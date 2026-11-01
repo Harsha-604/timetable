@@ -489,9 +489,11 @@ export const useStore = create(
       /* ── Toast ── */
       _toast: null,
       toast: (msg, kind = 'ok', url = null) => {
-        set({ _toast: { msg, kind, url, id: Date.now() } })
-        setTimeout(() => set((s) => (s._toast?.id === Date.now() ? { _toast: null } : {})), 4500)
+        const id = Date.now() + Math.random()
+        set({ _toast: { msg, kind, url, id } })
+        setTimeout(() => set((s) => (s._toast?.id === id ? { _toast: null } : {})), url ? 10000 : 4500)
       },
+      clearToast: () => set({ _toast: null }),
 
       /* ── Project backup / restore ── */
       saveProject: () => {
@@ -508,6 +510,10 @@ export const useStore = create(
     }),
     {
       name: 'tt_coord_v3',
+      partialize: (s) => {
+        const { _toast, ...rest } = s
+        return rest
+      },
       version: 3,
       migrate: (persistedState, version) => {
         return migrateState(persistedState)
