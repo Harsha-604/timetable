@@ -2,20 +2,14 @@ import { useState } from 'react'
 import { useStore } from '../store/useStore'
 import { BRANCHES, YEARS, DAYS_ORDER, DEFAULT_PERIODS, DEFAULT_LAB_WINDOWS } from '../utils/constants'
 import { uid, sectionLetter } from '../utils/helpers'
+import { testGitHubConnection, clearAuthCache } from '../utils/publisher'
 import {
-  getStoredToken,
-  setStoredToken,
-  clearStoredToken,
-  testGitHubConnection,
-  isPinSet,
-  getStoredPinHash,
-  setStoredPinHash,
-  clearStoredPinHash,
-  hashPin,
-  verifyPin,
-  setPinUnlocked,
-  logout,
-} from '../utils/publisher'
+  getMemoryToken,
+  clearMemoryToken,
+  deleteEncryptedToken,
+  changePin,
+  hasEncryptedToken,
+} from '../utils/tokenVault'
 import cic4Sample from '../sample/cic4.json'
 
 export default function Settings({ onLogout }) {
@@ -48,83 +42,82 @@ export default function Settings({ onLogout }) {
   const [pubBranch, setPubBranch] = useState(
     () => settings.publishing?.branch || 'master'
   )
-  const [pubToken, setPubToken] = useState(() => getStoredToken())
-  const [showToken, setShowToken] = useState(false)
   const [testing, setTesting] = useState(false)
   const [testStatus, setTestStatus] = useState(null)
 
-  // Security (PIN) state
-  const [hasPinSet, setHasPinSet] = useState(() => isPinSet())
-  const [securityMode, setSecurityMode] = useState('') // '' | 'change' | 'remove'
-  const [currentPin, setCurrentPin] = useState('')
-  const [newPin, setNewPin] = useState('')
-  const [confirmPin, setConfirmPin] = useState('')
+  // Change PIN state
+  const [showChangePin, setShowChangePin] = useState(false)
+  const [changePinCurrent, setChangePinCurrent] = useState('')
+  const [changePinNew, setChangePinNew] = useState('')
+  const [changePinConfirm, setChangePinConfirm] = useState('')
+  const [changePinLoading, setChangePinLoading] = useState(false)
+  const [changePinError, setChangePinError] = useState('')
 
   const handleLogoutAction = () => {
-    if (window.confirm('You will need the token to log in again. Make sure you have it saved.')) {
-      logout()
+    if (window.confirm('This removes the saved token from this browser. You will need to enter your GitHub token again.')) {
+      deleteEncryptedToken()
+      clearMemoryToken()
+      clearAuthCache()
       if (onLogout) {
         onLogout()
       } else {
+        window.location.hash = '#edit'
         window.location.reload()
       }
     }
   }
 
-  const handleSetPin = async () => {
-    if (!/^\d{4,8}$/.test(newPin)) {
-      toast('PIN must be between 4 and 8 digits', 'err')
+  const handleChangePinSubmit = async (e) => {
+    e?.preventDefault()
+    setChangePinError('')
+    if (!changePinCurrent) {
+      setChangePinError('Please enter your current PIN.')
       return
     }
-    if (newPin !== confirmPin) {
-      toast('PINs do not match', 'err')
+    if (changePinNew.length < 8) {
+      setChangePinError('New PIN must be at least 8 characters.')
       return
     }
-    const hash = await hashPin(newPin)
-    setStoredPinHash(hash)
-    setPinUnlocked(true)
-    setHasPinSet(true)
-    setNewPin('')
-    setConfirmPin('')
-    toast('PIN set successfully', 'ok')
+    if (changePinNew !== changePinConfirm) {
+      setChangePinError('New PINs do not match.')
+      return
+    }
+    setChangePinLoading(true)
+    try {
+      await changePin(changePinCurrent, changePinNew)
+      toast('PIN changed successfully', 'ok')
+      setShowChangePin(false)
+      setChangePinCurrent('')
+      setChangePinNew('')
+      setChangePinConfirm('')
+      setChangePinError('')
+    } catch (err) {
+      setChangePinError(err.message || 'Failed to change PIN')
+    } finally {
+      setChangePinLoading(false)
+    }
   }
 
-  const handleChangePin = async () => {
-    const valid = await verifyPin(currentPin, getStoredPinHash())
-    if (!valid) {
-      toast('Current PIN is incorrect', 'err')
+  const handleTestConnection = async () => {
+    setTesting(true)
+    setTestStatus(null)
+    const memToken = getMemoryToken()
+    if (!memToken) {
+      setTesting(false)
+      setTestStatus({ ok: false, text: 'Session locked or no token. Please unlock.' })
       return
     }
-    if (!/^\d{4,8}$/.test(newPin)) {
-      toast('New PIN must be between 4 and 8 digits', 'err')
-      return
+    const res = await testGitHubConnection({
+      owner: pubOwner,
+      repo: pubRepo,
+      token: memToken,
+    })
+    setTesting(false)
+    if (res.ok) {
+      setTestStatus({ ok: true, text: res.message || 'Connected, can publish' })
+    } else {
+      setTestStatus({ ok: false, text: res.error || 'Connection failed' })
     }
-    if (newPin !== confirmPin) {
-      toast('New PINs do not match', 'err')
-      return
-    }
-    const newHash = await hashPin(newPin)
-    setStoredPinHash(newHash)
-    setPinUnlocked(true)
-    setCurrentPin('')
-    setNewPin('')
-    setConfirmPin('')
-    setSecurityMode('')
-    toast('PIN changed successfully', 'ok')
-  }
-
-  const handleRemovePin = async () => {
-    const valid = await verifyPin(currentPin, getStoredPinHash())
-    if (!valid) {
-      toast('Current PIN is incorrect', 'err')
-      return
-    }
-    clearStoredPinHash()
-    setPinUnlocked(false)
-    setHasPinSet(false)
-    setCurrentPin('')
-    setSecurityMode('')
-    toast('PIN removed', 'ok')
   }
 
   // Classroom options for home classroom
@@ -761,7 +754,7 @@ export default function Settings({ onLogout }) {
       <div className="card" style={{ marginBottom: '1.5rem' }}>
         <h3 style={{ marginBottom: '.25rem' }}>Publishing</h3>
         <p style={{ color: 'var(--muted)', fontSize: '.84rem', marginBottom: '1rem' }}>
-          Configure repository settings and GitHub access token to publish timetables directly to the public viewer.
+          Configure repository settings and publish timetables directly to the public viewer.
         </p>
 
         <div
@@ -828,243 +821,138 @@ export default function Settings({ onLogout }) {
           <label style={{ display: 'block', fontSize: '.8rem', fontWeight: 600, marginBottom: '.3rem' }}>
             GitHub token
           </label>
-          <div style={{ display: 'flex', gap: '.5rem', alignItems: 'center' }}>
-            <input
-              type={showToken ? 'text' : 'password'}
-              value={pubToken}
-              onChange={(e) => {
-                const val = e.target.value
-                setPubToken(val)
-                setStoredToken(val)
-                setTestStatus(null)
+          <div style={{ display: 'flex', gap: '.75rem', alignItems: 'center', flexWrap: 'wrap' }}>
+            <span
+              className="tag"
+              style={{
+                fontSize: '.84rem',
+                padding: '.35rem .75rem',
+                border: '1px solid var(--border2)',
+                background: 'var(--surface2)',
+                color: 'var(--ink)',
+                fontWeight: 600,
               }}
-              placeholder="github_pat_..."
-              style={{ flex: 1, fontFamily: 'monospace' }}
-            />
+            >
+              Token saved (encrypted)
+            </span>
             <button
               type="button"
               className="btn btn-secondary btn-sm"
-              onClick={() => setShowToken(!showToken)}
+              disabled={testing}
+              onClick={handleTestConnection}
             >
-              {showToken ? 'Hide' : 'Show'}
+              {testing ? 'Testing…' : 'Test connection'}
             </button>
-            {pubToken && (
-              <button
-                type="button"
-                className="btn btn-ghost btn-sm"
-                style={{ color: 'var(--danger)' }}
-                onClick={handleLogoutAction}
-              >
-                Log out
-              </button>
-            )}
+            <button
+              type="button"
+              className="btn btn-secondary btn-sm"
+              onClick={() => {
+                setShowChangePin(!showChangePin)
+                setChangePinError('')
+              }}
+            >
+              {showChangePin ? 'Cancel PIN change' : 'Change PIN'}
+            </button>
+            <button
+              type="button"
+              className="btn btn-ghost btn-sm"
+              style={{ color: 'var(--danger)', marginLeft: 'auto' }}
+              onClick={handleLogoutAction}
+            >
+              Log out
+            </button>
           </div>
-          <p style={{ fontSize: '.8rem', color: 'var(--muted)', marginTop: '.35rem', lineHeight: 1.45 }}>
+
+          {testStatus && (
+            <div style={{ marginTop: '.6rem' }}>
+              <span
+                className={`tag ${testStatus.ok ? '' : 'danger'}`}
+                style={{
+                  fontSize: '.84rem',
+                  padding: '.35rem .6rem',
+                  border: testStatus.ok ? '1px solid var(--border2)' : undefined,
+                }}
+              >
+                {testStatus.text}
+              </span>
+            </div>
+          )}
+
+          {showChangePin && (
+            <form
+              onSubmit={handleChangePinSubmit}
+              style={{
+                marginTop: '1rem',
+                padding: '1rem',
+                background: 'var(--surface2)',
+                borderRadius: 'var(--radius-sm)',
+                border: '1px solid var(--border2)',
+              }}
+            >
+              <h4 style={{ fontSize: '.88rem', fontWeight: 600, marginBottom: '.6rem' }}>Change PIN</h4>
+              {changePinError && (
+                <div style={{ color: 'var(--danger)', fontSize: '.82rem', marginBottom: '.6rem' }}>
+                  {changePinError}
+                </div>
+              )}
+              <div style={{ display: 'flex', gap: '.75rem', flexWrap: 'wrap', alignItems: 'flex-end', marginBottom: '.4rem' }}>
+                <div>
+                  <label style={{ display: 'block', fontSize: '.75rem', fontWeight: 600, marginBottom: '.2rem' }}>
+                    Current PIN
+                  </label>
+                  <input
+                    type="password"
+                    value={changePinCurrent}
+                    onChange={(e) => setChangePinCurrent(e.target.value)}
+                    placeholder="Current PIN"
+                    style={{ width: 140 }}
+                  />
+                </div>
+                <div>
+                  <label style={{ display: 'block', fontSize: '.75rem', fontWeight: 600, marginBottom: '.2rem' }}>
+                    New PIN (min 8 chars)
+                  </label>
+                  <input
+                    type="password"
+                    value={changePinNew}
+                    onChange={(e) => setChangePinNew(e.target.value)}
+                    placeholder="New PIN"
+                    style={{ width: 140 }}
+                  />
+                </div>
+                <div>
+                  <label style={{ display: 'block', fontSize: '.75rem', fontWeight: 600, marginBottom: '.2rem' }}>
+                    Confirm New PIN
+                  </label>
+                  <input
+                    type="password"
+                    value={changePinConfirm}
+                    onChange={(e) => setChangePinConfirm(e.target.value)}
+                    placeholder="Confirm PIN"
+                    style={{ width: 140 }}
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="btn btn-primary btn-sm"
+                  disabled={changePinLoading}
+                >
+                  {changePinLoading ? 'Updating…' : 'Update PIN'}
+                </button>
+              </div>
+              <p style={{ fontSize: '.78rem', color: 'var(--muted)', margin: '.25rem 0 0' }}>
+                Longer is safer. Letters + numbers recommended.
+              </p>
+            </form>
+          )}
+
+          <p style={{ fontSize: '.8rem', color: 'var(--muted)', marginTop: '.75rem', lineHeight: 1.45 }}>
             Create a fine-grained token at github.com/settings/personal-access-tokens:
             Repository access = Only select repositories → timetable; Permissions → Contents =
             Read and write; Expiration = No expiration. Anyone using this browser can publish, so only
             save the token on the coordinator's own computer.
           </p>
         </div>
-
-        <div style={{ display: 'flex', alignItems: 'center', gap: '.75rem', flexWrap: 'wrap' }}>
-          <button
-            type="button"
-            className="btn btn-secondary"
-            disabled={testing}
-            onClick={async () => {
-              setTesting(true)
-              setTestStatus(null)
-              const res = await testGitHubConnection({
-                owner: pubOwner,
-                repo: pubRepo,
-                token: pubToken,
-              })
-              setTesting(false)
-              if (res.ok) {
-                setTestStatus({ ok: true, text: res.message || 'Connected, can publish' })
-              } else {
-                setTestStatus({ ok: false, text: res.error || 'Connection failed' })
-              }
-            }}
-          >
-            {testing ? 'Testing…' : 'Test connection'}
-          </button>
-
-          {testStatus && (
-            <span
-              className={`tag ${testStatus.ok ? '' : 'danger'}`}
-              style={{
-                fontSize: '.84rem',
-                padding: '.35rem .6rem',
-                border: testStatus.ok ? '1px solid var(--border2)' : undefined,
-              }}
-            >
-              {testStatus.text}
-            </span>
-          )}
-        </div>
-      </div>
-
-      {/* ── Security Section ── */}
-      <div className="card" style={{ marginBottom: '1.5rem' }}>
-        <h3 style={{ marginBottom: '.25rem' }}>Security</h3>
-        <p style={{ color: 'var(--muted)', fontSize: '.84rem', marginBottom: '1rem' }}>
-          Protect coordinator access with an optional PIN for shared or unattended computers.
-        </p>
-
-        {!hasPinSet ? (
-          <div>
-            <h4 style={{ fontSize: '.88rem', fontWeight: 600, marginBottom: '.5rem' }}>Set PIN</h4>
-            <div style={{ display: 'flex', gap: '.75rem', flexWrap: 'wrap', alignItems: 'flex-end' }}>
-              <div>
-                <label style={{ display: 'block', fontSize: '.78rem', fontWeight: 600, marginBottom: '.2rem' }}>
-                  New PIN (4 to 8 digits)
-                </label>
-                <input
-                  type="password"
-                  inputMode="numeric"
-                  maxLength={8}
-                  value={newPin}
-                  onChange={(e) => setNewPin(e.target.value.replace(/\D/g, ''))}
-                  placeholder="••••"
-                  style={{ width: 140, letterSpacing: '.2rem' }}
-                />
-              </div>
-              <div>
-                <label style={{ display: 'block', fontSize: '.78rem', fontWeight: 600, marginBottom: '.2rem' }}>
-                  Confirm PIN
-                </label>
-                <input
-                  type="password"
-                  inputMode="numeric"
-                  maxLength={8}
-                  value={confirmPin}
-                  onChange={(e) => setConfirmPin(e.target.value.replace(/\D/g, ''))}
-                  placeholder="••••"
-                  style={{ width: 140, letterSpacing: '.2rem' }}
-                />
-              </div>
-              <button
-                type="button"
-                className="btn btn-primary"
-                onClick={handleSetPin}
-              >
-                Set PIN
-              </button>
-            </div>
-          </div>
-        ) : (
-          <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '.75rem', marginBottom: '1rem', flexWrap: 'wrap' }}>
-              <span className="tag" style={{ border: '1px solid var(--border2)', color: 'var(--ink)' }}>
-                PIN is active
-              </span>
-              <button
-                type="button"
-                className={`btn btn-sm ${securityMode === 'change' ? 'btn-primary' : 'btn-ghost'}`}
-                onClick={() => setSecurityMode(securityMode === 'change' ? '' : 'change')}
-              >
-                Change PIN
-              </button>
-              <button
-                type="button"
-                className={`btn btn-sm ${securityMode === 'remove' ? 'btn-primary' : 'btn-ghost'}`}
-                style={{ color: securityMode === 'remove' ? undefined : 'var(--danger)' }}
-                onClick={() => setSecurityMode(securityMode === 'remove' ? '' : 'remove')}
-              >
-                Remove PIN
-              </button>
-            </div>
-
-            {securityMode === 'change' && (
-              <div style={{ padding: '1rem', background: 'var(--surface2)', borderRadius: 'var(--radius-sm)' }}>
-                <h4 style={{ fontSize: '.88rem', fontWeight: 600, marginBottom: '.5rem' }}>Change PIN</h4>
-                <div style={{ display: 'flex', gap: '.75rem', flexWrap: 'wrap', alignItems: 'flex-end' }}>
-                  <div>
-                    <label style={{ display: 'block', fontSize: '.75rem', fontWeight: 600, marginBottom: '.2rem' }}>
-                      Current PIN
-                    </label>
-                    <input
-                      type="password"
-                      inputMode="numeric"
-                      maxLength={8}
-                      value={currentPin}
-                      onChange={(e) => setCurrentPin(e.target.value.replace(/\D/g, ''))}
-                      placeholder="••••"
-                      style={{ width: 120, letterSpacing: '.2rem' }}
-                    />
-                  </div>
-                  <div>
-                    <label style={{ display: 'block', fontSize: '.75rem', fontWeight: 600, marginBottom: '.2rem' }}>
-                      New PIN (4 to 8 digits)
-                    </label>
-                    <input
-                      type="password"
-                      inputMode="numeric"
-                      maxLength={8}
-                      value={newPin}
-                      onChange={(e) => setNewPin(e.target.value.replace(/\D/g, ''))}
-                      placeholder="••••"
-                      style={{ width: 120, letterSpacing: '.2rem' }}
-                    />
-                  </div>
-                  <div>
-                    <label style={{ display: 'block', fontSize: '.75rem', fontWeight: 600, marginBottom: '.2rem' }}>
-                      Confirm New PIN
-                    </label>
-                    <input
-                      type="password"
-                      inputMode="numeric"
-                      maxLength={8}
-                      value={confirmPin}
-                      onChange={(e) => setConfirmPin(e.target.value.replace(/\D/g, ''))}
-                      placeholder="••••"
-                      style={{ width: 120, letterSpacing: '.2rem' }}
-                    />
-                  </div>
-                  <button
-                    type="button"
-                    className="btn btn-primary"
-                    onClick={handleChangePin}
-                  >
-                    Update PIN
-                  </button>
-                </div>
-              </div>
-            )}
-
-            {securityMode === 'remove' && (
-              <div style={{ padding: '1rem', background: 'var(--surface2)', borderRadius: 'var(--radius-sm)' }}>
-                <h4 style={{ fontSize: '.88rem', fontWeight: 600, marginBottom: '.5rem' }}>Remove PIN</h4>
-                <div style={{ display: 'flex', gap: '.75rem', flexWrap: 'wrap', alignItems: 'flex-end' }}>
-                  <div>
-                    <label style={{ display: 'block', fontSize: '.75rem', fontWeight: 600, marginBottom: '.2rem' }}>
-                      Current PIN
-                    </label>
-                    <input
-                      type="password"
-                      inputMode="numeric"
-                      maxLength={8}
-                      value={currentPin}
-                      onChange={(e) => setCurrentPin(e.target.value.replace(/\D/g, ''))}
-                      placeholder="••••"
-                      style={{ width: 140, letterSpacing: '.2rem' }}
-                    />
-                  </div>
-                  <button
-                    type="button"
-                    className="btn btn-primary"
-                    style={{ background: 'var(--danger)', color: '#fff' }}
-                    onClick={handleRemovePin}
-                  >
-                    Confirm Remove PIN
-                  </button>
-                </div>
-              </div>
-            )}
-          </div>
-        )}
       </div>
     </div>
   )

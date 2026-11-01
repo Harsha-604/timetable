@@ -4,6 +4,14 @@
  * be leaked into project payloads, console logs, or error messages.
  */
 
+import {
+  getMemoryToken,
+  setMemoryToken,
+  clearMemoryToken,
+  deleteEncryptedToken,
+  hasEncryptedToken,
+} from './tokenVault.js'
+
 export const TOKEN_STORAGE_KEY = 'tt_publish_token'
 export const PIN_STORAGE_KEY = 'tt_editor_pin'
 export const AUTH_CACHE_KEY = 'tt_auth_verified_at'
@@ -47,30 +55,15 @@ export function fromBase64Utf8(b64) {
 /* ─── Token Storage ─── */
 
 export function getStoredToken() {
-  if (typeof localStorage === 'undefined') return ''
-  try {
-    return localStorage.getItem(TOKEN_STORAGE_KEY) || ''
-  } catch {
-    return ''
-  }
+  return getMemoryToken()
 }
 
 export function setStoredToken(token) {
-  if (typeof localStorage === 'undefined') return
-  try {
-    if (token && typeof token === 'string' && token.trim()) {
-      localStorage.setItem(TOKEN_STORAGE_KEY, token.trim())
-    } else {
-      localStorage.removeItem(TOKEN_STORAGE_KEY)
-    }
-  } catch {}
+  setMemoryToken(token)
 }
 
 export function clearStoredToken() {
-  if (typeof localStorage === 'undefined') return
-  try {
-    localStorage.removeItem(TOKEN_STORAGE_KEY)
-  } catch {}
+  clearMemoryToken()
 }
 
 /* ─── PIN Storage & Hashing ─── */
@@ -103,7 +96,7 @@ export function clearStoredPinHash() {
 }
 
 export function isPinSet() {
-  return !!getStoredPinHash()
+  return hasEncryptedToken()
 }
 
 /**
@@ -184,7 +177,8 @@ export function clearAuthCache() {
 }
 
 export function logout() {
-  clearStoredToken()
+  deleteEncryptedToken()
+  clearMemoryToken()
   clearAuthCache()
   setPinUnlocked(false)
 }
@@ -251,6 +245,14 @@ export function buildProjectPayload(state, savedAt = new Date().toISOString()) {
     const raw = JSON.stringify(payload)
     if (raw.includes(storedPin)) {
       throw new Error('Security violation: PIN hash leaked into project payload')
+    }
+  }
+
+  const encStorage = typeof localStorage !== 'undefined' ? localStorage.getItem('tt_publish_token_enc') : null
+  if (encStorage && encStorage.length > 5) {
+    const raw = JSON.stringify(payload)
+    if (raw.includes(encStorage)) {
+      throw new Error('Security violation: Encrypted token vault leaked into project payload')
     }
   }
 
@@ -337,6 +339,7 @@ export async function verifyEditorAccess({
   }
 
   // 401, 404, or push false
+  deleteEncryptedToken()
   clearStoredToken()
   clearAuthCache()
   return {

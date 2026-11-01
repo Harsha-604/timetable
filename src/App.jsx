@@ -3,7 +3,6 @@ import { useStore } from './store/useStore'
 import Sidebar from './components/Sidebar'
 import Toast from './components/Toast'
 import LoginScreen from './components/LoginScreen'
-import PinScreen from './components/PinScreen'
 import Dashboard from './pages/Dashboard'
 import Settings from './pages/Settings'
 import Faculty from './pages/Faculty'
@@ -16,15 +15,18 @@ import RoomView from './pages/RoomView'
 import Export from './pages/Export'
 import PublicViewer from './pages/PublicViewer'
 import {
-  getStoredToken,
   isAuthCached,
-  isPinSet,
-  isPinUnlocked,
-  setPinUnlocked,
   verifyEditorAccess,
-  logout,
+  clearAuthCache,
   setIsOffline,
 } from './utils/publisher'
+import {
+  checkMigration,
+  hasEncryptedToken,
+  getMemoryToken,
+  clearMemoryToken,
+  deleteEncryptedToken,
+} from './utils/tokenVault'
 
 const PAGES = {
   home: Dashboard,
@@ -51,14 +53,15 @@ export default function App() {
   const toggleTheme = useStore((s) => s.toggleTheme)
   const settings = useStore((s) => s.settings)
 
+  // Migration check: if plaintext token existed, move to memory & prompt Set PIN
+  const [migrating, setMigrating] = useState(() => checkMigration())
+
   // Auth state
   const [authStep, setAuthStep] = useState(() => {
-    const token = getStoredToken()
+    if (checkMigration()) return 'login'
+    const token = getMemoryToken()
     if (!token) return 'login'
-    if (isAuthCached()) {
-      if (isPinSet() && !isPinUnlocked()) return 'pin'
-      return 'editor'
-    }
+    if (isAuthCached()) return 'editor'
     return 'checking'
   })
   const [isOfflineState, setIsOfflineState] = useState(false)
@@ -73,22 +76,34 @@ export default function App() {
     return () => window.removeEventListener('hashchange', handleHashChange)
   }, [])
 
+  // Listen for require-auth-unlock event from publisher / usePublish
+  useEffect(() => {
+    const handleRequireUnlock = () => {
+      clearMemoryToken()
+      clearAuthCache()
+      setAuthStep('login')
+    }
+    window.addEventListener('require-auth-unlock', handleRequireUnlock)
+    return () => window.removeEventListener('require-auth-unlock', handleRequireUnlock)
+  }, [])
+
   // Verify access on editor load
   useEffect(() => {
     if (!isEditor) return
 
-    const token = getStoredToken()
+    if (migrating) {
+      setAuthStep('login')
+      return
+    }
+
+    const token = getMemoryToken()
     if (!token) {
       setAuthStep('login')
       return
     }
 
     if (isAuthCached()) {
-      if (isPinSet() && !isPinUnlocked()) {
-        setAuthStep('pin')
-      } else {
-        setAuthStep('editor')
-      }
+      setAuthStep('editor')
       return
     }
 
@@ -105,11 +120,7 @@ export default function App() {
           setIsOfflineState(false)
           setIsOffline(false)
         }
-        if (isPinSet() && !isPinUnlocked()) {
-          setAuthStep('pin')
-        } else {
-          setAuthStep('editor')
-        }
+        setAuthStep('editor')
       } else {
         setLoginError(res.error || 'Your access was revoked or the token expired. Log in again.')
         setIsOfflineState(false)
@@ -117,18 +128,19 @@ export default function App() {
         setAuthStep('login')
       }
     })
-  }, [isEditor, settings?.publishing?.owner, settings?.publishing?.repo])
+  }, [isEditor, migrating, settings?.publishing?.owner, settings?.publishing?.repo])
 
-  // Inactivity timeout: 30 minutes without activity locks to PIN screen
+  // Inactivity timeout: 30 minutes without activity locks the editor (wipes in-memory token)
   useEffect(() => {
-    if (!isEditor || authStep !== 'editor' || !isPinSet()) return
+    if (!isEditor || authStep !== 'editor' || !hasEncryptedToken()) return
 
     let timer
     const resetTimer = () => {
       clearTimeout(timer)
       timer = setTimeout(() => {
-        setPinUnlocked(false)
-        setAuthStep('pin')
+        clearMemoryToken()
+        clearAuthCache()
+        setAuthStep('login')
       }, 30 * 60 * 1000)
     }
 
@@ -147,26 +159,27 @@ export default function App() {
     setLoginError('')
     setIsOfflineState(false)
     setIsOffline(false)
-    if (isPinSet() && !isPinUnlocked()) {
-      setAuthStep('pin')
-    } else {
-      setAuthStep('editor')
-    }
+    setMigrating(false)
+    setAuthStep('editor')
   }
 
   const handleLock = () => {
-    if (isPinSet()) {
-      setPinUnlocked(false)
-      setAuthStep('pin')
+    if (hasEncryptedToken()) {
+      clearMemoryToken()
+      clearAuthCache()
+      setAuthStep('login')
     }
   }
 
   const handleLogout = () => {
-    if (window.confirm('You will need the token to log in again. Make sure you have it saved.')) {
-      logout()
+    if (window.confirm('This removes the saved token from this browser. You will need to enter your GitHub token again.')) {
+      deleteEncryptedToken()
+      clearMemoryToken()
+      clearAuthCache()
       setIsOfflineState(false)
       setIsOffline(false)
       setLoginError('')
+      setMigrating(false)
       setAuthStep('login')
     }
   }
@@ -216,30 +229,22 @@ export default function App() {
     )
   }
 
-  // 2. Login screen
+  // 2. Login screen (Mode A: PIN unlock, Mode B: GitHub token + Set PIN)
   if (authStep === 'login') {
     return (
       <div className="public-app">
-        <LoginScreen onLoginSuccess={handleLoginSuccess} initialError={loginError} />
-        <Toast />
-      </div>
-    )
-  }
-
-  // 3. PIN prompt screen
-  if (authStep === 'pin') {
-    return (
-      <div className="public-app">
-        <PinScreen
-          onUnlockSuccess={() => setAuthStep('editor')}
-          onForgotPin={() => setAuthStep('login')}
+        <LoginScreen
+          onLoginSuccess={handleLoginSuccess}
+          initialError={loginError}
+          initialMode={migrating ? 'modeB' : undefined}
+          initialStep={migrating ? 'setPin' : undefined}
         />
         <Toast />
       </div>
     )
   }
 
-  // 4. Editor main view
+  // 3. Editor main view
   const Page = PAGES[page] || Dashboard
 
   return (
