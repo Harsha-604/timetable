@@ -6,6 +6,7 @@ import {
   deleteEncryptedToken,
   encryptToken,
   decryptToken,
+  changePin,
   getMemoryToken,
   setMemoryToken,
 } from '../utils/tokenVault'
@@ -33,6 +34,8 @@ export default function LoginScreen({ onLoginSuccess, initialError = '', initial
 
   const [pin, setPin] = useState('')
   const [showPin, setShowPin] = useState(false)
+  const [currentPin, setCurrentPin] = useState('')
+  const [showCurrentPin, setShowCurrentPin] = useState(false)
   const [token, setToken] = useState('')
   const [showToken, setShowToken] = useState(false)
 
@@ -113,6 +116,57 @@ export default function LoginScreen({ onLoginSuccess, initialError = '', initial
       setMode('modeB')
       setModeBStep('token')
       setPin('')
+      setError('Access was revoked or the token expired. Log in with a new token.')
+    }
+  }
+
+  // Change PIN from Login screen
+  const handleChangePinOnLogin = async (e) => {
+    e?.preventDefault()
+    if (!currentPin) {
+      setError('Please enter your current PIN.')
+      return
+    }
+    if (newPin.length < 8) {
+      setError('New PIN must be at least 8 characters.')
+      return
+    }
+    if (newPin !== confirmPin) {
+      setError('New PINs do not match.')
+      return
+    }
+
+    setLoading(true)
+    setError('')
+
+    try {
+      await changePin(currentPin, newPin)
+    } catch (err) {
+      setLoading(false)
+      setError(err.message || 'Wrong current PIN.')
+      return
+    }
+
+    const res = await testGitHubConnection({
+      owner,
+      repo,
+      token: getMemoryToken(),
+    })
+
+    setLoading(false)
+
+    if (res.ok && res.canPush) {
+      setAuthCached()
+      toast('PIN changed successfully', 'ok')
+      onLoginSuccess()
+    } else if (res.isNetworkError) {
+      setIsOffline(true)
+      toast('PIN changed successfully', 'ok')
+      onLoginSuccess()
+    } else {
+      deleteEncryptedToken()
+      setMode('modeB')
+      setModeBStep('token')
       setError('Access was revoked or the token expired. Log in with a new token.')
     }
   }
@@ -248,11 +302,17 @@ export default function LoginScreen({ onLoginSuccess, initialError = '', initial
             color: 'var(--ink)',
           }}
         >
-          {mode === 'modeB' && modeBStep === 'setPin' ? 'Set a PIN for this computer' : 'Coordinator login'}
+          {mode === 'changePin'
+            ? 'Change PIN'
+            : mode === 'modeB' && modeBStep === 'setPin'
+            ? 'Set a PIN for this computer'
+            : 'Coordinator login'}
         </h2>
 
         <p style={{ fontSize: '.84rem', color: 'var(--muted)', marginBottom: '1.5rem' }}>
-          {mode === 'modeA'
+          {mode === 'changePin'
+            ? 'Enter your current PIN and choose a new PIN.'
+            : mode === 'modeA'
             ? 'Enter your coordinator PIN to unlock this session.'
             : modeBStep === 'setPin'
             ? 'Choose a PIN of at least 8 characters to encrypt your token on this browser.'
@@ -325,7 +385,22 @@ export default function LoginScreen({ onLoginSuccess, initialError = '', initial
               {loading ? 'Verifying…' : 'Unlock'}
             </button>
 
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem', fontSize: '.8rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', fontSize: '.8rem', flexWrap: 'wrap', gap: '.4rem' }}>
+              <button
+                type="button"
+                className="btn btn-ghost btn-sm"
+                style={{ padding: 0, color: 'var(--accent)', textDecoration: 'underline' }}
+                onClick={() => {
+                  setMode('changePin')
+                  setCurrentPin('')
+                  setNewPin('')
+                  setConfirmPin('')
+                  setError('')
+                }}
+              >
+                Change PIN
+              </button>
+
               <button
                 type="button"
                 className="btn btn-ghost btn-sm"
@@ -348,6 +423,126 @@ export default function LoginScreen({ onLoginSuccess, initialError = '', initial
                 Forgot PIN?
               </button>
             </div>
+          </form>
+        )}
+
+        {/* ─── Change PIN Mode (from login) ─── */}
+        {mode === 'changePin' && (
+          <form onSubmit={handleChangePinOnLogin}>
+            <div style={{ marginBottom: '1rem' }}>
+              <label
+                style={{
+                  display: 'block',
+                  fontSize: '.82rem',
+                  fontWeight: 600,
+                  marginBottom: '.3rem',
+                  color: 'var(--ink)',
+                }}
+              >
+                Current PIN
+              </label>
+              <div style={{ display: 'flex', gap: '.4rem', alignItems: 'center' }}>
+                <input
+                  type={showCurrentPin ? 'text' : 'password'}
+                  value={currentPin}
+                  onChange={(e) => setCurrentPin(e.target.value)}
+                  placeholder="Enter current PIN"
+                  autoFocus
+                  style={{ flex: 1, fontFamily: showCurrentPin ? 'inherit' : 'monospace' }}
+                />
+                <button
+                  type="button"
+                  className="btn btn-secondary btn-sm"
+                  onClick={() => setShowCurrentPin(!showCurrentPin)}
+                >
+                  {showCurrentPin ? 'Hide' : 'Show'}
+                </button>
+              </div>
+            </div>
+
+            <div style={{ marginBottom: '1rem' }}>
+              <label
+                style={{
+                  display: 'block',
+                  fontSize: '.82rem',
+                  fontWeight: 600,
+                  marginBottom: '.3rem',
+                  color: 'var(--ink)',
+                }}
+              >
+                New PIN
+              </label>
+              <div style={{ display: 'flex', gap: '.4rem', alignItems: 'center' }}>
+                <input
+                  type={showNewPin ? 'text' : 'password'}
+                  value={newPin}
+                  onChange={(e) => setNewPin(e.target.value)}
+                  placeholder="At least 8 characters"
+                  style={{ flex: 1, fontFamily: showNewPin ? 'inherit' : 'monospace' }}
+                />
+                <button
+                  type="button"
+                  className="btn btn-secondary btn-sm"
+                  onClick={() => setShowNewPin(!showNewPin)}
+                >
+                  {showNewPin ? 'Hide' : 'Show'}
+                </button>
+              </div>
+              <p
+                style={{
+                  fontSize: '.78rem',
+                  color: 'var(--muted)',
+                  marginTop: '.35rem',
+                }}
+              >
+                Longer is safer. Letters + numbers recommended.
+              </p>
+            </div>
+
+            <div style={{ marginBottom: '1.25rem' }}>
+              <label
+                style={{
+                  display: 'block',
+                  fontSize: '.82rem',
+                  fontWeight: 600,
+                  marginBottom: '.3rem',
+                  color: 'var(--ink)',
+                }}
+              >
+                Confirm New PIN
+              </label>
+              <input
+                type={showNewPin ? 'text' : 'password'}
+                value={confirmPin}
+                onChange={(e) => setConfirmPin(e.target.value)}
+                placeholder="Re-enter new PIN"
+                style={{ width: '100%', fontFamily: showNewPin ? 'inherit' : 'monospace' }}
+              />
+            </div>
+
+            <button
+              type="submit"
+              className="btn btn-primary"
+              disabled={loading || !currentPin || !newPin || !confirmPin}
+              style={{ width: '100%', marginBottom: '.75rem' }}
+            >
+              {loading ? 'Updating PIN…' : 'Update PIN & Unlock'}
+            </button>
+
+            <button
+              type="button"
+              className="btn btn-secondary"
+              onClick={() => {
+                setMode('modeA')
+                setCurrentPin('')
+                setNewPin('')
+                setConfirmPin('')
+                setError('')
+              }}
+              style={{ width: '100%', marginBottom: '1rem' }}
+            >
+              Cancel
+            </button>
           </form>
         )}
 

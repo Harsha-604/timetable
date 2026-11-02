@@ -918,6 +918,32 @@ async function testSuite7_AuthenticationSecurity() {
     throw new Error('decryptToken did not throw on wrong PIN')
   }
 
+  // 1b. Change PIN: changes PIN, new PIN decrypts, old PIN fails, wrong current PIN throws
+  await encryptToken('token-to-change-pin', 'OldInitialPin123')
+  await changePin('OldInitialPin123', 'NewUpdatedPin456')
+  const decryptedWithNew = await decryptToken('NewUpdatedPin456')
+  if (decryptedWithNew !== 'token-to-change-pin') {
+    throw new Error('decryptToken failed with new PIN after changePin')
+  }
+  let oldPinFailed = false
+  try {
+    await decryptToken('OldInitialPin123')
+  } catch {
+    oldPinFailed = true
+  }
+  if (!oldPinFailed) {
+    throw new Error('Old PIN should fail after changePin')
+  }
+  let wrongCurrentThrows = false
+  try {
+    await changePin('IncorrectOldPin', 'BrandNewPin789')
+  } catch {
+    wrongCurrentThrows = true
+  }
+  if (!wrongCurrentThrows) {
+    throw new Error('changePin with wrong current PIN should throw')
+  }
+
   // 2. Same token + PIN encrypted twice -> different salt, iv and ct
   await encryptToken('same-secret-token', 'SecretPin123')
   const enc1 = JSON.parse(global.localStorage.getItem('tt_publish_token_enc'))

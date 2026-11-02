@@ -3,6 +3,7 @@ import { useStore } from './store/useStore'
 import Sidebar from './components/Sidebar'
 import Toast from './components/Toast'
 import LoginScreen from './components/LoginScreen'
+import ChangePinModal from './components/ChangePinModal'
 import Dashboard from './pages/Dashboard'
 import Settings from './pages/Settings'
 import Faculty from './pages/Faculty'
@@ -66,6 +67,7 @@ export default function App() {
   })
   const [isOfflineState, setIsOfflineState] = useState(false)
   const [loginError, setLoginError] = useState('')
+  const [isChangePinOpen, setIsChangePinOpen] = useState(false)
 
   // Listen to hash changes for #edit route
   useEffect(() => {
@@ -254,6 +256,7 @@ export default function App() {
         onNavigate={navigate}
         onOpenViewer={openViewer}
         onLock={handleLock}
+        onChangePin={() => setIsChangePinOpen(true)}
         onLogout={handleLogout}
       />
       <main className="main" id="mainContent">
@@ -301,6 +304,10 @@ export default function App() {
           onLogout={handleLogout}
         />
       </main>
+      <ChangePinModal
+        isOpen={isChangePinOpen}
+        onClose={() => setIsChangePinOpen(false)}
+      />
       <Toast />
     </div>
   )

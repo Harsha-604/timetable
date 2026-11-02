@@ -954,6 +954,39 @@ export default function Settings({ onLogout }) {
           </p>
         </div>
       </div>
+
+      {/* ── Security & PIN Section ── */}
+      <div className="card" style={{ marginBottom: '1.5rem' }}>
+        <h3 style={{ marginBottom: '.25rem' }}>Security & PIN</h3>
+        <p style={{ color: 'var(--muted)', fontSize: '.84rem', marginBottom: '1rem' }}>
+          Your GitHub publishing token is encrypted on this computer with AES-GCM 256. Use your PIN to unlock sessions and protect coordinator access.
+        </p>
+
+        <div style={{ display: 'flex', alignItems: 'center', gap: '.75rem', flexWrap: 'wrap', marginBottom: showChangePin ? '1rem' : 0 }}>
+          <span
+            className="tag"
+            style={{
+              fontSize: '.84rem',
+              padding: '.35rem .75rem',
+              border: '1px solid var(--border2)',
+              background: 'var(--surface2)',
+              color: 'var(--ink)',
+            }}
+          >
+            PIN protection active
+          </span>
+          <button
+            type="button"
+            className="btn btn-primary btn-sm"
+            onClick={() => {
+              setShowChangePin(true)
+              setChangePinError('')
+            }}
+          >
+            Change PIN
+          </button>
+        </div>
+      </div>
     </div>
   )
 }

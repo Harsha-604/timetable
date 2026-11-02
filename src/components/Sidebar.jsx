@@ -18,7 +18,7 @@ const NAV = [
   { view: 'export',       label: 'Export' },
 ]
 
-export default function Sidebar({ currentPage, onNavigate, onOpenViewer, onLock, onLogout }) {
+export default function Sidebar({ currentPage, onNavigate, onOpenViewer, onLock, onChangePin, onLogout }) {
   const { faculty, rooms, subjects, saveProject, loadProject, resetAll, toast } = useStore()
   const { publishing, deployStatus, isOffline, handlePublish } = usePublish({ onNavigate })
   const totalSubs = Object.values(subjects).reduce((a, b) => a + b.length, 0)
@@ -131,6 +131,15 @@ export default function Sidebar({ currentPage, onNavigate, onOpenViewer, onLock,
             onClick={onLock}
           >
             Lock
+          </button>
+        )}
+        {hasLock && onChangePin && (
+          <button
+            className="btn btn-ghost btn-sm"
+            style={{ width: '100%', marginBottom: '.4rem' }}
+            onClick={onChangePin}
+          >
+            Change PIN
           </button>
         )}
         <button
