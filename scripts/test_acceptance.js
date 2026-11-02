@@ -11,26 +11,13 @@ import {
   getStoredToken,
   setStoredToken,
   clearStoredToken,
-  getStoredPinHash,
-  setStoredPinHash,
-  clearStoredPinHash,
-  hashPin,
-  verifyPin,
+  isPinSet,
   clearAuthCache,
+  isAuthCached,
+  setAuthCached,
   testGitHubConnection,
   verifyEditorAccess,
 } from '../src/utils/publisher.js'
-import {
-  encryptToken,
-  decryptToken,
-  changePin,
-  checkMigration,
-  getMemoryToken,
-  setMemoryToken,
-  clearMemoryToken,
-  hasEncryptedToken,
-  deleteEncryptedToken,
-} from '../src/utils/tokenVault.js'
 
 const cic4Sample = JSON.parse(fs.readFileSync('./src/sample/cic4.json', 'utf-8'))
 
@@ -897,154 +884,39 @@ async function testSuite7_AuthenticationSecurity() {
   initMockStorage()
   const originalFetch = global.fetch
 
-  // 1. Encrypt / decrypt round trip with the right PIN; wrong PIN throws
-  const testPat = 'github_pat_11AAAAAAA_testSecretToken12345'
-  const rightPin = 'CoordinatorPin2026'
-  const wrongPin = 'IncorrectPin9999'
-
-  await encryptToken(testPat, rightPin)
-  const decrypted = await decryptToken(rightPin)
-  if (decrypted !== testPat) {
-    throw new Error(`Round trip mismatch: expected ${testPat}, got ${decrypted}`)
-  }
-
-  let wrongPinThrew = false
-  try {
-    await decryptToken(wrongPin)
-  } catch (err) {
-    wrongPinThrew = true
-  }
-  if (!wrongPinThrew) {
-    throw new Error('decryptToken did not throw on wrong PIN')
-  }
-
-  // 1b. Change PIN: changes PIN, new PIN decrypts, old PIN fails, wrong current PIN throws
-  await encryptToken('token-to-change-pin', 'OldInitialPin123')
-  await changePin('OldInitialPin123', 'NewUpdatedPin456')
-  const decryptedWithNew = await decryptToken('NewUpdatedPin456')
-  if (decryptedWithNew !== 'token-to-change-pin') {
-    throw new Error('decryptToken failed with new PIN after changePin')
-  }
-  let oldPinFailed = false
-  try {
-    await decryptToken('OldInitialPin123')
-  } catch {
-    oldPinFailed = true
-  }
-  if (!oldPinFailed) {
-    throw new Error('Old PIN should fail after changePin')
-  }
-  let wrongCurrentThrows = false
-  try {
-    await changePin('IncorrectOldPin', 'BrandNewPin789')
-  } catch {
-    wrongCurrentThrows = true
-  }
-  if (!wrongCurrentThrows) {
-    throw new Error('changePin with wrong current PIN should throw')
-  }
-
-  // 2. Same token + PIN encrypted twice -> different salt, iv and ct
-  await encryptToken('same-secret-token', 'SecretPin123')
-  const enc1 = JSON.parse(global.localStorage.getItem('tt_publish_token_enc'))
-
-  await encryptToken('same-secret-token', 'SecretPin123')
-  const enc2 = JSON.parse(global.localStorage.getItem('tt_publish_token_enc'))
-
-  if (enc1.salt === enc2.salt) {
-    throw new Error('Encrypted twice must produce different salt')
-  }
-  if (enc1.iv === enc2.iv) {
-    throw new Error('Encrypted twice must produce different IV')
-  }
-  if (enc1.ct === enc2.ct) {
-    throw new Error('Encrypted twice must produce different ciphertext')
-  }
-
-  // 3. Stored JSON contains neither token nor PIN as a substring
-  const sensitiveToken = 'sensitive-token-xyz-789'
-  const sensitivePin = 'SensitivePin888'
-  await encryptToken(sensitiveToken, sensitivePin)
-  const storedJson = global.localStorage.getItem('tt_publish_token_enc')
-  if (storedJson.includes(sensitiveToken)) {
-    throw new Error('Security violation: Stored JSON contains sensitive token substring')
-  }
-  if (storedJson.includes(sensitivePin)) {
-    throw new Error('Security violation: Stored JSON contains sensitive PIN substring')
-  }
-
-  // 4. Migration: plaintext tt_publish_token removed, old tt_editor_pin removed, token in memory, Set PIN reached
-  deleteEncryptedToken()
-  clearMemoryToken()
-  global.localStorage.setItem('tt_publish_token', 'old-plaintext-token-abc')
-  global.localStorage.setItem('tt_editor_pin', 'old-pin-hash-value-xyz')
-
-  const needsSetPin = checkMigration()
-  if (!needsSetPin) {
-    throw new Error('checkMigration should return true when migrating old plaintext token')
-  }
-  if (global.localStorage.getItem('tt_publish_token') !== null) {
-    throw new Error('Migration did not remove plaintext tt_publish_token from localStorage')
-  }
-  if (global.localStorage.getItem('tt_editor_pin') !== null) {
-    throw new Error('Migration did not remove old tt_editor_pin from localStorage')
-  }
-  if (getMemoryToken() !== 'old-plaintext-token-abc') {
-    throw new Error(`Token was not moved into memory: got ${getMemoryToken()}`)
-  }
-  clearMemoryToken()
-
-  // 5. 5 wrong PINs trigger the wait
-  await encryptToken('test-pat-cooldown', 'CorrectPin123')
-  let attemptFailures = 0
-  let waitTriggered = false
-  for (let i = 0; i < 5; i++) {
-    try {
-      await decryptToken('bad-pin-' + i)
-    } catch {
-      attemptFailures++
-      if (attemptFailures >= 5) {
-        waitTriggered = true
-      }
-    }
-  }
-  if (!waitTriggered || attemptFailures < 5) {
-    throw new Error('5 wrong PIN attempts did not trigger cooldown condition')
-  }
-
-  // 6. Revoked token: mock 401 on GitHub check after unlock deletes the vault and requires Mode B on next access
-  await encryptToken('revoked-token-401', 'UnlockPin123')
-  const unlockedToken = await decryptToken('UnlockPin123')
-  if (!hasEncryptedToken()) {
-    throw new Error('Vault should exist before revocation check')
-  }
-
-  global.fetch = async () => ({
-    status: 401,
-    ok: false,
-    json: async () => ({ message: 'Bad credentials' }),
-  })
-
-  const revCheck = await verifyEditorAccess({
-    owner: 'Harsha-604',
-    repo: 'timetable',
-    token: unlockedToken,
-  })
-
-  if (revCheck.allowed) {
-    throw new Error('verifyEditorAccess allowed revoked 401 token')
-  }
-  if (hasEncryptedToken()) {
-    throw new Error('401 check failed to delete encrypted token vault')
-  }
-  if (getMemoryToken() !== '') {
-    throw new Error('401 check failed to wipe memory token')
-  }
-
-  // 7. Push permission checks: permissions.push === true allows login; 401, 404, push:false rejected
+  // 1. Token storage in localStorage: getStoredToken, setStoredToken, clearStoredToken
   clearStoredToken()
   clearAuthCache()
 
+  const testToken = 'github_pat_11AAAAAAA_testSecretToken12345'
+  setStoredToken(testToken)
+  if (getStoredToken() !== testToken) {
+    throw new Error(`Token storage mismatch: expected ${testToken}, got ${getStoredToken()}`)
+  }
+  if (global.localStorage.getItem('tt_publish_token') !== testToken) {
+    throw new Error('Token was not written to localStorage key "tt_publish_token"')
+  }
+  clearStoredToken()
+  if (getStoredToken() !== '') {
+    throw new Error('Token was not cleared by clearStoredToken')
+  }
+
+  // 2. Old PIN keys are purged by setStoredToken / clearStoredToken
+  global.localStorage.setItem('tt_publish_token_enc', '{"v":1,"ct":"abc"}')
+  global.localStorage.setItem('tt_editor_pin', 'old-pin-hash')
+  setStoredToken('new-clean-token')
+  if (global.localStorage.getItem('tt_publish_token_enc') !== null) {
+    throw new Error('Old tt_publish_token_enc was not purged on setStoredToken')
+  }
+  if (global.localStorage.getItem('tt_editor_pin') !== null) {
+    throw new Error('Old tt_editor_pin was not purged on setStoredToken')
+  }
+  if (isPinSet() !== false) {
+    throw new Error('isPinSet() must return false')
+  }
+  clearStoredToken()
+
+  // 3. Push permission checks: permissions.push === true allows login; 401, 404, push:false rejected
   global.fetch = async () => ({
     status: 200,
     ok: true,
@@ -1101,9 +973,61 @@ async function testSuite7_AuthenticationSecurity() {
     throw new Error('push:false should not be allowed')
   }
 
-  // 8. Save Project / publish payload contains neither token nor PIN hash nor encrypted vault
+  // 4. Stored token that returns 401 on reload is cleared from storage and access revoked
+  setStoredToken('expired-pat-token')
+  clearAuthCache()
+  global.fetch = async () => ({
+    status: 401,
+    ok: false,
+    json: async () => ({ message: 'Bad credentials' }),
+  })
+  const accessCheck = await verifyEditorAccess({
+    owner: 'Harsha-604',
+    repo: 'timetable',
+    token: getStoredToken(),
+  })
+  if (accessCheck.allowed) {
+    throw new Error('verifyEditorAccess allowed an expired 401 token')
+  }
+  if (accessCheck.reason !== 'revoked') {
+    throw new Error(`Expected reason 'revoked', got ${accessCheck.reason}`)
+  }
+  if (getStoredToken() !== '') {
+    throw new Error('Stored token was not cleared after 401 on load')
+  }
+
+  // 5. Offline / network error allows editor with isOffline flag
+  setStoredToken('saved-token-offline')
+  clearAuthCache()
+  global.fetch = async () => {
+    throw new Error('Failed to fetch')
+  }
+  const offlineCheck = await verifyEditorAccess({
+    owner: 'Harsha-604',
+    repo: 'timetable',
+    token: getStoredToken(),
+  })
+  if (!offlineCheck.allowed || !offlineCheck.isOffline) {
+    throw new Error('verifyEditorAccess should allow offline access on network error')
+  }
+
+  // 6. Session verification cache: cached access returns allowed: true without network call
+  setAuthCached()
+  if (!isAuthCached()) {
+    throw new Error('isAuthCached should be true after setAuthCached')
+  }
+  const cachedCheck = await verifyEditorAccess({
+    owner: 'Harsha-604',
+    repo: 'timetable',
+    token: getStoredToken(),
+  })
+  if (!cachedCheck.allowed || !cachedCheck.cached) {
+    throw new Error('verifyEditorAccess should use sessionStorage cache')
+  }
+  clearAuthCache()
+
+  // 7. Save Project / publish payload contains neither token nor secrets
   const secretToken = 'super-secret-pat-token-for-test'
-  await encryptToken(secretToken, 'VaultPin1234')
   setStoredToken(secretToken)
 
   const mockState = {
@@ -1122,7 +1046,6 @@ async function testSuite7_AuthenticationSecurity() {
         branch: 'master',
         token: secretToken,
       },
-      pin: 'VaultPin1234',
       periods: [],
     },
   }
@@ -1133,13 +1056,6 @@ async function testSuite7_AuthenticationSecurity() {
   if (payloadStr.includes(secretToken)) {
     throw new Error('Security violation: Secret token leaked into project payload')
   }
-  if (payloadStr.includes('VaultPin1234')) {
-    throw new Error('Security violation: PIN leaked into project payload')
-  }
-  const vaultData = global.localStorage.getItem('tt_publish_token_enc')
-  if (vaultData && payloadStr.includes(vaultData)) {
-    throw new Error('Security violation: Encrypted token vault leaked into project payload')
-  }
   if (safePayload.settings?.publishing?.token) {
     throw new Error('Token property exists in settings.publishing of payload')
   }
@@ -1148,11 +1064,10 @@ async function testSuite7_AuthenticationSecurity() {
   }
 
   clearStoredToken()
-  deleteEncryptedToken()
   clearAuthCache()
   global.fetch = originalFetch
 
-  console.log('Suite 7: PASS (Roundtrip & wrong PIN, salt/iv/ct entropy, stored substring safety, migration, 5 failures cooldown, revoked token vault deletion, leak protection)')
+  console.log('Suite 7: PASS (Token storage, push check, 401 revocation, offline access, session cache, leak protection)')
 }
 
 async function main() {

@@ -1,9 +1,8 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import { useStore } from './store/useStore'
 import Sidebar from './components/Sidebar'
 import Toast from './components/Toast'
 import LoginScreen from './components/LoginScreen'
-import ChangePinModal from './components/ChangePinModal'
 import Dashboard from './pages/Dashboard'
 import Settings from './pages/Settings'
 import Faculty from './pages/Faculty'
@@ -16,18 +15,12 @@ import RoomView from './pages/RoomView'
 import Export from './pages/Export'
 import PublicViewer from './pages/PublicViewer'
 import {
+  getStoredToken,
   isAuthCached,
   verifyEditorAccess,
-  clearAuthCache,
+  logout,
   setIsOffline,
 } from './utils/publisher'
-import {
-  checkMigration,
-  hasEncryptedToken,
-  getMemoryToken,
-  clearMemoryToken,
-  deleteEncryptedToken,
-} from './utils/tokenVault'
 
 const PAGES = {
   home: Dashboard,
@@ -54,20 +47,15 @@ export default function App() {
   const toggleTheme = useStore((s) => s.toggleTheme)
   const settings = useStore((s) => s.settings)
 
-  // Migration check: if plaintext token existed, move to memory & prompt Set PIN
-  const [migrating, setMigrating] = useState(() => checkMigration())
-
   // Auth state
   const [authStep, setAuthStep] = useState(() => {
-    if (checkMigration()) return 'login'
-    const token = getMemoryToken()
+    const token = getStoredToken()
     if (!token) return 'login'
     if (isAuthCached()) return 'editor'
     return 'checking'
   })
   const [isOfflineState, setIsOfflineState] = useState(false)
   const [loginError, setLoginError] = useState('')
-  const [isChangePinOpen, setIsChangePinOpen] = useState(false)
 
   // Listen to hash changes for #edit route
   useEffect(() => {
@@ -78,27 +66,11 @@ export default function App() {
     return () => window.removeEventListener('hashchange', handleHashChange)
   }, [])
 
-  // Listen for require-auth-unlock event from publisher / usePublish
-  useEffect(() => {
-    const handleRequireUnlock = () => {
-      clearMemoryToken()
-      clearAuthCache()
-      setAuthStep('login')
-    }
-    window.addEventListener('require-auth-unlock', handleRequireUnlock)
-    return () => window.removeEventListener('require-auth-unlock', handleRequireUnlock)
-  }, [])
-
   // Verify access on editor load
   useEffect(() => {
     if (!isEditor) return
 
-    if (migrating) {
-      setAuthStep('login')
-      return
-    }
-
-    const token = getMemoryToken()
+    const token = getStoredToken()
     if (!token) {
       setAuthStep('login')
       return
@@ -130,58 +102,21 @@ export default function App() {
         setAuthStep('login')
       }
     })
-  }, [isEditor, migrating, settings?.publishing?.owner, settings?.publishing?.repo])
-
-  // Inactivity timeout: 30 minutes without activity locks the editor (wipes in-memory token)
-  useEffect(() => {
-    if (!isEditor || authStep !== 'editor' || !hasEncryptedToken()) return
-
-    let timer
-    const resetTimer = () => {
-      clearTimeout(timer)
-      timer = setTimeout(() => {
-        clearMemoryToken()
-        clearAuthCache()
-        setAuthStep('login')
-      }, 30 * 60 * 1000)
-    }
-
-    resetTimer()
-
-    const events = ['mousemove', 'mousedown', 'keydown', 'touchstart', 'scroll']
-    events.forEach((evt) => window.addEventListener(evt, resetTimer, { passive: true }))
-
-    return () => {
-      clearTimeout(timer)
-      events.forEach((evt) => window.removeEventListener(evt, resetTimer))
-    }
-  }, [isEditor, authStep])
+  }, [isEditor, settings?.publishing?.owner, settings?.publishing?.repo])
 
   const handleLoginSuccess = () => {
     setLoginError('')
     setIsOfflineState(false)
     setIsOffline(false)
-    setMigrating(false)
     setAuthStep('editor')
   }
 
-  const handleLock = () => {
-    if (hasEncryptedToken()) {
-      clearMemoryToken()
-      clearAuthCache()
-      setAuthStep('login')
-    }
-  }
-
   const handleLogout = () => {
-    if (window.confirm('This removes the saved token from this browser. You will need to enter your GitHub token again.')) {
-      deleteEncryptedToken()
-      clearMemoryToken()
-      clearAuthCache()
+    if (window.confirm('Log out from coordinator editor? You will need your token to log in again.')) {
+      logout()
       setIsOfflineState(false)
       setIsOffline(false)
       setLoginError('')
-      setMigrating(false)
       setAuthStep('login')
     }
   }
@@ -238,8 +173,6 @@ export default function App() {
         <LoginScreen
           onLoginSuccess={handleLoginSuccess}
           initialError={loginError}
-          initialMode={migrating ? 'modeB' : undefined}
-          initialStep={migrating ? 'setPin' : undefined}
         />
         <Toast />
       </div>
@@ -255,8 +188,6 @@ export default function App() {
         currentPage={page}
         onNavigate={navigate}
         onOpenViewer={openViewer}
-        onLock={handleLock}
-        onChangePin={() => setIsChangePinOpen(true)}
         onLogout={handleLogout}
       />
       <main className="main" id="mainContent">
@@ -304,10 +235,6 @@ export default function App() {
           onLogout={handleLogout}
         />
       </main>
-      <ChangePinModal
-        isOpen={isChangePinOpen}
-        onClose={() => setIsChangePinOpen(false)}
-      />
       <Toast />
     </div>
   )

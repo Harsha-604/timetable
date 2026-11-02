@@ -4,18 +4,8 @@
  * be leaked into project payloads, console logs, or error messages.
  */
 
-import {
-  getMemoryToken,
-  setMemoryToken,
-  clearMemoryToken,
-  deleteEncryptedToken,
-  hasEncryptedToken,
-} from './tokenVault.js'
-
 export const TOKEN_STORAGE_KEY = 'tt_publish_token'
-export const PIN_STORAGE_KEY = 'tt_editor_pin'
 export const AUTH_CACHE_KEY = 'tt_auth_verified_at'
-export const PIN_UNLOCKED_KEY = 'tt_pin_unlocked'
 export const AUTH_CACHE_TTL = 12 * 60 * 60 * 1000 // 12 hours
 
 let offlineState = false
@@ -52,52 +42,64 @@ export function fromBase64Utf8(b64) {
   return new TextDecoder().decode(bytes)
 }
 
+let memoryToken = ''
+
 /* ─── Token Storage ─── */
 
 export function getStoredToken() {
-  return getMemoryToken()
-}
-
-export function setStoredToken(token) {
-  setMemoryToken(token)
-}
-
-export function clearStoredToken() {
-  clearMemoryToken()
-}
-
-/* ─── PIN Storage & Hashing ─── */
-
-export function getStoredPinHash() {
+  if (memoryToken) return memoryToken
   if (typeof localStorage === 'undefined') return ''
   try {
-    return localStorage.getItem(PIN_STORAGE_KEY) || ''
+    const raw = localStorage.getItem(TOKEN_STORAGE_KEY) || ''
+    memoryToken = raw.trim()
+    return memoryToken
   } catch {
     return ''
   }
 }
 
-export function setStoredPinHash(hash) {
+export function setStoredToken(token) {
+  const clean = (token || '').trim()
+  memoryToken = clean
   if (typeof localStorage === 'undefined') return
   try {
-    if (hash && typeof hash === 'string' && hash.trim()) {
-      localStorage.setItem(PIN_STORAGE_KEY, hash.trim())
+    if (clean) {
+      localStorage.setItem(TOKEN_STORAGE_KEY, clean)
     } else {
-      localStorage.removeItem(PIN_STORAGE_KEY)
+      localStorage.removeItem(TOKEN_STORAGE_KEY)
     }
+    // Clean up any old PIN keys
+    localStorage.removeItem('tt_publish_token_enc')
+    localStorage.removeItem('tt_editor_pin')
+    localStorage.removeItem('tt_pin_unlocked')
   } catch {}
 }
 
-export function clearStoredPinHash() {
+export function clearStoredToken() {
+  memoryToken = ''
   if (typeof localStorage === 'undefined') return
   try {
-    localStorage.removeItem(PIN_STORAGE_KEY)
+    localStorage.removeItem(TOKEN_STORAGE_KEY)
+    localStorage.removeItem('tt_publish_token_enc')
+    localStorage.removeItem('tt_editor_pin')
+    localStorage.removeItem('tt_pin_unlocked')
   } catch {}
 }
 
 export function isPinSet() {
-  return hasEncryptedToken()
+  return false
 }
+
+export function getStoredPinHash() {
+  return ''
+}
+
+export function setStoredPinHash() {}
+export function clearStoredPinHash() {}
+export function isPinUnlocked() {
+  return true
+}
+export function setPinUnlocked() {}
 
 /**
  * Computes a salted SHA-256 hash using Web Cryptography API.
@@ -127,28 +129,7 @@ export async function verifyPin(pin, storedHash) {
   return check === storedHash
 }
 
-/* ─── Session Flags (Auth cache & PIN unlock) ─── */
-
-export function isPinUnlocked() {
-  if (!isPinSet()) return true
-  if (typeof sessionStorage === 'undefined') return false
-  try {
-    return sessionStorage.getItem(PIN_UNLOCKED_KEY) === 'true'
-  } catch {
-    return false
-  }
-}
-
-export function setPinUnlocked(unlocked) {
-  if (typeof sessionStorage === 'undefined') return
-  try {
-    if (unlocked) {
-      sessionStorage.setItem(PIN_UNLOCKED_KEY, 'true')
-    } else {
-      sessionStorage.removeItem(PIN_UNLOCKED_KEY)
-    }
-  } catch {}
-}
+/* ─── Session Flags (Auth cache) ─── */
 
 export function isAuthCached() {
   if (typeof sessionStorage === 'undefined') return false
@@ -177,10 +158,8 @@ export function clearAuthCache() {
 }
 
 export function logout() {
-  deleteEncryptedToken()
-  clearMemoryToken()
+  clearStoredToken()
   clearAuthCache()
-  setPinUnlocked(false)
 }
 
 export function formatPublishCommitMessage(date = new Date()) {
@@ -339,7 +318,6 @@ export async function verifyEditorAccess({
   }
 
   // 401, 404, or push false
-  deleteEncryptedToken()
   clearStoredToken()
   clearAuthCache()
   return {

@@ -1,7 +1,6 @@
 import { useStore } from '../store/useStore'
 import { BRANCHES, YEARS } from '../utils/constants'
 import { usePublish } from '../utils/usePublish'
-import { hasEncryptedToken } from '../utils/tokenVault'
 
 const NAV = [
   { view: 'home',         label: 'Dashboard' },
@@ -18,11 +17,10 @@ const NAV = [
   { view: 'export',       label: 'Export' },
 ]
 
-export default function Sidebar({ currentPage, onNavigate, onOpenViewer, onLock, onChangePin, onLogout }) {
+export default function Sidebar({ currentPage, onNavigate, onOpenViewer, onLogout }) {
   const { faculty, rooms, subjects, saveProject, loadProject, resetAll, toast } = useStore()
   const { publishing, deployStatus, isOffline, handlePublish } = usePublish({ onNavigate })
   const totalSubs = Object.values(subjects).reduce((a, b) => a + b.length, 0)
-  const hasLock = hasEncryptedToken()
 
   const badge = (key) => {
     if (key === 'faculty')  return faculty.length
@@ -124,24 +122,6 @@ export default function Sidebar({ currentPage, onNavigate, onOpenViewer, onLock,
         >
           Reset All
         </button>
-        {hasLock && (
-          <button
-            className="btn btn-ghost btn-sm"
-            style={{ width: '100%', marginBottom: '.4rem' }}
-            onClick={onLock}
-          >
-            Lock
-          </button>
-        )}
-        {hasLock && onChangePin && (
-          <button
-            className="btn btn-ghost btn-sm"
-            style={{ width: '100%', marginBottom: '.4rem' }}
-            onClick={onChangePin}
-          >
-            Change PIN
-          </button>
-        )}
         <button
           className="btn btn-ghost btn-sm"
           style={{ width: '100%', color: 'var(--muted)' }}

@@ -87,12 +87,12 @@ export function usePublish({ onNavigate } = {}) {
       return
     }
 
-    // Pre-check 1: Token in memory?
+    // Pre-check 1: Token saved?
     const token = getStoredToken()
     if (!token) {
-      toast('Session locked or no token. Please unlock to publish.', 'err')
-      if (typeof window !== 'undefined') {
-        window.dispatchEvent(new CustomEvent('require-auth-unlock'))
+      toast('No token saved. Configure token in Settings → Publishing.', 'err')
+      if (onNavigate) {
+        onNavigate('settings')
       }
       return
     }
