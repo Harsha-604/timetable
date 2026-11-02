@@ -129,12 +129,14 @@ export async function verifyPin(pin, storedHash) {
   return check === storedHash
 }
 
-/* ─── Session Flags (Auth cache) ─── */
+/* ─── Auth cache (localStorage, 12-hour TTL) ─── */
+// Persists across page reloads and browser restarts so the coordinator
+// is not asked to re-enter the token on every visit.
 
 export function isAuthCached() {
-  if (typeof sessionStorage === 'undefined') return false
+  if (typeof localStorage === 'undefined') return false
   try {
-    const val = sessionStorage.getItem(AUTH_CACHE_KEY)
+    const val = localStorage.getItem(AUTH_CACHE_KEY)
     if (!val) return false
     const time = Number(val)
     return Date.now() - time < AUTH_CACHE_TTL
@@ -144,16 +146,20 @@ export function isAuthCached() {
 }
 
 export function setAuthCached() {
-  if (typeof sessionStorage === 'undefined') return
+  if (typeof localStorage === 'undefined') return
   try {
-    sessionStorage.setItem(AUTH_CACHE_KEY, String(Date.now()))
+    localStorage.setItem(AUTH_CACHE_KEY, String(Date.now()))
   } catch {}
 }
 
 export function clearAuthCache() {
-  if (typeof sessionStorage === 'undefined') return
+  if (typeof localStorage === 'undefined') return
   try {
-    sessionStorage.removeItem(AUTH_CACHE_KEY)
+    localStorage.removeItem(AUTH_CACHE_KEY)
+    // Also clear old sessionStorage key if present from a previous version
+    if (typeof sessionStorage !== 'undefined') {
+      sessionStorage.removeItem(AUTH_CACHE_KEY)
+    }
   } catch {}
 }
 
