@@ -1,5 +1,5 @@
 {
-  "savedAt": "2026-11-01T07:12:51.714Z",
+  "savedAt": "2026-11-02T06:12:03.356Z",
   "classes": [
     {
       "id": "CIC-2-A",
@@ -3032,72 +3032,74 @@
     "CIC-2-A": {
       "Mon": {
         "p3": {
-          "subId": "shbla6m",
-          "subCode": "ITW",
+          "subId": "seendbp",
+          "subCode": "DE Lab",
           "facIds": [
-            "fa6621v"
+            "fklgsjw",
+            "fnohs2s"
           ],
-          "facId": "fa6621v",
-          "roomId": "CS-114",
+          "facId": "fklgsjw",
+          "roomId": "CS-115",
           "blockStart": "p3",
           "blockSize": 2,
           "locked": false
         },
         "p4": {
-          "subId": "shbla6m",
-          "subCode": "ITW",
+          "subId": "seendbp",
+          "subCode": "DE Lab",
           "facIds": [
-            "fa6621v"
+            "fklgsjw",
+            "fnohs2s"
           ],
-          "facId": "fa6621v",
-          "roomId": "CS-114",
+          "facId": "fklgsjw",
+          "roomId": "CS-115",
           "blockStart": "p3",
           "blockSize": 2,
           "locked": false
         },
-        "p5": {
-          "subId": "syecxov",
-          "subCode": "OOP",
-          "facIds": [
-            "frab7ha"
-          ],
-          "facId": "frab7ha",
-          "roomId": "CS-101",
-          "blockStart": "p5",
-          "blockSize": 1,
-          "locked": false
-        },
         "p2": {
-          "subId": "syosb0c",
-          "subCode": "EVS",
+          "subId": "sr21jvx",
+          "subCode": "PSM",
           "facIds": [
-            "fuwsk8z"
+            "fkxc6oh"
           ],
-          "facId": "fuwsk8z",
+          "facId": "fkxc6oh",
           "roomId": "CS-101",
           "blockStart": "p2",
           "blockSize": 1,
           "locked": false
         },
         "p1": {
-          "subId": "s3btglv",
-          "subCode": "DS",
+          "subId": "sk1qabe",
+          "subCode": "DE",
           "facIds": [
-            "f04i4jc"
+            "fklgsjw"
           ],
-          "facId": "f04i4jc",
+          "facId": "fklgsjw",
           "roomId": "CS-101",
           "blockStart": "p1",
           "blockSize": 1,
           "locked": false
         },
-        "p6": {
+        "p5": {
           "subId": "sb2v0qn",
           "subCode": "COA",
           "facIds": [
             "fu381xi"
           ],
           "facId": "fu381xi",
+          "roomId": "CS-101",
+          "blockStart": "p5",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p6": {
+          "subId": "syecxov",
+          "subCode": "OOP",
+          "facIds": [
+            "frab7ha"
+          ],
+          "facId": "frab7ha",
           "roomId": "CS-101",
           "blockStart": "p6",
           "blockSize": 1,
@@ -3105,57 +3107,33 @@
         }
       },
       "Tue": {
-        "p5": {
-          "subId": "syv1v29",
-          "subCode": "DS Lab",
+        "p3": {
+          "subId": "svz592x",
+          "subCode": "OOP Lab",
           "facIds": [
-            "f04i4jc",
-            "fvs724f"
+            "fhi7jce",
+            "f9il99o"
           ],
-          "facId": "f04i4jc",
-          "roomId": "CS-113",
-          "blockStart": "p5",
+          "facId": "fhi7jce",
+          "roomId": "CS-114",
+          "blockStart": "p3",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p4": {
+          "subId": "svz592x",
+          "subCode": "OOP Lab",
+          "facIds": [
+            "fhi7jce",
+            "f9il99o"
+          ],
+          "facId": "fhi7jce",
+          "roomId": "CS-114",
+          "blockStart": "p3",
           "blockSize": 2,
           "locked": false
         },
         "p6": {
-          "subId": "syv1v29",
-          "subCode": "DS Lab",
-          "facIds": [
-            "f04i4jc",
-            "fvs724f"
-          ],
-          "facId": "f04i4jc",
-          "roomId": "CS-113",
-          "blockStart": "p5",
-          "blockSize": 2,
-          "locked": false
-        },
-        "p3": {
-          "subId": "sk1qabe",
-          "subCode": "DE",
-          "facIds": [
-            "fklgsjw"
-          ],
-          "facId": "fklgsjw",
-          "roomId": "CS-101",
-          "blockStart": "p3",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p4": {
-          "subId": "s3btglv",
-          "subCode": "DS",
-          "facIds": [
-            "f04i4jc"
-          ],
-          "facId": "f04i4jc",
-          "roomId": "CS-101",
-          "blockStart": "p4",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p2": {
           "subId": "sjbfaga",
           "subCode": "DM",
           "facIds": [
@@ -3163,48 +3141,8 @@
           ],
           "facId": "fyte2g1",
           "roomId": "CS-101",
-          "blockStart": "p2",
+          "blockStart": "p6",
           "blockSize": 1,
-          "locked": false
-        },
-        "p1": {
-          "subId": "syecxov",
-          "subCode": "OOP",
-          "facIds": [
-            "frab7ha"
-          ],
-          "facId": "frab7ha",
-          "roomId": "CS-101",
-          "blockStart": "p1",
-          "blockSize": 1,
-          "locked": false
-        }
-      },
-      "Wed": {
-        "p1": {
-          "subId": "seendbp",
-          "subCode": "DE Lab",
-          "facIds": [
-            "fklgsjw",
-            "fnohs2s"
-          ],
-          "facId": "fklgsjw",
-          "roomId": "CS-115",
-          "blockStart": "p1",
-          "blockSize": 2,
-          "locked": false
-        },
-        "p2": {
-          "subId": "seendbp",
-          "subCode": "DE Lab",
-          "facIds": [
-            "fklgsjw",
-            "fnohs2s"
-          ],
-          "facId": "fklgsjw",
-          "roomId": "CS-115",
-          "blockStart": "p1",
-          "blockSize": 2,
           "locked": false
         },
         "p5": {
@@ -3219,107 +3157,7 @@
           "blockSize": 1,
           "locked": false
         },
-        "p3": {
-          "subId": "sr21jvx",
-          "subCode": "PSM",
-          "facIds": [
-            "fkxc6oh"
-          ],
-          "facId": "fkxc6oh",
-          "roomId": "CS-101",
-          "blockStart": "p3",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p4": {
-          "subId": "s3btglv",
-          "subCode": "DS",
-          "facIds": [
-            "f04i4jc"
-          ],
-          "facId": "f04i4jc",
-          "roomId": "CS-101",
-          "blockStart": "p4",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p6": {
-          "subId": "syecxov",
-          "subCode": "OOP",
-          "facIds": [
-            "frab7ha"
-          ],
-          "facId": "frab7ha",
-          "roomId": "CS-101",
-          "blockStart": "p6",
-          "blockSize": 1,
-          "locked": false
-        }
-      },
-      "Thu": {
         "p1": {
-          "subId": "svz592x",
-          "subCode": "OOP Lab",
-          "facIds": [
-            "fhi7jce",
-            "f9il99o"
-          ],
-          "facId": "fhi7jce",
-          "roomId": "CS-114",
-          "blockStart": "p1",
-          "blockSize": 2,
-          "locked": false
-        },
-        "p2": {
-          "subId": "svz592x",
-          "subCode": "OOP Lab",
-          "facIds": [
-            "fhi7jce",
-            "f9il99o"
-          ],
-          "facId": "fhi7jce",
-          "roomId": "CS-114",
-          "blockStart": "p1",
-          "blockSize": 2,
-          "locked": false
-        },
-        "p4": {
-          "subId": "sjbfaga",
-          "subCode": "DM",
-          "facIds": [
-            "fyte2g1"
-          ],
-          "facId": "fyte2g1",
-          "roomId": "CS-101",
-          "blockStart": "p4",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p3": {
-          "subId": "sr21jvx",
-          "subCode": "PSM",
-          "facIds": [
-            "fkxc6oh"
-          ],
-          "facId": "fkxc6oh",
-          "roomId": "CS-101",
-          "blockStart": "p3",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p5": {
-          "subId": "sk1qabe",
-          "subCode": "DE",
-          "facIds": [
-            "fklgsjw"
-          ],
-          "facId": "fklgsjw",
-          "roomId": "CS-101",
-          "blockStart": "p5",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p6": {
           "subId": "sb2v0qn",
           "subCode": "COA",
           "facIds": [
@@ -3327,7 +3165,169 @@
           ],
           "facId": "fu381xi",
           "roomId": "CS-101",
-          "blockStart": "p6",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p2": {
+          "subId": "sk1qabe",
+          "subCode": "DE",
+          "facIds": [
+            "fklgsjw"
+          ],
+          "facId": "fklgsjw",
+          "roomId": "CS-101",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Wed": {
+        "p5": {
+          "subId": "shbla6m",
+          "subCode": "ITW",
+          "facIds": [
+            "fa6621v"
+          ],
+          "facId": "fa6621v",
+          "roomId": "CS-114",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p6": {
+          "subId": "shbla6m",
+          "subCode": "ITW",
+          "facIds": [
+            "fa6621v"
+          ],
+          "facId": "fa6621v",
+          "roomId": "CS-114",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p3": {
+          "subId": "sk1qabe",
+          "subCode": "DE",
+          "facIds": [
+            "fklgsjw"
+          ],
+          "facId": "fklgsjw",
+          "roomId": "CS-101",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p4": {
+          "subId": "sr21jvx",
+          "subCode": "PSM",
+          "facIds": [
+            "fkxc6oh"
+          ],
+          "facId": "fkxc6oh",
+          "roomId": "CS-101",
+          "blockStart": "p4",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p2": {
+          "subId": "s3btglv",
+          "subCode": "DS",
+          "facIds": [
+            "f04i4jc"
+          ],
+          "facId": "f04i4jc",
+          "roomId": "CS-101",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p1": {
+          "subId": "sjbfaga",
+          "subCode": "DM",
+          "facIds": [
+            "fyte2g1"
+          ],
+          "facId": "fyte2g1",
+          "roomId": "CS-101",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Thu": {
+        "p5": {
+          "subId": "syv1v29",
+          "subCode": "DS Lab",
+          "facIds": [
+            "f04i4jc",
+            "fvs724f"
+          ],
+          "facId": "f04i4jc",
+          "roomId": "CS-113",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p6": {
+          "subId": "syv1v29",
+          "subCode": "DS Lab",
+          "facIds": [
+            "f04i4jc",
+            "fvs724f"
+          ],
+          "facId": "f04i4jc",
+          "roomId": "CS-113",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p1": {
+          "subId": "sr21jvx",
+          "subCode": "PSM",
+          "facIds": [
+            "fkxc6oh"
+          ],
+          "facId": "fkxc6oh",
+          "roomId": "CS-101",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p2": {
+          "subId": "s3btglv",
+          "subCode": "DS",
+          "facIds": [
+            "f04i4jc"
+          ],
+          "facId": "f04i4jc",
+          "roomId": "CS-101",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p3": {
+          "subId": "syosb0c",
+          "subCode": "EVS",
+          "facIds": [
+            "fuwsk8z"
+          ],
+          "facId": "fuwsk8z",
+          "roomId": "CS-101",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p4": {
+          "subId": "syecxov",
+          "subCode": "OOP",
+          "facIds": [
+            "frab7ha"
+          ],
+          "facId": "frab7ha",
+          "roomId": "CS-101",
+          "blockStart": "p4",
           "blockSize": 1,
           "locked": false
         }
@@ -3371,7 +3371,7 @@
           "blockSize": 1,
           "locked": false
         },
-        "p2": {
+        "p5": {
           "subId": "sjbfaga",
           "subCode": "DM",
           "facIds": [
@@ -3379,31 +3379,31 @@
           ],
           "facId": "fyte2g1",
           "roomId": "CS-101",
-          "blockStart": "p2",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p5": {
-          "subId": "sk1qabe",
-          "subCode": "DE",
-          "facIds": [
-            "fklgsjw"
-          ],
-          "facId": "fklgsjw",
-          "roomId": "CS-101",
           "blockStart": "p5",
           "blockSize": 1,
           "locked": false
         },
         "p6": {
-          "subId": "sr21jvx",
-          "subCode": "PSM",
+          "subId": "s3btglv",
+          "subCode": "DS",
           "facIds": [
-            "fkxc6oh"
+            "f04i4jc"
           ],
-          "facId": "fkxc6oh",
+          "facId": "f04i4jc",
           "roomId": "CS-101",
           "blockStart": "p6",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p2": {
+          "subId": "syecxov",
+          "subCode": "OOP",
+          "facIds": [
+            "frab7ha"
+          ],
+          "facId": "frab7ha",
+          "roomId": "CS-101",
+          "blockStart": "p2",
           "blockSize": 1,
           "locked": false
         }
@@ -3411,7 +3411,7 @@
     },
     "CIC-3-A": {
       "Mon": {
-        "p5": {
+        "p3": {
           "subId": "swnkugi",
           "subCode": "OS Lab",
           "facIds": [
@@ -3420,11 +3420,11 @@
           ],
           "facId": "f93jwxk",
           "roomId": "CS-205",
-          "blockStart": "p5",
+          "blockStart": "p3",
           "blockSize": 2,
           "locked": false
         },
-        "p6": {
+        "p4": {
           "subId": "swnkugi",
           "subCode": "OS Lab",
           "facIds": [
@@ -3433,47 +3433,35 @@
           ],
           "facId": "f93jwxk",
           "roomId": "CS-205",
-          "blockStart": "p5",
+          "blockStart": "p3",
           "blockSize": 2,
-          "locked": false
-        },
-        "p2": {
-          "subId": "s5ygca0",
-          "subCode": "IoT",
-          "facIds": [
-            "fjw0sm1"
-          ],
-          "facId": "fjw0sm1",
-          "roomId": "CS-102",
-          "blockStart": "p2",
-          "blockSize": 1,
           "locked": false
         },
         "p1": {
-          "subId": "s9xsaqf",
-          "subCode": "OS",
+          "subId": "souqber",
+          "subCode": "SE",
           "facIds": [
-            "f93jwxk"
+            "f1u2u18"
           ],
-          "facId": "f93jwxk",
+          "facId": "f1u2u18",
           "roomId": "CS-102",
           "blockStart": "p1",
           "blockSize": 1,
           "locked": false
         },
-        "p4": {
-          "subId": "s7f8ldk",
-          "subCode": "DBMS",
+        "p2": {
+          "subId": "s3gsj2k",
+          "subCode": "PE-I:CC",
           "facIds": [
-            "fiuyg71"
+            "f1k5jo0"
           ],
-          "facId": "fiuyg71",
+          "facId": "f1k5jo0",
           "roomId": "CS-102",
-          "blockStart": "p4",
+          "blockStart": "p2",
           "blockSize": 1,
           "locked": false
         },
-        "p3": {
+        "p6": {
           "subId": "s91ikul",
           "subCode": "CN",
           "facIds": [
@@ -3481,51 +3469,75 @@
           ],
           "facId": "fs3onw5",
           "roomId": "CS-102",
-          "blockStart": "p3",
+          "blockStart": "p6",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p5": {
+          "subId": "s7f8ldk",
+          "subCode": "DBMS",
+          "facIds": [
+            "fiuyg71"
+          ],
+          "facId": "fiuyg71",
+          "roomId": "CS-102",
+          "blockStart": "p5",
           "blockSize": 1,
           "locked": false
         }
       },
       "Tue": {
-        "p1": {
-          "subId": "swnkugi",
-          "subCode": "OS Lab",
+        "p5": {
+          "subId": "skzruib",
+          "subCode": "DBMS Lab",
           "facIds": [
-            "f93jwxk",
-            "fmvua27"
+            "fiuyg71",
+            "fuzyhjx"
           ],
-          "facId": "f93jwxk",
+          "facId": "fiuyg71",
           "roomId": "CS-205",
-          "blockStart": "p1",
+          "blockStart": "p5",
           "blockSize": 2,
           "locked": false
         },
-        "p2": {
-          "subId": "swnkugi",
-          "subCode": "OS Lab",
+        "p6": {
+          "subId": "skzruib",
+          "subCode": "DBMS Lab",
           "facIds": [
-            "f93jwxk",
-            "fmvua27"
+            "fiuyg71",
+            "fuzyhjx"
           ],
-          "facId": "f93jwxk",
+          "facId": "fiuyg71",
           "roomId": "CS-205",
-          "blockStart": "p1",
+          "blockStart": "p5",
           "blockSize": 2,
           "locked": false
         },
         "p3": {
-          "subId": "s3gsj2k",
-          "subCode": "PE-I:CC",
+          "subId": "s9xsaqf",
+          "subCode": "OS",
           "facIds": [
-            "f1k5jo0"
+            "f93jwxk"
           ],
-          "facId": "f1k5jo0",
+          "facId": "f93jwxk",
           "roomId": "CS-102",
           "blockStart": "p3",
           "blockSize": 1,
           "locked": false
         },
-        "p6": {
+        "p4": {
+          "subId": "s5ygca0",
+          "subCode": "IoT",
+          "facIds": [
+            "fjw0sm1"
+          ],
+          "facId": "fjw0sm1",
+          "roomId": "CS-102",
+          "blockStart": "p4",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p2": {
           "subId": "s9spcsq",
           "subCode": "CNS",
           "facIds": [
@@ -3533,11 +3545,11 @@
           ],
           "facId": "f7j8puf",
           "roomId": "CS-102",
-          "blockStart": "p6",
+          "blockStart": "p2",
           "blockSize": 1,
           "locked": false
         },
-        "p5": {
+        "p1": {
           "subId": "s7f8ldk",
           "subCode": "DBMS",
           "facIds": [
@@ -3545,51 +3557,39 @@
           ],
           "facId": "fiuyg71",
           "roomId": "CS-102",
-          "blockStart": "p5",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p4": {
-          "subId": "souqber",
-          "subCode": "SE",
-          "facIds": [
-            "f1u2u18"
-          ],
-          "facId": "f1u2u18",
-          "roomId": "CS-102",
-          "blockStart": "p4",
+          "blockStart": "p1",
           "blockSize": 1,
           "locked": false
         }
       },
       "Wed": {
-        "p5": {
-          "subId": "skzruib",
-          "subCode": "DBMS Lab",
-          "facIds": [
-            "fiuyg71",
-            "fuzyhjx"
-          ],
-          "facId": "fiuyg71",
-          "roomId": "CS-205",
-          "blockStart": "p5",
-          "blockSize": 2,
-          "locked": false
-        },
-        "p6": {
-          "subId": "skzruib",
-          "subCode": "DBMS Lab",
-          "facIds": [
-            "fiuyg71",
-            "fuzyhjx"
-          ],
-          "facId": "fiuyg71",
-          "roomId": "CS-205",
-          "blockStart": "p5",
-          "blockSize": 2,
-          "locked": false
-        },
         "p3": {
+          "subId": "swnkugi",
+          "subCode": "OS Lab",
+          "facIds": [
+            "f93jwxk",
+            "fmvua27"
+          ],
+          "facId": "f93jwxk",
+          "roomId": "CS-205",
+          "blockStart": "p3",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p4": {
+          "subId": "swnkugi",
+          "subCode": "OS Lab",
+          "facIds": [
+            "f93jwxk",
+            "fmvua27"
+          ],
+          "facId": "f93jwxk",
+          "roomId": "CS-205",
+          "blockStart": "p3",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p2": {
           "subId": "s91ikul",
           "subCode": "CN",
           "facIds": [
@@ -3597,11 +3597,11 @@
           ],
           "facId": "fs3onw5",
           "roomId": "CS-102",
-          "blockStart": "p3",
+          "blockStart": "p2",
           "blockSize": 1,
           "locked": false
         },
-        "p1": {
+        "p6": {
           "subId": "s9xsaqf",
           "subCode": "OS",
           "facIds": [
@@ -3609,23 +3609,11 @@
           ],
           "facId": "f93jwxk",
           "roomId": "CS-102",
-          "blockStart": "p1",
+          "blockStart": "p6",
           "blockSize": 1,
           "locked": false
         },
-        "p2": {
-          "subId": "s9spcsq",
-          "subCode": "CNS",
-          "facIds": [
-            "f7j8puf"
-          ],
-          "facId": "f7j8puf",
-          "roomId": "CS-102",
-          "blockStart": "p2",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p4": {
+        "p1": {
           "subId": "souqber",
           "subCode": "SE",
           "facIds": [
@@ -3633,61 +3621,11 @@
           ],
           "facId": "f1u2u18",
           "roomId": "CS-102",
-          "blockStart": "p4",
-          "blockSize": 1,
-          "locked": false
-        }
-      },
-      "Thu": {
-        "p5": {
-          "subId": "sdbdraf",
-          "subCode": "MP",
-          "facIds": [
-            "fon3gzp"
-          ],
-          "facId": "fon3gzp",
-          "roomId": "CS-207",
-          "blockStart": "p5",
-          "blockSize": 2,
-          "locked": false
-        },
-        "p6": {
-          "subId": "sdbdraf",
-          "subCode": "MP",
-          "facIds": [
-            "fon3gzp"
-          ],
-          "facId": "fon3gzp",
-          "roomId": "CS-207",
-          "blockStart": "p5",
-          "blockSize": 2,
-          "locked": false
-        },
-        "p4": {
-          "subId": "s9spcsq",
-          "subCode": "CNS",
-          "facIds": [
-            "f7j8puf"
-          ],
-          "facId": "f7j8puf",
-          "roomId": "CS-102",
-          "blockStart": "p4",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p1": {
-          "subId": "s91ikul",
-          "subCode": "CN",
-          "facIds": [
-            "fs3onw5"
-          ],
-          "facId": "fs3onw5",
-          "roomId": "CS-102",
           "blockStart": "p1",
           "blockSize": 1,
           "locked": false
         },
-        "p2": {
+        "p5": {
           "subId": "s5ygca0",
           "subCode": "IoT",
           "facIds": [
@@ -3695,24 +3633,12 @@
           ],
           "facId": "fjw0sm1",
           "roomId": "CS-102",
-          "blockStart": "p2",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p3": {
-          "subId": "souqber",
-          "subCode": "SE",
-          "facIds": [
-            "f1u2u18"
-          ],
-          "facId": "f1u2u18",
-          "roomId": "CS-102",
-          "blockStart": "p3",
+          "blockStart": "p5",
           "blockSize": 1,
           "locked": false
         }
       },
-      "Fri": {
+      "Thu": {
         "p1": {
           "subId": "sbzr64n",
           "subCode": "CN Lab",
@@ -3740,18 +3666,30 @@
           "locked": false
         },
         "p3": {
-          "subId": "s9xsaqf",
-          "subCode": "OS",
+          "subId": "s91ikul",
+          "subCode": "CN",
           "facIds": [
-            "f93jwxk"
+            "fs3onw5"
           ],
-          "facId": "f93jwxk",
+          "facId": "fs3onw5",
           "roomId": "CS-102",
           "blockStart": "p3",
           "blockSize": 1,
           "locked": false
         },
-        "p6": {
+        "p5": {
+          "subId": "s5ygca0",
+          "subCode": "IoT",
+          "facIds": [
+            "fjw0sm1"
+          ],
+          "facId": "fjw0sm1",
+          "roomId": "CS-102",
+          "blockStart": "p5",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p4": {
           "subId": "s3gsj2k",
           "subCode": "PE-I:CC",
           "facIds": [
@@ -3759,7 +3697,57 @@
           ],
           "facId": "f1k5jo0",
           "roomId": "CS-102",
+          "blockStart": "p4",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p6": {
+          "subId": "s9spcsq",
+          "subCode": "CNS",
+          "facIds": [
+            "f7j8puf"
+          ],
+          "facId": "f7j8puf",
+          "roomId": "CS-102",
           "blockStart": "p6",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Fri": {
+        "p5": {
+          "subId": "sdbdraf",
+          "subCode": "MP",
+          "facIds": [
+            "fon3gzp"
+          ],
+          "facId": "fon3gzp",
+          "roomId": "CS-207",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p6": {
+          "subId": "sdbdraf",
+          "subCode": "MP",
+          "facIds": [
+            "fon3gzp"
+          ],
+          "facId": "fon3gzp",
+          "roomId": "CS-207",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p1": {
+          "subId": "souqber",
+          "subCode": "SE",
+          "facIds": [
+            "f1u2u18"
+          ],
+          "facId": "f1u2u18",
+          "roomId": "CS-102",
+          "blockStart": "p1",
           "blockSize": 1,
           "locked": false
         },
@@ -3775,15 +3763,27 @@
           "blockSize": 1,
           "locked": false
         },
-        "p5": {
-          "subId": "s5ygca0",
-          "subCode": "IoT",
+        "p3": {
+          "subId": "s9spcsq",
+          "subCode": "CNS",
           "facIds": [
-            "fjw0sm1"
+            "f7j8puf"
           ],
-          "facId": "fjw0sm1",
+          "facId": "f7j8puf",
           "roomId": "CS-102",
-          "blockStart": "p5",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p2": {
+          "subId": "s9xsaqf",
+          "subCode": "OS",
+          "facIds": [
+            "f93jwxk"
+          ],
+          "facId": "f93jwxk",
+          "roomId": "CS-102",
+          "blockStart": "p2",
           "blockSize": 1,
           "locked": false
         }
@@ -3791,7 +3791,7 @@
     },
     "CIC-4-A": {
       "Mon": {
-        "p3": {
+        "p1": {
           "subId": "s8czwwd",
           "subCode": "OE-I:RSE",
           "facIds": [
@@ -3799,67 +3799,69 @@
           ],
           "facId": "f2wxl5l",
           "roomId": "CS-103",
-          "blockStart": "p3",
+          "blockStart": "p1",
           "blockSize": 1,
           "locked": false
         },
-        "p1": {
-          "subId": "stuek81",
-          "subCode": "DevOps Lab",
+        "p3": {
+          "subId": "s75vg81",
+          "subCode": "BCT Lab",
           "facIds": [
             "fuxak8n",
-            "fmvua27"
+            "furpuwu",
+            "fvfe2sm"
           ],
           "facId": "fuxak8n",
-          "roomId": "CS-104",
-          "blockStart": "p1",
-          "blockSize": 2,
-          "locked": false
-        },
-        "p2": {
-          "subId": "stuek81",
-          "subCode": "DevOps Lab",
-          "facIds": [
-            "fuxak8n",
-            "fmvua27"
-          ],
-          "facId": "fuxak8n",
-          "roomId": "CS-104",
-          "blockStart": "p1",
+          "roomId": "CS-109",
+          "blockStart": "p3",
           "blockSize": 2,
           "locked": false
         },
         "p4": {
-          "subId": "sidppjh",
-          "subCode": "BCT",
+          "subId": "s75vg81",
+          "subCode": "BCT Lab",
           "facIds": [
-            "fuxak8n"
+            "fuxak8n",
+            "furpuwu",
+            "fvfe2sm"
           ],
           "facId": "fuxak8n",
+          "roomId": "CS-109",
+          "blockStart": "p3",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p2": {
+          "subId": "swfn5bo",
+          "subCode": "PE-IV:SPSM",
+          "facIds": [
+            "fmvua27"
+          ],
+          "facId": "fmvua27",
           "roomId": "CS-103",
-          "blockStart": "p4",
+          "blockStart": "p2",
           "blockSize": 1,
           "locked": false
         },
         "p5": {
-          "subId": "s3f41u7",
-          "subCode": "ES",
+          "subId": "s8mumgr",
+          "subCode": "PE-V:SQT",
           "facIds": [
-            "fevyfmd"
+            "ftvlte9"
           ],
-          "facId": "fevyfmd",
+          "facId": "ftvlte9",
           "roomId": "CS-103",
           "blockStart": "p5",
           "blockSize": 1,
           "locked": false
         },
         "p6": {
-          "subId": "s0xugfb",
-          "subCode": "IoTCPS",
+          "subId": "s3f41u7",
+          "subCode": "ES",
           "facIds": [
-            "ftjlb2n"
+            "fevyfmd"
           ],
-          "facId": "ftjlb2n",
+          "facId": "fevyfmd",
           "roomId": "CS-103",
           "blockStart": "p6",
           "blockSize": 1,
@@ -3894,18 +3896,6 @@
           "locked": false
         },
         "p2": {
-          "subId": "sidppjh",
-          "subCode": "BCT",
-          "facIds": [
-            "fuxak8n"
-          ],
-          "facId": "fuxak8n",
-          "roomId": "CS-103",
-          "blockStart": "p2",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p1": {
           "subId": "s8mumgr",
           "subCode": "PE-V:SQT",
           "facIds": [
@@ -3913,11 +3903,109 @@
           ],
           "facId": "ftvlte9",
           "roomId": "CS-103",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p1": {
+          "subId": "sidppjh",
+          "subCode": "BCT",
+          "facIds": [
+            "fuxak8n"
+          ],
+          "facId": "fuxak8n",
+          "roomId": "CS-103",
           "blockStart": "p1",
           "blockSize": 1,
           "locked": false
         },
+        "p5": {
+          "subId": "s0xugfb",
+          "subCode": "IoTCPS",
+          "facIds": [
+            "ftjlb2n"
+          ],
+          "facId": "ftjlb2n",
+          "roomId": "CS-103",
+          "blockStart": "p5",
+          "blockSize": 1,
+          "locked": false
+        },
         "p6": {
+          "subId": "syk8uo7",
+          "subCode": "DMF",
+          "facIds": [
+            "f7j8puf"
+          ],
+          "facId": "f7j8puf",
+          "roomId": "CS-103",
+          "blockStart": "p6",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Wed": {
+        "p1": {
+          "subId": "s8czwwd",
+          "subCode": "OE-I:RSE",
+          "facIds": [
+            "f2wxl5l"
+          ],
+          "facId": "f2wxl5l",
+          "roomId": "CS-103",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p5": {
+          "subId": "s7oba4y",
+          "subCode": "CPW-1",
+          "facIds": [
+            "f29x3xf"
+          ],
+          "facId": "f29x3xf",
+          "roomId": "CS-207",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p6": {
+          "subId": "s7oba4y",
+          "subCode": "CPW-1",
+          "facIds": [
+            "f29x3xf"
+          ],
+          "facId": "f29x3xf",
+          "roomId": "CS-207",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p2": {
+          "subId": "syk8uo7",
+          "subCode": "DMF",
+          "facIds": [
+            "f7j8puf"
+          ],
+          "facId": "f7j8puf",
+          "roomId": "CS-103",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p3": {
+          "subId": "s8mumgr",
+          "subCode": "PE-V:SQT",
+          "facIds": [
+            "ftvlte9"
+          ],
+          "facId": "ftvlte9",
+          "roomId": "CS-103",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p4": {
           "subId": "s3f41u7",
           "subCode": "ES",
           "facIds": [
@@ -3925,103 +4013,13 @@
           ],
           "facId": "fevyfmd",
           "roomId": "CS-103",
-          "blockStart": "p6",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p5": {
-          "subId": "syk8uo7",
-          "subCode": "DMF",
-          "facIds": [
-            "f7j8puf"
-          ],
-          "facId": "f7j8puf",
-          "roomId": "CS-103",
-          "blockStart": "p5",
-          "blockSize": 1,
-          "locked": false
-        }
-      },
-      "Wed": {
-        "p5": {
-          "subId": "s1jh0dk",
-          "subCode": "IoTCPS Lab",
-          "facIds": [
-            "ftjlb2n",
-            "f1u2u18",
-            "fjw0sm1"
-          ],
-          "facId": "ftjlb2n",
-          "roomId": "CS-109",
-          "blockStart": "p5",
-          "blockSize": 2,
-          "locked": false
-        },
-        "p6": {
-          "subId": "s1jh0dk",
-          "subCode": "IoTCPS Lab",
-          "facIds": [
-            "ftjlb2n",
-            "f1u2u18",
-            "fjw0sm1"
-          ],
-          "facId": "ftjlb2n",
-          "roomId": "CS-109",
-          "blockStart": "p5",
-          "blockSize": 2,
-          "locked": false
-        },
-        "p1": {
-          "subId": "s0xugfb",
-          "subCode": "IoTCPS",
-          "facIds": [
-            "ftjlb2n"
-          ],
-          "facId": "ftjlb2n",
-          "roomId": "CS-103",
-          "blockStart": "p1",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p2": {
-          "subId": "s8mumgr",
-          "subCode": "PE-V:SQT",
-          "facIds": [
-            "ftvlte9"
-          ],
-          "facId": "ftvlte9",
-          "roomId": "CS-103",
-          "blockStart": "p2",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p4": {
-          "subId": "syk8uo7",
-          "subCode": "DMF",
-          "facIds": [
-            "f7j8puf"
-          ],
-          "facId": "f7j8puf",
-          "roomId": "CS-103",
           "blockStart": "p4",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p3": {
-          "subId": "swfn5bo",
-          "subCode": "PE-IV:SPSM",
-          "facIds": [
-            "fmvua27"
-          ],
-          "facId": "fmvua27",
-          "roomId": "CS-103",
-          "blockStart": "p3",
           "blockSize": 1,
           "locked": false
         }
       },
       "Thu": {
-        "p3": {
+        "p4": {
           "subId": "s8czwwd",
           "subCode": "OE-I:RSE",
           "facIds": [
@@ -4029,35 +4027,37 @@
           ],
           "facId": "f2wxl5l",
           "roomId": "CS-103",
-          "blockStart": "p3",
+          "blockStart": "p4",
           "blockSize": 1,
           "locked": false
         },
         "p1": {
-          "subId": "s7oba4y",
-          "subCode": "CPW-1",
+          "subId": "stuek81",
+          "subCode": "DevOps Lab",
           "facIds": [
-            "f29x3xf"
+            "fuxak8n",
+            "fmvua27"
           ],
-          "facId": "f29x3xf",
-          "roomId": "CS-207",
+          "facId": "fuxak8n",
+          "roomId": "CS-104",
           "blockStart": "p1",
           "blockSize": 2,
           "locked": false
         },
         "p2": {
-          "subId": "s7oba4y",
-          "subCode": "CPW-1",
+          "subId": "stuek81",
+          "subCode": "DevOps Lab",
           "facIds": [
-            "f29x3xf"
+            "fuxak8n",
+            "fmvua27"
           ],
-          "facId": "f29x3xf",
-          "roomId": "CS-207",
+          "facId": "fuxak8n",
+          "roomId": "CS-104",
           "blockStart": "p1",
           "blockSize": 2,
           "locked": false
         },
-        "p6": {
+        "p3": {
           "subId": "s0xugfb",
           "subCode": "IoTCPS",
           "facIds": [
@@ -4065,77 +4065,11 @@
           ],
           "facId": "ftjlb2n",
           "roomId": "CS-103",
-          "blockStart": "p6",
+          "blockStart": "p3",
           "blockSize": 1,
-          "locked": false
-        },
-        "p4": {
-          "subId": "swfn5bo",
-          "subCode": "PE-IV:SPSM",
-          "facIds": [
-            "fmvua27"
-          ],
-          "facId": "fmvua27",
-          "roomId": "CS-103",
-          "blockStart": "p4",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p5": {
-          "subId": "s8mumgr",
-          "subCode": "PE-V:SQT",
-          "facIds": [
-            "ftvlte9"
-          ],
-          "facId": "ftvlte9",
-          "roomId": "CS-103",
-          "blockStart": "p5",
-          "blockSize": 1,
-          "locked": false
-        }
-      },
-      "Fri": {
-        "p4": {
-          "subId": "s8czwwd",
-          "subCode": "OE-I:RSE",
-          "facIds": [
-            "f2wxl5l"
-          ],
-          "facId": "f2wxl5l",
-          "roomId": "CS-103",
-          "blockStart": "p4",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p5": {
-          "subId": "s75vg81",
-          "subCode": "BCT Lab",
-          "facIds": [
-            "fuxak8n",
-            "furpuwu",
-            "fvfe2sm"
-          ],
-          "facId": "fuxak8n",
-          "roomId": "CS-109",
-          "blockStart": "p5",
-          "blockSize": 2,
           "locked": false
         },
         "p6": {
-          "subId": "s75vg81",
-          "subCode": "BCT Lab",
-          "facIds": [
-            "fuxak8n",
-            "furpuwu",
-            "fvfe2sm"
-          ],
-          "facId": "fuxak8n",
-          "roomId": "CS-109",
-          "blockStart": "p5",
-          "blockSize": 2,
-          "locked": false
-        },
-        "p3": {
           "subId": "sidppjh",
           "subCode": "BCT",
           "facIds": [
@@ -4143,11 +4077,11 @@
           ],
           "facId": "fuxak8n",
           "roomId": "CS-103",
-          "blockStart": "p3",
+          "blockStart": "p6",
           "blockSize": 1,
           "locked": false
         },
-        "p1": {
+        "p5": {
           "subId": "swfn5bo",
           "subCode": "PE-IV:SPSM",
           "facIds": [
@@ -4155,8 +4089,38 @@
           ],
           "facId": "fmvua27",
           "roomId": "CS-103",
-          "blockStart": "p1",
+          "blockStart": "p5",
           "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Fri": {
+        "p3": {
+          "subId": "s1jh0dk",
+          "subCode": "IoTCPS Lab",
+          "facIds": [
+            "ftjlb2n",
+            "f1u2u18",
+            "fjw0sm1"
+          ],
+          "facId": "ftjlb2n",
+          "roomId": "CS-109",
+          "blockStart": "p3",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p4": {
+          "subId": "s1jh0dk",
+          "subCode": "IoTCPS Lab",
+          "facIds": [
+            "ftjlb2n",
+            "f1u2u18",
+            "fjw0sm1"
+          ],
+          "facId": "ftjlb2n",
+          "roomId": "CS-109",
+          "blockStart": "p3",
+          "blockSize": 2,
           "locked": false
         },
         "p2": {
@@ -4168,6 +4132,42 @@
           "facId": "f7j8puf",
           "roomId": "CS-103",
           "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p1": {
+          "subId": "sidppjh",
+          "subCode": "BCT",
+          "facIds": [
+            "fuxak8n"
+          ],
+          "facId": "fuxak8n",
+          "roomId": "CS-103",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p5": {
+          "subId": "s0xugfb",
+          "subCode": "IoTCPS",
+          "facIds": [
+            "ftjlb2n"
+          ],
+          "facId": "ftjlb2n",
+          "roomId": "CS-103",
+          "blockStart": "p5",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p6": {
+          "subId": "swfn5bo",
+          "subCode": "PE-IV:SPSM",
+          "facIds": [
+            "fmvua27"
+          ],
+          "facId": "fmvua27",
+          "roomId": "CS-103",
+          "blockStart": "p6",
           "blockSize": 1,
           "locked": false
         }
@@ -4175,43 +4175,57 @@
     },
     "AIML-2-A": {
       "Mon": {
-        "p5": {
-          "subId": "smeiuf6",
-          "subCode": "ITW",
+        "p3": {
+          "subId": "sfgaswn",
+          "subCode": "OOP Lab",
           "facIds": [
-            "f2trwys"
+            "fhi7jce",
+            "f9il99o"
           ],
-          "facId": "f2trwys",
+          "facId": "fhi7jce",
           "roomId": "CS-114",
-          "blockStart": "p5",
+          "blockStart": "p3",
           "blockSize": 2,
           "locked": false
         },
-        "p6": {
-          "subId": "smeiuf6",
-          "subCode": "ITW",
+        "p4": {
+          "subId": "sfgaswn",
+          "subCode": "OOP Lab",
           "facIds": [
-            "f2trwys"
+            "fhi7jce",
+            "f9il99o"
           ],
-          "facId": "f2trwys",
+          "facId": "fhi7jce",
           "roomId": "CS-114",
-          "blockStart": "p5",
+          "blockStart": "p3",
           "blockSize": 2,
           "locked": false
         },
-        "p2": {
-          "subId": "stl3rpl",
-          "subCode": "DE",
+        "p1": {
+          "subId": "sx2565r",
+          "subCode": "OOP",
           "facIds": [
-            "fu381xi"
+            "fhi7jce"
           ],
-          "facId": "fu381xi",
+          "facId": "fhi7jce",
           "roomId": "CS-105",
-          "blockStart": "p2",
+          "blockStart": "p1",
           "blockSize": 1,
           "locked": false
         },
-        "p3": {
+        "p5": {
+          "subId": "stqv97j",
+          "subCode": "PSM",
+          "facIds": [
+            "fevyfmd"
+          ],
+          "facId": "fevyfmd",
+          "roomId": "CS-105",
+          "blockStart": "p5",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p2": {
           "subId": "s321w5k",
           "subCode": "DS",
           "facIds": [
@@ -4219,31 +4233,19 @@
           ],
           "facId": "fg716wg",
           "roomId": "CS-105",
-          "blockStart": "p3",
+          "blockStart": "p2",
           "blockSize": 1,
           "locked": false
         },
-        "p4": {
-          "subId": "sg9wj5i",
-          "subCode": "COA",
+        "p6": {
+          "subId": "s9xo2ak",
+          "subCode": "DM",
           "facIds": [
-            "fnohs2s"
+            "fuwsk8z"
           ],
-          "facId": "fnohs2s",
+          "facId": "fuwsk8z",
           "roomId": "CS-105",
-          "blockStart": "p4",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p1": {
-          "subId": "sg80253",
-          "subCode": "EVS",
-          "facIds": [
-            "fh06l0h"
-          ],
-          "facId": "fh06l0h",
-          "roomId": "CS-105",
-          "blockStart": "p1",
+          "blockStart": "p6",
           "blockSize": 1,
           "locked": false
         }
@@ -4275,7 +4277,7 @@
           "blockSize": 2,
           "locked": false
         },
-        "p1": {
+        "p2": {
           "subId": "sg9wj5i",
           "subCode": "COA",
           "facIds": [
@@ -4283,99 +4285,35 @@
           ],
           "facId": "fnohs2s",
           "roomId": "CS-105",
-          "blockStart": "p1",
+          "blockStart": "p2",
           "blockSize": 1,
           "locked": false
         },
-        "p5": {
+        "p1": {
           "subId": "s321w5k",
           "subCode": "DS",
           "facIds": [
             "fg716wg"
           ],
           "facId": "fg716wg",
+          "roomId": "CS-105",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p5": {
+          "subId": "stl3rpl",
+          "subCode": "DE",
+          "facIds": [
+            "fu381xi"
+          ],
+          "facId": "fu381xi",
           "roomId": "CS-105",
           "blockStart": "p5",
           "blockSize": 1,
           "locked": false
         },
         "p6": {
-          "subId": "sx2565r",
-          "subCode": "OOP",
-          "facIds": [
-            "fhi7jce"
-          ],
-          "facId": "fhi7jce",
-          "roomId": "CS-105",
-          "blockStart": "p6",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p2": {
-          "subId": "s9xo2ak",
-          "subCode": "DM",
-          "facIds": [
-            "fuwsk8z"
-          ],
-          "facId": "fuwsk8z",
-          "roomId": "CS-105",
-          "blockStart": "p2",
-          "blockSize": 1,
-          "locked": false
-        }
-      },
-      "Wed": {
-        "p1": {
-          "subId": "scs7o92",
-          "subCode": "DS Lab",
-          "facIds": [
-            "fg716wg",
-            "fa6621v"
-          ],
-          "facId": "fg716wg",
-          "roomId": "CS-113",
-          "blockStart": "p1",
-          "blockSize": 2,
-          "locked": false
-        },
-        "p2": {
-          "subId": "scs7o92",
-          "subCode": "DS Lab",
-          "facIds": [
-            "fg716wg",
-            "fa6621v"
-          ],
-          "facId": "fg716wg",
-          "roomId": "CS-113",
-          "blockStart": "p1",
-          "blockSize": 2,
-          "locked": false
-        },
-        "p3": {
-          "subId": "sx2565r",
-          "subCode": "OOP",
-          "facIds": [
-            "fhi7jce"
-          ],
-          "facId": "fhi7jce",
-          "roomId": "CS-105",
-          "blockStart": "p3",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p6": {
-          "subId": "s321w5k",
-          "subCode": "DS",
-          "facIds": [
-            "fg716wg"
-          ],
-          "facId": "fg716wg",
-          "roomId": "CS-105",
-          "blockStart": "p6",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p5": {
           "subId": "stqv97j",
           "subCode": "PSM",
           "facIds": [
@@ -4383,19 +4321,81 @@
           ],
           "facId": "fevyfmd",
           "roomId": "CS-105",
+          "blockStart": "p6",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Wed": {
+        "p3": {
+          "subId": "smeiuf6",
+          "subCode": "ITW",
+          "facIds": [
+            "f2trwys"
+          ],
+          "facId": "f2trwys",
+          "roomId": "CS-114",
+          "blockStart": "p3",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p4": {
+          "subId": "smeiuf6",
+          "subCode": "ITW",
+          "facIds": [
+            "f2trwys"
+          ],
+          "facId": "f2trwys",
+          "roomId": "CS-114",
+          "blockStart": "p3",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p5": {
+          "subId": "s321w5k",
+          "subCode": "DS",
+          "facIds": [
+            "fg716wg"
+          ],
+          "facId": "fg716wg",
+          "roomId": "CS-105",
           "blockStart": "p5",
           "blockSize": 1,
           "locked": false
         },
-        "p4": {
-          "subId": "sg80253",
-          "subCode": "EVS",
+        "p2": {
+          "subId": "sg9wj5i",
+          "subCode": "COA",
           "facIds": [
-            "fh06l0h"
+            "fnohs2s"
           ],
-          "facId": "fh06l0h",
+          "facId": "fnohs2s",
           "roomId": "CS-105",
-          "blockStart": "p4",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p6": {
+          "subId": "sx2565r",
+          "subCode": "OOP",
+          "facIds": [
+            "fhi7jce"
+          ],
+          "facId": "fhi7jce",
+          "roomId": "CS-105",
+          "blockStart": "p6",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p1": {
+          "subId": "s9xo2ak",
+          "subCode": "DM",
+          "facIds": [
+            "fuwsk8z"
+          ],
+          "facId": "fuwsk8z",
+          "roomId": "CS-105",
+          "blockStart": "p1",
           "blockSize": 1,
           "locked": false
         }
@@ -4427,7 +4427,7 @@
           "blockSize": 2,
           "locked": false
         },
-        "p3": {
+        "p6": {
           "subId": "stl3rpl",
           "subCode": "DE",
           "facIds": [
@@ -4435,75 +4435,11 @@
           ],
           "facId": "fu381xi",
           "roomId": "CS-105",
-          "blockStart": "p3",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p6": {
-          "subId": "sx2565r",
-          "subCode": "OOP",
-          "facIds": [
-            "fhi7jce"
-          ],
-          "facId": "fhi7jce",
-          "roomId": "CS-105",
           "blockStart": "p6",
           "blockSize": 1,
           "locked": false
         },
-        "p5": {
-          "subId": "s9xo2ak",
-          "subCode": "DM",
-          "facIds": [
-            "fuwsk8z"
-          ],
-          "facId": "fuwsk8z",
-          "roomId": "CS-105",
-          "blockStart": "p5",
-          "blockSize": 1,
-          "locked": false
-        },
         "p4": {
-          "subId": "stqv97j",
-          "subCode": "PSM",
-          "facIds": [
-            "fevyfmd"
-          ],
-          "facId": "fevyfmd",
-          "roomId": "CS-105",
-          "blockStart": "p4",
-          "blockSize": 1,
-          "locked": false
-        }
-      },
-      "Fri": {
-        "p3": {
-          "subId": "sfgaswn",
-          "subCode": "OOP Lab",
-          "facIds": [
-            "fhi7jce",
-            "f9il99o"
-          ],
-          "facId": "fhi7jce",
-          "roomId": "CS-114",
-          "blockStart": "p3",
-          "blockSize": 2,
-          "locked": false
-        },
-        "p4": {
-          "subId": "sfgaswn",
-          "subCode": "OOP Lab",
-          "facIds": [
-            "fhi7jce",
-            "f9il99o"
-          ],
-          "facId": "fhi7jce",
-          "roomId": "CS-114",
-          "blockStart": "p3",
-          "blockSize": 2,
-          "locked": false
-        },
-        "p2": {
           "subId": "sg9wj5i",
           "subCode": "COA",
           "facIds": [
@@ -4511,35 +4447,63 @@
           ],
           "facId": "fnohs2s",
           "roomId": "CS-105",
-          "blockStart": "p2",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p1": {
-          "subId": "s9xo2ak",
-          "subCode": "DM",
-          "facIds": [
-            "fuwsk8z"
-          ],
-          "facId": "fuwsk8z",
-          "roomId": "CS-105",
-          "blockStart": "p1",
+          "blockStart": "p4",
           "blockSize": 1,
           "locked": false
         },
         "p5": {
-          "subId": "stqv97j",
-          "subCode": "PSM",
+          "subId": "sx2565r",
+          "subCode": "OOP",
           "facIds": [
-            "fevyfmd"
+            "fhi7jce"
           ],
-          "facId": "fevyfmd",
+          "facId": "fhi7jce",
           "roomId": "CS-105",
           "blockStart": "p5",
           "blockSize": 1,
           "locked": false
         },
-        "p6": {
+        "p3": {
+          "subId": "sg80253",
+          "subCode": "EVS",
+          "facIds": [
+            "fh06l0h"
+          ],
+          "facId": "fh06l0h",
+          "roomId": "CS-105",
+          "blockStart": "p5",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Fri": {
+        "p1": {
+          "subId": "scs7o92",
+          "subCode": "DS Lab",
+          "facIds": [
+            "fg716wg",
+            "fa6621v"
+          ],
+          "facId": "fg716wg",
+          "roomId": "CS-113",
+          "blockStart": "p1",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p2": {
+          "subId": "scs7o92",
+          "subCode": "DS Lab",
+          "facIds": [
+            "fg716wg",
+            "fa6621v"
+          ],
+          "facId": "fg716wg",
+          "roomId": "CS-113",
+          "blockStart": "p1",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p4": {
           "subId": "stl3rpl",
           "subCode": "DE",
           "facIds": [
@@ -4547,7 +4511,43 @@
           ],
           "facId": "fu381xi",
           "roomId": "CS-105",
+          "blockStart": "p4",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p6": {
+          "subId": "stqv97j",
+          "subCode": "PSM",
+          "facIds": [
+            "fevyfmd"
+          ],
+          "facId": "fevyfmd",
+          "roomId": "CS-105",
           "blockStart": "p6",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p3": {
+          "subId": "s9xo2ak",
+          "subCode": "DM",
+          "facIds": [
+            "fuwsk8z"
+          ],
+          "facId": "fuwsk8z",
+          "roomId": "CS-105",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p5": {
+          "subId": "sg80253",
+          "subCode": "EVS",
+          "facIds": [
+            "fh06l0h"
+          ],
+          "facId": "fh06l0h",
+          "roomId": "CS-105",
+          "blockStart": "p5",
           "blockSize": 1,
           "locked": false
         }
@@ -4555,118 +4555,30 @@
     },
     "AIML-3-A": {
       "Mon": {
-        "p3": {
-          "subId": "s2hwq0e",
-          "subCode": "ML Lab",
-          "facIds": [
-            "f0ec6br",
-            "f86u0ae"
-          ],
-          "facId": "f0ec6br",
-          "roomId": "CS-206",
-          "blockStart": "p3",
-          "blockSize": 2,
-          "locked": false
-        },
-        "p4": {
-          "subId": "s2hwq0e",
-          "subCode": "ML Lab",
-          "facIds": [
-            "f0ec6br",
-            "f86u0ae"
-          ],
-          "facId": "f0ec6br",
-          "roomId": "CS-206",
-          "blockStart": "p3",
-          "blockSize": 2,
-          "locked": false
-        },
-        "p2": {
-          "subId": "s9s2pn2",
-          "subCode": "AI",
-          "facIds": [
-            "f86u0ae"
-          ],
-          "facId": "f86u0ae",
-          "roomId": "CS-106",
-          "blockStart": "p2",
-          "blockSize": 1,
-          "locked": false
-        },
         "p1": {
-          "subId": "smg3k3q",
-          "subCode": "ML",
+          "subId": "s4se2js",
+          "subCode": "DBMS Lab",
           "facIds": [
-            "f0ec6br"
-          ],
-          "facId": "f0ec6br",
-          "roomId": "CS-106",
-          "blockStart": "p1",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p6": {
-          "subId": "sm10o3a",
-          "subCode": "DBMS",
-          "facIds": [
-            "fasn7jg"
+            "fasn7jg",
+            "fuzyhjx"
           ],
           "facId": "fasn7jg",
-          "roomId": "CS-106",
-          "blockStart": "p6",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p5": {
-          "subId": "s603ttb",
-          "subCode": "OS",
-          "facIds": [
-            "fw06wkc"
-          ],
-          "facId": "fw06wkc",
-          "roomId": "CS-106",
-          "blockStart": "p5",
-          "blockSize": 1,
-          "locked": false
-        }
-      },
-      "Tue": {
-        "p1": {
-          "subId": "s2hwq0e",
-          "subCode": "ML Lab",
-          "facIds": [
-            "f0ec6br",
-            "f86u0ae"
-          ],
-          "facId": "f0ec6br",
-          "roomId": "CS-206",
+          "roomId": "CS-205",
           "blockStart": "p1",
           "blockSize": 2,
           "locked": false
         },
         "p2": {
-          "subId": "s2hwq0e",
-          "subCode": "ML Lab",
+          "subId": "s4se2js",
+          "subCode": "DBMS Lab",
           "facIds": [
-            "f0ec6br",
-            "f86u0ae"
+            "fasn7jg",
+            "fuzyhjx"
           ],
-          "facId": "f0ec6br",
-          "roomId": "CS-206",
+          "facId": "fasn7jg",
+          "roomId": "CS-205",
           "blockStart": "p1",
           "blockSize": 2,
-          "locked": false
-        },
-        "p3": {
-          "subId": "s603ttb",
-          "subCode": "OS",
-          "facIds": [
-            "fw06wkc"
-          ],
-          "facId": "fw06wkc",
-          "roomId": "CS-106",
-          "blockStart": "p3",
-          "blockSize": 1,
           "locked": false
         },
         "p4": {
@@ -4682,6 +4594,30 @@
           "locked": false
         },
         "p5": {
+          "subId": "skls3e2",
+          "subCode": "SE",
+          "facIds": [
+            "fasn7jg"
+          ],
+          "facId": "fasn7jg",
+          "roomId": "CS-106",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p3": {
+          "subId": "sm10o3a",
+          "subCode": "DBMS",
+          "facIds": [
+            "fasn7jg"
+          ],
+          "facId": "fasn7jg",
+          "roomId": "CS-106",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p6": {
           "subId": "sbz4vy4",
           "subCode": "CN",
           "facIds": [
@@ -4689,11 +4625,39 @@
           ],
           "facId": "fsj2dpg",
           "roomId": "CS-106",
-          "blockStart": "p5",
+          "blockStart": "p6",
           "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Tue": {
+        "p5": {
+          "subId": "s4t0ycj",
+          "subCode": "AI Lab",
+          "facIds": [
+            "f86u0ae",
+            "fon3gzp"
+          ],
+          "facId": "f86u0ae",
+          "roomId": "CS-206",
+          "blockStart": "p5",
+          "blockSize": 2,
           "locked": false
         },
         "p6": {
+          "subId": "s4t0ycj",
+          "subCode": "AI Lab",
+          "facIds": [
+            "f86u0ae",
+            "fon3gzp"
+          ],
+          "facId": "f86u0ae",
+          "roomId": "CS-206",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p3": {
           "subId": "smg3k3q",
           "subCode": "ML",
           "facIds": [
@@ -4701,51 +4665,75 @@
           ],
           "facId": "f0ec6br",
           "roomId": "CS-106",
-          "blockStart": "p6",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p2": {
+          "subId": "sbz4vy4",
+          "subCode": "CN",
+          "facIds": [
+            "fsj2dpg"
+          ],
+          "facId": "fsj2dpg",
+          "roomId": "CS-106",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p1": {
+          "subId": "s603ttb",
+          "subCode": "OS",
+          "facIds": [
+            "fw06wkc"
+          ],
+          "facId": "fw06wkc",
+          "roomId": "CS-106",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p4": {
+          "subId": "s4fv7f4",
+          "subCode": "PE-I:NLP",
+          "facIds": [
+            "f7fglzl"
+          ],
+          "facId": "f7fglzl",
+          "roomId": "CS-106",
+          "blockStart": "p4",
           "blockSize": 1,
           "locked": false
         }
       },
       "Wed": {
         "p1": {
-          "subId": "s4t0ycj",
-          "subCode": "AI Lab",
+          "subId": "s2hwq0e",
+          "subCode": "ML Lab",
           "facIds": [
-            "f86u0ae",
-            "fon3gzp"
+            "f0ec6br",
+            "f86u0ae"
           ],
-          "facId": "f86u0ae",
+          "facId": "f0ec6br",
           "roomId": "CS-206",
           "blockStart": "p1",
           "blockSize": 2,
           "locked": false
         },
         "p2": {
-          "subId": "s4t0ycj",
-          "subCode": "AI Lab",
+          "subId": "s2hwq0e",
+          "subCode": "ML Lab",
           "facIds": [
-            "f86u0ae",
-            "fon3gzp"
+            "f0ec6br",
+            "f86u0ae"
           ],
-          "facId": "f86u0ae",
+          "facId": "f0ec6br",
           "roomId": "CS-206",
           "blockStart": "p1",
           "blockSize": 2,
           "locked": false
         },
         "p3": {
-          "subId": "sbz4vy4",
-          "subCode": "CN",
-          "facIds": [
-            "fsj2dpg"
-          ],
-          "facId": "fsj2dpg",
-          "roomId": "CS-106",
-          "blockStart": "p3",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p5": {
           "subId": "s603ttb",
           "subCode": "OS",
           "facIds": [
@@ -4757,87 +4745,13 @@
           "blockSize": 1,
           "locked": false
         },
-        "p4": {
-          "subId": "sm10o3a",
-          "subCode": "DBMS",
-          "facIds": [
-            "fasn7jg"
-          ],
-          "facId": "fasn7jg",
-          "roomId": "CS-106",
-          "blockStart": "p4",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p6": {
-          "subId": "skls3e2",
-          "subCode": "SE",
-          "facIds": [
-            "fasn7jg"
-          ],
-          "facId": "fasn7jg",
-          "roomId": "CS-106",
-          "blockStart": "p6",
-          "blockSize": 1,
-          "locked": false
-        }
-      },
-      "Thu": {
-        "p3": {
-          "subId": "spm96nl",
-          "subCode": "MP",
-          "facIds": [
-            "f1k5jo0"
-          ],
-          "facId": "f1k5jo0",
-          "roomId": "CS-207",
-          "blockStart": "p3",
-          "blockSize": 2,
-          "locked": false
-        },
-        "p4": {
-          "subId": "spm96nl",
-          "subCode": "MP",
-          "facIds": [
-            "f1k5jo0"
-          ],
-          "facId": "f1k5jo0",
-          "roomId": "CS-207",
-          "blockStart": "p3",
-          "blockSize": 2,
-          "locked": false
-        },
-        "p2": {
-          "subId": "sm10o3a",
-          "subCode": "DBMS",
-          "facIds": [
-            "fasn7jg"
-          ],
-          "facId": "fasn7jg",
-          "roomId": "CS-106",
-          "blockStart": "p2",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p1": {
-          "subId": "skls3e2",
-          "subCode": "SE",
-          "facIds": [
-            "fasn7jg"
-          ],
-          "facId": "fasn7jg",
-          "roomId": "CS-106",
-          "blockStart": "p1",
-          "blockSize": 1,
-          "locked": false
-        },
         "p5": {
-          "subId": "s4fv7f4",
-          "subCode": "PE-I:NLP",
+          "subId": "sbz4vy4",
+          "subCode": "CN",
           "facIds": [
-            "f7fglzl"
+            "fsj2dpg"
           ],
-          "facId": "f7fglzl",
+          "facId": "fsj2dpg",
           "roomId": "CS-106",
           "blockStart": "p5",
           "blockSize": 1,
@@ -4854,33 +4768,143 @@
           "blockStart": "p6",
           "blockSize": 1,
           "locked": false
-        }
-      },
-      "Fri": {
-        "p3": {
-          "subId": "s4se2js",
-          "subCode": "DBMS Lab",
+        },
+        "p4": {
+          "subId": "sm10o3a",
+          "subCode": "DBMS",
           "facIds": [
-            "fasn7jg",
-            "fuzyhjx"
+            "fasn7jg"
           ],
           "facId": "fasn7jg",
-          "roomId": "CS-205",
+          "roomId": "CS-106",
+          "blockStart": "p4",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Thu": {
+        "p3": {
+          "subId": "s2hwq0e",
+          "subCode": "ML Lab",
+          "facIds": [
+            "f0ec6br",
+            "f86u0ae"
+          ],
+          "facId": "f0ec6br",
+          "roomId": "CS-206",
           "blockStart": "p3",
           "blockSize": 2,
           "locked": false
         },
         "p4": {
-          "subId": "s4se2js",
-          "subCode": "DBMS Lab",
+          "subId": "s2hwq0e",
+          "subCode": "ML Lab",
           "facIds": [
-            "fasn7jg",
-            "fuzyhjx"
+            "f0ec6br",
+            "f86u0ae"
           ],
-          "facId": "fasn7jg",
-          "roomId": "CS-205",
+          "facId": "f0ec6br",
+          "roomId": "CS-206",
           "blockStart": "p3",
           "blockSize": 2,
+          "locked": false
+        },
+        "p2": {
+          "subId": "smg3k3q",
+          "subCode": "ML",
+          "facIds": [
+            "f0ec6br"
+          ],
+          "facId": "f0ec6br",
+          "roomId": "CS-106",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p1": {
+          "subId": "s4fv7f4",
+          "subCode": "PE-I:NLP",
+          "facIds": [
+            "f7fglzl"
+          ],
+          "facId": "f7fglzl",
+          "roomId": "CS-106",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p6": {
+          "subId": "skls3e2",
+          "subCode": "SE",
+          "facIds": [
+            "fasn7jg"
+          ],
+          "facId": "fasn7jg",
+          "roomId": "CS-106",
+          "blockStart": "p6",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p5": {
+          "subId": "sm10o3a",
+          "subCode": "DBMS",
+          "facIds": [
+            "fasn7jg"
+          ],
+          "facId": "fasn7jg",
+          "roomId": "CS-106",
+          "blockStart": "p5",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Fri": {
+        "p3": {
+          "subId": "spm96nl",
+          "subCode": "MP",
+          "facIds": [
+            "f1k5jo0"
+          ],
+          "facId": "f1k5jo0",
+          "roomId": "CS-207",
+          "blockStart": "p3",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p4": {
+          "subId": "spm96nl",
+          "subCode": "MP",
+          "facIds": [
+            "f1k5jo0"
+          ],
+          "facId": "f1k5jo0",
+          "roomId": "CS-207",
+          "blockStart": "p3",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p5": {
+          "subId": "skls3e2",
+          "subCode": "SE",
+          "facIds": [
+            "fasn7jg"
+          ],
+          "facId": "fasn7jg",
+          "roomId": "CS-106",
+          "blockStart": "p5",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p2": {
+          "subId": "s603ttb",
+          "subCode": "OS",
+          "facIds": [
+            "fw06wkc"
+          ],
+          "facId": "fw06wkc",
+          "roomId": "CS-106",
+          "blockStart": "p2",
+          "blockSize": 1,
           "locked": false
         },
         "p1": {
@@ -4895,39 +4919,15 @@
           "blockSize": 1,
           "locked": false
         },
-        "p2": {
-          "subId": "skls3e2",
-          "subCode": "SE",
-          "facIds": [
-            "fasn7jg"
-          ],
-          "facId": "fasn7jg",
-          "roomId": "CS-106",
-          "blockStart": "p2",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p5": {
-          "subId": "s4fv7f4",
-          "subCode": "PE-I:NLP",
-          "facIds": [
-            "f7fglzl"
-          ],
-          "facId": "f7fglzl",
-          "roomId": "CS-106",
-          "blockStart": "p5",
-          "blockSize": 1,
-          "locked": false
-        },
         "p6": {
-          "subId": "sbz4vy4",
-          "subCode": "CN",
+          "subId": "s9s2pn2",
+          "subCode": "AI",
           "facIds": [
-            "fsj2dpg"
+            "f86u0ae"
           ],
-          "facId": "fsj2dpg",
+          "facId": "f86u0ae",
           "roomId": "CS-106",
-          "blockStart": "p1",
+          "blockStart": "p6",
           "blockSize": 1,
           "locked": false
         }
@@ -4935,7 +4935,7 @@
     },
     "AIML-4-A": {
       "Mon": {
-        "p3": {
+        "p1": {
           "subId": "srnir6u",
           "subCode": "OE-I:HRM",
           "facIds": [
@@ -4943,49 +4943,37 @@
           ],
           "facId": "fph3ibb",
           "roomId": "CS-107",
-          "blockStart": "p3",
+          "blockStart": "p1",
           "blockSize": 1,
           "locked": false
         },
         "p5": {
-          "subId": "slku7bk",
-          "subCode": "CV Lab",
+          "subId": "se700x3",
+          "subCode": "DL Lab",
           "facIds": [
-            "f7fglzl",
-            "ft2v2or"
+            "ft2v2or",
+            "f29x3xf"
           ],
-          "facId": "f7fglzl",
+          "facId": "ft2v2or",
           "roomId": "CS-104",
           "blockStart": "p5",
           "blockSize": 2,
           "locked": false
         },
         "p6": {
-          "subId": "slku7bk",
-          "subCode": "CV Lab",
+          "subId": "se700x3",
+          "subCode": "DL Lab",
           "facIds": [
-            "f7fglzl",
-            "ft2v2or"
+            "ft2v2or",
+            "f29x3xf"
           ],
-          "facId": "f7fglzl",
+          "facId": "ft2v2or",
           "roomId": "CS-104",
           "blockStart": "p5",
           "blockSize": 2,
           "locked": false
         },
         "p2": {
-          "subId": "s1ndoor",
-          "subCode": "CV",
-          "facIds": [
-            "f7fglzl"
-          ],
-          "facId": "f7fglzl",
-          "roomId": "CS-107",
-          "blockStart": "p2",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p1": {
           "subId": "stwteka",
           "subCode": "DL",
           "facIds": [
@@ -4993,7 +4981,19 @@
           ],
           "facId": "ft2v2or",
           "roomId": "CS-107",
-          "blockStart": "p1",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p3": {
+          "subId": "swbivq6",
+          "subCode": "GAI",
+          "facIds": [
+            "fvs724f"
+          ],
+          "facId": "fvs724f",
+          "roomId": "CS-107",
+          "blockStart": "p3",
           "blockSize": 1,
           "locked": false
         },
@@ -5012,38 +5012,36 @@
       },
       "Tue": {
         "p3": {
-          "subId": "s45j8o0",
-          "subCode": "NLP Lab",
+          "subId": "swqd6jp",
+          "subCode": "CPW-1",
           "facIds": [
-            "f7fglzl",
-            "f29x3xf"
+            "f1qgqs3"
           ],
-          "facId": "f7fglzl",
-          "roomId": "CS-206",
+          "facId": "f1qgqs3",
+          "roomId": "CS-207",
           "blockStart": "p3",
           "blockSize": 2,
           "locked": false
         },
         "p4": {
-          "subId": "s45j8o0",
-          "subCode": "NLP Lab",
+          "subId": "swqd6jp",
+          "subCode": "CPW-1",
           "facIds": [
-            "f7fglzl",
-            "f29x3xf"
+            "f1qgqs3"
           ],
-          "facId": "f7fglzl",
-          "roomId": "CS-206",
+          "facId": "f1qgqs3",
+          "roomId": "CS-207",
           "blockStart": "p3",
           "blockSize": 2,
           "locked": false
         },
         "p5": {
-          "subId": "s1ndoor",
-          "subCode": "CV",
+          "subId": "stwteka",
+          "subCode": "DL",
           "facIds": [
-            "f7fglzl"
+            "ft2v2or"
           ],
-          "facId": "f7fglzl",
+          "facId": "ft2v2or",
           "roomId": "CS-107",
           "blockStart": "p5",
           "blockSize": 1,
@@ -5062,24 +5060,24 @@
           "locked": false
         },
         "p2": {
-          "subId": "sqk6oyc",
-          "subCode": "PE-IV:SPSM",
+          "subId": "s1ndoor",
+          "subCode": "CV",
           "facIds": [
-            "fvs724f"
+            "f7fglzl"
           ],
-          "facId": "fvs724f",
+          "facId": "f7fglzl",
           "roomId": "CS-107",
           "blockStart": "p2",
           "blockSize": 1,
           "locked": false
         },
         "p6": {
-          "subId": "stwteka",
-          "subCode": "DL",
+          "subId": "sqk6oyc",
+          "subCode": "PE-IV:SPSM",
           "facIds": [
-            "ft2v2or"
+            "fvs724f"
           ],
-          "facId": "ft2v2or",
+          "facId": "fvs724f",
           "roomId": "CS-107",
           "blockStart": "p6",
           "blockSize": 1,
@@ -5087,33 +5085,57 @@
         }
       },
       "Wed": {
-        "p3": {
-          "subId": "se700x3",
-          "subCode": "DL Lab",
+        "p1": {
+          "subId": "srnir6u",
+          "subCode": "OE-I:HRM",
           "facIds": [
-            "ft2v2or",
+            "fph3ibb"
+          ],
+          "facId": "fph3ibb",
+          "roomId": "CS-107",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p3": {
+          "subId": "s45j8o0",
+          "subCode": "NLP Lab",
+          "facIds": [
+            "f7fglzl",
             "f29x3xf"
           ],
-          "facId": "ft2v2or",
-          "roomId": "CS-104",
+          "facId": "f7fglzl",
+          "roomId": "CS-206",
           "blockStart": "p3",
           "blockSize": 2,
           "locked": false
         },
         "p4": {
-          "subId": "se700x3",
-          "subCode": "DL Lab",
+          "subId": "s45j8o0",
+          "subCode": "NLP Lab",
           "facIds": [
-            "ft2v2or",
+            "f7fglzl",
             "f29x3xf"
           ],
-          "facId": "ft2v2or",
-          "roomId": "CS-104",
+          "facId": "f7fglzl",
+          "roomId": "CS-206",
           "blockStart": "p3",
           "blockSize": 2,
           "locked": false
         },
         "p2": {
+          "subId": "sh0oeii",
+          "subCode": "ES",
+          "facIds": [
+            "fuxjizo"
+          ],
+          "facId": "fuxjizo",
+          "roomId": "CS-107",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p6": {
           "subId": "swbivq6",
           "subCode": "GAI",
           "facIds": [
@@ -5121,11 +5143,63 @@
           ],
           "facId": "fvs724f",
           "roomId": "CS-107",
-          "blockStart": "p2",
+          "blockStart": "p6",
           "blockSize": 1,
           "locked": false
         },
-        "p1": {
+        "p5": {
+          "subId": "sgm6a4o",
+          "subCode": "RL",
+          "facIds": [
+            "fon3gzp"
+          ],
+          "facId": "fon3gzp",
+          "roomId": "CS-107",
+          "blockStart": "p5",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Thu": {
+        "p4": {
+          "subId": "srnir6u",
+          "subCode": "OE-I:HRM",
+          "facIds": [
+            "fph3ibb"
+          ],
+          "facId": "fph3ibb",
+          "roomId": "CS-107",
+          "blockStart": "p4",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p5": {
+          "subId": "se700x3",
+          "subCode": "DL Lab",
+          "facIds": [
+            "ft2v2or",
+            "f29x3xf"
+          ],
+          "facId": "ft2v2or",
+          "roomId": "CS-104",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p6": {
+          "subId": "se700x3",
+          "subCode": "DL Lab",
+          "facIds": [
+            "ft2v2or",
+            "f29x3xf"
+          ],
+          "facId": "ft2v2or",
+          "roomId": "CS-104",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p2": {
           "subId": "s1ndoor",
           "subCode": "CV",
           "facIds": [
@@ -5133,7 +5207,83 @@
           ],
           "facId": "f7fglzl",
           "roomId": "CS-107",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p3": {
+          "subId": "sqk6oyc",
+          "subCode": "PE-IV:SPSM",
+          "facIds": [
+            "fvs724f"
+          ],
+          "facId": "fvs724f",
+          "roomId": "CS-107",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p1": {
+          "subId": "sgm6a4o",
+          "subCode": "RL",
+          "facIds": [
+            "fon3gzp"
+          ],
+          "facId": "fon3gzp",
+          "roomId": "CS-107",
           "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Fri": {
+        "p1": {
+          "subId": "slku7bk",
+          "subCode": "CV Lab",
+          "facIds": [
+            "f7fglzl",
+            "ft2v2or"
+          ],
+          "facId": "f7fglzl",
+          "roomId": "CS-104",
+          "blockStart": "p1",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p2": {
+          "subId": "slku7bk",
+          "subCode": "CV Lab",
+          "facIds": [
+            "f7fglzl",
+            "ft2v2or"
+          ],
+          "facId": "f7fglzl",
+          "roomId": "CS-104",
+          "blockStart": "p1",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p4": {
+          "subId": "sh0oeii",
+          "subCode": "ES",
+          "facIds": [
+            "fuxjizo"
+          ],
+          "facId": "fuxjizo",
+          "roomId": "CS-107",
+          "blockStart": "p4",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p6": {
+          "subId": "swbivq6",
+          "subCode": "GAI",
+          "facIds": [
+            "fvs724f"
+          ],
+          "facId": "fvs724f",
+          "roomId": "CS-107",
+          "blockStart": "p6",
           "blockSize": 1,
           "locked": false
         },
@@ -5149,163 +5299,13 @@
           "blockSize": 1,
           "locked": false
         },
-        "p6": {
-          "subId": "sh0oeii",
-          "subCode": "ES",
-          "facIds": [
-            "fuxjizo"
-          ],
-          "facId": "fuxjizo",
-          "roomId": "CS-107",
-          "blockStart": "p6",
-          "blockSize": 1,
-          "locked": false
-        }
-      },
-      "Thu": {
         "p3": {
-          "subId": "srnir6u",
-          "subCode": "OE-I:HRM",
+          "subId": "s1ndoor",
+          "subCode": "CV",
           "facIds": [
-            "fph3ibb"
+            "f7fglzl"
           ],
-          "facId": "fph3ibb",
-          "roomId": "CS-107",
-          "blockStart": "p3",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p5": {
-          "subId": "se700x3",
-          "subCode": "DL Lab",
-          "facIds": [
-            "ft2v2or",
-            "f29x3xf"
-          ],
-          "facId": "ft2v2or",
-          "roomId": "CS-104",
-          "blockStart": "p5",
-          "blockSize": 2,
-          "locked": false
-        },
-        "p6": {
-          "subId": "se700x3",
-          "subCode": "DL Lab",
-          "facIds": [
-            "ft2v2or",
-            "f29x3xf"
-          ],
-          "facId": "ft2v2or",
-          "roomId": "CS-104",
-          "blockStart": "p5",
-          "blockSize": 2,
-          "locked": false
-        },
-        "p1": {
-          "subId": "sgm6a4o",
-          "subCode": "RL",
-          "facIds": [
-            "fon3gzp"
-          ],
-          "facId": "fon3gzp",
-          "roomId": "CS-107",
-          "blockStart": "p1",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p2": {
-          "subId": "swbivq6",
-          "subCode": "GAI",
-          "facIds": [
-            "fvs724f"
-          ],
-          "facId": "fvs724f",
-          "roomId": "CS-107",
-          "blockStart": "p2",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p4": {
-          "subId": "sqk6oyc",
-          "subCode": "PE-IV:SPSM",
-          "facIds": [
-            "fvs724f"
-          ],
-          "facId": "fvs724f",
-          "roomId": "CS-107",
-          "blockStart": "p4",
-          "blockSize": 1,
-          "locked": false
-        }
-      },
-      "Fri": {
-        "p4": {
-          "subId": "srnir6u",
-          "subCode": "OE-I:HRM",
-          "facIds": [
-            "fph3ibb"
-          ],
-          "facId": "fph3ibb",
-          "roomId": "CS-107",
-          "blockStart": "p4",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p5": {
-          "subId": "swqd6jp",
-          "subCode": "CPW-1",
-          "facIds": [
-            "f1qgqs3"
-          ],
-          "facId": "f1qgqs3",
-          "roomId": "CS-207",
-          "blockStart": "p5",
-          "blockSize": 2,
-          "locked": false
-        },
-        "p6": {
-          "subId": "swqd6jp",
-          "subCode": "CPW-1",
-          "facIds": [
-            "f1qgqs3"
-          ],
-          "facId": "f1qgqs3",
-          "roomId": "CS-207",
-          "blockStart": "p5",
-          "blockSize": 2,
-          "locked": false
-        },
-        "p2": {
-          "subId": "sgm6a4o",
-          "subCode": "RL",
-          "facIds": [
-            "fon3gzp"
-          ],
-          "facId": "fon3gzp",
-          "roomId": "CS-107",
-          "blockStart": "p2",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p1": {
-          "subId": "swbivq6",
-          "subCode": "GAI",
-          "facIds": [
-            "fvs724f"
-          ],
-          "facId": "fvs724f",
-          "roomId": "CS-107",
-          "blockStart": "p1",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p3": {
-          "subId": "sh0oeii",
-          "subCode": "ES",
-          "facIds": [
-            "fuxjizo"
-          ],
-          "facId": "fuxjizo",
+          "facId": "f7fglzl",
           "roomId": "CS-107",
           "blockStart": "p3",
           "blockSize": 1,
@@ -5315,55 +5315,33 @@
     },
     "DS-2-A": {
       "Mon": {
-        "p1": {
-          "subId": "suwy8j8",
-          "subCode": "ITW",
+        "p5": {
+          "subId": "s4sql98",
+          "subCode": "DS Lab",
           "facIds": [
-            "f2trwys"
+            "fa6621v",
+            "f04i4jc"
           ],
-          "facId": "f2trwys",
-          "roomId": "CS-114",
-          "blockStart": "p1",
+          "facId": "fa6621v",
+          "roomId": "CS-113",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p6": {
+          "subId": "s4sql98",
+          "subCode": "DS Lab",
+          "facIds": [
+            "fa6621v",
+            "f04i4jc"
+          ],
+          "facId": "fa6621v",
+          "roomId": "CS-113",
+          "blockStart": "p5",
           "blockSize": 2,
           "locked": false
         },
         "p2": {
-          "subId": "suwy8j8",
-          "subCode": "ITW",
-          "facIds": [
-            "f2trwys"
-          ],
-          "facId": "f2trwys",
-          "roomId": "CS-114",
-          "blockStart": "p1",
-          "blockSize": 2,
-          "locked": false
-        },
-        "p4": {
-          "subId": "sytq8lc",
-          "subCode": "DE",
-          "facIds": [
-            "fklgsjw"
-          ],
-          "facId": "fklgsjw",
-          "roomId": "CS-108",
-          "blockStart": "p5",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p3": {
-          "subId": "scptmcv",
-          "subCode": "OOP",
-          "facIds": [
-            "f9il99o"
-          ],
-          "facId": "f9il99o",
-          "roomId": "CS-108",
-          "blockStart": "p5",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p5": {
           "subId": "sset14o",
           "subCode": "COA",
           "facIds": [
@@ -5371,11 +5349,11 @@
           ],
           "facId": "fnohs2s",
           "roomId": "CS-108",
-          "blockStart": "p5",
+          "blockStart": "p2",
           "blockSize": 1,
           "locked": false
         },
-        "p6": {
+        "p1": {
           "subId": "shsmvia",
           "subCode": "DS",
           "facIds": [
@@ -5383,7 +5361,31 @@
           ],
           "facId": "frab7ha",
           "roomId": "CS-108",
-          "blockStart": "p6",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p3": {
+          "subId": "sq3x84u",
+          "subCode": "EVS",
+          "facIds": [
+            "fh06l0h"
+          ],
+          "facId": "fh06l0h",
+          "roomId": "CS-108",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p4": {
+          "subId": "sqivbe1",
+          "subCode": "DM",
+          "facIds": [
+            "fyte2g1"
+          ],
+          "facId": "fyte2g1",
+          "roomId": "CS-108",
+          "blockStart": "p4",
           "blockSize": 1,
           "locked": false
         }
@@ -5416,18 +5418,6 @@
           "locked": false
         },
         "p4": {
-          "subId": "s3s273k",
-          "subCode": "PSM",
-          "facIds": [
-            "fkxc6oh"
-          ],
-          "facId": "fkxc6oh",
-          "roomId": "CS-108",
-          "blockStart": "p4",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p5": {
           "subId": "sytq8lc",
           "subCode": "DE",
           "facIds": [
@@ -5435,29 +5425,41 @@
           ],
           "facId": "fklgsjw",
           "roomId": "CS-108",
-          "blockStart": "p5",
+          "blockStart": "p4",
           "blockSize": 1,
           "locked": false
         },
         "p3": {
-          "subId": "scptmcv",
-          "subCode": "OOP",
-          "facIds": [
-            "f9il99o"
-          ],
-          "facId": "f9il99o",
-          "roomId": "CS-108",
-          "blockStart": "p3",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p6": {
           "subId": "shsmvia",
           "subCode": "DS",
           "facIds": [
             "frab7ha"
           ],
           "facId": "frab7ha",
+          "roomId": "CS-108",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p5": {
+          "subId": "sqivbe1",
+          "subCode": "DM",
+          "facIds": [
+            "fyte2g1"
+          ],
+          "facId": "fyte2g1",
+          "roomId": "CS-108",
+          "blockStart": "p5",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p6": {
+          "subId": "s3s273k",
+          "subCode": "PSM",
+          "facIds": [
+            "fkxc6oh"
+          ],
+          "facId": "fkxc6oh",
           "roomId": "CS-108",
           "blockStart": "p6",
           "blockSize": 1,
@@ -5465,7 +5467,7 @@
         }
       },
       "Wed": {
-        "p3": {
+        "p1": {
           "subId": "sn82jm8",
           "subCode": "DE Lab",
           "facIds": [
@@ -5474,32 +5476,56 @@
           ],
           "facId": "fklgsjw",
           "roomId": "CS-115",
-          "blockStart": "p3",
-          "blockSize": 2,
-          "locked": false
-        },
-        "p4": {
-          "subId": "sn82jm8",
-          "subCode": "DE Lab",
-          "facIds": [
-            "fklgsjw",
-            "fu381xi"
-          ],
-          "facId": "fklgsjw",
-          "roomId": "CS-115",
-          "blockStart": "p3",
+          "blockStart": "p1",
           "blockSize": 2,
           "locked": false
         },
         "p2": {
-          "subId": "sqivbe1",
-          "subCode": "DM",
+          "subId": "sn82jm8",
+          "subCode": "DE Lab",
           "facIds": [
-            "fyte2g1"
+            "fklgsjw",
+            "fu381xi"
           ],
-          "facId": "fyte2g1",
+          "facId": "fklgsjw",
+          "roomId": "CS-115",
+          "blockStart": "p1",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p6": {
+          "subId": "sytq8lc",
+          "subCode": "DE",
+          "facIds": [
+            "fklgsjw"
+          ],
+          "facId": "fklgsjw",
           "roomId": "CS-108",
-          "blockStart": "p2",
+          "blockStart": "p6",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p3": {
+          "subId": "sset14o",
+          "subCode": "COA",
+          "facIds": [
+            "fnohs2s"
+          ],
+          "facId": "fnohs2s",
+          "roomId": "CS-108",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p4": {
+          "subId": "scptmcv",
+          "subCode": "OOP",
+          "facIds": [
+            "f9il99o"
+          ],
+          "facId": "f9il99o",
+          "roomId": "CS-108",
+          "blockStart": "p4",
           "blockSize": 1,
           "locked": false
         },
@@ -5511,8 +5537,110 @@
           ],
           "facId": "fkxc6oh",
           "roomId": "CS-108",
-          "blockStart": "p4",
+          "blockStart": "p5",
           "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Thu": {
+        "p3": {
+          "subId": "sjnb2jj",
+          "subCode": "OOP Lab",
+          "facIds": [
+            "f9il99o",
+            "ftvlte9"
+          ],
+          "facId": "f9il99o",
+          "roomId": "CS-114",
+          "blockStart": "p3",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p4": {
+          "subId": "sjnb2jj",
+          "subCode": "OOP Lab",
+          "facIds": [
+            "f9il99o",
+            "ftvlte9"
+          ],
+          "facId": "f9il99o",
+          "roomId": "CS-114",
+          "blockStart": "p3",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p1": {
+          "subId": "shsmvia",
+          "subCode": "DS",
+          "facIds": [
+            "frab7ha"
+          ],
+          "facId": "frab7ha",
+          "roomId": "CS-108",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p5": {
+          "subId": "sytq8lc",
+          "subCode": "DE",
+          "facIds": [
+            "fklgsjw"
+          ],
+          "facId": "fklgsjw",
+          "roomId": "CS-108",
+          "blockStart": "p5",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p6": {
+          "subId": "scptmcv",
+          "subCode": "OOP",
+          "facIds": [
+            "f9il99o"
+          ],
+          "facId": "f9il99o",
+          "roomId": "CS-108",
+          "blockStart": "p6",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p2": {
+          "subId": "sset14o",
+          "subCode": "COA",
+          "facIds": [
+            "fnohs2s"
+          ],
+          "facId": "fnohs2s",
+          "roomId": "CS-108",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Fri": {
+        "p3": {
+          "subId": "suwy8j8",
+          "subCode": "ITW",
+          "facIds": [
+            "f2trwys"
+          ],
+          "facId": "f2trwys",
+          "roomId": "CS-114",
+          "blockStart": "p3",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p4": {
+          "subId": "suwy8j8",
+          "subCode": "ITW",
+          "facIds": [
+            "f2trwys"
+          ],
+          "facId": "f2trwys",
+          "roomId": "CS-114",
+          "blockStart": "p3",
+          "blockSize": 2,
           "locked": false
         },
         "p1": {
@@ -5527,147 +5655,19 @@
           "blockSize": 1,
           "locked": false
         },
-        "p6": {
+        "p2": {
           "subId": "sq3x84u",
           "subCode": "EVS",
           "facIds": [
             "fh06l0h"
           ],
           "facId": "fh06l0h",
-          "roomId": "CS-108",
-          "blockStart": "p3",
-          "blockSize": 1,
-          "locked": false
-        }
-      },
-      "Thu": {
-        "p3": {
-          "subId": "s4sql98",
-          "subCode": "DS Lab",
-          "facIds": [
-            "fa6621v",
-            "f04i4jc"
-          ],
-          "facId": "fa6621v",
-          "roomId": "CS-113",
-          "blockStart": "p3",
-          "blockSize": 2,
-          "locked": false
-        },
-        "p4": {
-          "subId": "s4sql98",
-          "subCode": "DS Lab",
-          "facIds": [
-            "fa6621v",
-            "f04i4jc"
-          ],
-          "facId": "fa6621v",
-          "roomId": "CS-113",
-          "blockStart": "p3",
-          "blockSize": 2,
-          "locked": false
-        },
-        "p2": {
-          "subId": "shsmvia",
-          "subCode": "DS",
-          "facIds": [
-            "frab7ha"
-          ],
-          "facId": "frab7ha",
           "roomId": "CS-108",
           "blockStart": "p2",
           "blockSize": 1,
           "locked": false
         },
         "p5": {
-          "subId": "sq3x84u",
-          "subCode": "EVS",
-          "facIds": [
-            "fh06l0h"
-          ],
-          "facId": "fh06l0h",
-          "roomId": "CS-108",
-          "blockStart": "p5",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p1": {
-          "subId": "sset14o",
-          "subCode": "COA",
-          "facIds": [
-            "fnohs2s"
-          ],
-          "facId": "fnohs2s",
-          "roomId": "CS-108",
-          "blockStart": "p1",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p6": {
-          "subId": "sqivbe1",
-          "subCode": "DM",
-          "facIds": [
-            "fyte2g1"
-          ],
-          "facId": "fyte2g1",
-          "roomId": "CS-108",
-          "blockStart": "p6",
-          "blockSize": 1,
-          "locked": false
-        }
-      },
-      "Fri": {
-        "p1": {
-          "subId": "sjnb2jj",
-          "subCode": "OOP Lab",
-          "facIds": [
-            "f9il99o",
-            "ftvlte9"
-          ],
-          "facId": "f9il99o",
-          "roomId": "CS-114",
-          "blockStart": "p1",
-          "blockSize": 2,
-          "locked": false
-        },
-        "p2": {
-          "subId": "sjnb2jj",
-          "subCode": "OOP Lab",
-          "facIds": [
-            "f9il99o",
-            "ftvlte9"
-          ],
-          "facId": "f9il99o",
-          "roomId": "CS-114",
-          "blockStart": "p1",
-          "blockSize": 2,
-          "locked": false
-        },
-        "p5": {
-          "subId": "sqivbe1",
-          "subCode": "DM",
-          "facIds": [
-            "fyte2g1"
-          ],
-          "facId": "fyte2g1",
-          "roomId": "CS-108",
-          "blockStart": "p3",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p3": {
-          "subId": "sset14o",
-          "subCode": "COA",
-          "facIds": [
-            "fnohs2s"
-          ],
-          "facId": "fnohs2s",
-          "roomId": "CS-108",
-          "blockStart": "p3",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p4": {
           "subId": "s3s273k",
           "subCode": "PSM",
           "facIds": [
@@ -5675,17 +5675,17 @@
           ],
           "facId": "fkxc6oh",
           "roomId": "CS-108",
-          "blockStart": "p4",
+          "blockStart": "p5",
           "blockSize": 1,
           "locked": false
         },
         "p6": {
-          "subId": "sytq8lc",
-          "subCode": "DE",
+          "subId": "sqivbe1",
+          "subCode": "DM",
           "facIds": [
-            "fklgsjw"
+            "fyte2g1"
           ],
-          "facId": "fklgsjw",
+          "facId": "fyte2g1",
           "roomId": "CS-108",
           "blockStart": "p6",
           "blockSize": 1,
@@ -5695,6 +5695,156 @@
     },
     "DS-3-A": {
       "Mon": {
+        "p3": {
+          "subId": "swbnazg",
+          "subCode": "BDA Lab",
+          "facIds": [
+            "fv8q6n3",
+            "fn0iwbt"
+          ],
+          "facId": "fv8q6n3",
+          "roomId": "CS-113",
+          "blockStart": "p3",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p4": {
+          "subId": "swbnazg",
+          "subCode": "BDA Lab",
+          "facIds": [
+            "fv8q6n3",
+            "fn0iwbt"
+          ],
+          "facId": "fv8q6n3",
+          "roomId": "CS-113",
+          "blockStart": "p3",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p1": {
+          "subId": "shgq4q9",
+          "subCode": "CN",
+          "facIds": [
+            "fsj2dpg"
+          ],
+          "facId": "fsj2dpg",
+          "roomId": "CS-110",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p2": {
+          "subId": "smdevtz",
+          "subCode": "SE",
+          "facIds": [
+            "f1u2u18"
+          ],
+          "facId": "f1u2u18",
+          "roomId": "CS-110",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p6": {
+          "subId": "shlltp9",
+          "subCode": "OS",
+          "facIds": [
+            "fkxzksu"
+          ],
+          "facId": "fkxzksu",
+          "roomId": "CS-110",
+          "blockStart": "p6",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p5": {
+          "subId": "s32szv8",
+          "subCode": "BDA",
+          "facIds": [
+            "fv8q6n3"
+          ],
+          "facId": "fv8q6n3",
+          "roomId": "CS-110",
+          "blockStart": "p5",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Tue": {
+        "p5": {
+          "subId": "s9ewa72",
+          "subCode": "MP",
+          "facIds": [
+            "fvfe2sm"
+          ],
+          "facId": "fvfe2sm",
+          "roomId": "CS-207",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p6": {
+          "subId": "s9ewa72",
+          "subCode": "MP",
+          "facIds": [
+            "fvfe2sm"
+          ],
+          "facId": "fvfe2sm",
+          "roomId": "CS-207",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p1": {
+          "subId": "shlltp9",
+          "subCode": "OS",
+          "facIds": [
+            "fkxzksu"
+          ],
+          "facId": "fkxzksu",
+          "roomId": "CS-110",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p2": {
+          "subId": "sxkxmn5",
+          "subCode": "DBMS",
+          "facIds": [
+            "fw06wkc"
+          ],
+          "facId": "fw06wkc",
+          "roomId": "CS-110",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p4": {
+          "subId": "s32szv8",
+          "subCode": "BDA",
+          "facIds": [
+            "fv8q6n3"
+          ],
+          "facId": "fv8q6n3",
+          "roomId": "CS-110",
+          "blockStart": "p4",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p3": {
+          "subId": "smdevtz",
+          "subCode": "SE",
+          "facIds": [
+            "f1u2u18"
+          ],
+          "facId": "f1u2u18",
+          "roomId": "CS-110",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Wed": {
         "p1": {
           "subId": "s8te1lx",
           "subCode": "DWDM Lab",
@@ -5719,18 +5869,6 @@
           "roomId": "CS-205",
           "blockStart": "p1",
           "blockSize": 2,
-          "locked": false
-        },
-        "p3": {
-          "subId": "shlltp9",
-          "subCode": "OS",
-          "facIds": [
-            "fkxzksu"
-          ],
-          "facId": "fkxzksu",
-          "roomId": "CS-110",
-          "blockStart": "p3",
-          "blockSize": 1,
           "locked": false
         },
         "p4": {
@@ -5745,93 +5883,7 @@
           "blockSize": 1,
           "locked": false
         },
-        "p5": {
-          "subId": "s32szv8",
-          "subCode": "BDA",
-          "facIds": [
-            "fv8q6n3"
-          ],
-          "facId": "fv8q6n3",
-          "roomId": "CS-110",
-          "blockStart": "p5",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p6": {
-          "subId": "se4610e",
-          "subCode": "DWDM",
-          "facIds": [
-            "fn0iwbt"
-          ],
-          "facId": "fn0iwbt",
-          "roomId": "CS-110",
-          "blockStart": "p6",
-          "blockSize": 1,
-          "locked": false
-        }
-      },
-      "Tue": {
         "p3": {
-          "subId": "s9ewa72",
-          "subCode": "MP",
-          "facIds": [
-            "fvfe2sm"
-          ],
-          "facId": "fvfe2sm",
-          "roomId": "CS-207",
-          "blockStart": "p3",
-          "blockSize": 2,
-          "locked": false
-        },
-        "p4": {
-          "subId": "s9ewa72",
-          "subCode": "MP",
-          "facIds": [
-            "fvfe2sm"
-          ],
-          "facId": "fvfe2sm",
-          "roomId": "CS-207",
-          "blockStart": "p3",
-          "blockSize": 2,
-          "locked": false
-        },
-        "p2": {
-          "subId": "shlltp9",
-          "subCode": "OS",
-          "facIds": [
-            "fkxzksu"
-          ],
-          "facId": "fkxzksu",
-          "roomId": "CS-110",
-          "blockStart": "p2",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p1": {
-          "subId": "sxkxmn5",
-          "subCode": "DBMS",
-          "facIds": [
-            "fw06wkc"
-          ],
-          "facId": "fw06wkc",
-          "roomId": "CS-110",
-          "blockStart": "p1",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p6": {
-          "subId": "smdevtz",
-          "subCode": "SE",
-          "facIds": [
-            "f1u2u18"
-          ],
-          "facId": "f1u2u18",
-          "roomId": "CS-110",
-          "blockStart": "p6",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p5": {
           "subId": "swcco8v",
           "subCode": "PE-I:DV",
           "facIds": [
@@ -5839,63 +5891,11 @@
           ],
           "facId": "fchbisd",
           "roomId": "CS-110",
-          "blockStart": "p5",
-          "blockSize": 1,
-          "locked": false
-        }
-      },
-      "Wed": {
-        "p3": {
-          "subId": "swbnazg",
-          "subCode": "BDA Lab",
-          "facIds": [
-            "fv8q6n3",
-            "fn0iwbt"
-          ],
-          "facId": "fv8q6n3",
-          "roomId": "CS-113",
           "blockStart": "p3",
-          "blockSize": 2,
-          "locked": false
-        },
-        "p4": {
-          "subId": "swbnazg",
-          "subCode": "BDA Lab",
-          "facIds": [
-            "fv8q6n3",
-            "fn0iwbt"
-          ],
-          "facId": "fv8q6n3",
-          "roomId": "CS-113",
-          "blockStart": "p3",
-          "blockSize": 2,
-          "locked": false
-        },
-        "p6": {
-          "subId": "s32szv8",
-          "subCode": "BDA",
-          "facIds": [
-            "fv8q6n3"
-          ],
-          "facId": "fv8q6n3",
-          "roomId": "CS-110",
-          "blockStart": "p6",
           "blockSize": 1,
           "locked": false
         },
-        "p2": {
-          "subId": "smdevtz",
-          "subCode": "SE",
-          "facIds": [
-            "f1u2u18"
-          ],
-          "facId": "f1u2u18",
-          "roomId": "CS-110",
-          "blockStart": "p2",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p1": {
+        "p5": {
           "subId": "sxkxmn5",
           "subCode": "DBMS",
           "facIds": [
@@ -5903,11 +5903,63 @@
           ],
           "facId": "fw06wkc",
           "roomId": "CS-110",
-          "blockStart": "p1",
+          "blockStart": "p5",
           "blockSize": 1,
           "locked": false
         },
-        "p5": {
+        "p6": {
+          "subId": "se4610e",
+          "subCode": "DWDM",
+          "facIds": [
+            "fn0iwbt"
+          ],
+          "facId": "fn0iwbt",
+          "roomId": "CS-110",
+          "blockStart": "p6",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Thu": {
+        "p1": {
+          "subId": "se9m4h8",
+          "subCode": "DBMS Lab",
+          "facIds": [
+            "fuzyhjx",
+            "fiuyg71"
+          ],
+          "facId": "fuzyhjx",
+          "roomId": "CS-205",
+          "blockStart": "p1",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p2": {
+          "subId": "se9m4h8",
+          "subCode": "DBMS Lab",
+          "facIds": [
+            "fuzyhjx",
+            "fiuyg71"
+          ],
+          "facId": "fuzyhjx",
+          "roomId": "CS-205",
+          "blockStart": "p1",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p3": {
+          "subId": "se4610e",
+          "subCode": "DWDM",
+          "facIds": [
+            "fn0iwbt"
+          ],
+          "facId": "fn0iwbt",
+          "roomId": "CS-110",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p4": {
           "subId": "shlltp9",
           "subCode": "OS",
           "facIds": [
@@ -5915,39 +5967,11 @@
           ],
           "facId": "fkxzksu",
           "roomId": "CS-110",
-          "blockStart": "p5",
+          "blockStart": "p4",
           "blockSize": 1,
           "locked": false
-        }
-      },
-      "Thu": {
-        "p3": {
-          "subId": "se9m4h8",
-          "subCode": "DBMS Lab",
-          "facIds": [
-            "fuzyhjx",
-            "fiuyg71"
-          ],
-          "facId": "fuzyhjx",
-          "roomId": "CS-205",
-          "blockStart": "p3",
-          "blockSize": 2,
-          "locked": false
         },
-        "p4": {
-          "subId": "se9m4h8",
-          "subCode": "DBMS Lab",
-          "facIds": [
-            "fuzyhjx",
-            "fiuyg71"
-          ],
-          "facId": "fuzyhjx",
-          "roomId": "CS-205",
-          "blockStart": "p3",
-          "blockSize": 2,
-          "locked": false
-        },
-        "p2": {
+        "p6": {
           "subId": "smdevtz",
           "subCode": "SE",
           "facIds": [
@@ -5955,7 +5979,7 @@
           ],
           "facId": "f1u2u18",
           "roomId": "CS-110",
-          "blockStart": "p2",
+          "blockStart": "p6",
           "blockSize": 1,
           "locked": false
         },
@@ -5968,30 +5992,6 @@
           "facId": "fv8q6n3",
           "roomId": "CS-110",
           "blockStart": "p5",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p1": {
-          "subId": "se4610e",
-          "subCode": "DWDM",
-          "facIds": [
-            "fn0iwbt"
-          ],
-          "facId": "fn0iwbt",
-          "roomId": "CS-110",
-          "blockStart": "p1",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p6": {
-          "subId": "shgq4q9",
-          "subCode": "CN",
-          "facIds": [
-            "fsj2dpg"
-          ],
-          "facId": "fsj2dpg",
-          "roomId": "CS-110",
-          "blockStart": "p6",
           "blockSize": 1,
           "locked": false
         }
@@ -6023,7 +6023,7 @@
           "blockSize": 2,
           "locked": false
         },
-        "p3": {
+        "p1": {
           "subId": "sxkxmn5",
           "subCode": "DBMS",
           "facIds": [
@@ -6031,23 +6031,11 @@
           ],
           "facId": "fw06wkc",
           "roomId": "CS-110",
-          "blockStart": "p3",
+          "blockStart": "p1",
           "blockSize": 1,
           "locked": false
         },
         "p2": {
-          "subId": "swcco8v",
-          "subCode": "PE-I:DV",
-          "facIds": [
-            "fchbisd"
-          ],
-          "facId": "fchbisd",
-          "roomId": "CS-110",
-          "blockStart": "p2",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p4": {
           "subId": "shgq4q9",
           "subCode": "CN",
           "facIds": [
@@ -6055,11 +6043,11 @@
           ],
           "facId": "fsj2dpg",
           "roomId": "CS-110",
-          "blockStart": "p4",
+          "blockStart": "p2",
           "blockSize": 1,
           "locked": false
         },
-        "p1": {
+        "p4": {
           "subId": "se4610e",
           "subCode": "DWDM",
           "facIds": [
@@ -6067,7 +6055,19 @@
           ],
           "facId": "fn0iwbt",
           "roomId": "CS-110",
-          "blockStart": "p1",
+          "blockStart": "p4",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p3": {
+          "subId": "swcco8v",
+          "subCode": "PE-I:DV",
+          "facIds": [
+            "fchbisd"
+          ],
+          "facId": "fchbisd",
+          "roomId": "CS-110",
+          "blockStart": "p3",
           "blockSize": 1,
           "locked": false
         }
@@ -6075,43 +6075,7 @@
     },
     "DS-4-A": {
       "Mon": {
-        "p3": {
-          "subId": "s5psxu8",
-          "subCode": "OE-I:IPR",
-          "facIds": [
-            "fuxjizo"
-          ],
-          "facId": "fuxjizo",
-          "roomId": "CS-111",
-          "blockStart": "p3",
-          "blockSize": 1,
-          "locked": false
-        },
         "p1": {
-          "subId": "sbmgvv6",
-          "subCode": "CPW-1",
-          "facIds": [
-            "f1qgqs3"
-          ],
-          "facId": "f1qgqs3",
-          "roomId": "CS-207",
-          "blockStart": "p1",
-          "blockSize": 2,
-          "locked": false
-        },
-        "p2": {
-          "subId": "sbmgvv6",
-          "subCode": "CPW-1",
-          "facIds": [
-            "f1qgqs3"
-          ],
-          "facId": "f1qgqs3",
-          "roomId": "CS-207",
-          "blockStart": "p1",
-          "blockSize": 2,
-          "locked": false
-        },
-        "p6": {
           "subId": "siw6rli",
           "subCode": "CC",
           "facIds": [
@@ -6123,19 +6087,57 @@
           "blockSize": 1,
           "locked": false
         },
-        "p4": {
-          "subId": "skw3guj",
-          "subCode": "TSA",
+        "p5": {
+          "subId": "s4v8hal",
+          "subCode": "PA Lab",
           "facIds": [
-            "fqgoh7i"
+            "fqgoh7i",
+            "fuzyhjx"
           ],
           "facId": "fqgoh7i",
+          "roomId": "CS-109",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p6": {
+          "subId": "s4v8hal",
+          "subCode": "PA Lab",
+          "facIds": [
+            "fqgoh7i",
+            "fuzyhjx"
+          ],
+          "facId": "fqgoh7i",
+          "roomId": "CS-109",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p4": {
+          "subId": "sxddoc1",
+          "subCode": "PE-V:SQT",
+          "facIds": [
+            "ftvlte9"
+          ],
+          "facId": "ftvlte9",
           "roomId": "CS-111",
           "blockStart": "p4",
           "blockSize": 1,
           "locked": false
         },
-        "p5": {
+        "p2": {
+          "subId": "sued245",
+          "subCode": "SNA",
+          "facIds": [
+            "fchbisd"
+          ],
+          "facId": "fchbisd",
+          "roomId": "CS-111",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p3": {
           "subId": "srr4c03",
           "subCode": "PA",
           "facIds": [
@@ -6143,26 +6145,101 @@
           ],
           "facId": "fqgoh7i",
           "roomId": "CS-111",
-          "blockStart": "p5",
+          "blockStart": "p3",
           "blockSize": 1,
           "locked": false
         }
       },
       "Tue": {
         "p3": {
-          "subId": "s4v8hal",
-          "subCode": "PA Lab",
+          "subId": "sedfvy0",
+          "subCode": "CC Lab",
           "facIds": [
-            "fqgoh7i",
-            "fuzyhjx"
+            "f2n6nbs",
+            "f1k5jo0"
           ],
-          "facId": "fqgoh7i",
-          "roomId": "CS-109",
+          "facId": "f2n6nbs",
+          "roomId": "CS-205",
           "blockStart": "p3",
           "blockSize": 2,
           "locked": false
         },
         "p4": {
+          "subId": "sedfvy0",
+          "subCode": "CC Lab",
+          "facIds": [
+            "f2n6nbs",
+            "f1k5jo0"
+          ],
+          "facId": "f2n6nbs",
+          "roomId": "CS-205",
+          "blockStart": "p3",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p2": {
+          "subId": "skw3guj",
+          "subCode": "TSA",
+          "facIds": [
+            "fqgoh7i"
+          ],
+          "facId": "fqgoh7i",
+          "roomId": "CS-111",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p1": {
+          "subId": "sxddoc1",
+          "subCode": "PE-V:SQT",
+          "facIds": [
+            "ftvlte9"
+          ],
+          "facId": "ftvlte9",
+          "roomId": "CS-111",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p5": {
+          "subId": "sued245",
+          "subCode": "SNA",
+          "facIds": [
+            "fchbisd"
+          ],
+          "facId": "fchbisd",
+          "roomId": "CS-111",
+          "blockStart": "p5",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p6": {
+          "subId": "s5psxu8",
+          "subCode": "OE-I:IPR",
+          "facIds": [
+            "fuxjizo"
+          ],
+          "facId": "fuxjizo",
+          "roomId": "CS-111",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Wed": {
+        "p1": {
+          "subId": "s5psxu8",
+          "subCode": "OE-I:IPR",
+          "facIds": [
+            "fuxjizo"
+          ],
+          "facId": "fuxjizo",
+          "roomId": "CS-111",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p5": {
           "subId": "s4v8hal",
           "subCode": "PA Lab",
           "facIds": [
@@ -6171,7 +6248,20 @@
           ],
           "facId": "fqgoh7i",
           "roomId": "CS-109",
-          "blockStart": "p3",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p6": {
+          "subId": "s4v8hal",
+          "subCode": "PA Lab",
+          "facIds": [
+            "fqgoh7i",
+            "fuzyhjx"
+          ],
+          "facId": "fqgoh7i",
+          "roomId": "CS-109",
+          "blockStart": "p5",
           "blockSize": 2,
           "locked": false
         },
@@ -6187,73 +6277,21 @@
           "blockSize": 1,
           "locked": false
         },
-        "p1": {
-          "subId": "sued245",
-          "subCode": "SNA",
+        "p3": {
+          "subId": "ss9jx80",
+          "subCode": "ES",
           "facIds": [
-            "fchbisd"
+            "fph3ibb"
           ],
-          "facId": "fchbisd",
+          "facId": "fph3ibb",
           "roomId": "CS-111",
-          "blockStart": "p1",
+          "blockStart": "p3",
           "blockSize": 1,
-          "locked": false
-        },
-        "p6": {
-          "subId": "sxddoc1",
-          "subCode": "PE-V:SQT",
-          "facIds": [
-            "ftvlte9"
-          ],
-          "facId": "ftvlte9",
-          "roomId": "CS-111",
-          "blockStart": "p6",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p5": {
-          "subId": "skw3guj",
-          "subCode": "TSA",
-          "facIds": [
-            "fqgoh7i"
-          ],
-          "facId": "fqgoh7i",
-          "roomId": "CS-111",
-          "blockStart": "p5",
-          "blockSize": 1,
-          "locked": false
-        }
-      },
-      "Wed": {
-        "p1": {
-          "subId": "s4v8hal",
-          "subCode": "PA Lab",
-          "facIds": [
-            "fqgoh7i",
-            "fuzyhjx"
-          ],
-          "facId": "fqgoh7i",
-          "roomId": "CS-109",
-          "blockStart": "p1",
-          "blockSize": 2,
-          "locked": false
-        },
-        "p2": {
-          "subId": "s4v8hal",
-          "subCode": "PA Lab",
-          "facIds": [
-            "fqgoh7i",
-            "fuzyhjx"
-          ],
-          "facId": "fqgoh7i",
-          "roomId": "CS-109",
-          "blockStart": "p1",
-          "blockSize": 2,
           "locked": false
         },
         "p4": {
-          "subId": "skw3guj",
-          "subCode": "TSA",
+          "subId": "srr4c03",
+          "subCode": "PA",
           "facIds": [
             "fqgoh7i"
           ],
@@ -6262,8 +6300,58 @@
           "blockStart": "p4",
           "blockSize": 1,
           "locked": false
+        }
+      },
+      "Thu": {
+        "p4": {
+          "subId": "s5psxu8",
+          "subCode": "OE-I:IPR",
+          "facIds": [
+            "fuxjizo"
+          ],
+          "facId": "fuxjizo",
+          "roomId": "CS-111",
+          "blockStart": "p4",
+          "blockSize": 1,
+          "locked": false
         },
-        "p5": {
+        "p1": {
+          "subId": "sbmgvv6",
+          "subCode": "CPW-1",
+          "facIds": [
+            "f1qgqs3"
+          ],
+          "facId": "f1qgqs3",
+          "roomId": "CS-207",
+          "blockStart": "p1",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p2": {
+          "subId": "sbmgvv6",
+          "subCode": "CPW-1",
+          "facIds": [
+            "f1qgqs3"
+          ],
+          "facId": "f1qgqs3",
+          "roomId": "CS-207",
+          "blockStart": "p1",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p3": {
+          "subId": "skw3guj",
+          "subCode": "TSA",
+          "facIds": [
+            "fqgoh7i"
+          ],
+          "facId": "fqgoh7i",
+          "roomId": "CS-111",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p6": {
           "subId": "siw6rli",
           "subCode": "CC",
           "facIds": [
@@ -6271,105 +6359,17 @@
           ],
           "facId": "f2n6nbs",
           "roomId": "CS-111",
-          "blockStart": "p5",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p3": {
-          "subId": "ss9jx80",
-          "subCode": "ES",
-          "facIds": [
-            "fph3ibb"
-          ],
-          "facId": "fph3ibb",
-          "roomId": "CS-111",
-          "blockStart": "p3",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p6": {
-          "subId": "sxddoc1",
-          "subCode": "PE-V:SQT",
-          "facIds": [
-            "ftvlte9"
-          ],
-          "facId": "ftvlte9",
-          "roomId": "CS-111",
           "blockStart": "p6",
           "blockSize": 1,
           "locked": false
-        }
-      },
-      "Thu": {
-        "p3": {
-          "subId": "s5psxu8",
-          "subCode": "OE-I:IPR",
-          "facIds": [
-            "fuxjizo"
-          ],
-          "facId": "fuxjizo",
-          "roomId": "CS-111",
-          "blockStart": "p3",
-          "blockSize": 1,
-          "locked": false
         },
-        "p1": {
-          "subId": "su70xo5",
-          "subCode": "SNA Lab",
-          "facIds": [
-            "fchbisd",
-            "fiuyg71"
-          ],
-          "facId": "fchbisd",
-          "roomId": "CS-206",
-          "blockStart": "p1",
-          "blockSize": 2,
-          "locked": false
-        },
-        "p2": {
-          "subId": "su70xo5",
-          "subCode": "SNA Lab",
-          "facIds": [
-            "fchbisd",
-            "fiuyg71"
-          ],
-          "facId": "fchbisd",
-          "roomId": "CS-206",
-          "blockStart": "p1",
-          "blockSize": 2,
-          "locked": false
-        },
-        "p4": {
-          "subId": "sxddoc1",
-          "subCode": "PE-V:SQT",
-          "facIds": [
-            "ftvlte9"
-          ],
-          "facId": "ftvlte9",
-          "roomId": "CS-111",
-          "blockStart": "p4",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p6": {
+        "p5": {
           "subId": "sued245",
           "subCode": "SNA",
           "facIds": [
             "fchbisd"
           ],
           "facId": "fchbisd",
-          "roomId": "CS-111",
-          "blockStart": "p6",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p5": {
-          "subId": "srr4c03",
-          "subCode": "PA",
-          "facIds": [
-            "fqgoh7i"
-          ],
-          "facId": "fqgoh7i",
           "roomId": "CS-111",
           "blockStart": "p5",
           "blockSize": 1,
@@ -6377,66 +6377,30 @@
         }
       },
       "Fri": {
-        "p4": {
-          "subId": "s5psxu8",
-          "subCode": "OE-I:IPR",
-          "facIds": [
-            "fuxjizo"
-          ],
-          "facId": "fuxjizo",
-          "roomId": "CS-111",
-          "blockStart": "p4",
-          "blockSize": 1,
-          "locked": false
-        },
         "p1": {
-          "subId": "sedfvy0",
-          "subCode": "CC Lab",
+          "subId": "su70xo5",
+          "subCode": "SNA Lab",
           "facIds": [
-            "f2n6nbs",
-            "f1k5jo0"
+            "fchbisd",
+            "fiuyg71"
           ],
-          "facId": "f2n6nbs",
-          "roomId": "CS-205",
+          "facId": "fchbisd",
+          "roomId": "CS-206",
           "blockStart": "p1",
           "blockSize": 2,
           "locked": false
         },
         "p2": {
-          "subId": "sedfvy0",
-          "subCode": "CC Lab",
+          "subId": "su70xo5",
+          "subCode": "SNA Lab",
           "facIds": [
-            "f2n6nbs",
-            "f1k5jo0"
-          ],
-          "facId": "f2n6nbs",
-          "roomId": "CS-205",
-          "blockStart": "p1",
-          "blockSize": 2,
-          "locked": false
-        },
-        "p3": {
-          "subId": "srr4c03",
-          "subCode": "PA",
-          "facIds": [
-            "fqgoh7i"
-          ],
-          "facId": "fqgoh7i",
-          "roomId": "CS-111",
-          "blockStart": "p3",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p5": {
-          "subId": "sued245",
-          "subCode": "SNA",
-          "facIds": [
-            "fchbisd"
+            "fchbisd",
+            "fiuyg71"
           ],
           "facId": "fchbisd",
-          "roomId": "CS-111",
-          "blockStart": "p5",
-          "blockSize": 1,
+          "roomId": "CS-206",
+          "blockStart": "p1",
+          "blockSize": 2,
           "locked": false
         },
         "p6": {
@@ -6447,7 +6411,43 @@
           ],
           "facId": "fph3ibb",
           "roomId": "CS-111",
+          "blockStart": "p6",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p3": {
+          "subId": "sxddoc1",
+          "subCode": "PE-V:SQT",
+          "facIds": [
+            "ftvlte9"
+          ],
+          "facId": "ftvlte9",
+          "roomId": "CS-111",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p5": {
+          "subId": "skw3guj",
+          "subCode": "TSA",
+          "facIds": [
+            "fqgoh7i"
+          ],
+          "facId": "fqgoh7i",
+          "roomId": "CS-111",
           "blockStart": "p5",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p4": {
+          "subId": "srr4c03",
+          "subCode": "PA",
+          "facIds": [
+            "fqgoh7i"
+          ],
+          "facId": "fqgoh7i",
+          "roomId": "CS-111",
+          "blockStart": "p1",
           "blockSize": 1,
           "locked": false
         }
@@ -6455,118 +6455,28 @@
     },
     "CSIT-2-A": {
       "Mon": {
-        "p5": {
-          "subId": "s1wvtty",
-          "subCode": "DS Lab",
-          "facIds": [
-            "f9il99o",
-            "fg716wg"
-          ],
-          "facId": "f9il99o",
-          "roomId": "CS-113",
-          "blockStart": "p5",
-          "blockSize": 2,
-          "locked": false
-        },
-        "p6": {
-          "subId": "s1wvtty",
-          "subCode": "DS Lab",
-          "facIds": [
-            "f9il99o",
-            "fg716wg"
-          ],
-          "facId": "f9il99o",
-          "roomId": "CS-113",
-          "blockStart": "p5",
-          "blockSize": 2,
-          "locked": false
-        },
-        "p3": {
-          "subId": "svuw421",
-          "subCode": "DS",
-          "facIds": [
-            "frab7ha"
-          ],
-          "facId": "frab7ha",
-          "roomId": "CS-112",
-          "blockStart": "p3",
-          "blockSize": 1,
-          "locked": false
-        },
         "p1": {
-          "subId": "si705t8",
-          "subCode": "OOP",
+          "subId": "shx8ho4",
+          "subCode": "ITW",
           "facIds": [
-            "fhi7jce"
+            "f2trwys"
           ],
-          "facId": "fhi7jce",
-          "roomId": "CS-112",
+          "facId": "f2trwys",
+          "roomId": "CS-114",
           "blockStart": "p1",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p2": {
-          "subId": "s8xsysy",
-          "subCode": "EVS",
-          "facIds": [
-            "fh06l0h"
-          ],
-          "facId": "fh06l0h",
-          "roomId": "CS-112",
-          "blockStart": "p2",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p4": {
-          "subId": "sgxgg6w",
-          "subCode": "DE",
-          "facIds": [
-            "fu381xi"
-          ],
-          "facId": "fu381xi",
-          "roomId": "CS-112",
-          "blockStart": "p4",
-          "blockSize": 1,
-          "locked": false
-        }
-      },
-      "Tue": {
-        "p3": {
-          "subId": "smitx2h",
-          "subCode": "OOP Lab",
-          "facIds": [
-            "fhi7jce",
-            "ftvlte9"
-          ],
-          "facId": "fhi7jce",
-          "roomId": "CS-114",
-          "blockStart": "p3",
-          "blockSize": 2,
-          "locked": false
-        },
-        "p4": {
-          "subId": "smitx2h",
-          "subCode": "OOP Lab",
-          "facIds": [
-            "fhi7jce",
-            "ftvlte9"
-          ],
-          "facId": "fhi7jce",
-          "roomId": "CS-114",
-          "blockStart": "p3",
           "blockSize": 2,
           "locked": false
         },
         "p2": {
-          "subId": "sgxgg6w",
-          "subCode": "DE",
+          "subId": "shx8ho4",
+          "subCode": "ITW",
           "facIds": [
-            "fu381xi"
+            "f2trwys"
           ],
-          "facId": "fu381xi",
-          "roomId": "CS-112",
-          "blockStart": "p2",
-          "blockSize": 1,
+          "facId": "f2trwys",
+          "roomId": "CS-114",
+          "blockStart": "p1",
+          "blockSize": 2,
           "locked": false
         },
         "p5": {
@@ -6593,13 +6503,101 @@
           "blockSize": 1,
           "locked": false
         },
-        "p1": {
-          "subId": "sk8owqa",
-          "subCode": "DM",
+        "p4": {
+          "subId": "s8xsysy",
+          "subCode": "EVS",
           "facIds": [
-            "fuwsk8z"
+            "fh06l0h"
           ],
-          "facId": "fuwsk8z",
+          "facId": "fh06l0h",
+          "roomId": "CS-112",
+          "blockStart": "p4",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p3": {
+          "subId": "sgxgg6w",
+          "subCode": "DE",
+          "facIds": [
+            "fu381xi"
+          ],
+          "facId": "fu381xi",
+          "roomId": "CS-112",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Tue": {
+        "p5": {
+          "subId": "s1wvtty",
+          "subCode": "DS Lab",
+          "facIds": [
+            "f9il99o",
+            "fg716wg"
+          ],
+          "facId": "f9il99o",
+          "roomId": "CS-113",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p6": {
+          "subId": "s1wvtty",
+          "subCode": "DS Lab",
+          "facIds": [
+            "f9il99o",
+            "fg716wg"
+          ],
+          "facId": "f9il99o",
+          "roomId": "CS-113",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p3": {
+          "subId": "s4kz8rm",
+          "subCode": "COA",
+          "facIds": [
+            "fnohs2s"
+          ],
+          "facId": "fnohs2s",
+          "roomId": "CS-112",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p2": {
+          "subId": "sxs3yps",
+          "subCode": "PSM",
+          "facIds": [
+            "fevyfmd"
+          ],
+          "facId": "fevyfmd",
+          "roomId": "CS-112",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p4": {
+          "subId": "sgxgg6w",
+          "subCode": "DE",
+          "facIds": [
+            "fu381xi"
+          ],
+          "facId": "fu381xi",
+          "roomId": "CS-112",
+          "blockStart": "p4",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p1": {
+          "subId": "si705t8",
+          "subCode": "OOP",
+          "facIds": [
+            "fhi7jce"
+          ],
+          "facId": "fhi7jce",
           "roomId": "CS-112",
           "blockStart": "p1",
           "blockSize": 1,
@@ -6633,43 +6631,7 @@
           "blockSize": 2,
           "locked": false
         },
-        "p3": {
-          "subId": "s4kz8rm",
-          "subCode": "COA",
-          "facIds": [
-            "fnohs2s"
-          ],
-          "facId": "fnohs2s",
-          "roomId": "CS-112",
-          "blockStart": "p3",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p1": {
-          "subId": "svuw421",
-          "subCode": "DS",
-          "facIds": [
-            "frab7ha"
-          ],
-          "facId": "frab7ha",
-          "roomId": "CS-112",
-          "blockStart": "p1",
-          "blockSize": 1,
-          "locked": false
-        },
         "p2": {
-          "subId": "sxs3yps",
-          "subCode": "PSM",
-          "facIds": [
-            "fevyfmd"
-          ],
-          "facId": "fevyfmd",
-          "roomId": "CS-112",
-          "blockStart": "p2",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p4": {
           "subId": "sk8owqa",
           "subCode": "DM",
           "facIds": [
@@ -6677,71 +6639,7 @@
           ],
           "facId": "fuwsk8z",
           "roomId": "CS-112",
-          "blockStart": "p4",
-          "blockSize": 1,
-          "locked": false
-        }
-      },
-      "Thu": {
-        "p5": {
-          "subId": "s1wvtty",
-          "subCode": "DS Lab",
-          "facIds": [
-            "f9il99o",
-            "fg716wg"
-          ],
-          "facId": "f9il99o",
-          "roomId": "CS-113",
-          "blockStart": "p5",
-          "blockSize": 2,
-          "locked": false
-        },
-        "p6": {
-          "subId": "s1wvtty",
-          "subCode": "DS Lab",
-          "facIds": [
-            "f9il99o",
-            "fg716wg"
-          ],
-          "facId": "f9il99o",
-          "roomId": "CS-113",
-          "blockStart": "p5",
-          "blockSize": 2,
-          "locked": false
-        },
-        "p2": {
-          "subId": "s4kz8rm",
-          "subCode": "COA",
-          "facIds": [
-            "fnohs2s"
-          ],
-          "facId": "fnohs2s",
-          "roomId": "CS-112",
           "blockStart": "p2",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p4": {
-          "subId": "si705t8",
-          "subCode": "OOP",
-          "facIds": [
-            "fhi7jce"
-          ],
-          "facId": "fhi7jce",
-          "roomId": "CS-112",
-          "blockStart": "p4",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p1": {
-          "subId": "sk8owqa",
-          "subCode": "DM",
-          "facIds": [
-            "fuwsk8z"
-          ],
-          "facId": "fuwsk8z",
-          "roomId": "CS-112",
-          "blockStart": "p1",
           "blockSize": 1,
           "locked": false
         },
@@ -6756,34 +6654,8 @@
           "blockStart": "p3",
           "blockSize": 1,
           "locked": false
-        }
-      },
-      "Fri": {
-        "p5": {
-          "subId": "shx8ho4",
-          "subCode": "ITW",
-          "facIds": [
-            "f2trwys"
-          ],
-          "facId": "f2trwys",
-          "roomId": "CS-114",
-          "blockStart": "p5",
-          "blockSize": 2,
-          "locked": false
         },
-        "p6": {
-          "subId": "shx8ho4",
-          "subCode": "ITW",
-          "facIds": [
-            "f2trwys"
-          ],
-          "facId": "f2trwys",
-          "roomId": "CS-114",
-          "blockStart": "p5",
-          "blockSize": 2,
-          "locked": false
-        },
-        "p2": {
+        "p4": {
           "subId": "s8xsysy",
           "subCode": "EVS",
           "facIds": [
@@ -6791,7 +6663,135 @@
           ],
           "facId": "fh06l0h",
           "roomId": "CS-112",
-          "blockStart": "p2",
+          "blockStart": "p4",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p1": {
+          "subId": "si705t8",
+          "subCode": "OOP",
+          "facIds": [
+            "fhi7jce"
+          ],
+          "facId": "fhi7jce",
+          "roomId": "CS-112",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Thu": {
+        "p1": {
+          "subId": "s1wvtty",
+          "subCode": "DS Lab",
+          "facIds": [
+            "f9il99o",
+            "fg716wg"
+          ],
+          "facId": "f9il99o",
+          "roomId": "CS-113",
+          "blockStart": "p1",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p2": {
+          "subId": "s1wvtty",
+          "subCode": "DS Lab",
+          "facIds": [
+            "f9il99o",
+            "fg716wg"
+          ],
+          "facId": "f9il99o",
+          "roomId": "CS-113",
+          "blockStart": "p1",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p4": {
+          "subId": "sk8owqa",
+          "subCode": "DM",
+          "facIds": [
+            "fuwsk8z"
+          ],
+          "facId": "fuwsk8z",
+          "roomId": "CS-112",
+          "blockStart": "p4",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p3": {
+          "subId": "si705t8",
+          "subCode": "OOP",
+          "facIds": [
+            "fhi7jce"
+          ],
+          "facId": "fhi7jce",
+          "roomId": "CS-112",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p5": {
+          "subId": "s4kz8rm",
+          "subCode": "COA",
+          "facIds": [
+            "fnohs2s"
+          ],
+          "facId": "fnohs2s",
+          "roomId": "CS-112",
+          "blockStart": "p5",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p6": {
+          "subId": "svuw421",
+          "subCode": "DS",
+          "facIds": [
+            "frab7ha"
+          ],
+          "facId": "frab7ha",
+          "roomId": "CS-112",
+          "blockStart": "p6",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Fri": {
+        "p1": {
+          "subId": "smitx2h",
+          "subCode": "OOP Lab",
+          "facIds": [
+            "fhi7jce",
+            "ftvlte9"
+          ],
+          "facId": "fhi7jce",
+          "roomId": "CS-114",
+          "blockStart": "p1",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p2": {
+          "subId": "smitx2h",
+          "subCode": "OOP Lab",
+          "facIds": [
+            "fhi7jce",
+            "ftvlte9"
+          ],
+          "facId": "fhi7jce",
+          "roomId": "CS-114",
+          "blockStart": "p1",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p4": {
+          "subId": "sk8owqa",
+          "subCode": "DM",
+          "facIds": [
+            "fuwsk8z"
+          ],
+          "facId": "fuwsk8z",
+          "roomId": "CS-112",
+          "blockStart": "p4",
           "blockSize": 1,
           "locked": false
         },
@@ -6807,19 +6807,7 @@
           "blockSize": 1,
           "locked": false
         },
-        "p1": {
-          "subId": "si705t8",
-          "subCode": "OOP",
-          "facIds": [
-            "fhi7jce"
-          ],
-          "facId": "fhi7jce",
-          "roomId": "CS-112",
-          "blockStart": "p1",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p4": {
+        "p5": {
           "subId": "sxs3yps",
           "subCode": "PSM",
           "facIds": [
@@ -6827,7 +6815,19 @@
           ],
           "facId": "fevyfmd",
           "roomId": "CS-112",
-          "blockStart": "p4",
+          "blockStart": "p5",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p6": {
+          "subId": "svuw421",
+          "subCode": "DS",
+          "facIds": [
+            "frab7ha"
+          ],
+          "facId": "frab7ha",
+          "roomId": "CS-112",
+          "blockStart": "p6",
           "blockSize": 1,
           "locked": false
         }
@@ -6836,29 +6836,41 @@
     "CSIT-3-A": {
       "Mon": {
         "p5": {
-          "subId": "srvgh2q",
-          "subCode": "CN Lab",
+          "subId": "ss465jh",
+          "subCode": "WT Lab",
           "facIds": [
-            "fs3onw5",
-            "fjw0sm1"
+            "fsws4xh",
+            "fvfe2sm"
           ],
-          "facId": "fs3onw5",
-          "roomId": "CS-206",
+          "facId": "fsws4xh",
+          "roomId": "CS-114",
           "blockStart": "p5",
           "blockSize": 2,
           "locked": false
         },
         "p6": {
-          "subId": "srvgh2q",
-          "subCode": "CN Lab",
+          "subId": "ss465jh",
+          "subCode": "WT Lab",
           "facIds": [
-            "fs3onw5",
-            "fjw0sm1"
+            "fsws4xh",
+            "fvfe2sm"
           ],
-          "facId": "fs3onw5",
-          "roomId": "CS-206",
+          "facId": "fsws4xh",
+          "roomId": "CS-114",
           "blockStart": "p5",
           "blockSize": 2,
+          "locked": false
+        },
+        "p2": {
+          "subId": "s09rmva",
+          "subCode": "DBMS",
+          "facIds": [
+            "fw06wkc"
+          ],
+          "facId": "fw06wkc",
+          "roomId": "CS-201",
+          "blockStart": "p2",
+          "blockSize": 1,
           "locked": false
         },
         "p3": {
@@ -6873,7 +6885,7 @@
           "blockSize": 1,
           "locked": false
         },
-        "p2": {
+        "p1": {
           "subId": "sk52mip",
           "subCode": "CN",
           "facIds": [
@@ -6881,71 +6893,71 @@
           ],
           "facId": "fs3onw5",
           "roomId": "CS-201",
-          "blockStart": "p2",
+          "blockStart": "p1",
           "blockSize": 1,
           "locked": false
         },
         "p4": {
-          "subId": "s3dsx41",
-          "subCode": "CD",
+          "subId": "smds87s",
+          "subCode": "OS",
           "facIds": [
-            "f1qgqs3"
+            "fkxzksu"
           ],
-          "facId": "f1qgqs3",
+          "facId": "fkxzksu",
           "roomId": "CS-201",
           "blockStart": "p4",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p1": {
-          "subId": "s09rmva",
-          "subCode": "DBMS",
-          "facIds": [
-            "fw06wkc"
-          ],
-          "facId": "fw06wkc",
-          "roomId": "CS-201",
-          "blockStart": "p1",
           "blockSize": 1,
           "locked": false
         }
       },
       "Tue": {
-        "p3": {
-          "subId": "sfbwkx7",
-          "subCode": "DBMS Lab",
+        "p1": {
+          "subId": "srvgh2q",
+          "subCode": "CN Lab",
           "facIds": [
-            "fasn7jg",
-            "fiuyg71"
+            "fs3onw5",
+            "fjw0sm1"
           ],
-          "facId": "fasn7jg",
-          "roomId": "CS-205",
-          "blockStart": "p3",
-          "blockSize": 2,
-          "locked": false
-        },
-        "p4": {
-          "subId": "sfbwkx7",
-          "subCode": "DBMS Lab",
-          "facIds": [
-            "fasn7jg",
-            "fiuyg71"
-          ],
-          "facId": "fasn7jg",
-          "roomId": "CS-205",
-          "blockStart": "p3",
+          "facId": "fs3onw5",
+          "roomId": "CS-206",
+          "blockStart": "p1",
           "blockSize": 2,
           "locked": false
         },
         "p2": {
-          "subId": "s3dsx41",
-          "subCode": "CD",
+          "subId": "srvgh2q",
+          "subCode": "CN Lab",
           "facIds": [
-            "f1qgqs3"
+            "fs3onw5",
+            "fjw0sm1"
           ],
-          "facId": "f1qgqs3",
+          "facId": "fs3onw5",
+          "roomId": "CS-206",
+          "blockStart": "p1",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p4": {
+          "subId": "shqrd1b",
+          "subCode": "SE",
+          "facIds": [
+            "f1u2u18"
+          ],
+          "facId": "f1u2u18",
           "roomId": "CS-201",
-          "blockStart": "p2",
+          "blockStart": "p4",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p3": {
+          "subId": "scym71m",
+          "subCode": "WT",
+          "facIds": [
+            "fsws4xh"
+          ],
+          "facId": "fsws4xh",
+          "roomId": "CS-201",
+          "blockStart": "p3",
           "blockSize": 1,
           "locked": false
         },
@@ -6961,25 +6973,13 @@
           "blockSize": 1,
           "locked": false
         },
-        "p1": {
-          "subId": "shqrd1b",
-          "subCode": "SE",
-          "facIds": [
-            "f1u2u18"
-          ],
-          "facId": "f1u2u18",
-          "roomId": "CS-201",
-          "blockStart": "p1",
-          "blockSize": 1,
-          "locked": false
-        },
         "p6": {
-          "subId": "scym71m",
-          "subCode": "WT",
+          "subId": "s09rmva",
+          "subCode": "DBMS",
           "facIds": [
-            "fsws4xh"
+            "fw06wkc"
           ],
-          "facId": "fsws4xh",
+          "facId": "fw06wkc",
           "roomId": "CS-201",
           "blockStart": "p6",
           "blockSize": 1,
@@ -6987,45 +6987,33 @@
         }
       },
       "Wed": {
-        "p3": {
-          "subId": "ss465jh",
-          "subCode": "WT Lab",
+        "p5": {
+          "subId": "sfbwkx7",
+          "subCode": "DBMS Lab",
           "facIds": [
-            "fsws4xh",
-            "fvfe2sm"
+            "fasn7jg",
+            "fiuyg71"
           ],
-          "facId": "fsws4xh",
-          "roomId": "CS-114",
-          "blockStart": "p3",
+          "facId": "fasn7jg",
+          "roomId": "CS-205",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p6": {
+          "subId": "sfbwkx7",
+          "subCode": "DBMS Lab",
+          "facIds": [
+            "fasn7jg",
+            "fiuyg71"
+          ],
+          "facId": "fasn7jg",
+          "roomId": "CS-205",
+          "blockStart": "p5",
           "blockSize": 2,
           "locked": false
         },
         "p4": {
-          "subId": "ss465jh",
-          "subCode": "WT Lab",
-          "facIds": [
-            "fsws4xh",
-            "fvfe2sm"
-          ],
-          "facId": "fsws4xh",
-          "roomId": "CS-114",
-          "blockStart": "p3",
-          "blockSize": 2,
-          "locked": false
-        },
-        "p2": {
-          "subId": "smds87s",
-          "subCode": "OS",
-          "facIds": [
-            "fkxzksu"
-          ],
-          "facId": "fkxzksu",
-          "roomId": "CS-201",
-          "blockStart": "p2",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p1": {
           "subId": "scym71m",
           "subCode": "WT",
           "facIds": [
@@ -7033,17 +7021,93 @@
           ],
           "facId": "fsws4xh",
           "roomId": "CS-201",
-          "blockStart": "p1",
+          "blockStart": "p4",
           "blockSize": 1,
           "locked": false
         },
-        "p5": {
+        "p1": {
           "subId": "s3dsx41",
           "subCode": "CD",
           "facIds": [
             "f1qgqs3"
           ],
           "facId": "f1qgqs3",
+          "roomId": "CS-201",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p2": {
+          "subId": "shqrd1b",
+          "subCode": "SE",
+          "facIds": [
+            "f1u2u18"
+          ],
+          "facId": "f1u2u18",
+          "roomId": "CS-201",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p3": {
+          "subId": "sk52mip",
+          "subCode": "CN",
+          "facIds": [
+            "fs3onw5"
+          ],
+          "facId": "fs3onw5",
+          "roomId": "CS-201",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Thu": {
+        "p1": {
+          "subId": "ss465jh",
+          "subCode": "WT Lab",
+          "facIds": [
+            "fsws4xh",
+            "fvfe2sm"
+          ],
+          "facId": "fsws4xh",
+          "roomId": "CS-114",
+          "blockStart": "p1",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p2": {
+          "subId": "ss465jh",
+          "subCode": "WT Lab",
+          "facIds": [
+            "fsws4xh",
+            "fvfe2sm"
+          ],
+          "facId": "fsws4xh",
+          "roomId": "CS-114",
+          "blockStart": "p1",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p4": {
+          "subId": "scym71m",
+          "subCode": "WT",
+          "facIds": [
+            "fsws4xh"
+          ],
+          "facId": "fsws4xh",
+          "roomId": "CS-201",
+          "blockStart": "p4",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p5": {
+          "subId": "shqrd1b",
+          "subCode": "SE",
+          "facIds": [
+            "f1u2u18"
+          ],
+          "facId": "f1u2u18",
           "roomId": "CS-201",
           "blockStart": "p5",
           "blockSize": 1,
@@ -7060,80 +7124,16 @@
           "blockStart": "p6",
           "blockSize": 1,
           "locked": false
-        }
-      },
-      "Thu": {
-        "p5": {
-          "subId": "ss465jh",
-          "subCode": "WT Lab",
-          "facIds": [
-            "fsws4xh",
-            "fvfe2sm"
-          ],
-          "facId": "fsws4xh",
-          "roomId": "CS-114",
-          "blockStart": "p5",
-          "blockSize": 2,
-          "locked": false
-        },
-        "p6": {
-          "subId": "ss465jh",
-          "subCode": "WT Lab",
-          "facIds": [
-            "fsws4xh",
-            "fvfe2sm"
-          ],
-          "facId": "fsws4xh",
-          "roomId": "CS-114",
-          "blockStart": "p5",
-          "blockSize": 2,
-          "locked": false
-        },
-        "p2": {
-          "subId": "sk52mip",
-          "subCode": "CN",
-          "facIds": [
-            "fs3onw5"
-          ],
-          "facId": "fs3onw5",
-          "roomId": "CS-201",
-          "blockStart": "p2",
-          "blockSize": 1,
-          "locked": false
         },
         "p3": {
-          "subId": "s09rmva",
-          "subCode": "DBMS",
+          "subId": "s3dsx41",
+          "subCode": "CD",
           "facIds": [
-            "fw06wkc"
+            "f1qgqs3"
           ],
-          "facId": "fw06wkc",
+          "facId": "f1qgqs3",
           "roomId": "CS-201",
           "blockStart": "p3",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p1": {
-          "subId": "swkcxym",
-          "subCode": "PE-I:CC",
-          "facIds": [
-            "f1k5jo0"
-          ],
-          "facId": "f1k5jo0",
-          "roomId": "CS-201",
-          "blockStart": "p1",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p4": {
-          "subId": "shqrd1b",
-          "subCode": "SE",
-          "facIds": [
-            "f1u2u18"
-          ],
-          "facId": "f1u2u18",
-          "roomId": "CS-201",
-          "blockStart": "p4",
           "blockSize": 1,
           "locked": false
         }
@@ -7163,31 +7163,31 @@
           "blockSize": 2,
           "locked": false
         },
-        "p3": {
-          "subId": "shqrd1b",
-          "subCode": "SE",
-          "facIds": [
-            "f1u2u18"
-          ],
-          "facId": "f1u2u18",
-          "roomId": "CS-201",
-          "blockStart": "p3",
-          "blockSize": 1,
-          "locked": false
-        },
         "p5": {
-          "subId": "scym71m",
-          "subCode": "WT",
+          "subId": "swkcxym",
+          "subCode": "PE-I:CC",
           "facIds": [
-            "fsws4xh"
+            "f1k5jo0"
           ],
-          "facId": "fsws4xh",
+          "facId": "f1k5jo0",
           "roomId": "CS-201",
           "blockStart": "p5",
           "blockSize": 1,
           "locked": false
         },
-        "p4": {
+        "p6": {
+          "subId": "s3dsx41",
+          "subCode": "CD",
+          "facIds": [
+            "f1qgqs3"
+          ],
+          "facId": "f1qgqs3",
+          "roomId": "CS-201",
+          "blockStart": "p6",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p3": {
           "subId": "s09rmva",
           "subCode": "DBMS",
           "facIds": [
@@ -7195,11 +7195,11 @@
           ],
           "facId": "fw06wkc",
           "roomId": "CS-201",
-          "blockStart": "p4",
+          "blockStart": "p2",
           "blockSize": 1,
           "locked": false
         },
-        "p6": {
+        "p4": {
           "subId": "smds87s",
           "subCode": "OS",
           "facIds": [
@@ -7207,7 +7207,7 @@
           ],
           "facId": "fkxzksu",
           "roomId": "CS-201",
-          "blockStart": "p6",
+          "blockStart": "p4",
           "blockSize": 1,
           "locked": false
         }
@@ -7215,47 +7215,7 @@
     },
     "CSIT-4-A": {
       "Mon": {
-        "p3": {
-          "subId": "s5k0gph",
-          "subCode": "OE-I:EM",
-          "facIds": [
-            "fh06l0h"
-          ],
-          "facId": "fh06l0h",
-          "roomId": "CS-202",
-          "blockStart": "p3",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p5": {
-          "subId": "sfe7g59",
-          "subCode": "BCT Lab",
-          "facIds": [
-            "fvfe2sm",
-            "f7j8puf",
-            "fuxak8n"
-          ],
-          "facId": "fvfe2sm",
-          "roomId": "CS-109",
-          "blockStart": "p5",
-          "blockSize": 2,
-          "locked": false
-        },
-        "p6": {
-          "subId": "sfe7g59",
-          "subCode": "BCT Lab",
-          "facIds": [
-            "fvfe2sm",
-            "f7j8puf",
-            "fuxak8n"
-          ],
-          "facId": "fvfe2sm",
-          "roomId": "CS-109",
-          "blockStart": "p5",
-          "blockSize": 2,
-          "locked": false
-        },
-        "p2": {
+        "p1": {
           "subId": "suo9qbn",
           "subCode": "BCT",
           "facIds": [
@@ -7263,29 +7223,67 @@
           ],
           "facId": "fvfe2sm",
           "roomId": "CS-202",
-          "blockStart": "p2",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p1": {
-          "subId": "s6uo21h",
-          "subCode": "CC",
-          "facIds": [
-            "f2n6nbs"
-          ],
-          "facId": "f2n6nbs",
-          "roomId": "CS-202",
           "blockStart": "p1",
           "blockSize": 1,
           "locked": false
         },
-        "p4": {
+        "p5": {
+          "subId": "slj4wox",
+          "subCode": "CC Lab",
+          "facIds": [
+            "f2n6nbs",
+            "f1k5jo0"
+          ],
+          "facId": "f2n6nbs",
+          "roomId": "CS-205",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p6": {
+          "subId": "slj4wox",
+          "subCode": "CC Lab",
+          "facIds": [
+            "f2n6nbs",
+            "f1k5jo0"
+          ],
+          "facId": "f2n6nbs",
+          "roomId": "CS-205",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p3": {
           "subId": "sbd2a13",
           "subCode": "ES",
           "facIds": [
             "fph3ibb"
           ],
           "facId": "fph3ibb",
+          "roomId": "CS-202",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p2": {
+          "subId": "snyje1n",
+          "subCode": "CSF",
+          "facIds": [
+            "f2n6nbs"
+          ],
+          "facId": "f2n6nbs",
+          "roomId": "CS-202",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p4": {
+          "subId": "s6uo21h",
+          "subCode": "CC",
+          "facIds": [
+            "f2n6nbs"
+          ],
+          "facId": "f2n6nbs",
           "roomId": "CS-202",
           "blockStart": "p4",
           "blockSize": 1,
@@ -7293,29 +7291,27 @@
         }
       },
       "Tue": {
-        "p5": {
-          "subId": "slj4wox",
-          "subCode": "CC Lab",
+        "p1": {
+          "subId": "slcje98",
+          "subCode": "CPW-1",
           "facIds": [
-            "f2n6nbs",
-            "f1k5jo0"
+            "ftjlb2n"
           ],
-          "facId": "f2n6nbs",
-          "roomId": "CS-205",
-          "blockStart": "p5",
+          "facId": "ftjlb2n",
+          "roomId": "CS-207",
+          "blockStart": "p1",
           "blockSize": 2,
           "locked": false
         },
-        "p6": {
-          "subId": "slj4wox",
-          "subCode": "CC Lab",
+        "p2": {
+          "subId": "slcje98",
+          "subCode": "CPW-1",
           "facIds": [
-            "f2n6nbs",
-            "f1k5jo0"
+            "ftjlb2n"
           ],
-          "facId": "f2n6nbs",
-          "roomId": "CS-205",
-          "blockStart": "p5",
+          "facId": "ftjlb2n",
+          "roomId": "CS-207",
+          "blockStart": "p1",
           "blockSize": 2,
           "locked": false
         },
@@ -7331,169 +7327,19 @@
           "blockSize": 1,
           "locked": false
         },
-        "p4": {
-          "subId": "sb7ugad",
-          "subCode": "MAD",
-          "facIds": [
-            "furpuwu"
-          ],
-          "facId": "furpuwu",
-          "roomId": "CS-202",
-          "blockStart": "p4",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p1": {
+        "p5": {
           "subId": "snyje1n",
           "subCode": "CSF",
           "facIds": [
             "f2n6nbs"
           ],
           "facId": "f2n6nbs",
-          "roomId": "CS-202",
-          "blockStart": "p1",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p2": {
-          "subId": "suo9qbn",
-          "subCode": "BCT",
-          "facIds": [
-            "fvfe2sm"
-          ],
-          "facId": "fvfe2sm",
-          "roomId": "CS-202",
-          "blockStart": "p2",
-          "blockSize": 1,
-          "locked": false
-        }
-      },
-      "Wed": {
-        "p3": {
-          "subId": "slcje98",
-          "subCode": "CPW-1",
-          "facIds": [
-            "ftjlb2n"
-          ],
-          "facId": "ftjlb2n",
-          "roomId": "CS-207",
-          "blockStart": "p3",
-          "blockSize": 2,
-          "locked": false
-        },
-        "p4": {
-          "subId": "slcje98",
-          "subCode": "CPW-1",
-          "facIds": [
-            "ftjlb2n"
-          ],
-          "facId": "ftjlb2n",
-          "roomId": "CS-207",
-          "blockStart": "p3",
-          "blockSize": 2,
-          "locked": false
-        },
-        "p1": {
-          "subId": "s6uo21h",
-          "subCode": "CC",
-          "facIds": [
-            "f2n6nbs"
-          ],
-          "facId": "f2n6nbs",
-          "roomId": "CS-202",
-          "blockStart": "p1",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p2": {
-          "subId": "sb7ugad",
-          "subCode": "MAD",
-          "facIds": [
-            "furpuwu"
-          ],
-          "facId": "furpuwu",
-          "roomId": "CS-202",
-          "blockStart": "p2",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p6": {
-          "subId": "sqi3af8",
-          "subCode": "PE-V:SQT",
-          "facIds": [
-            "fsj2dpg"
-          ],
-          "facId": "fsj2dpg",
-          "roomId": "CS-202",
-          "blockStart": "p6",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p5": {
-          "subId": "suo9qbn",
-          "subCode": "BCT",
-          "facIds": [
-            "fvfe2sm"
-          ],
-          "facId": "fvfe2sm",
           "roomId": "CS-202",
           "blockStart": "p5",
           "blockSize": 1,
           "locked": false
-        }
-      },
-      "Thu": {
-        "p3": {
-          "subId": "s5k0gph",
-          "subCode": "OE-I:EM",
-          "facIds": [
-            "fh06l0h"
-          ],
-          "facId": "fh06l0h",
-          "roomId": "CS-202",
-          "blockStart": "p3",
-          "blockSize": 1,
-          "locked": false
         },
-        "p1": {
-          "subId": "sl1s4dl",
-          "subCode": "MAD Lab",
-          "facIds": [
-            "furpuwu",
-            "fsws4xh"
-          ],
-          "facId": "furpuwu",
-          "roomId": "CS-109",
-          "blockStart": "p1",
-          "blockSize": 2,
-          "locked": false
-        },
-        "p2": {
-          "subId": "sl1s4dl",
-          "subCode": "MAD Lab",
-          "facIds": [
-            "furpuwu",
-            "fsws4xh"
-          ],
-          "facId": "furpuwu",
-          "roomId": "CS-109",
-          "blockStart": "p1",
-          "blockSize": 2,
-          "locked": false
-        },
-        "p4": {
-          "subId": "snyje1n",
-          "subCode": "CSF",
-          "facIds": [
-            "f2n6nbs"
-          ],
-          "facId": "f2n6nbs",
-          "roomId": "CS-202",
-          "blockStart": "p4",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p5": {
+        "p6": {
           "subId": "sbd2a13",
           "subCode": "ES",
           "facIds": [
@@ -7501,11 +7347,11 @@
           ],
           "facId": "fph3ibb",
           "roomId": "CS-202",
-          "blockStart": "p5",
+          "blockStart": "p6",
           "blockSize": 1,
           "locked": false
         },
-        "p6": {
+        "p4": {
           "subId": "sb7ugad",
           "subCode": "MAD",
           "facIds": [
@@ -7513,12 +7359,90 @@
           ],
           "facId": "furpuwu",
           "roomId": "CS-202",
-          "blockStart": "p6",
+          "blockStart": "p4",
           "blockSize": 1,
           "locked": false
         }
       },
-      "Fri": {
+      "Wed": {
+        "p1": {
+          "subId": "s5k0gph",
+          "subCode": "OE-I:EM",
+          "facIds": [
+            "fh06l0h"
+          ],
+          "facId": "fh06l0h",
+          "roomId": "CS-202",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p3": {
+          "subId": "sfe7g59",
+          "subCode": "BCT Lab",
+          "facIds": [
+            "fvfe2sm",
+            "f7j8puf",
+            "fuxak8n"
+          ],
+          "facId": "fvfe2sm",
+          "roomId": "CS-109",
+          "blockStart": "p3",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p4": {
+          "subId": "sfe7g59",
+          "subCode": "BCT Lab",
+          "facIds": [
+            "fvfe2sm",
+            "f7j8puf",
+            "fuxak8n"
+          ],
+          "facId": "fvfe2sm",
+          "roomId": "CS-109",
+          "blockStart": "p3",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p5": {
+          "subId": "s6uo21h",
+          "subCode": "CC",
+          "facIds": [
+            "f2n6nbs"
+          ],
+          "facId": "f2n6nbs",
+          "roomId": "CS-202",
+          "blockStart": "p5",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p6": {
+          "subId": "sqi3af8",
+          "subCode": "PE-V:SQT",
+          "facIds": [
+            "fsj2dpg"
+          ],
+          "facId": "fsj2dpg",
+          "roomId": "CS-202",
+          "blockStart": "p6",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p2": {
+          "subId": "sb7ugad",
+          "subCode": "MAD",
+          "facIds": [
+            "furpuwu"
+          ],
+          "facId": "furpuwu",
+          "roomId": "CS-202",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Thu": {
         "p4": {
           "subId": "s5k0gph",
           "subCode": "OE-I:EM",
@@ -7531,7 +7455,7 @@
           "blockSize": 1,
           "locked": false
         },
-        "p1": {
+        "p5": {
           "subId": "sl1s4dl",
           "subCode": "MAD Lab",
           "facIds": [
@@ -7540,48 +7464,24 @@
           ],
           "facId": "furpuwu",
           "roomId": "CS-109",
-          "blockStart": "p1",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p6": {
+          "subId": "sl1s4dl",
+          "subCode": "MAD Lab",
+          "facIds": [
+            "furpuwu",
+            "fsws4xh"
+          ],
+          "facId": "furpuwu",
+          "roomId": "CS-109",
+          "blockStart": "p5",
           "blockSize": 2,
           "locked": false
         },
         "p2": {
-          "subId": "sl1s4dl",
-          "subCode": "MAD Lab",
-          "facIds": [
-            "furpuwu",
-            "fsws4xh"
-          ],
-          "facId": "furpuwu",
-          "roomId": "CS-109",
-          "blockStart": "p1",
-          "blockSize": 2,
-          "locked": false
-        },
-        "p3": {
-          "subId": "snyje1n",
-          "subCode": "CSF",
-          "facIds": [
-            "f2n6nbs"
-          ],
-          "facId": "f2n6nbs",
-          "roomId": "CS-202",
-          "blockStart": "p3",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p5": {
-          "subId": "sqi3af8",
-          "subCode": "PE-V:SQT",
-          "facIds": [
-            "fsj2dpg"
-          ],
-          "facId": "fsj2dpg",
-          "roomId": "CS-202",
-          "blockStart": "p5",
-          "blockSize": 1,
-          "locked": false
-        },
-        "p6": {
           "subId": "s6uo21h",
           "subCode": "CC",
           "facIds": [
@@ -7589,7 +7489,107 @@
           ],
           "facId": "f2n6nbs",
           "roomId": "CS-202",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p1": {
+          "subId": "snyje1n",
+          "subCode": "CSF",
+          "facIds": [
+            "f2n6nbs"
+          ],
+          "facId": "f2n6nbs",
+          "roomId": "CS-202",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p3": {
+          "subId": "suo9qbn",
+          "subCode": "BCT",
+          "facIds": [
+            "fvfe2sm"
+          ],
+          "facId": "fvfe2sm",
+          "roomId": "CS-202",
           "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        }
+      },
+      "Fri": {
+        "p5": {
+          "subId": "sl1s4dl",
+          "subCode": "MAD Lab",
+          "facIds": [
+            "furpuwu",
+            "fsws4xh"
+          ],
+          "facId": "furpuwu",
+          "roomId": "CS-109",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p6": {
+          "subId": "sl1s4dl",
+          "subCode": "MAD Lab",
+          "facIds": [
+            "furpuwu",
+            "fsws4xh"
+          ],
+          "facId": "furpuwu",
+          "roomId": "CS-109",
+          "blockStart": "p5",
+          "blockSize": 2,
+          "locked": false
+        },
+        "p1": {
+          "subId": "sb7ugad",
+          "subCode": "MAD",
+          "facIds": [
+            "furpuwu"
+          ],
+          "facId": "furpuwu",
+          "roomId": "CS-202",
+          "blockStart": "p1",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p3": {
+          "subId": "sqi3af8",
+          "subCode": "PE-V:SQT",
+          "facIds": [
+            "fsj2dpg"
+          ],
+          "facId": "fsj2dpg",
+          "roomId": "CS-202",
+          "blockStart": "p3",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p2": {
+          "subId": "suo9qbn",
+          "subCode": "BCT",
+          "facIds": [
+            "fvfe2sm"
+          ],
+          "facId": "fvfe2sm",
+          "roomId": "CS-202",
+          "blockStart": "p2",
+          "blockSize": 1,
+          "locked": false
+        },
+        "p4": {
+          "subId": "s5k0gph",
+          "subCode": "OE-I:EM",
+          "facIds": [
+            "fh06l0h"
+          ],
+          "facId": "fh06l0h",
+          "roomId": "CS-202",
+          "blockStart": "p1",
           "blockSize": 1,
           "locked": false
         }
@@ -7669,6 +7669,11 @@
         "p6"
       ]
     ],
-    "defaultSaturdayPeriods": 4
+    "defaultSaturdayPeriods": 4,
+    "publishing": {
+      "owner": "Harsha-604",
+      "repo": "timetable",
+      "branch": "master"
+    }
   }
 }
