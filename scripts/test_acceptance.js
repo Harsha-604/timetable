@@ -879,12 +879,25 @@ function initMockStorage() {
   }
 }
 
+async function initMockCrypto() {
+  // Node 19+ exposes globalThis.crypto with getRandomValues; older versions need a shim.
+  if (typeof global.crypto === 'undefined' || typeof global.crypto.getRandomValues !== 'function') {
+    const { randomFillSync } = await import('node:crypto')
+    global.crypto = {
+      getRandomValues(arr) {
+        randomFillSync(arr)
+        return arr
+      },
+    }
+  }
+}
 async function testSuite7_AuthenticationSecurity() {
   console.log('\n--- Running Suite 7: Authentication & Security Tests ---')
   initMockStorage()
+  await initMockCrypto()
   const originalFetch = global.fetch
 
-  // 1. Token storage in localStorage: getStoredToken, setStoredToken, clearStoredToken
+  // 1. Token storage: round-trips correctly; NOT stored as plain text in localStorage
   clearStoredToken()
   clearAuthCache()
 
@@ -893,8 +906,19 @@ async function testSuite7_AuthenticationSecurity() {
   if (getStoredToken() !== testToken) {
     throw new Error(`Token storage mismatch: expected ${testToken}, got ${getStoredToken()}`)
   }
-  if (global.localStorage.getItem('tt_publish_token') !== testToken) {
+  const rawStored = global.localStorage.getItem('tt_publish_token')
+  if (!rawStored) {
     throw new Error('Token was not written to localStorage key "tt_publish_token"')
+  }
+  // Token must NOT be visible as plain text in localStorage (encoded envelope)
+  if (rawStored === testToken || rawStored.includes('github_pat_')) {
+    throw new Error('Token is stored as plain text in localStorage — must be encoded')
+  }
+  // Must be the v2 JSON envelope
+  let parsed
+  try { parsed = JSON.parse(rawStored) } catch { throw new Error('Stored token is not valid JSON envelope') }
+  if (parsed.v !== 2 || !parsed.d) {
+    throw new Error('Stored token envelope missing v:2 or d field')
   }
   clearStoredToken()
   if (getStoredToken() !== '') {
@@ -1067,11 +1091,12 @@ async function testSuite7_AuthenticationSecurity() {
   clearAuthCache()
   global.fetch = originalFetch
 
-  console.log('Suite 7: PASS (Token storage, push check, 401 revocation, offline access, session cache, leak protection)')
+  console.log('Suite 7: PASS (Token encoded at rest, push check, 401 revocation, offline access, auth cache, leak protection)')
 }
 
 async function main() {
   initMockStorage()
+  await initMockCrypto()
   await testSuite1_ReferenceFacultyMatch()
   await testSuite2_AutoAssignBlankWithPresets()
   await testSuite3_SectionOverride()

@@ -44,6 +44,54 @@ export function fromBase64Utf8(b64) {
 
 let memoryToken = ''
 
+/* ─── Token Vault (XOR + per-browser random key) ───────────────────────────
+ * The token is never written to localStorage in plain text.
+ * A random 64-byte key is generated once per browser profile and stored under
+ * tt_vault_k. The token is XOR'd with that key and stored as a base64 JSON
+ * envelope { v:2, d:"<base64>" } under tt_publish_token.
+ * Both entries look like opaque base64 blobs in DevTools.
+ * ─────────────────────────────────────────────────────────────────────────── */
+
+const VAULT_KEY_NAME = 'tt_vault_k'
+
+function _getOrCreateVaultKey() {
+  if (typeof localStorage === 'undefined') return null
+  try {
+    const stored = localStorage.getItem(VAULT_KEY_NAME)
+    if (stored) {
+      return Uint8Array.from(atob(stored), (c) => c.charCodeAt(0))
+    }
+    // First use: generate a random 64-byte key for this browser profile
+    const key =
+      typeof crypto !== 'undefined' && crypto.getRandomValues
+        ? crypto.getRandomValues(new Uint8Array(64))
+        : Uint8Array.from({ length: 64 }, (_, i) => (i * 31 + 17) & 0xff) // fallback (tests)
+    const b64 = btoa(String.fromCharCode(...key))
+    localStorage.setItem(VAULT_KEY_NAME, b64)
+    return key
+  } catch {
+    return null
+  }
+}
+
+function _xorEncode(plaintext, key) {
+  const bytes = new TextEncoder().encode(plaintext)
+  const out = new Uint8Array(bytes.length)
+  for (let i = 0; i < bytes.length; i++) {
+    out[i] = bytes[i] ^ key[i % key.length]
+  }
+  return btoa(String.fromCharCode(...out))
+}
+
+function _xorDecode(b64, key) {
+  const bytes = Uint8Array.from(atob(b64), (c) => c.charCodeAt(0))
+  const out = new Uint8Array(bytes.length)
+  for (let i = 0; i < bytes.length; i++) {
+    out[i] = bytes[i] ^ key[i % key.length]
+  }
+  return new TextDecoder().decode(out)
+}
+
 /* ─── Token Storage ─── */
 
 export function getStoredToken() {
@@ -51,8 +99,28 @@ export function getStoredToken() {
   if (typeof localStorage === 'undefined') return ''
   try {
     const raw = localStorage.getItem(TOKEN_STORAGE_KEY) || ''
-    memoryToken = raw.trim()
-    return memoryToken
+    if (!raw) return ''
+
+    // v2 envelope: { v:2, d:"<xor-base64>" }
+    if (raw.startsWith('{')) {
+      const parsed = JSON.parse(raw)
+      if (parsed.v === 2 && parsed.d) {
+        const key = _getOrCreateVaultKey()
+        if (!key) return ''
+        memoryToken = _xorDecode(parsed.d, key).trim()
+        return memoryToken
+      }
+    }
+
+    // Legacy: plain-text token from old version — migrate it transparently
+    const plain = raw.trim()
+    if (plain) {
+      memoryToken = plain
+      // Re-save in encoded form immediately
+      setStoredToken(plain)
+      return memoryToken
+    }
+    return ''
   } catch {
     return ''
   }
@@ -64,11 +132,18 @@ export function setStoredToken(token) {
   if (typeof localStorage === 'undefined') return
   try {
     if (clean) {
-      localStorage.setItem(TOKEN_STORAGE_KEY, clean)
+      const key = _getOrCreateVaultKey()
+      if (key) {
+        const encoded = _xorEncode(clean, key)
+        localStorage.setItem(TOKEN_STORAGE_KEY, JSON.stringify({ v: 2, d: encoded }))
+      } else {
+        // Fallback: should not happen, but avoid storing plain text
+        localStorage.setItem(TOKEN_STORAGE_KEY, JSON.stringify({ v: 2, d: btoa(clean) }))
+      }
     } else {
       localStorage.removeItem(TOKEN_STORAGE_KEY)
     }
-    // Clean up any old PIN keys
+    // Clean up any old PIN/plain-text keys
     localStorage.removeItem('tt_publish_token_enc')
     localStorage.removeItem('tt_editor_pin')
     localStorage.removeItem('tt_pin_unlocked')
@@ -83,6 +158,7 @@ export function clearStoredToken() {
     localStorage.removeItem('tt_publish_token_enc')
     localStorage.removeItem('tt_editor_pin')
     localStorage.removeItem('tt_pin_unlocked')
+    // Note: tt_vault_k is intentionally kept — it protects future tokens too
   } catch {}
 }
 
