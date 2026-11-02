@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useStore } from '../store/useStore'
 import { testGitHubConnection, setStoredToken, setAuthCached } from '../utils/publisher'
 
@@ -23,6 +23,21 @@ export default function LoginScreen({ onLoginSuccess, initialError = '' }) {
   const [showToken, setShowToken] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(initialError)
+  const [migrated, setMigrated] = useState(false)
+
+  // Detect and clear the old PIN-encrypted token (tt_publish_token_enc).
+  // It cannot be decrypted without the PIN that was removed, so we wipe it
+  // and show a one-time notice so the user knows why they need to re-enter.
+  useEffect(() => {
+    try {
+      if (localStorage.getItem('tt_publish_token_enc')) {
+        localStorage.removeItem('tt_publish_token_enc')
+        localStorage.removeItem('tt_editor_pin')
+        localStorage.removeItem('tt_pin_unlocked')
+        setMigrated(true)
+      }
+    } catch {}
+  }, [])
 
   const handleLogin = async (e) => {
     e?.preventDefault()
@@ -110,6 +125,24 @@ export default function LoginScreen({ onLoginSuccess, initialError = '' }) {
         <p style={{ fontSize: '.84rem', color: 'var(--muted)', marginBottom: '1.5rem' }}>
           Enter your GitHub publishing token to access the coordinator editor.
         </p>
+
+        {migrated && (
+          <div
+            style={{
+              padding: '.6rem .75rem',
+              borderRadius: 'var(--radius-sm)',
+              background: 'var(--surface2)',
+              color: 'var(--ink)',
+              border: '1px solid var(--border)',
+              fontSize: '.82rem',
+              marginBottom: '1rem',
+              lineHeight: 1.45,
+            }}
+          >
+            The security system was updated and PIN login has been removed. Please enter
+            your GitHub token once more — it will be remembered in this browser.
+          </div>
+        )}
 
         {error && (
           <div
