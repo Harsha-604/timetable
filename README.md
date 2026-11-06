@@ -2,6 +2,73 @@
 
 A React + Vite application for college timetable coordinators managing CSE allied branches (CIC, AIML, DS, CSIT) across academic years and sections. Features dynamic section management, Excel-based batch data import, automated multi-class conflict-free scheduling with soft-rule optimization, and live manual editing with clash detection.
 
+## Hosted app and shared data
+
+- **Live site:** [https://cse-allied-timetable.web.app](https://cse-allied-timetable.web.app)
+- Sign in with an approved Google account to use the coordinator.
+- Timetable project data is synchronized through Cloud Firestore, so approved users can continue the same project on different devices.
+- The first approved sign-in creates the shared cloud copy from that browser's local project if no cloud copy exists yet. Sign in first on the browser that contains the latest project data.
+- Later edits sync automatically. **Save Project** and **Load Project** remain available for JSON backups.
+- Only email addresses allowed by the Firestore Security Rules can read or edit the shared project. Add or remove access by updating the allowlist in Firebase Console.
+
+## Invigilation availability checker
+
+1. Open **Invigilation** and upload a faculty timetable workbook (`.xlsx`, `.xls`, or `.xlsm`).
+2. Choose the exam date, start and end times, and semester.
+3. The eligible list includes faculty with no occupied timetable period during the exam or the one-hour buffer before and after it.
+4. Timetable periods identified as belonging to the selected semester are treated as free for this exam. Results display period times without subject names.
+5. Service faculty, HODs, AHODs, and Dr. B. Sandhya are excluded.
+
+The uploaded invigilation workbook is parsed in the browser and is not saved to Firestore; upload it again after refreshing or opening the app on another device.
+
+## Local development
+
+Requirements: Node.js 18 or later and npm.
+
+```powershell
+npm install
+npm run dev
+```
+
+Firebase web configuration is in `src/firebase.js`. To use a different Firebase project, register a web app in Firebase Console and replace the configuration values with that app's config.
+
+The app uses Google Authentication and Cloud Firestore. Firestore access should remain closed except for the intended users. The deployed app uses the `sharedTimetables/main` document; an allowlist rule can be configured in **Firebase Console → Firestore Database → Rules**:
+
+```text
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /sharedTimetables/main {
+      allow read, write: if request.auth != null
+        && request.auth.token.email_verified == true
+        && request.auth.token.email in [
+          "allowed-user@example.com",
+          "another-allowed-user@example.com"
+        ];
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
+```
+
+Replace the example addresses with the exact Google account emails that should have access. Do not publish rules with the example addresses unchanged.
+
+## Deploy to Firebase Hosting
+
+The repository is configured to build the Vite app into `dist` and deploy that folder to Firebase Hosting.
+
+```powershell
+npm install -g firebase-tools
+firebase login
+npm run build
+firebase deploy --only hosting
+```
+
+`firebase deploy --only hosting` deploys the website only; it does not deploy or change Firestore rules. The default Firebase Hosting URL is `https://cse-allied-timetable.web.app`.
+
 ---
 
 ## 1. How to Fill the 3 Excel Templates
@@ -86,4 +153,4 @@ Columns:
 
 ## 4. Save and load project data
 
-Timetable changes stay in this browser. Use **Save Project** in the sidebar to download a JSON backup, and **Load Project** to restore a previously saved backup. No sign-in or in-app publishing is required.
+Timetable project data is synchronized to Firestore for approved Google accounts. Use **Save Project** in the sidebar to download a JSON backup, and **Load Project** to restore a previously saved backup.
