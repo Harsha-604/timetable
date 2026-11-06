@@ -3,11 +3,9 @@ import { useStore } from '../store/useStore'
 import { autoAssignFaculty, generateScheduleAsync } from '../utils/generator'
 import { validateState, isFacultyQualified, auditTimetableHardViolations } from '../utils/validator'
 import { getBranchYearKey } from '../utils/helpers'
-import { usePublish } from '../utils/usePublish'
 
 export default function Generate({ onNavigate }) {
   const state = useStore()
-  const { publishing, deployStatus, isOffline, handlePublish } = usePublish({ onNavigate })
   const {
     classes,
     faculty,
@@ -581,31 +579,6 @@ export default function Generate({ onNavigate }) {
                   Soft Penalty Score: {genReport.score}
                 </span>
                 <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '.5rem', flexWrap: 'wrap' }}>
-                  {deployStatus && (
-                    <span style={{ fontSize: '.78rem' }}>
-                      {deployStatus.state === 'failed' ? (
-                        <a
-                          href={deployStatus.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          style={{ color: 'var(--danger)', textDecoration: 'underline' }}
-                        >
-                          Deploy failed, see Actions
-                        </a>
-                      ) : deployStatus.state === 'live' ? (
-                        <span className="tag" style={{ color: 'var(--ink)', fontWeight: 600 }}>Live</span>
-                      ) : (
-                        <span className="tag" style={{ color: 'var(--muted)' }}>Deploying…</span>
-                      )}
-                    </span>
-                  )}
-                  <button
-                    className="btn btn-primary btn-sm"
-                    disabled={publishing || isOffline}
-                    onClick={handlePublish}
-                  >
-                    {publishing ? 'Publishing…' : 'Publish'}
-                  </button>
                   <button
                     className="btn btn-secondary btn-sm"
                     onClick={() => onNavigate('view-tt')}

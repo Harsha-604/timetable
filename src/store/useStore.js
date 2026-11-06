@@ -13,7 +13,7 @@ import {
   sectionLetter,
   normalizeKey,
 } from '../utils/helpers'
-import { buildProjectPayload } from '../utils/publisher'
+import { buildProjectPayload } from '../utils/projectPayload'
 
 export function defaultClasses() {
   const list = []
@@ -55,11 +55,6 @@ export function makeEmpty() {
       periods: JSON.parse(JSON.stringify(DEFAULT_PERIODS)),
       labWindows: JSON.parse(JSON.stringify(DEFAULT_LAB_WINDOWS)),
       defaultSaturdayPeriods: 4,
-      publishing: {
-        owner: 'Harsha-604',
-        repo: 'timetable',
-        branch: 'master',
-      },
     },
     validationReport: null,
   }
@@ -146,15 +141,10 @@ export function migrateState(state) {
     lastGeneratedAt: state.lastGeneratedAt || null,
     settings: {
       ...fresh.settings,
-      ...state.settings,
+      ...Object.fromEntries(Object.entries(state.settings || {}).filter(([key]) => key !== 'publishing')),
       periods,
       labWindows,
       defaultSaturdayPeriods: state.settings?.defaultSaturdayPeriods || 4,
-      publishing: {
-        owner: state.settings?.publishing?.owner || 'Harsha-604',
-        repo: state.settings?.publishing?.repo || 'timetable',
-        branch: state.settings?.publishing?.branch || 'master',
-      },
     },
     faculty: Array.isArray(state.faculty) ? state.faculty : [],
     rooms: Array.isArray(state.rooms) ? state.rooms : [],
@@ -465,23 +455,6 @@ export const useStore = create(
             labWindows: JSON.parse(JSON.stringify(DEFAULT_LAB_WINDOWS)),
           },
         })),
-
-      updatePublishingSettings: (patch) =>
-        set((s) => {
-          const { token, ...safePatch } = patch || {}
-          return {
-            settings: {
-              ...s.settings,
-              publishing: {
-                owner: 'Harsha-604',
-                repo: 'timetable',
-                branch: 'master',
-                ...(s.settings?.publishing || {}),
-                ...safePatch,
-              },
-            },
-          }
-        }),
 
       /* ── Validation ── */
       setValidationReport: (report) => set({ validationReport: report }),

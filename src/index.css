@@ -440,6 +440,26 @@ input:not([type=checkbox]):focus, select:focus, textarea:focus { border-color: v
 .gen-log .err  { color: var(--danger); }
 .gen-log .info { color: var(--accent); }
 
+/* ── Invigilation availability ── */
+.invigilation-controls { display: grid; gap: 1.25rem; }
+.invigilation-upload { display: flex; align-items: center; gap: .65rem; flex-wrap: wrap; }
+.invigilation-file-name { color: var(--muted); font-size: .82rem; overflow-wrap: anywhere; }
+.invigilation-exam-fields { display: grid; grid-template-columns: repeat(3, minmax(140px, 1fr)); gap: 1rem; }
+.invigilation-exam-fields small { color: var(--muted); font-size: .75rem; }
+.invigilation-rule { padding: .8rem 1rem; border-left: 3px solid var(--accent); background: var(--surface2); color: var(--ink); font-size: .86rem; }
+.invigilation-error { color: var(--danger); font-size: .85rem; margin: 0; }
+.invigilation-notice { color: var(--muted); font-size: .82rem; }
+.invigilation-notice p { margin-top: .4rem; }
+.invigilation-notice ul { margin: .4rem 0 0 1.25rem; }
+.invigilation-results-header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; }
+.invigilation-results-header h3 { margin-bottom: .2rem; }
+.invigilation-results-header p { color: var(--muted); font-size: .8rem; }
+.invigilation-exclusion-note { color: var(--muted); font-size: .78rem; margin: -.45rem 0 .8rem; }
+@media (max-width: 640px) {
+  .invigilation-exam-fields { grid-template-columns: 1fr; }
+  .invigilation-results-header { align-items: flex-start; }
+}
+
 /* ── Toast ── */
 .toast-el {
   position: fixed;
